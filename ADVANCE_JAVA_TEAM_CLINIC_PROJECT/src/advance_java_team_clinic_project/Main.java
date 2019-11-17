@@ -16,9 +16,14 @@ import java.sql.SQLException;
 public class Main {
     
     public static void main(String[] args) {
+        Main pin = new Main();
+    }
+        public Main(){
+            
+        
         
             try (Connection conn = DriverManager.getConnection(
-                "jdbc:oracle:thin:@localhost:1521:orcl", "javadev", "javadev")) {
+                "jdbc:oracle:thin:@25.57.202.173:1521:orcl", "javadev", "javadev")) {
 
             if (conn != null) {
                 System.out.println("Connected to the database!");
@@ -31,5 +36,6 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+            
     }
 }
