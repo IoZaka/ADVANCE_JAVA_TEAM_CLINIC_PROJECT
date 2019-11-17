@@ -20,7 +20,7 @@ public class DBConnection {
     
     public static  DBConnection getInstance(){
             try (Connection conn = DriverManager.getConnection(
-                "jdbc:oracle:thin:@localhost:1521:xe", "javadev", "javadev")) {    
+                "jdbc:oracle:thin:@25.57.202.173:1521:xe", "javadev", "javadev")) {    
             if (conn != null) {
                 System.out.println("Connected to the database!");
             } else {
