@@ -20,6 +20,7 @@ public class Main {
         ak = new Controller();
         ak.getObject();
         ak.Query();
+        ak.getData();
     }
 
             
