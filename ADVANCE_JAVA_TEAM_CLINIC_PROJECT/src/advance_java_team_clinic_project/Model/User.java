@@ -30,6 +30,11 @@ public class User {
 
     public int getContactID() {return contactID;}
     public void setContactID(int contactID) {this.contactID = contactID;}
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
     
     
     

@@ -9,6 +9,11 @@ package advance_java_team_clinic_project.Model;
  *
  * @author Chris
  */
-public class Admin {
+public class Admin extends User{
+    
+    public Admin(String username, String password) {
+        super(username, password);
+    }
+    
     
 }
