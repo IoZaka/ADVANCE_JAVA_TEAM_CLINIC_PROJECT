@@ -3,8 +3,9 @@
  *  Plan Driven and Agile Programming
  *  TP4129 - TP4187 - TP4145
  */
-package advance_java_team_clinic_project;
+package advance_java_team_clinic_project.Main;
 
+import advance_java_team_clinic_project.Controller;
 import java.sql.SQLException;
 
 
