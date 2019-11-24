@@ -7,6 +7,8 @@ public class User {
     private String password;
     private String firstName;
     private String surname;
+//    private ContactDetails contactDetails;
+//    private AddressDetails addressDetails;
     private int addressID;
     private int contactID;
     
