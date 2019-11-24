@@ -36,7 +36,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         //JavaFx Run
-        Parent root = FXMLLoader.load(getClass().getResource("../View/styleFX.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
         
         Scene scene = new Scene(root);
         
