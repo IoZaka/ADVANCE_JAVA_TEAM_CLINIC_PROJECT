@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Main;
 
-import advance_java_team_clinic_project.Controller;
+import advance_java_team_clinic_project.DatabaseController;
 import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,11 +20,12 @@ import javafx.stage.Stage;
  */
 
 public class Main extends Application{
- private static Controller ak;
+    
+ private static DatabaseController ak;
  
     public static void main(String[] args) throws SQLException {
          launch(args);
-        ak = new Controller();
+        ak = new DatabaseController();
         ak.getObject();
         ak.Query();
         ak.getData();
@@ -35,7 +36,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("styleFX.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/styleFX.fxml"));
         
         Scene scene = new Scene(root);
         

@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Controller {
+public class DatabaseController {
    private Statement stmt;
    private String sql;
    private ResultSet rs;
@@ -12,7 +12,7 @@ public class Controller {
    private DatabaseConnection object;
    
    
-   public Controller(){
+   public DatabaseController(){
         
    }
    
