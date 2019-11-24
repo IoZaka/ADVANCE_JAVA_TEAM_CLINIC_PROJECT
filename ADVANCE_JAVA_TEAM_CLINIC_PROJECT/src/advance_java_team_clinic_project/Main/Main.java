@@ -19,12 +19,10 @@ import javafx.application.Application;
  * @author Beast
  */
 
-public class Main extends Application{
 public class Main {
  private static Controller ak;
  
     public static void main(String[] args) throws SQLException {
-         launch(args);
         ak = new Controller();
         ak.getObject();
         ak.Query();
