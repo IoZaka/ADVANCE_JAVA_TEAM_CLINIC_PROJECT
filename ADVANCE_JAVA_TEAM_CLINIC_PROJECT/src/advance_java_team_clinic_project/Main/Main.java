@@ -24,18 +24,18 @@ public class Main extends Application{
  private static DatabaseController ak;
  
     public static void main(String[] args) throws SQLException {
-         launch(args);
+        
+        
+        launch(args);
         ak = new DatabaseController();
         ak.getObject();
         ak.Query();
         ak.getData();
-        
-        
-        
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //JavaFx Run
         Parent root = FXMLLoader.load(getClass().getResource("../View/styleFX.fxml"));
         
         Scene scene = new Scene(root);
