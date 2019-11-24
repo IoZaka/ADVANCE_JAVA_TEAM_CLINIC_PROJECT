@@ -2,8 +2,8 @@
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
-*/
-/* 
+/
+/ 
     Created on : Nov 24, 2019, 7:51:08 PM
     Author     : Chris
 */
@@ -16,25 +16,33 @@ and open the template in the editor.
     -fx-padding: 0 1 0 1;
 }
 
-.splitOne {
+.leftPane {
     -fx-background-color:#385ca8;
 }
 
-.Login {
--fx-color: #fff !important;
--fx-text-transform: uppercase;
--fx-text-decoration: none;
--fx-background: #60a3bc;
--fx-padding: 20px;
--fx-border-radius: 50px;
--fx-display: inline-block;
--fx-border: none;
--fx-transition: all 0.4s ease 0s;
+.loginBtn {
+    -fx-background-color:#385ca8;
+    -fx-background-radius: 10em;
 }
 
-.Login:hover {
-text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-transition: all 0.4s ease 0s;
+.loginBtn:hover {
+    -fx-background-color:#304e8e;
+}
+
+.forgotBtn {
+    -fx-background-color:#385ca8;
+    -fx-background-radius: 10em;
+}
+
+.forgotBtn:hover {
+    -fx-background-color:#304e8e;
+}
+
+.registerBtn {
+    -fx-background-color:#385ca8;
+    -fx-background-radius: 10em;
+}
+
+.registerBtn:hover {
+    -fx-background-color: #162442;
 }
