@@ -16,7 +16,7 @@ and open the template in the editor.
     -fx-padding: 0 1 0 1;
 }
 
-.splitOne {
+.leftPane {
     -fx-background-color:#385ca8;
 }
 
