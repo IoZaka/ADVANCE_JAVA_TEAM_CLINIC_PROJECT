@@ -20,3 +20,29 @@ and open the template in the editor.
     -fx-background-color:#385ca8;
 }
 
+.loginBtn {
+    -fx-background-color:#385ca8;
+    -fx-background-radius: 10em;
+}
+
+.loginBtn:hover {
+    -fx-background-color:#304e8e;
+}
+
+.forgotBtn {
+    -fx-background-color:#385ca8;
+    -fx-background-radius: 10em;
+}
+
+.forgotBtn:hover {
+    -fx-background-color:#304e8e;
+}
+
+.registerBtn {
+    -fx-background-color:#385ca8;
+    -fx-background-radius: 10em;
+}
+
+.registerBtn:hover {
+    -fx-background-color: #162442;
+}
