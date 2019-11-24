@@ -7,8 +7,11 @@ package advance_java_team_clinic_project.Main;
 
 import advance_java_team_clinic_project.Controller;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import javafx.application.Application;
 
+=======
+>>>>>>> parent of d2f7034... 1.0.1.4
 
 
 /**
@@ -17,6 +20,7 @@ import javafx.application.Application;
  */
 
 public class Main extends Application{
+public class Main {
  private static Controller ak;
  
     public static void main(String[] args) throws SQLException {
@@ -25,10 +29,16 @@ public class Main extends Application{
         ak.getObject();
         ak.Query();
         ak.getData();
+<<<<<<< HEAD
         
         
         
     }
 
 }
+=======
+    }
+
+    }
+>>>>>>> parent of d2f7034... 1.0.1.4
 
