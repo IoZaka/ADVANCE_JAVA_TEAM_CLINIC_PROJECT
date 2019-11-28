@@ -5,7 +5,9 @@
  */
 package advance_java_team_clinic_project.Main;
 
+import advance_java_team_clinic_project.Controller.LoginViewController;
 import advance_java_team_clinic_project.DatabaseController;
+import advance_java_team_clinic_project.Model.User;
 import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,12 +27,12 @@ public class Main extends Application{
  
     public static void main(String[] args) throws SQLException {
         
-        
-        launch(args);
+        launch(args);   
         ak = new DatabaseController();
         ak.getObject();
         ak.Query();
         ak.getData();
+
     }
 
     @Override

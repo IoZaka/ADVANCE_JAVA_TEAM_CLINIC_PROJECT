@@ -21,11 +21,15 @@ and open the template in the editor.
 }
 
 .loginBtn {
-    -fx-background-color:#385ca8;
+    -fx-border-color:#385ca8;
+    -fx-border-radius: 10em;
+    -fx-background-color:#fff;
     -fx-background-radius: 10em;
+    -fx-cursor: hand;
 }
 
 .loginBtn:hover {
+   -fx-text-fill:fff;
     -fx-background-color:#304e8e;
 }
 
@@ -35,7 +39,7 @@ and open the template in the editor.
 }
 
 .forgotBtn:hover {
-    -fx-background-color:#304e8e;
+    -fx-background-color:#162442;
 }
 
 .registerBtn {
@@ -45,4 +49,8 @@ and open the template in the editor.
 
 .registerBtn:hover {
     -fx-background-color: #162442;
+}
+
+.usernameInput {
+   
 }
