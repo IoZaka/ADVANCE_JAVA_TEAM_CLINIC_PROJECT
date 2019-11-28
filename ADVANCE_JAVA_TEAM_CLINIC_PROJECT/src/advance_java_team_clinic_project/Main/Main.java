@@ -26,7 +26,7 @@ public class Main extends Application{
  private static DatabaseController ak;
  
     public static void main(String[] args) throws SQLException {
-        
+        //launch javafx 
         launch(args);   
         ak = new DatabaseController();
         ak.getObject();
