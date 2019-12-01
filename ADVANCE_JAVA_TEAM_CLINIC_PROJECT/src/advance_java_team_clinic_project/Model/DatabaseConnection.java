@@ -3,7 +3,7 @@
  *  Plan Driven and Agile Programming
  *  TP4129 - TP4187 - TP4145
  */
-package advance_java_team_clinic_project;
+package advance_java_team_clinic_project.Model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,14 +14,14 @@ import java.sql.SQLException;
  * @author Beast
  */
 public class DatabaseConnection {
-    private static DatabaseConnection instance;
-    Connection connection;
-    //private String url =  "jdbc:oracle:thin:@localhost:1521:xe";
-    private String url =  "jdbc:oracle:thin:@25.57.202.173:1521:xe";
+    public static DatabaseConnection instance;
+    public Connection connection;
+    private String url =  "jdbc:oracle:thin:@localhost:1521:xe";
+    //private String url =  "jdbc:oracle:thin:@25.57.202.173:1521:xe";
     private String username = "javadev";
     private String password = "javadev";
     
-    private DatabaseConnection() throws SQLException {
+    public DatabaseConnection() throws SQLException {
         try {
             this.connection = DriverManager.getConnection(url, username, password);
             } catch (SQLException ex){

@@ -1,13 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.DatabaseModel;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -42,7 +46,15 @@ public class LoginViewController implements Initializable {
     @FXML
     private Button forgotBtn;
     @FXML
-    private Pane loginPane;
+    private Pane loginPane; 
+    private static DatabaseModel ak;
+    @FXML
+    private TextField userNameTxtField;
+    @FXML
+    private PasswordField passWordField;
+    
+    String userNameGiven;
+    String passWordGiven;
 
     /**
      * Initializes the controller class.
@@ -58,8 +70,33 @@ public class LoginViewController implements Initializable {
                 }
             }
         });
-    } 
+        
+        loginBtn.setOnAction(new EventHandler<ActionEvent>(){
+            @Override public void handle(ActionEvent e){
+                try{
+                    handleLoginAction(e);
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+ 
+     
     
+    private void handleLoginAction(ActionEvent event) throws IOException {
+        System.out.println("to login koumpi patithike");
+        ak = new DatabaseModel();
+        userNameGiven = userNameTxtField.getText();
+        passWordGiven = passWordField.getText();
+        try {
+            ak.getObject();
+            ak.loginQuery(userNameGiven, passWordGiven);
+            ak.getData();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     private void handleButtonAction(ActionEvent event) throws IOException { 
         

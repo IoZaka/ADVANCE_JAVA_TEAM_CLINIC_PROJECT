@@ -6,7 +6,7 @@
 package advance_java_team_clinic_project.Main;
 
 import advance_java_team_clinic_project.Controller.LoginViewController;
-import advance_java_team_clinic_project.DatabaseController;
+import advance_java_team_clinic_project.Model.DatabaseModel;
 import advance_java_team_clinic_project.Model.User;
 import java.sql.SQLException;
 import javafx.application.Application;
@@ -15,23 +15,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 /**
  *
  * @author Beast
  */
+public class Main extends Application {
 
-public class Main extends Application{
-    
- private static DatabaseController ak;
- 
     public static void main(String[] args) throws SQLException {
         //launch javafx 
-        launch(args);   
-        ak = new DatabaseController();
-        ak.getObject();
-        ak.Query();
-        ak.getData();
+        launch(args);
 
     }
 
@@ -39,12 +31,11 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception {
         //JavaFx Run
         Parent root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    }
-
+}
