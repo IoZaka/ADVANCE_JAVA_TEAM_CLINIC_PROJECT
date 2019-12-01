@@ -16,13 +16,12 @@ import javafx.stage.StageStyle;
 public class DatabaseModel {
 
     private Statement stmt;
-    private String sql;
-    private ResultSet rs;
+    private String sql,existSql,regSql;
+    private ResultSet rs,regRs;
     private String username, password, role, created, updated;
     private DatabaseConnection object;
     public Integer roleId;
-    Alert alertWrongPw = new Alert(AlertType.INFORMATION);
-    Alert alertWrongUn = new Alert(AlertType.INFORMATION);
+    Alert alert = new Alert(AlertType.INFORMATION);
 
     public DatabaseModel() {
 
@@ -40,29 +39,46 @@ public class DatabaseModel {
     
     public void loginQuery(String userName, String passWord) throws SQLException {
         /* Alert Initialization */
-        alertWrongPw.setTitle("Incorrect Password");
-        alertWrongPw.setHeaderText(null);
-        alertWrongPw.setContentText("The Password you have entered is not correct!");
-        alertWrongPw.initStyle(StageStyle.UTILITY);
-        alertWrongUn.setTitle("Incorrect Username");
-        alertWrongUn.setHeaderText(null);
-        alertWrongUn.setContentText("The Username you have entered does not match any existing user!");
-        alertWrongUn.initStyle(StageStyle.UTILITY);
+        alert.setHeaderText(null);
+        alert.initStyle(StageStyle.UTILITY);
         /* End of Alert Initialiization*/
         stmt = object.connection.createStatement();
         sql = "select id, password, role_id from pm_users where username = '" + userName + "'";
         rs = stmt.executeQuery(sql);
         if (rs.next()) {
             password = rs.getString("password");
-            if (password.equals(passWord)){
+            if (password.equals(passWord)) {
                 roleId = rs.getInt("role_id");
-                System.out.println("Password correct!"+ roleId);
-            }
-            else if (password != passWord){
-                alertWrongPw.showAndWait();
+                System.out.println("Password correct!" + roleId);
+            } else if (password != passWord) {
+                alert.setTitle("Incorrect Password");
+                alert.setContentText("The Password you have entered is not correct!");
+                alert.showAndWait();
             }
         } else {
-            alertWrongUn.showAndWait();
+            alert.setTitle("Incorrect Username");
+            alert.setContentText("The Username you have entered does not match any existing user!");
+            alert.showAndWait();
+        }
+    }
+    
+    public void registerQuery(String userName, String passWord) throws SQLException{
+        alert.setHeaderText(null);
+        alert.initStyle(StageStyle.UTILITY);
+        stmt = object.connection.createStatement();
+        existSql = "select count(*) as existing from pm_users where username ='"+userName+"'";
+        rs = stmt.executeQuery(existSql);
+        rs.next();
+        if (rs.getInt("existing") > 0){
+            alert.setTitle("Wrong username");
+            alert.setContentText("Username already existing, please add another username.");
+            alert.showAndWait();
+        }else if (rs.getInt("existing") == 0){
+            regSql = "insert into pm_users (username,password,role_id) values ('"+userName+"','"+passWord+"',3)";
+            regRs = stmt.executeQuery(regSql);
+            alert.setTitle("Success!");
+            alert.setContentText("User was succesfully registered! You may login now.");
+            alert.showAndWait();
         }
     }
 

@@ -85,14 +85,12 @@ public class LoginViewController implements Initializable {
      
     
     private void handleLoginAction(ActionEvent event) throws IOException {
-        System.out.println("to login koumpi patithike");
         ak = new DatabaseModel();
         userNameGiven = userNameTxtField.getText();
         passWordGiven = passWordField.getText();
         try {
             ak.getObject();
             ak.loginQuery(userNameGiven, passWordGiven);
-            ak.getData();
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }

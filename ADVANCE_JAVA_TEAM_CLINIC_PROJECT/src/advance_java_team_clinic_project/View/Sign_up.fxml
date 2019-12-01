@@ -13,7 +13,7 @@
       <TextField fx:id="registerUsername" layoutX="196.0" layoutY="254.0" prefHeight="33.0" prefWidth="213.0" promptText="Username " />
       <PasswordField fx:id="registerPassword" layoutX="195.0" layoutY="301.0" prefHeight="33.0" prefWidth="213.0" promptText="Password " />
       <PasswordField fx:id="confirmPassword" layoutX="195.0" layoutY="349.0" prefHeight="33.0" prefWidth="213.0" promptText="Confirm Password " />
-      <Button layoutX="237.0" layoutY="419.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="129.0" text="Sumbit" />
+      <Button fx:id="registerBtn" layoutX="237.0" layoutY="419.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="129.0" text="Sumbit" />
       <ImageView fitHeight="254.0" fitWidth="270.0" layoutX="176.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/hospital.png" />
