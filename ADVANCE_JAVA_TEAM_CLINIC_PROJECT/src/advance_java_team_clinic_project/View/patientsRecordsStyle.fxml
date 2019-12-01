@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ToolBar?>
@@ -7,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -24,9 +26,24 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Pane prefHeight="60.0" prefWidth="432.0" />
-            <Button fx:id="editProfileBtn" mnemonicParsing="false" styleClass="editProfileBtn" stylesheets="@style.css" text="Edit Profile" />
-            <Button fx:id="logoutBtn" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" styleClass="logoutBtn" stylesheets="@style.css" text="Logout" />
+            <Pane prefHeight="60.0" prefWidth="544.0" />
+            <ImageView fx:id="detailsBtn" fitHeight="40.0" fitWidth="54.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true" styleClass="detailsBtn">
+               <image>
+                  <Image url="@images/detailsBtnImg.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="30.0" minY="40.0" width="40.0" />
+               </viewport>
+            </ImageView>
+            <Pane prefHeight="60.0" prefWidth="20.0" />
+            <ImageView fx:id="logoutBtnIcon" fitHeight="40.0" fitWidth="54.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true" styleClass="detailsBtn">
+               <image>
+                  <Image url="@images/logout.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="30.0" minY="40.0" width="40.0" />
+               </viewport>
+            </ImageView>
          </items>
       </ToolBar>
       <Text fill="#385ca8" layoutX="299.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOUR RECORDS" wrappingWidth="184.13671875">
@@ -40,5 +57,31 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Pane fx:id="detailsPane" layoutX="580.0" layoutY="63.0" opacity="0.0" prefHeight="200.0" prefWidth="206.0" styleClass="detailsPane" stylesheets="@style.css">
+         <children>
+            <ImageView fitHeight="40.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/user.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="30.0" minY="40.0" width="40.0" />
+               </viewport>
+            </ImageView>
+            <Text layoutX="80.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, " wrappingWidth="125.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="80.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as " wrappingWidth="125.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Line endX="100.0" layoutX="103.0" layoutY="61.0" startX="-100.0" />
+            <Button fx:id="editProfileBtn" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="editProfileBtn" stylesheets="@style.css" text="Edit Profile" textFill="WHITE" />
+            <Button fx:id="aboutBtn" layoutX="14.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="aboutBtn" stylesheets="@style.css" text="About" textFill="WHITE" />
+            <Button fx:id="logOutBtn" layoutX="14.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="logoutBtn" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

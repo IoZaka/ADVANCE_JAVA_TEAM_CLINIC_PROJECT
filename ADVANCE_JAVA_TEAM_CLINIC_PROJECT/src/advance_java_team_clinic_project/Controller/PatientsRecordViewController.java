@@ -23,7 +23,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -36,9 +40,7 @@ public class PatientsRecordViewController implements Initializable {
     @FXML
     private Button homeBtn;
     @FXML
-    private Button editProfileBtn;
-    @FXML
-    private Button logoutBtn;
+    private ImageView detailsBtn;
     @FXML
     private ListView<String> recordsListView;
 
@@ -47,6 +49,16 @@ public class PatientsRecordViewController implements Initializable {
     private Button refreshBtn;
     @FXML
     private AnchorPane recordsPane;
+    @FXML
+    private Pane detailsPane;
+    @FXML
+    private ImageView logoutBtnIcon;
+    @FXML
+    private Button editProfileBtn;
+    @FXML
+    private Button aboutBtn;
+    @FXML
+    private Button logOutBtn;
     
     /**
      * Initializes the controller class.
@@ -55,22 +67,10 @@ public class PatientsRecordViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        recordsListView.setItems(list);
        recordsListView.setPrefHeight(list.size()*24); //default size each row = 24
-       
-       logoutBtn.setOnAction(new EventHandler<ActionEvent>(){
-            @Override public void handle(ActionEvent e) {
-                try {
-                    handleButtonAction(e);
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-           
-        });
-       
     }
     
-    private void handleButtonAction(ActionEvent event) throws IOException { 
+    @FXML
+    private void handleButtonAction(MouseEvent event) throws IOException {
         
         Stage currentStage = (Stage)recordsPane.getScene().getWindow();;
         Parent root;
@@ -78,13 +78,16 @@ public class PatientsRecordViewController implements Initializable {
         
         final Node source = (Node) event.getSource();
         String id = source.getId();
-
-        if(id.equals("logoutBtn")){
+        
+        if(id.equals("detailsBtn")){
+            if(detailsPane.getOpacity() == 1){detailsPane.setOpacity(0);}
+            else{detailsPane.setOpacity(1);}
+        }else if(id.equals("logoutBtnIcon") || id.equals("logOutBtn")){
             root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
             scene = new Scene(root);
             currentStage.setScene(scene);
         }
         currentStage.show();
     }
-    
+
 }
