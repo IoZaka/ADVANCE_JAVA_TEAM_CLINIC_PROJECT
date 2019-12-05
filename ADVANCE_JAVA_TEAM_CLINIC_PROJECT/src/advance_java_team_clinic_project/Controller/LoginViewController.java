@@ -18,6 +18,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -72,17 +73,7 @@ public class LoginViewController implements Initializable {
         });
         
         loginBtn.setOnAction(new EventHandler<ActionEvent>(){
-            @Override public void handle(ActionEvent e){
-                try{
-                    handleLoginAction(e);
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
- 
-     
+
     
     private void handleLoginAction(ActionEvent event) throws IOException {
         System.out.println("to login koumpi patithike");
@@ -100,15 +91,25 @@ public class LoginViewController implements Initializable {
     
     private void handleButtonAction(ActionEvent event) throws IOException { 
         
-        Stage stageOnClose = (Stage)loginPane.getScene().getWindow();
-        stageOnClose.close();
+        Stage currentStage = (Stage)loginPane.getScene().getWindow();;
+        Parent root;
+        Scene scene;
         
-        Parent root = FXMLLoader.load(getClass().getResource("../View/Sign_up.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Sign Up");
-        stage.setScene(scene);  
-        stage.show();
+        final Node source = (Node) event.getSource();
+        String id = source.getId();
+
+        if(id.equals("registerBtn")){
+            root = FXMLLoader.load(getClass().getResource("../View/Sign_up.fxml"));
+            scene = new Scene(root);
+            currentStage.setScene(scene);
+        }else if(id.equals("loginBtn")){
+            root = FXMLLoader.load(getClass().getResource("../View/patientsRecordsStyle.fxml"));
+            scene = new Scene(root);
+            currentStage.setScene(scene);
+        }
+        
+        currentStage.show();
+        
     }
 
     public Button getRegisterBtn() {
