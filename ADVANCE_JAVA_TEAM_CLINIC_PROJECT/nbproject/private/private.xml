@@ -5,14 +5,8 @@
         <group>
             <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/SignUpViewController.java</file>
             <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Main/Main.java</file>
-            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/Doctor.java</file>
-            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/DatabaseController.java</file>
-            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/LoginViewController.java</file>
-            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/Patient.java</file>
-            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/DatabaseConnection.java</file>
-            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/AddressDetails.java</file>
-            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/Admin.java</file>
-            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/View/loginStyleFX.fxml</file>
+            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseModel.java</file>
+            <file>file:/E:/Github_project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseConnection.java</file>
         </group>
     </open-files>
 </project-private>
