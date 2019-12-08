@@ -37,7 +37,7 @@ public class DatabaseModel {
         rs = stmt.executeQuery(sql);
     }
     
-    public void loginQuery(String userName, String passWord) throws SQLException {
+    public boolean loginQuery(String userName, String passWord) throws SQLException {
         /* Alert Initialization */
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
@@ -50,16 +50,20 @@ public class DatabaseModel {
             if (password.equals(passWord)) {
                 roleId = rs.getInt("role_id");
                 System.out.println("Password correct!" + roleId);
+                return true;
             } else if (password != passWord) {
                 alert.setTitle("Incorrect Password");
                 alert.setContentText("The Password you have entered is not correct!");
                 alert.showAndWait();
+                return false;
             }
         } else {
             alert.setTitle("Incorrect Username");
             alert.setContentText("The Username you have entered does not match any existing user!");
             alert.showAndWait();
+            return false;
         }
+        return false;
     }
     
     public void registerQuery(String userName, String passWord) throws SQLException{
