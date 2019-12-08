@@ -35,7 +35,7 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class PatientsRecordViewController implements Initializable {
+public class PatientsRecordViewController extends NewStage implements Initializable {
 
     @FXML
     private Button homeBtn;
@@ -73,8 +73,6 @@ public class PatientsRecordViewController implements Initializable {
     private void handleButtonAction(MouseEvent event) throws IOException {
         
         Stage currentStage = (Stage)recordsPane.getScene().getWindow();;
-        Parent root;
-        Scene scene;
         
         final Node source = (Node) event.getSource();
         String id = source.getId();
@@ -83,9 +81,7 @@ public class PatientsRecordViewController implements Initializable {
             if(detailsPane.getOpacity() == 1){detailsPane.setOpacity(0);}
             else{detailsPane.setOpacity(1);}
         }else if(id.equals("logoutBtnIcon") || id.equals("logOutBtn")){
-            root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
+            setNewStage("../View/loginStyleFX.fxml", currentStage);
         }
         currentStage.show();
     }

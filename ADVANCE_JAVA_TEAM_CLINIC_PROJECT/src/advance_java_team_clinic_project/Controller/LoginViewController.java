@@ -83,9 +83,6 @@ public class LoginViewController extends NewStage implements Initializable {
         });
     }
 
-    
-        
-    
        
     private void handleLoginAction(ActionEvent event) throws IOException {
         ak = new DatabaseModel();
@@ -94,22 +91,16 @@ public class LoginViewController extends NewStage implements Initializable {
         
         /**/
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-        /**/
-        try {
-            ak.getObject();
-            if(ak.loginQuery(userNameGiven, passWordGiven) == true){
-                setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
-            };
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //ak.getObject();
+        // if(ak.loginQuery(userNameGiven, passWordGiven) == true){
+        setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
+        //};
     }        
     
     private void handleRegisterAction(ActionEvent event) throws IOException { 
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-        currentStage.show();
+        setNewStage("../View/Sign_up.fxml", currentStage);
     }
-    
     
     
     public Button getRegisterBtn() {
