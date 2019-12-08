@@ -119,10 +119,15 @@ and open the template in the editor.
 .usernameInput, .passwordInput {
     -fx-prompt-text-fill: #304e8e;
     -fx-text-fill: #304e8e;
-    -fx-background-color: -fx-text-box-border, -fx-background ;
+    -fx-background-color: -fx-text-box-border, -fx-background;
     -fx-background-insets: 0, 0 0 1 0 ;
     -fx-background-radius: 0 ;
 }
+
+.usernameInput:hover, .passwordInput:hover {
+    -fx-background-insets: 0, 0 0 2 0 ;
+}
+
 
 .usernameInput:focused, .passwordInput:focused {
     -fx-prompt-text-fill:transparent;
@@ -131,3 +136,27 @@ and open the template in the editor.
      -fx-background-color: -fx-focus-color, -fx-background;
 }
 
+
+.registerUsernameInput, .registerPasswordInput {
+    -fx-prompt-text-fill: #fff;
+    -fx-text-fill: #fff;
+    -fx-background-color:  #385ca8;
+    -fx-border-color: transparent transparent #fff transparent;
+}
+
+/*=============================================*/
+
+/*==============SIDEBAR ADMIN==================*/
+.sidebar {
+    -fx-background-color: #385ca8;
+}
+
+.button1 {
+    -fx-text-fill: #fff;
+    -fx-background-color:#385ca8;
+    -fx-cursor: hand;
+}
+
+.button1:hover {
+    -fx-background-color: #829dd5;
+}
