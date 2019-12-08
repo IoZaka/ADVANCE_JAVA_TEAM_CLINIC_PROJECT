@@ -103,26 +103,25 @@ public class LoginViewController implements Initializable {
     private void handleButtonAction(ActionEvent event) throws IOException { 
         
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-        Parent root;
-        Scene scene;
-        
+
         final Node source = (Node) event.getSource();
         String id = source.getId();
 
         if(id.equals("registerBtn")){
-            root = FXMLLoader.load(getClass().getResource("../View/Sign_up.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
+            setNewStage("../View/Sign_Up.fxml", currentStage);
         }else if(id.equals("loginBtn")){
-            root = FXMLLoader.load(getClass().getResource("../View/Success_Appointment.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
+            setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
         }
-        
         currentStage.show();
         
     }
 
+    public void setNewStage(String path, Stage currentStage) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource(path));
+        Scene scene = new Scene(root);
+        currentStage.setScene(scene);
+    }
+    
     public Button getRegisterBtn() {
         return registerBtn;
     }
