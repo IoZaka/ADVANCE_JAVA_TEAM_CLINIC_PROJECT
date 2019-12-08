@@ -30,7 +30,7 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class Success_AppointmentController implements Initializable {
+public class Success_AppointmentController extends NewStage implements Initializable {
 
     @FXML
     private AnchorPane successAppPane;
@@ -62,30 +62,18 @@ public class Success_AppointmentController implements Initializable {
     @FXML
     private void handleButtonAction(MouseEvent event) throws IOException {
         Stage currentStage = (Stage)successAppPane.getScene().getWindow();;
-        Parent root;
-        Scene scene;
-        
         final Node source = (Node) event.getSource();
         String id = source.getId();
-        
         
         if(id.equals("detailsBtn")){
             if(detailsPane.getOpacity() == 1){detailsPane.setOpacity(0);}
             else{detailsPane.setOpacity(1);}
         }else if(id.equals("logoutBtnIcon") || id.equals("logOutBtn")){
-            root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
+            setNewStage("../View/loginStyleFX.fxml", currentStage);
         }else if(id.equals("clickHereBtn")){
-            root = FXMLLoader.load(getClass().getResource("../View/patientsRecordsStyle.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
+            setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
         }
         currentStage.show();
-    }
-
-    
-  
-    
+    } 
     
 }

@@ -112,3 +112,22 @@ and open the template in the editor.
 .backBtn {
     -fx-cursor: hand;
 }
+
+/* ============================ */
+
+/*========LOGIN STYLE CSS =========*/
+.usernameInput, .passwordInput {
+    -fx-prompt-text-fill: #304e8e;
+    -fx-text-fill: #304e8e;
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+}
+
+.usernameInput:focused, .passwordInput:focused {
+    -fx-prompt-text-fill:transparent;
+     -fx-text-fill: #304e8e;
+     -fx-border-color: transparent transparent #304e8e transparent;
+     -fx-background-color: -fx-focus-color, -fx-background;
+}
+

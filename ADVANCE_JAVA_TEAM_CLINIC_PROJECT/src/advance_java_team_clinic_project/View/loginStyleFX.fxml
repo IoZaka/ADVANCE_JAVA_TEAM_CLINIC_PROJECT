@@ -10,6 +10,8 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import advance_java_team_clinic_project.View.widgets.EditText.java?>
+
 
 <Pane fx:id="loginPane" prefHeight="600.0" prefWidth="800" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.LoginViewController">
          <children>
@@ -54,8 +56,9 @@
                <image>
                   <Image url="@images/user.png" />
                </image>
+               <EditText prompText="Nombre de Usuario"  />
             </ImageView>
-            <PasswordField fx:id="passWordField" layoutX="93.0" layoutY="183.0" prefHeight="34.0" prefWidth="285.0" promptText="Give Password" />
+            <PasswordField fx:id="passWordField" layoutX="93.0" layoutY="183.0" prefHeight="34.0" prefWidth="285.0" promptText="Give Password" styleClass="passwordInput" stylesheets="@style.css" />
                      </children>
                   </AnchorPane>
          </children>
