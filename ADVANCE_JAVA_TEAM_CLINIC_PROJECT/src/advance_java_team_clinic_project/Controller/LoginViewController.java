@@ -34,7 +34,7 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class LoginViewController implements Initializable {
+public class LoginViewController extends NewStage implements Initializable {
 
     @FXML
     private Button registerBtn;
@@ -85,7 +85,7 @@ public class LoginViewController implements Initializable {
 
     
         
-    }
+    
        
     private void handleLoginAction(ActionEvent event) throws IOException {
         ak = new DatabaseModel();
@@ -94,15 +94,11 @@ public class LoginViewController implements Initializable {
         
         /**/
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-        Parent root;
-        Scene scene;
         /**/
         try {
             ak.getObject();
             if(ak.loginQuery(userNameGiven, passWordGiven) == true){
-                root = FXMLLoader.load(getClass().getResource("../View/patientsRecordsStyle.fxml"));
-                scene = new Scene(root);
-                currentStage.setScene(scene);
+                setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
             };
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,24 +106,11 @@ public class LoginViewController implements Initializable {
     }        
     
     private void handleRegisterAction(ActionEvent event) throws IOException { 
-        
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-
-        final Node source = (Node) event.getSource();
-
-            root = FXMLLoader.load(getClass().getResource("../View/Sign_up.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
-
         currentStage.show();
-        
     }
-
-    public void setNewStage(String path, Stage currentStage) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource(path));
-        Scene scene = new Scene(root);
-        currentStage.setScene(scene);
-    }
+    
+    
     
     public Button getRegisterBtn() {
         return registerBtn;
