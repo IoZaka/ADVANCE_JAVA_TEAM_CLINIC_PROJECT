@@ -31,7 +31,6 @@ and open the template in the editor.
 .loginBtn:hover, .refreshBtn:hover {
    -fx-text-fill:fff;
     -fx-background-color:#304e8e;
-    
 }
 
 .forgotBtn {
@@ -96,4 +95,20 @@ and open the template in the editor.
 .editProfileBtn:hover,.aboutBtn:hover,.logoutBtn:hover{
     -fx-cursor: hand;
     -fx-background-color: #4f75c4;
+}
+
+/* ======SignUP View CSS====== */
+
+.submitBtn {
+    -fx-background-color:#fff;
+    -fx-cursor: hand;
+    -fx-text-fill: #385ca8;
+}
+
+.submitBtn:hover {
+    -fx-background-color:#ced9ef;
+}
+
+.backBtn {
+    -fx-cursor: hand;
 }

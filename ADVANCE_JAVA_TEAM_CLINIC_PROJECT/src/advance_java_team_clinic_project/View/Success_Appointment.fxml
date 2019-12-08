@@ -1,35 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="successAppPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleButtonAction" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.Success_AppointmentController">
    <children>
-      <Label layoutX="191.0" layoutY="154.0" text="Appointment successfully registered !!!!">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Label layoutX="273.0" layoutY="228.0" text="Appointment id: ">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="400.0" layoutY="228.0" prefHeight="21.0" prefWidth="83.0" text="Id" />
-      <Button layoutX="303.0" layoutY="369.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="179.0" text="Return" />
-      <Pane layoutY="-6.0" prefHeight="76.0" prefWidth="800.0" style="-fx-background-color: #385ca8;">
-         <children>
-            <ImageView fitHeight="76.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
+      <ToolBar prefHeight="50.0" prefWidth="800.0" styleClass="toolbar" stylesheets="@style.css">
+         <items>
+            <ImageView fitHeight="60.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/hospital.png" />
                </image>
             </ImageView>
+            <Button fx:id="homeBtn" mnemonicParsing="false" styleClass="homeBtn" stylesheets="@style.css" text="HMS">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="60.0" prefWidth="544.0" />
+            <ImageView fx:id="detailsBtn" fitHeight="40.0" fitWidth="54.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true" styleClass="detailsBtn">
+               <image>
+                  <Image url="@images/detailsBtnImg.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="30.0" minY="40.0" width="40.0" />
+               </viewport>
+            </ImageView>
+            <Pane prefHeight="60.0" prefWidth="20.0" />
+            <ImageView fx:id="logoutBtnIcon" fitHeight="40.0" fitWidth="54.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true" styleClass="detailsBtn">
+               <image>
+                  <Image url="@images/logout.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="30.0" minY="40.0" width="40.0" />
+               </viewport>
+            </ImageView>
+         </items>
+      </ToolBar>
+      <Text layoutX="86.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You successfully registered your appointment" wrappingWidth="633.13671875">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="239.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment ID: " wrappingWidth="124.13671875">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Label layoutX="363.0" layoutY="366.0" prefHeight="25.0" prefWidth="40.0" text="ID" />
+      <ImageView fitHeight="135.0" fitWidth="220.0" layoutX="273.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/tick.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="239.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To view your records " wrappingWidth="192.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Hyperlink fx:id="clickHereBtn" layoutX="403.0" layoutY="404.0" onMouseClicked="#handleButtonAction" text="click here" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Hyperlink>
+      <Pane fx:id="detailsPane" layoutX="580.0" layoutY="63.0" opacity="0.0" prefHeight="200.0" prefWidth="206.0" styleClass="detailsPane" stylesheets="@style.css">
+         <children>
+            <ImageView fitHeight="40.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/user.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="30.0" minY="40.0" width="40.0" />
+               </viewport>
+            </ImageView>
+            <Text layoutX="80.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, " wrappingWidth="125.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="80.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as " wrappingWidth="125.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Line endX="100.0" layoutX="103.0" layoutY="61.0" startX="-100.0" />
+            <Button fx:id="editProfileBtn" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="editProfileBtn" stylesheets="@style.css" text="Edit Profile" textFill="WHITE" />
+            <Button fx:id="aboutBtn" layoutX="14.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="aboutBtn" stylesheets="@style.css" text="About" textFill="WHITE" />
+            <Button fx:id="logOutBtn" layoutX="14.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="logoutBtn" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
          </children>
       </Pane>
    </children>
-</Pane>
+</AnchorPane>

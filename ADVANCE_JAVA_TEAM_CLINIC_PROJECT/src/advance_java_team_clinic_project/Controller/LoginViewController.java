@@ -73,8 +73,19 @@ public class LoginViewController implements Initializable {
         });
         
         loginBtn.setOnAction(new EventHandler<ActionEvent>(){
-
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    handleButtonAction(event);
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     
+        
+    }
+       
     private void handleLoginAction(ActionEvent event) throws IOException {
         System.out.println("to login koumpi patithike");
         ak = new DatabaseModel();
@@ -87,7 +98,7 @@ public class LoginViewController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }        
     
     private void handleButtonAction(ActionEvent event) throws IOException { 
         
@@ -103,7 +114,7 @@ public class LoginViewController implements Initializable {
             scene = new Scene(root);
             currentStage.setScene(scene);
         }else if(id.equals("loginBtn")){
-            root = FXMLLoader.load(getClass().getResource("../View/patientsRecordsStyle.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../View/Success_Appointment.fxml"));
             scene = new Scene(root);
             currentStage.setScene(scene);
         }
