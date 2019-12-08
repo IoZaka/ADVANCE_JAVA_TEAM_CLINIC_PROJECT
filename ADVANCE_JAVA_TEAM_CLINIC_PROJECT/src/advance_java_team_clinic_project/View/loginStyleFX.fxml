@@ -42,7 +42,7 @@
                <font>
                   <Font size="14.0" />
                </font></Button>
-                        <TextField fx:id="userNameTxtField" layoutX="93.0" layoutY="140.0" prefHeight="33.0" prefWidth="285.0" promptText="Give Username..." styleClass="usernameInput" stylesheets="@style.css">
+                        <TextField fx:id="userNameTxtField" alignment="TOP_LEFT" layoutX="93.0" layoutY="140.0" prefHeight="33.0" prefWidth="285.0" promptText="Give Username..." styleClass="usernameInput" stylesheets="@style.css">
                <font>
                   <Font size="14.0" />
                </font>
@@ -62,7 +62,7 @@
                   <Image url="@images/user.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="passWordField" layoutX="93.0" layoutY="183.0" prefHeight="34.0" prefWidth="285.0" promptText="Give Password..." styleClass="passwordInput" stylesheets="@style.css">
+            <PasswordField fx:id="passWordField" alignment="TOP_LEFT" layoutX="93.0" layoutY="183.0" prefHeight="34.0" prefWidth="285.0" promptText="Give Password..." styleClass="passwordInput" stylesheets="@style.css">
                <font>
                   <Font size="14.0" />
                </font></PasswordField>
