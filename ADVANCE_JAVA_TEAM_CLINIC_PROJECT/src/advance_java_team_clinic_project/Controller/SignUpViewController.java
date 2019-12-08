@@ -34,7 +34,7 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class SignUpViewController implements Initializable{
+public class SignUpViewController implements Initializable {
 
     @FXML
     private TextField registerUsername;
@@ -42,46 +42,54 @@ public class SignUpViewController implements Initializable{
     private PasswordField registerPassword;
     @FXML
     private PasswordField confirmPassword;
-    
-
     @FXML
     private Pane signUpPane;
     @FXML
-    private Button submitBtn;
-    @FXML
-    private ImageView backBtn;
-    
+    private Button registerBtn;
+
+    private String passWord;
+    private String confirmPassWord;
+    private String userName;
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private static DatabaseModel ak;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        registerBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(MouseEvent event) {
-                try {
-                    handleBackBtn(event);
-                } catch (IOException ex) {
-                    Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
+            public void handle(ActionEvent e) {
+                passWord = registerPassword.getText();
+                confirmPassWord = confirmPassword.getText();
+                userName = registerUsername.getText();
+                alert.setHeaderText(null);
+                alert.initStyle(StageStyle.UTILITY);
+                if (userName != null && !userName.isEmpty()) {
+                    ak = new DatabaseModel();
+                    if (passWord != null && !passWord.isEmpty() && confirmPassword != null && !confirmPassWord.isEmpty()) {
+                        if (passWord.equals(confirmPassWord)) {
+                            try {
+                                ak.getObject();
+                                ak.registerQuery(userName, passWord);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            alert.setTitle("Incorrect password");
+                            alert.setContentText("Passwords do not match1");
+                            alert.showAndWait();
+                        }
+                    } else {
+                        alert.setTitle("Incorrect password");
+                        alert.setContentText("Please enter valid passwords");
+                        alert.showAndWait();
+                    }
+                } else {
+
+                    alert.setTitle("Incorrect username");
+                    alert.setContentText("Please enter a valid username!");
+                    alert.showAndWait();
                 }
             }
         });
     }
-    
-    private void handleBackBtn(MouseEvent event) throws IOException{
-        Stage currentStage = (Stage)signUpPane.getScene().getWindow();;
-        Parent root;
-        Scene scene;
-        
-        final Node source = (Node) event.getSource();
-        String id = source.getId();
-        
-        if(id.equals("backBtn")){
-           root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
-        }
-        currentStage.show();
-    }
-       
-    
 }

@@ -65,7 +65,7 @@ public class LoginViewController implements Initializable {
         registerBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 try {
-                    handleButtonAction(e);
+                    handleRegisterAction(e);
                 } catch (IOException ex) {
                     Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -73,45 +73,52 @@ public class LoginViewController implements Initializable {
         });
         
         loginBtn.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    handleButtonAction(event);
+            @Override public void handle(ActionEvent e){
+                try{
+                    handleLoginAction(e);
                 } catch (IOException ex) {
                     Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
+    }
+
     
         
     }
        
     private void handleLoginAction(ActionEvent event) throws IOException {
-        System.out.println("to login koumpi patithike");
         ak = new DatabaseModel();
         userNameGiven = userNameTxtField.getText();
         passWordGiven = passWordField.getText();
+        
+        /**/
+        Stage currentStage = (Stage)loginPane.getScene().getWindow();;
+        Parent root;
+        Scene scene;
+        /**/
         try {
             ak.getObject();
-            ak.loginQuery(userNameGiven, passWordGiven);
-            ak.getData();
+            if(ak.loginQuery(userNameGiven, passWordGiven) == true){
+                root = FXMLLoader.load(getClass().getResource("../View/patientsRecordsStyle.fxml"));
+                scene = new Scene(root);
+                currentStage.setScene(scene);
+            };
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }        
     
-    private void handleButtonAction(ActionEvent event) throws IOException { 
+    private void handleRegisterAction(ActionEvent event) throws IOException { 
         
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
 
         final Node source = (Node) event.getSource();
-        String id = source.getId();
 
-        if(id.equals("registerBtn")){
-            setNewStage("../View/Sign_Up.fxml", currentStage);
-        }else if(id.equals("loginBtn")){
-            setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
-        }
+            root = FXMLLoader.load(getClass().getResource("../View/Sign_up.fxml"));
+            scene = new Scene(root);
+            currentStage.setScene(scene);
+
         currentStage.show();
         
     }
