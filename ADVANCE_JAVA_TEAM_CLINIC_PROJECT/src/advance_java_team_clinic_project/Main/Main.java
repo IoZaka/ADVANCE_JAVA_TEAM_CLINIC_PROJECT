@@ -5,9 +5,6 @@
  */
 package advance_java_team_clinic_project.Main;
 
-import advance_java_team_clinic_project.Controller.LoginViewController;
-import advance_java_team_clinic_project.Model.DatabaseModel;
-import advance_java_team_clinic_project.Model.User;
 import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,8 +32,10 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
 
         Scene scene = new Scene(root);
-
         primaryStage.setScene(scene);
+        primaryStage.setWidth(800);
+        primaryStage.setHeight(600);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

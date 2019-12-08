@@ -84,6 +84,9 @@ public class LoginViewController implements Initializable {
     }
 
     
+        
+    }
+       
     private void handleLoginAction(ActionEvent event) throws IOException {
         ak = new DatabaseModel();
         userNameGiven = userNameTxtField.getText();
@@ -104,14 +107,12 @@ public class LoginViewController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }        
     
     private void handleRegisterAction(ActionEvent event) throws IOException { 
         
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-        Parent root;
-        Scene scene;
-        
+
         final Node source = (Node) event.getSource();
 
             root = FXMLLoader.load(getClass().getResource("../View/Sign_up.fxml"));
@@ -122,6 +123,12 @@ public class LoginViewController implements Initializable {
         
     }
 
+    public void setNewStage(String path, Stage currentStage) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource(path));
+        Scene scene = new Scene(root);
+        currentStage.setScene(scene);
+    }
+    
     public Button getRegisterBtn() {
         return registerBtn;
     }
