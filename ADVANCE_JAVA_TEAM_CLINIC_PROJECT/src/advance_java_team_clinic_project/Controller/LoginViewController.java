@@ -85,7 +85,7 @@ public class LoginViewController implements Initializable {
 
     
         
-    }
+    
        
     private void handleLoginAction(ActionEvent event) throws IOException {
         ak = new DatabaseModel();
@@ -114,7 +114,9 @@ public class LoginViewController implements Initializable {
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
 
         final Node source = (Node) event.getSource();
-
+Parent root;
+        Scene scene ;
+        
             root = FXMLLoader.load(getClass().getResource("../View/Sign_up.fxml"));
             scene = new Scene(root);
             currentStage.setScene(scene);
