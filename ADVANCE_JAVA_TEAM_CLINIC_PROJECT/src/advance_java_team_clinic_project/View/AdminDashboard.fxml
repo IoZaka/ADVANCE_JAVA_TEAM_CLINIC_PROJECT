@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AdminDashboardController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" styleClass="sidebar" stylesheets="@style.css" BorderPane.alignment="CENTER">
          <children>
@@ -19,7 +19,7 @@
                   <Insets left="15.0" />
                </VBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button fx:id="button1" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
