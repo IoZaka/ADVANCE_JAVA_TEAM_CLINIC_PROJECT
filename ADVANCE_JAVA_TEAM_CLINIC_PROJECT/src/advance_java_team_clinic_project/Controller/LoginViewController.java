@@ -94,7 +94,7 @@ public class LoginViewController extends NewStage implements Initializable {
         Stage currentStage = (Stage)loginPane.getScene().getWindow();
         //ak.getObject();
         // if(ak.loginQuery(userNameGiven, passWordGiven) == true){
-        setNewStage("../View/AdminDashboard.fxml", currentStage);
+        setNewStage("../View/editProfile.fxml", currentStage);
         //};
     }        
     

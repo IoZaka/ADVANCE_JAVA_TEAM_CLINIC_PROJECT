@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/AdminDashboardController.java</file>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/View/style.css</file>
+            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/PatientsRecordViewController.java</file>
+            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/View/checkUsernameWindow.fxml</file>
+            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/EditProfileController.java</file>
         </group>
     </open-files>
 </project-private>

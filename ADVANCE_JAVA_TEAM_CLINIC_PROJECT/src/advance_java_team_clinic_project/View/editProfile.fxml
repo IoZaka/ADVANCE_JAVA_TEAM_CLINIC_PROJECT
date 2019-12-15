@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="editProfilePane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
+   <children>
+      <ToolBar prefHeight="50.0" prefWidth="800.0" styleClass="toolbar" stylesheets="@style.css">
+         <items>
+            <ImageView fitHeight="60.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/hospital.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="homeBtn" mnemonicParsing="false" styleClass="homeBtn" stylesheets="@style.css" text="HMS">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="60.0" prefWidth="544.0" />
+            <ImageView fx:id="detailsBtn" fitHeight="40.0" fitWidth="54.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true" styleClass="detailsBtn">
+               <image>
+                  <Image url="@images/detailsBtnImg.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="30.0" minY="40.0" width="40.0" />
+               </viewport>
+            </ImageView>
+            <Pane prefHeight="60.0" prefWidth="20.0" />
+            <ImageView fx:id="logoutBtnIcon" fitHeight="40.0" fitWidth="54.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true" styleClass="detailsBtn">
+               <image>
+                  <Image url="@images/logout.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D minX="30.0" minY="40.0" width="40.0" />
+               </viewport>
+            </ImageView>
+         </items>
+      </ToolBar>
+      <Button fx:id="checkUsernameBtn" layoutX="45.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Check Username" />
+      <TextField layoutX="209.0" layoutY="139.0" />
+      <TextField layoutX="410.0" layoutY="139.0" />
+      <Button fx:id="insuranceBtn" layoutX="620.0" layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Insurance Name" />
+      <TextField layoutX="32.0" layoutY="223.0" />
+      <TextField layoutX="216.0" layoutY="223.0" />
+      <TextField layoutX="417.0" layoutY="223.0" />
+      <TextField layoutX="31.0" layoutY="300.0" />
+      <TextField layoutX="215.0" layoutY="300.0" />
+      <DatePicker layoutX="404.0" layoutY="300.0" />
+      <TextField layoutX="621.0" layoutY="300.0" />
+      <TextField layoutX="213.0" layoutY="392.0" />
+      <Button fx:id="checkPasswordBtn" layoutX="634.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Check Password" />
+      <Button fx:id="addressBtn" layoutX="234.0" layoutY="496.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Check Address" />
+      <Button fx:id="contactBtn" layoutX="437.0" layoutY="496.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Contact" />
+      <Text layoutX="73.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+      <Text layoutX="257.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+      <Text layoutX="462.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname" />
+      <Text layoutX="644.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insurance Details" />
+      <Text layoutX="92.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code" />
+      <Text layoutX="270.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AMKA" />
+      <Text layoutX="475.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AMA" />
+      <Text layoutX="671.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GENDER" />
+      <Text layoutX="63.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FATHERS NAME" />
+      <Text layoutX="245.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MOTHERS NAME" />
+      <Text layoutX="443.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE OF BIRTH" />
+      <Text layoutX="655.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACE OF BIRTH" />
+      <Text layoutX="56.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ECONOMIC STATUS" />
+      <Text layoutX="253.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROFESSION" />
+      <Text layoutX="457.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NATIONALITY" />
+      <Text layoutX="656.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORD" />
+      <Text layoutX="86.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROLE" />
+      <Text layoutX="235.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS DETAILS" />
+      <Text layoutX="439.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTACT DETAILS" />
+      <ComboBox layoutX="614.0" layoutY="223.0" prefWidth="150.0" />
+      <ComboBox layoutX="34.0" layoutY="392.0" prefWidth="150.0" />
+      <ComboBox layoutX="413.0" layoutY="400.0" prefWidth="150.0" />
+      <ComboBox layoutX="25.0" layoutY="496.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
