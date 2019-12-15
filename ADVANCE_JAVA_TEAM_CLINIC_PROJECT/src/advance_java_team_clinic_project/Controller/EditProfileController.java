@@ -59,14 +59,11 @@ public class EditProfileController implements Initializable {
            @Override
            public void handle(MouseEvent event) {
                try {
-                   Parent root;
-                   root = FXMLLoader.load(getClass().getClassLoader().getResource("checkUsernameWindow.fxml"));
+                   Parent root = FXMLLoader.load(getClass().getResource("../View/checkUsernameWindow.fxml"));
                    Stage stage = new Stage();
-                   stage.setTitle("My New Stage Title");
+                   stage.setTitle("Check Username");
                    stage.setScene(new Scene(root, 400, 200));
                    stage.show();
-                   // Hide this current window (if this is what you want)
-                   ((Node)(event.getSource())).getScene().getWindow().hide();
                } catch (IOException ex) {
                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
                }
