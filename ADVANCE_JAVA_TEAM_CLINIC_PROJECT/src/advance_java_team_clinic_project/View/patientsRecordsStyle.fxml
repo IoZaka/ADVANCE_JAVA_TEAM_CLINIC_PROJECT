@@ -57,7 +57,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Pane fx:id="detailsPane" layoutX="580.0" layoutY="63.0" opacity="0.0" prefHeight="200.0" prefWidth="206.0" styleClass="detailsPane" stylesheets="@style.css">
+      <Pane fx:id="detailsPane" layoutX="580.0" layoutY="63.0" opacity="0.0" prefHeight="207.0" prefWidth="206.0" styleClass="detailsPane" stylesheets="@style.css">
          <children>
             <ImageView fitHeight="40.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -77,10 +77,10 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Line endX="100.0" layoutX="103.0" layoutY="61.0" startX="-100.0" />
-            <Button fx:id="editProfileBtn" layoutX="14.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="editProfileBtn" stylesheets="@style.css" text="Edit Profile" textFill="WHITE" />
-            <Button fx:id="aboutBtn" layoutX="14.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="aboutBtn" stylesheets="@style.css" text="About" textFill="WHITE" />
-            <Button fx:id="logOutBtn" layoutX="14.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="184.0" styleClass="logoutBtn" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
+            <Line endX="100.0" layoutX="103.0" layoutY="71.0" startX="-100.0" />
+            <Button fx:id="editProfileBtn" layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="185.0" styleClass="editProfileBtn" stylesheets="@style.css" text="Edit Profile" textFill="WHITE" />
+            <Button fx:id="aboutBtn" layoutX="14.0" layoutY="122.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="185.0" styleClass="aboutBtn" stylesheets="@style.css" text="About" textFill="WHITE" />
+            <Button fx:id="logOutBtn" layoutX="14.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="25.0" prefWidth="185.0" styleClass="logoutBtn" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
          </children>
       </Pane>
    </children>

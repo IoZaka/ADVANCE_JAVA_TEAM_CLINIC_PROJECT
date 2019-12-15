@@ -169,5 +169,7 @@ and open the template in the editor.
 }
 
 .profileInfo {
-    -fx-border-color: black;
+    -fx-border-width: 4 0 0 0;
+    -fx-border-color: #385ca8 transparent transparent transparent;
+    -fx-background-color: #fff;
 }

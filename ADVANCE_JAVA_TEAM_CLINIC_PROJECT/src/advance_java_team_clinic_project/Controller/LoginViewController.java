@@ -100,17 +100,10 @@ public class LoginViewController extends NewStage implements Initializable {
     
     private void handleRegisterAction(ActionEvent event) throws IOException { 
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-        setNewStage("../View/Sign_Up.fxml", currentStage);
+        setNewStage("../View/Sign_up.fxml", currentStage);
         currentStage.show();
         
     }
-
-    public void setNewStage(String path, Stage currentStage) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource(path));
-        Scene scene = new Scene(root);
-        currentStage.setScene(scene);
-    }
-    
     
     public Button getRegisterBtn() {
         return registerBtn;
