@@ -36,7 +36,7 @@ import javafx.stage.StageStyle;
  *
  * @author Chris
  */
-public class SignUpViewController implements Initializable {
+public class SignUpViewController extends NewStage implements Initializable {
 
     @FXML
     private TextField registerUsername;
@@ -54,6 +54,8 @@ public class SignUpViewController implements Initializable {
     private String userName;
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private static DatabaseModel ak;
+    @FXML
+    private ImageView backBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,6 +92,18 @@ public class SignUpViewController implements Initializable {
                     alert.setTitle("Incorrect username");
                     alert.setContentText("Please enter a valid username!");
                     alert.showAndWait();
+                }
+            }
+        });
+        
+        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                Stage currentStage = (Stage)signUpPane.getScene().getWindow();
+                try {
+                    setNewStage("../View/loginStyleFX.fxml",currentStage);
+                } catch (IOException ex) {
+                    Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

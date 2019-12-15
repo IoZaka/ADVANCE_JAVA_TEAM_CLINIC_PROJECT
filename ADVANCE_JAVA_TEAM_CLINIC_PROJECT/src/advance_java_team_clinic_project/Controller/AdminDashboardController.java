@@ -26,19 +26,20 @@ import javafx.stage.Stage;
 public class AdminDashboardController extends NewStage implements Initializable {
 
     @FXML
-    private Button button1;
-    @FXML
     private BorderPane borderPane;
+    @FXML
+    private Button profileBtn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        button1.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        loadUIonSamePane("../View/profileAdminPane.fxml");
+        profileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                loadUIonSamePane("../View/Button1.fxml");
+                loadUIonSamePane("../View/profileAdminPane.fxml");
             }
         });
     }    

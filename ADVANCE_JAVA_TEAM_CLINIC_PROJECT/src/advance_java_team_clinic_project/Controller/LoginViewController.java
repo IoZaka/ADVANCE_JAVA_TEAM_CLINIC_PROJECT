@@ -56,6 +56,7 @@ public class LoginViewController extends NewStage implements Initializable {
     
     String userNameGiven;
     String passWordGiven;
+    
 
     /**
      * Initializes the controller class.
@@ -90,10 +91,10 @@ public class LoginViewController extends NewStage implements Initializable {
         passWordGiven = passWordField.getText();
         
         /**/
-        Stage currentStage = (Stage)loginPane.getScene().getWindow();;
+        Stage currentStage = (Stage)loginPane.getScene().getWindow();
         //ak.getObject();
         // if(ak.loginQuery(userNameGiven, passWordGiven) == true){
-        setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
+        setNewStage("../View/AdminDashboard.fxml", currentStage);
         //};
     }        
     

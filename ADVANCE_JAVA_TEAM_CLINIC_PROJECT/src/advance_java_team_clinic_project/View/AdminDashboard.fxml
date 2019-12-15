@@ -19,42 +19,42 @@
                   <Insets left="15.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="button1" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button fx:id="profileBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Profile">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Button">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Button">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Button">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Button">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Button">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Button">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="button1" stylesheets="@style.css" text="Button">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Button">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>

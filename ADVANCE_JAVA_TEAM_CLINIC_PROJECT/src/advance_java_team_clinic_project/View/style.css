@@ -137,7 +137,7 @@ and open the template in the editor.
 }
 
 .registerUsernameInput, .registerPasswordInput {
-    -fx-prompt-text-fill: #fff;
+    -fx-prompt-text-fill:#fff;
     -fx-text-fill: #fff;
     -fx-background-color:  #385ca8;
     -fx-border-color: transparent transparent #fff transparent;
@@ -147,6 +147,7 @@ and open the template in the editor.
     -fx-border-width: 0 0 2 0;
 }
 .registerUsernameInput:focused, .registerPasswordInput:focused {
+    -fx-prompt-text-fill: transparent;
     -fx-border-width: 0 0 2 0;
 }
 
@@ -157,11 +158,16 @@ and open the template in the editor.
     -fx-background-color: #385ca8;
 }
 
-.button1 {
+.sidebarBtns {
     -fx-text-fill: #fff;
     -fx-background-color:#385ca8;
     -fx-cursor: hand;
 }
-.button1:hover {
-    -fx-background-color: #829dd5;
+.sidebarBtns:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: #385ca8;
+}
+
+.profileInfo {
+    -fx-border-color: black;
 }

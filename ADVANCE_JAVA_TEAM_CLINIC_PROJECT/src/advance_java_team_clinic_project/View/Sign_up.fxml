@@ -30,7 +30,7 @@
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="379.0" layoutY="224.0" scaleX="3.0" scaleY="3.0" scaleZ="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up" />
-      <ImageView fx:id="backBtn" fitHeight="48.0" fitWidth="49.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="backBtn">
+      <ImageView fx:id="backBtn" fitHeight="48.0" fitWidth="34.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="backBtn">
          <image>
             <Image url="@images/back.png" />
          </image>
