@@ -21,6 +21,8 @@ public class DatabaseConnection {
     private String username = "javadev";
     private String password = "javadev";
     
+    
+    
     public DatabaseConnection() throws SQLException {
         try {
             this.connection = DriverManager.getConnection(url, username, password);
@@ -43,7 +45,5 @@ public class DatabaseConnection {
         }
         return instance;
     }
-    
-
-   
+     
 }

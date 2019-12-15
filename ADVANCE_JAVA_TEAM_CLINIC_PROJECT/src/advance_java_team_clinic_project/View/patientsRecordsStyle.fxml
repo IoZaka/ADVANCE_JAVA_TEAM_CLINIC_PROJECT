@@ -72,7 +72,7 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Text layoutX="80.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as " wrappingWidth="125.0">
+            <Text fx:id="logged_as" layoutX="80.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as " wrappingWidth="125.0">
                <font>
                   <Font size="14.0" />
                </font>

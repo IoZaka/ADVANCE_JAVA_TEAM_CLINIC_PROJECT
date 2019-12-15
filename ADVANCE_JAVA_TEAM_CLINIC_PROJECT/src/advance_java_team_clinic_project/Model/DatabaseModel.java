@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.stage.StageStyle;
 
 public class DatabaseModel {
@@ -20,6 +21,7 @@ public class DatabaseModel {
     private ResultSet rs,regRs;
     private String username, password, role, created, updated;
     private DatabaseConnection object;
+    User user = User.getInstance();
     public Integer roleId;
     Alert alert = new Alert(AlertType.INFORMATION);
 
@@ -43,13 +45,16 @@ public class DatabaseModel {
         alert.initStyle(StageStyle.UTILITY);
         /* End of Alert Initialiization*/
         stmt = object.connection.createStatement();
-        sql = "select id, password, role_id from pm_users where username = '" + userName + "'";
+        sql = "select id, password, role_id, name as firstname, surname, username from pm_users where username = '" + userName + "'";
         rs = stmt.executeQuery(sql);
         if (rs.next()) {
             password = rs.getString("password");
             if (password.equals(passWord)) {
-                roleId = rs.getInt("role_id");
-                System.out.println("Password correct!" + roleId);
+                user.setRoleID(rs.getInt("role_id"));
+                user.setId(rs.getInt("id"));
+                user.setFirstName(rs.getString("firstname"));
+                user.setSurname(rs.getString("surname"));
+                user.setUsername(rs.getString("username"));
                 return true;
             } else if (password != passWord) {
                 alert.setTitle("Incorrect Password");
@@ -66,7 +71,7 @@ public class DatabaseModel {
         return false;
     }
     
-    public void registerQuery(String userName, String passWord) throws SQLException{
+    public boolean registerQuery(String userName, String passWord) throws SQLException{
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
@@ -77,13 +82,17 @@ public class DatabaseModel {
             alert.setTitle("Wrong username");
             alert.setContentText("Username already existing, please add another username.");
             alert.showAndWait();
+            return false;
         }else if (rs.getInt("existing") == 0){
             regSql = "insert into pm_users (username,password,role_id) values ('"+userName+"','"+passWord+"',3)";
             regRs = stmt.executeQuery(regSql);
             alert.setTitle("Success!");
             alert.setContentText("User was succesfully registered! You may login now.");
             alert.showAndWait();
+            return true;
+
         }
+        return false;
     }
 
     public void getData() throws SQLException {

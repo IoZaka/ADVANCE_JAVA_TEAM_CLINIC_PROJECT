@@ -5,6 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -44,7 +46,7 @@ public class PatientsRecordViewController implements Initializable {
     @FXML
     private ListView<String> recordsListView;
 
-    ObservableList<String> list = FXCollections.observableArrayList("1","2","3","4");
+    ObservableList<String> list = FXCollections.observableArrayList("1", "2", "3", "4");
     @FXML
     private Button refreshBtn;
     @FXML
@@ -59,30 +61,38 @@ public class PatientsRecordViewController implements Initializable {
     private Button aboutBtn;
     @FXML
     private Button logOutBtn;
-    
+    User user = User.getInstance();
+    @FXML
+    private Text logged_as;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       recordsListView.setItems(list);
-       recordsListView.setPrefHeight(list.size()*24); //default size each row = 24
+        recordsListView.setItems(list);
+        recordsListView.setPrefHeight(list.size() * 24); //default size each row = 24
+        logged_as.setText(logged_as.getText() + user.getSurname() + " " + user.getFirstName() + ".");
     }
-    
+
     @FXML
     private void handleButtonAction(MouseEvent event) throws IOException {
-        
-        Stage currentStage = (Stage)recordsPane.getScene().getWindow();;
+
+        Stage currentStage = (Stage) recordsPane.getScene().getWindow();;
         Parent root;
         Scene scene;
-        
+
         final Node source = (Node) event.getSource();
         String id = source.getId();
-        
-        if(id.equals("detailsBtn")){
-            if(detailsPane.getOpacity() == 1){detailsPane.setOpacity(0);}
-            else{detailsPane.setOpacity(1);}
-        }else if(id.equals("logoutBtnIcon") || id.equals("logOutBtn")){
+
+        if (id.equals("detailsBtn")) {
+            if (detailsPane.getOpacity() == 1) {
+                detailsPane.setOpacity(0);
+            } else {
+                detailsPane.setOpacity(1);
+            }
+        } else if (id.equals("logoutBtnIcon") || id.equals("logOutBtn")) {
+            user.setInstance(user);
             root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
             scene = new Scene(root);
             currentStage.setScene(scene);

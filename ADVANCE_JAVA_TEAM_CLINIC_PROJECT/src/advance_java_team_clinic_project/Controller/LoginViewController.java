@@ -112,6 +112,19 @@ public class LoginViewController implements Initializable {
     private void handleRegisterAction(ActionEvent event) throws IOException { 
         
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+        Parent root;
+        Scene scene;
+=======
+        final Node source = (Node) event.getSource();
+        Parent root;
+        Scene scene ;
+>>>>>>> Stashed changes
+        
+        final Node source = (Node) event.getSource();
+>>>>>>> Stashed changes
 
         final Node source = (Node) event.getSource();
 Parent root;

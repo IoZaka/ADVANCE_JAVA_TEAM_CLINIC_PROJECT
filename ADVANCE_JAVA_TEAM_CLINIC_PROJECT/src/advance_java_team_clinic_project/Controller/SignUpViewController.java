@@ -57,32 +57,46 @@ public class SignUpViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        alert.setHeaderText(null);
+        alert.initStyle(StageStyle.UTILITY);
+
         registerBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 passWord = registerPassword.getText();
                 confirmPassWord = confirmPassword.getText();
                 userName = registerUsername.getText();
-                alert.setHeaderText(null);
-                alert.initStyle(StageStyle.UTILITY);
-                if (userName != null && !userName.isEmpty()) {
+                /**/
+                Stage currentStage = (Stage) signUpPane.getScene().getWindow();;
+                Parent root;
+                Scene scene;
+                /**/
+
+                if (!userName.equals(null) && !userName.equals("") /*&& !passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("") */) {
                     ak = new DatabaseModel();
-                    if (passWord != null && !passWord.isEmpty() && confirmPassword != null && !confirmPassWord.isEmpty()) {
+                    if (!passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("")) {
                         if (passWord.equals(confirmPassWord)) {
                             try {
                                 ak.getObject();
-                                ak.registerQuery(userName, passWord);
+                                if (ak.registerQuery(userName, passWord) == true) {
+                                    root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
+                                    scene = new Scene(root);
+                                    currentStage.setScene(scene);
+                                };
                             } catch (SQLException ex) {
                                 Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IOException ex) {
+                                Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
                             }
+
                         } else {
                             alert.setTitle("Incorrect password");
-                            alert.setContentText("Passwords do not match1");
+                            alert.setContentText("Passwords do not match!");
                             alert.showAndWait();
                         }
                     } else {
                         alert.setTitle("Incorrect password");
-                        alert.setContentText("Please enter valid passwords");
+                        alert.setContentText("Please enter valid passwords!");
                         alert.showAndWait();
                     }
                 } else {
