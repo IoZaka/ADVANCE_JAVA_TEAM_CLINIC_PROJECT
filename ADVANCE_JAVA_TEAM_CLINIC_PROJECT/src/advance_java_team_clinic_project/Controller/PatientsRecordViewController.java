@@ -37,7 +37,7 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class PatientsRecordViewController implements Initializable {
+public class PatientsRecordViewController extends NewStage implements Initializable {
 
     @FXML
     private Button homeBtn;
@@ -78,24 +78,17 @@ public class PatientsRecordViewController implements Initializable {
     @FXML
     private void handleButtonAction(MouseEvent event) throws IOException {
 
-        Stage currentStage = (Stage) recordsPane.getScene().getWindow();;
-        Parent root;
-        Scene scene;
-
+        Stage currentStage = (Stage)recordsPane.getScene().getWindow();;
+        
         final Node source = (Node) event.getSource();
         String id = source.getId();
-
-        if (id.equals("detailsBtn")) {
-            if (detailsPane.getOpacity() == 1) {
-                detailsPane.setOpacity(0);
-            } else {
-                detailsPane.setOpacity(1);
-            }
-        } else if (id.equals("logoutBtnIcon") || id.equals("logOutBtn")) {
+        
+        if(id.equals("detailsBtn")){
+            if(detailsPane.getOpacity() == 1){detailsPane.setOpacity(0);}
+            else{detailsPane.setOpacity(1);}
+        }else if(id.equals("logoutBtnIcon") || id.equals("logOutBtn")){
             user.setInstance(user);
-            root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
+            setNewStage("../View/loginStyleFX.fxml", currentStage);
         }
         currentStage.show();
     }
