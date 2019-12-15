@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.DatabaseModel;
+import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +48,7 @@ public class LoginViewController extends NewStage implements Initializable {
     private Button forgotBtn;
     @FXML
     private Pane loginPane; 
-    private static DatabaseModel ak;
+    private static DatabaseLoginRegister ak;
     @FXML
     private TextField userNameTxtField;
     @FXML
@@ -87,7 +87,7 @@ public class LoginViewController extends NewStage implements Initializable {
        
     private void handleLoginAction(ActionEvent event) throws IOException {
         try {
-            ak = new DatabaseModel();
+            ak = new DatabaseLoginRegister();
             userNameGiven = userNameTxtField.getText();
             passWordGiven = passWordField.getText();
             

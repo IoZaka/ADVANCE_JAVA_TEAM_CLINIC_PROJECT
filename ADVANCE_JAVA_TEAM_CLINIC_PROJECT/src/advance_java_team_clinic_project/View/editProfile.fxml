@@ -47,21 +47,21 @@
             </ImageView>
          </items>
       </ToolBar>
-      <Button fx:id="checkUsernameBtn" layoutX="51.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Check Username" />
-      <TextField layoutX="215.0" layoutY="114.0" />
-      <TextField layoutX="416.0" layoutY="114.0" />
-      <Button fx:id="insuranceBtn" layoutX="626.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Insurance Name" />
-      <TextField layoutX="38.0" layoutY="198.0" />
-      <TextField layoutX="222.0" layoutY="198.0" />
-      <TextField layoutX="423.0" layoutY="198.0" />
-      <TextField layoutX="37.0" layoutY="275.0" />
-      <TextField layoutX="221.0" layoutY="275.0" />
-      <DatePicker layoutX="410.0" layoutY="275.0" />
-      <TextField layoutX="627.0" layoutY="275.0" />
-      <TextField layoutX="219.0" layoutY="367.0" />
-      <Button fx:id="checkPasswordBtn" layoutX="640.0" layoutY="375.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Check Password" />
-      <Button fx:id="addressBtn" layoutX="240.0" layoutY="471.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Check Address" />
-      <Button fx:id="contactBtn" layoutX="443.0" layoutY="471.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Contact" />
+      <Button fx:id="usernamebtn" layoutX="51.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="name" layoutX="215.0" layoutY="114.0"  />
+      <TextField fx:id="surname" layoutX="416.0" layoutY="114.0"   />
+      <Button fx:id="insurancebtn" layoutX="626.0" layoutY="114.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0"  />
+      <TextField fx:id="code" layoutX="38.0" layoutY="198.0"  />
+      <TextField fx:id="amka" layoutX="222.0" layoutY="198.0" />
+      <TextField fx:id="ama" layoutX="423.0" layoutY="198.0" />
+      <TextField fx:id="fathersName" layoutX="37.0" layoutY="275.0" />
+      <TextField fx:id="mothersName" layoutX="221.0" layoutY="275.0" />
+      <DatePicker fx:id="dateOfBirth" layoutX="410.0" layoutY="275.0"/>
+      <TextField fx:id="placeOfBirth" layoutX="627.0" layoutY="275.0" />
+      <TextField fx:id="profession" layoutX="219.0" layoutY="367.0" />
+      <Button fx:id="passwordbtn" layoutX="640.0" layoutY="375.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Change password" />
+      <Button fx:id="addressbtn" layoutX="240.0" layoutY="471.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Address details" />
+      <Button fx:id="contactbtn" layoutX="443.0" layoutY="471.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Contact details" />
       <Text layoutX="79.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
       <Text layoutX="277.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
       <Text layoutX="468.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname" />

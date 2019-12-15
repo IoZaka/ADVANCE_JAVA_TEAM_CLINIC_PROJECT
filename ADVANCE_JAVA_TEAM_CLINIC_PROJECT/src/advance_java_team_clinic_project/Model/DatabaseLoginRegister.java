@@ -16,7 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.StageStyle;
 
-public class DatabaseModel {
+public class DatabaseLoginRegister {
 
     private Statement stmt;
     private String sql,existSql,regSql;
@@ -27,20 +27,9 @@ public class DatabaseModel {
     public Integer roleId;
     Alert alert = new Alert(AlertType.INFORMATION);
 
-    public DatabaseModel() {
-
-    }
-
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
-    }
-
-    public void Query() throws SQLException {
-        stmt = object.connection.createStatement();
-        sql = "select a.username as \"user\",a.password pass,b.description role,c.name||' ' || c.surname created_by,d.name||' ' || d.surname updated_by from pm_users a, pm_roles b, pm_users c, pm_users d where a.created_by = c.id and a.updated_by = d.id and a.role_id = b.id";
-        rs = stmt.executeQuery(sql);
-    }
-    
+    } 
     public boolean loginQuery(String userName, String passWord) throws SQLException {
         /* Alert Initialization */
         alert.setHeaderText(null);

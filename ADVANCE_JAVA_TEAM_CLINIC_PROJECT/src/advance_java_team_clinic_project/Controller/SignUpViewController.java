@@ -6,7 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 
-import advance_java_team_clinic_project.Model.DatabaseModel;
+import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -53,7 +53,7 @@ public class SignUpViewController extends NewStage implements Initializable {
     private String confirmPassWord;
     private String userName;
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    private static DatabaseModel ak;
+    private static DatabaseLoginRegister ak;
     @FXML
     private ImageView backBtn;
 
@@ -75,7 +75,7 @@ public class SignUpViewController extends NewStage implements Initializable {
                 /**/
 
                 if (!userName.equals(null) && !userName.equals("") /*&& !passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("") */) {
-                    ak = new DatabaseModel();
+                    ak = new DatabaseLoginRegister();
                     if (!passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("")) {
                         if (passWord.equals(confirmPassWord)) {
                             try {
