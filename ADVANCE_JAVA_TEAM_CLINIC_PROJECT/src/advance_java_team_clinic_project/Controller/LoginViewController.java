@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.DatabaseModel;
+import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +48,7 @@ public class LoginViewController extends NewStage implements Initializable {
     private Button forgotBtn;
     @FXML
     private Pane loginPane; 
-    private static DatabaseModel ak;
+    private static DatabaseLoginRegister ak;
     @FXML
     private TextField userNameTxtField;
     @FXML
@@ -86,18 +86,23 @@ public class LoginViewController extends NewStage implements Initializable {
 
        
     private void handleLoginAction(ActionEvent event) throws IOException {
-        ak = new DatabaseModel();
-        userNameGiven = userNameTxtField.getText();
-        passWordGiven = passWordField.getText();
-        
-        /**/
-        Stage currentStage = (Stage)loginPane.getScene().getWindow();
-        //ak.getObject();
-        // if(ak.loginQuery(userNameGiven, passWordGiven) == true){
-        setNewStage("../View/editProfile.fxml", currentStage);
-        //};
-    }        
-    
+        try {
+            ak = new DatabaseLoginRegister();
+            userNameGiven = userNameTxtField.getText();
+            passWordGiven = passWordField.getText();
+            
+            /**/
+            Stage currentStage = (Stage) loginPane.getScene().getWindow();
+            
+            ak.getObject();
+            if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
+                setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void handleRegisterAction(ActionEvent event) throws IOException { 
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
         setNewStage("../View/Sign_up.fxml", currentStage);

@@ -31,6 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import oracle.net.aso.e;
 
 /**
  * FXML Controller class
@@ -89,6 +90,8 @@ public class PatientsRecordViewController extends NewStage implements Initializa
         }else if(id.equals("logoutBtnIcon") || id.equals("logOutBtn")){
             user.setInstance(user);
             setNewStage("../View/loginStyleFX.fxml", currentStage);
+        }else if(id.equals("editProfileBtn")){
+            setNewStage("../View/editProfile.fxml", currentStage);
         }
         currentStage.show();
     }
