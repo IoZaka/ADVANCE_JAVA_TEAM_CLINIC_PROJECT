@@ -34,7 +34,7 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class LoginViewController implements Initializable {
+public class LoginViewController extends NewStage implements Initializable {
 
     @FXML
     private Button registerBtn;
@@ -56,6 +56,7 @@ public class LoginViewController implements Initializable {
     
     String userNameGiven;
     String passWordGiven;
+    
 
     /**
      * Initializes the controller class.
@@ -83,9 +84,6 @@ public class LoginViewController implements Initializable {
         });
     }
 
-    
-        
-    
        
     private void handleLoginAction(ActionEvent event) throws IOException {
         ak = new DatabaseModel();
@@ -93,47 +91,16 @@ public class LoginViewController implements Initializable {
         passWordGiven = passWordField.getText();
         
         /**/
-        Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-        Parent root;
-        Scene scene;
-        /**/
-        try {
-            ak.getObject();
-            if(ak.loginQuery(userNameGiven, passWordGiven) == true){
-                root = FXMLLoader.load(getClass().getResource("../View/patientsRecordsStyle.fxml"));
-                scene = new Scene(root);
-                currentStage.setScene(scene);
-            };
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Stage currentStage = (Stage)loginPane.getScene().getWindow();
+        //ak.getObject();
+        // if(ak.loginQuery(userNameGiven, passWordGiven) == true){
+        setNewStage("../View/AdminDashboard.fxml", currentStage);
+        //};
     }        
     
     private void handleRegisterAction(ActionEvent event) throws IOException { 
-        
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-        Parent root;
-        Scene scene;
-=======
-        final Node source = (Node) event.getSource();
-        Parent root;
-        Scene scene ;
->>>>>>> Stashed changes
-        
-        final Node source = (Node) event.getSource();
->>>>>>> Stashed changes
-
-        final Node source = (Node) event.getSource();
-Parent root;
-        Scene scene ;
-        
-            root = FXMLLoader.load(getClass().getResource("../View/Sign_up.fxml"));
-            scene = new Scene(root);
-            currentStage.setScene(scene);
-
+        setNewStage("../View/Sign_Up.fxml", currentStage);
         currentStage.show();
         
     }
@@ -143,6 +110,7 @@ Parent root;
         Scene scene = new Scene(root);
         currentStage.setScene(scene);
     }
+    
     
     public Button getRegisterBtn() {
         return registerBtn;

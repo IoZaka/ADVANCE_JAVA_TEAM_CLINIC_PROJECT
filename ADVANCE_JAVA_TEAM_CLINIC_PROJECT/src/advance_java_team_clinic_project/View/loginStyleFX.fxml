@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -41,8 +42,14 @@
                <font>
                   <Font size="14.0" />
                </font></Button>
+                        <TextField fx:id="userNameTxtField" alignment="TOP_LEFT" layoutX="93.0" layoutY="140.0" prefHeight="33.0" prefWidth="285.0" promptText="Give Username..." styleClass="usernameInput" stylesheets="@style.css">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></TextField>
                         <Line endX="130.0" layoutX="102.0" layoutY="365.0" startX="-8.0" />
-                        <TextField fx:id="userNameTxtField" layoutX="93.0" layoutY="140.0" prefHeight="33.0" prefWidth="285.0" promptText="Give Username..." styleClass="usernameInput" stylesheets="@style.css" />
             <Text layoutX="232.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR" />
             <Line endX="130.0" layoutX="257.0" layoutY="365.0" startX="-8.0" />
             <Text fill="#385ca8" layoutX="199.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="73.13671875">
@@ -55,7 +62,10 @@
                   <Image url="@images/user.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="passWordField" layoutX="93.0" layoutY="183.0" prefHeight="34.0" prefWidth="285.0" promptText="Give Password" />
+            <PasswordField fx:id="passWordField" alignment="TOP_LEFT" layoutX="93.0" layoutY="183.0" prefHeight="34.0" prefWidth="285.0" promptText="Give Password..." styleClass="passwordInput" stylesheets="@style.css">
+               <font>
+                  <Font size="14.0" />
+               </font></PasswordField>
                      </children>
                   </AnchorPane>
          </children>
