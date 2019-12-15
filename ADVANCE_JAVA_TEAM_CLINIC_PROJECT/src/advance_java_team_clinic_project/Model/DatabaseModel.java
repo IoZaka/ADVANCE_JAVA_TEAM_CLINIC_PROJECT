@@ -6,6 +6,8 @@
 package advance_java_team_clinic_project.Model;
 
 import advance_java_team_clinic_project.Model.DatabaseConnection;
+import advance_java_team_clinic_project.Model.DatabaseConnection;
+import advance_java_team_clinic_project.Model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -93,22 +95,5 @@ public class DatabaseModel {
 
         }
         return false;
-    }
-
-    public void getData() throws SQLException {
-        while (rs.next()) {
-            username = rs.getString("user");
-            password = rs.getString("pass");
-            role = rs.getString("role");
-            created = rs.getString("created_by");
-            updated = rs.getString("updated_by");
-
-            System.out.println("User: " + username);
-            System.out.println("Password: " + password);
-            System.out.println("Role: " + role);
-            System.out.println("Created: " + created);
-            System.out.println("Updated: " + updated);
-        }
-        rs.close();
     }
 }
