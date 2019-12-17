@@ -96,7 +96,7 @@ public class LoginViewController extends NewStage implements Initializable {
             
             ak.getObject();
             if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
-                setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
+                setNewStage("../View/patientsDashboard.fxml", currentStage);
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,11 +105,11 @@ public class LoginViewController extends NewStage implements Initializable {
 
     private void handleRegisterAction(ActionEvent event) throws IOException { 
         Stage currentStage = (Stage)loginPane.getScene().getWindow();;
-        setNewStage("../View/Sign_up.fxml", currentStage);
+        setNewStage("../View/Sign_Up.fxml", currentStage);
         currentStage.show();
         
     }
-    
+ 
     public Button getRegisterBtn() {
         return registerBtn;
     }

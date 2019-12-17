@@ -53,13 +53,6 @@ and open the template in the editor.
     -fx-background-color: #162442;
 }
 
-.detailsBtn {
-    -fx-graphic: url("/images/user.png");
-    -fx-border-color: transparent;
-    -fx-cursor: hand;
-}
-
-
 .homeBtn {
      -fx-border-color: transparent;
     -fx-border-width: 0;
@@ -76,26 +69,7 @@ and open the template in the editor.
     -fx-border-width: 0 0 2 0;
 }
 
-.toolbar {
-    -fx-background-color: #385ca8;
-}
 
-.detailsPane {
-    -fx-border-color: #385ca8;
-    -fx-border-width: 0 1 1 1;
-    -fx-border-radius: 0.5em;
-}
-
-.editProfileBtn,.aboutBtn,.logoutBtn{
-    -fx-cursor: hand;
-    -fx-background-color: #385ca8;
-}
-
-
-.editProfileBtn:hover,.aboutBtn:hover,.logoutBtn:hover{
-    -fx-cursor: hand;
-    -fx-background-color: #4f75c4;
-}
 
 /* ======SignUP View CSS====== */
 
@@ -164,6 +138,11 @@ and open the template in the editor.
     -fx-cursor: hand;
 }
 .sidebarBtns:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: #385ca8;
+}
+
+.sidebarBtns:selected {
     -fx-background-color: #fff;
     -fx-text-fill: #385ca8;
 }
