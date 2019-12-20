@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.Co_Role;
+import advance_java_team_clinic_project.Model.CustomCombo;
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
 import advance_java_team_clinic_project.Model.DatabaseProfileDetails;
 import advance_java_team_clinic_project.Model.DatabaseProfileEdit;
@@ -27,7 +27,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,10 +34,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import oracle.net.aso.e;
 
 /**
  * FXML Controller class
@@ -54,6 +53,7 @@ public class EditProfileController implements Initializable {
     @FXML
     private ImageView logoutBtnIcon;
     
+    @FXML
     private AnchorPane editProfilePane;
     
     private static DatabaseProfileDetails ak;
@@ -89,18 +89,19 @@ public class EditProfileController implements Initializable {
     @FXML
     private Button contactbtn;
 
-    
-    
-    @FXML
-    private ComboBox Combo_Gender;
     private static DatabaseProfileEdit ed;
-    
     @FXML
-    private ComboBox comboRoles;
-     private List<Co_Role> coRoles = new ArrayList<>();     
+    private ComboBox<?> comboGender;
+    @FXML
+    private ComboBox<?> comboEcoStatus;
+    @FXML
+    private ComboBox<?> comboNationality;
+    @FXML
+    private ComboBox<?> comboRole;
     
-    
-    private Co_Role co_role;
+    private Number gender,ecoStatus,nationality,role;
+    ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
+
     /**
      * Initializes the controller class.
      */
@@ -121,24 +122,16 @@ public class EditProfileController implements Initializable {
                 ama.setText(rs.getString("ama"));
                 fathersName.setText(rs.getString("fathers_name"));
                 mothersName.setText(rs.getString("mothers_name"));
-               /* dateOfBirth.setValue(LOCAL_DATE(rs.getDate("date_of_birth")));*/
+                /* dateOfBirth.setValue(LOCAL_DATE(rs.getDate("date_of_birth")));*/
                 placeOfBirth.setText(rs.getString("place_of_birth"));
                 profession.setText(rs.getString("profession"));
+
+
+                setComboValues();
+                setComboEventListeners();
                 
-                
-         ed = new DatabaseProfileEdit();
-         ed.getObject();
-         //ed.Clean_Lists();
-         //ed.EditQuery("pm_roles");
-         coRoles = ed.FetchData("pm_roles");
-         co_role = new Co_Role();
-//         co_role.setId_list(ed.getId_list());
-//         co_role.setDescription_list(ed.getDescription_list());
-          
-          comboRoles.setItems(FXCollections.observableArrayList(coRoles));
-         
             }
-            
+
             usernamebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
                 @Override
                 public void handle(MouseEvent event) {
@@ -173,18 +166,57 @@ public class EditProfileController implements Initializable {
         });
         
         
-        
-        
-    }    
-    
+    }
+
+    private void setComboValues() throws SQLException {
+        ed = new DatabaseProfileEdit();
+        ed.getObject();
+        customCombo = ed.FetchData("pm_roles");
+        comboRole.setItems(FXCollections.observableArrayList(customCombo));
+        customCombo = ed.FetchData("pm_nationalities");
+        comboNationality.setItems(FXCollections.observableArrayList(customCombo));
+        customCombo = ed.FetchData("pm_eco_status");
+        comboEcoStatus.setItems(FXCollections.observableArrayList(customCombo));
+        customCombo = ed.FetchData("pm_genders");
+        comboGender.setItems(FXCollections.observableArrayList(customCombo));
+    }
+
+    private void setComboEventListeners() {
+        comboRole.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomCombo coRole = (CustomCombo) comboRole.getSelectionModel().getSelectedItem();
+                System.out.println(coRole.getId() + coRole.getDescription());
+            }
+        });
+        comboNationality.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomCombo coRole = (CustomCombo) comboNationality.getSelectionModel().getSelectedItem();
+                System.out.println(coRole.getId() + coRole.getDescription());
+            }
+        });
+        comboEcoStatus.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomCombo coRole = (CustomCombo) comboEcoStatus.getSelectionModel().getSelectedItem();
+                System.out.println(coRole.getId() + coRole.getDescription());
+            }
+        });
+        comboGender.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomCombo coRole = (CustomCombo) comboGender.getSelectionModel().getSelectedItem();
+                System.out.println(coRole.getId() + coRole.getDescription());
+            }
+        });
+    }
+
     @FXML
     private void handleButtonAction(MouseEvent event) {
         
     }
-    @FXML
      private void handleEditAction(ActionEvent event) throws IOException, SQLException {
-         
-     }
-    
+
+    }
+
+
+
 
 }
