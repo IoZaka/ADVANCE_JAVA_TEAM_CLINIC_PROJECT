@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -49,7 +48,6 @@ public class PatientsDashboardController extends NewStage implements Initializab
     @FXML
     private ToggleButton makeAnAppointment;
 
-    
     /**
      * Initializes the controller class.
      */
@@ -101,12 +99,10 @@ public class PatientsDashboardController extends NewStage implements Initializab
     }
     
     
-    
-    private void clearSelectedButtons(){
-        recordsBtn.setSelected(false);
-        editProfileBtn.setSelected(false);
-        makeAnAppointment.setSelected(false);
-        logoutBtn.setSelected(false);
+    void clearSelectedButtons(){
+       recordsBtn.setSelected(false);
+       editProfileBtn.setSelected(false);
+       makeAnAppointment.setSelected(false);
     }
     
     private void loadUIonSamePane(String path){

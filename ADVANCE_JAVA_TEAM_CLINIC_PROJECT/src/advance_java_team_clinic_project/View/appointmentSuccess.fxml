@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -26,15 +25,10 @@
             <Image url="@images/tick.png" />
          </image>
       </ImageView>
-      <Text layoutX="282.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To view your records " wrappingWidth="173.13671875">
+      <Text layoutX="282.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click your Records to view your appointments." wrappingWidth="368.13671875">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Hyperlink fx:id="clickHereBtn" layoutX="450.0" layoutY="386.0" text="click here" underline="true">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Hyperlink>
    </children>
 </AnchorPane>

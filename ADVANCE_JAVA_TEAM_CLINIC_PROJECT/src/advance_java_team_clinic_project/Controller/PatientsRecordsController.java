@@ -18,7 +18,7 @@ import javafx.scene.control.ListView;
  *
  * @author Tasos
  */
-public class PatientsRecordsController implements Initializable {
+public class PatientsRecordsController extends NewStage implements Initializable {
 
     @FXML
     private ListView<String> recordsList;

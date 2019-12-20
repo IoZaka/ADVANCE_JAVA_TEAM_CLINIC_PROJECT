@@ -9,45 +9,45 @@
 
 <AnchorPane id="AnchorPane" fx:id="editProfilePane" maxHeight="600.0" maxWidth="820.0" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
    <children>
-      <Button fx:id="usernamebtn" disable="true" layoutX="110.0" layoutY="68.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" />
-      <TextField fx:id="name" layoutX="326.0" layoutY="69.0" />
-      <TextField fx:id="surname" layoutX="580.0" layoutY="68.0" />
-      <Button fx:id="insurancebtn" layoutX="167.0" layoutY="423.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" />
-      <TextField fx:id="code" disable="true" layoutX="95.0" layoutY="219.0" prefHeight="25.0" prefWidth="45.0" />
-      <TextField fx:id="amka" layoutX="206.0" layoutY="219.0" />
-      <TextField fx:id="ama" layoutX="406.0" layoutY="219.0" />
-      <TextField fx:id="fathersName" layoutX="110.0" layoutY="141.0" />
-      <TextField fx:id="mothersName" layoutX="370.0" layoutY="141.0" />
-      <DatePicker fx:id="dateOfBirth" layoutX="627.0" layoutY="141.0" />
-      <TextField fx:id="placeOfBirth" layoutX="662.0" layoutY="423.0" />
-      <TextField fx:id="profession" layoutX="378.0" layoutY="288.0" />
-      <Button fx:id="passwordbtn" layoutX="666.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Change password" />
-      <Button fx:id="addressbtn" layoutX="138.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Address details" />
-      <Button fx:id="contactbtn" layoutX="449.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="Contact details" />
-      <Text layoutX="36.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
-      <Text layoutX="281.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-      <Text layoutX="523.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname" wrappingWidth="53.0" />
-      <Text layoutX="36.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insurance Details" />
-      <Text layoutX="47.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code:" />
-      <Text layoutX="167.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AMKA: " />
-      <Text layoutX="370.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AMA:" />
-      <Text layoutX="334.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GENDER" />
-      <Text layoutX="13.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FATHERS NAME:" />
-      <Text layoutX="272.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MOTHERS NAME:" />
-      <Text layoutX="538.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE OF BIRTH:" />
-      <Text layoutX="557.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACE OF BIRTH" />
-      <Text layoutX="24.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ECONOMIC STATUS" />
-      <Text layoutX="301.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROFESSION" />
-      <Text layoutX="549.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NATIONALITY" />
-      <Text layoutX="589.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORD" />
-      <Text layoutX="586.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROLE:" />
-      <Text layoutX="26.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS DETAILS" />
-      <Text layoutX="332.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTACT DETAILS" />
-      <ComboBox layoutX="393.0" layoutY="423.0" prefWidth="150.0" />
-      <ComboBox layoutX="140.0" layoutY="288.0" prefWidth="150.0" />
-      <ComboBox layoutX="627.0" layoutY="288.0" prefWidth="150.0" />
-      <ComboBox layoutX="625.0" layoutY="219.0" prefHeight="25.0" prefWidth="129.0" />
-      <Button layoutX="261.0" layoutY="500.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" text="Cancel" />
-      <Button layoutX="464.0" layoutY="500.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" text="Submit" />
+      <Button fx:id="usernamebtn" layoutX="111.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" styleClass="editUsernameBtn" stylesheets="@style.css" text="Change Username" />
+      <TextField fx:id="name" layoutX="111.0" layoutY="89.0" styleClass="editNameText" stylesheets="@style.css" />
+      <TextField fx:id="surname" layoutX="340.0" layoutY="89.0" styleClass="editSurnameText" stylesheets="@style.css" />
+      <Button fx:id="insurancebtn" layoutX="675.0" layoutY="272.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editInsuranceBtn" stylesheets="@style.css" text="Insurance Details" />
+      <TextField fx:id="code" disable="true" layoutX="77.0" layoutY="335.0" prefHeight="25.0" prefWidth="45.0" />
+      <TextField fx:id="amka" layoutX="192.0" layoutY="335.0" styleClass="editAmkaText" stylesheets="@style.css" />
+      <TextField fx:id="ama" layoutX="390.0" layoutY="335.0" styleClass="editAmaText" stylesheets="@style.css" />
+      <TextField fx:id="fathersName" layoutX="117.0" layoutY="214.0" styleClass="editFathersNameText" stylesheets="@style.css" />
+      <TextField fx:id="mothersName" layoutX="377.0" layoutY="214.0" styleClass="editMothersNameText" stylesheets="@style.css" />
+      <DatePicker fx:id="dateOfBirth" layoutX="374.0" layoutY="158.0" />
+      <TextField fx:id="placeOfBirth" layoutX="117.0" layoutY="158.0" styleClass="editPlaceBirthText" stylesheets="@style.css" />
+      <TextField fx:id="profession" layoutX="376.0" layoutY="415.0" styleClass="editProfessionText" stylesheets="@style.css" />
+      <Button fx:id="passwordbtn" layoutX="350.0" layoutY="29.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="Change password" />
+      <Button fx:id="addressbtn" layoutX="127.0" layoutY="272.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" styleClass="editAddressBtn" stylesheets="@style.css" text="Address details" />
+      <Button fx:id="contactbtn" layoutX="430.0" layoutY="272.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" styleClass="editContactBtn" stylesheets="@style.css" text="Contact details" />
+      <Text layoutX="34.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
+      <Text layoutX="57.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+      <Text layoutX="281.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname:" wrappingWidth="53.0" />
+      <Text layoutX="571.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insurance Details:" />
+      <Text layoutX="29.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code:" />
+      <Text layoutX="153.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AMKA: " />
+      <Text layoutX="354.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AMA:" />
+      <Text layoutX="521.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" />
+      <Text layoutX="20.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Father's Name:" />
+      <Text layoutX="279.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mother's Name:" />
+      <Text layoutX="285.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" />
+      <Text layoutX="29.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Place of Birth:" />
+      <Text layoutX="31.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Economic Status:" />
+      <Text layoutX="308.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profession:" />
+      <Text layoutX="565.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nationality:" />
+      <Text layoutX="273.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
+      <Text layoutX="571.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROLE:" />
+      <Text layoutX="25.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address Details:" />
+      <Text layoutX="338.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Details: " />
+      <ComboBox layoutX="576.0" layoutY="30.0" prefHeight="25.0" prefWidth="94.0" styleClass="editCombobox" stylesheets="@style.css" />
+      <ComboBox layoutX="127.0" layoutY="415.0" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" />
+      <ComboBox layoutX="643.0" layoutY="158.0" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" />
+      <ComboBox layoutX="610.0" layoutY="335.0" prefHeight="25.0" prefWidth="129.0" styleClass="editCombobox" stylesheets="@style.css" />
+      <Button layoutX="284.0" layoutY="488.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editCancelBtn" stylesheets="@style.css" text="Cancel" />
+      <Button layoutX="479.0" layoutY="488.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editSubmitBtn" stylesheets="@style.css" text="Submit" />
    </children>
 </AnchorPane>

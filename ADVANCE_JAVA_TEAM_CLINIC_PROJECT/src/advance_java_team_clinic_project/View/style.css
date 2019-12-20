@@ -127,7 +127,10 @@ and open the template in the editor.
 
 /*=============================================*/
 
-/*==============SIDEBAR ADMIN==================*/
+
+
+
+/*==============SIDEBAR USERS==================*/
 .sidebar {
     -fx-background-color: #385ca8;
 }
@@ -147,8 +150,59 @@ and open the template in the editor.
     -fx-text-fill: #385ca8;
 }
 
+
+
+/* ============FOR ADMIN ONLY==================*/
 .profileInfo {
     -fx-border-width: 4 0 0 0;
     -fx-border-color: #385ca8 transparent transparent transparent;
     -fx-background-color: #fff;
+}
+
+
+/*=============================================*/
+
+
+/*==============EDIT PROFILE CSS==============*/
+
+.editUsernameBtn,.editPasswordBtn,.editAddressBtn,.editContactBtn, .editInsuranceBtn, .editSubmitBtn {
+    -fx-background-color: #304e8e;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 0.5em;
+    -fx-cursor: hand;
+}
+
+.editSubmitBtn {
+    -fx-background-radius: 2em;
+}
+
+.editUsernameBtn:hover,.editPasswordBtn:hover,.editAddressBtn:hover,.editContactBtn:hover, .editInsuranceBtn:hover, editSubmitBtn:hover {
+    -fx-background-color: #385ca8;
+}
+
+.editCancelBtn {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 2em;
+    -fx-cursor: hand;
+}
+
+.editCancelBtn:hover {
+    -fx-background-color: #e74c3c;
+}
+
+.editCombobox {
+    -fx-background-radius: 1em;
+    -fx-text-fill: #385ca8;
+    -fx-cursor: hand;
+}
+
+
+.editNameText, .editSurnameText, .editPlaceBirthText, .editFathersNameText, .editMothersNameText, .editAmaText, .editAmkaText, .editProfessionText {
+    -fx-prompt-text-fill: #304e8e;
+    -fx-text-fill: #304e8e;
+    -fx-background-color: -fx-text-box-border, -fx-background;
+    -fx-background-insets: 1, 0 0 1 0 ;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent transparent #304e8e transparent;
 }
