@@ -6,7 +6,7 @@
 package advance_java_team_clinic_project.Model;
 
 
-public class Nationalities {
+public class Co_Nationalities {
     private int id;
     private String description;
 
@@ -16,7 +16,7 @@ public class Nationalities {
     public String getDescription() {return description;}
     public void setDescription(String description) {this.description = description;}
 
-    public Nationalities(int id, String description) {
+    public Co_Nationalities(int id, String description) {
         this.id = id;
         this.description = description;
     }
