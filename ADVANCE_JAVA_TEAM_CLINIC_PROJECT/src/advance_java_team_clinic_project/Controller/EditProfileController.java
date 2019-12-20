@@ -5,15 +5,23 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.Co_Role;
+import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
 import advance_java_team_clinic_project.Model.DatabaseProfileDetails;
+import advance_java_team_clinic_project.Model.DatabaseProfileEdit;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,12 +31,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import oracle.net.aso.e;
 
 /**
  * FXML Controller class
@@ -79,6 +89,18 @@ public class EditProfileController implements Initializable {
     @FXML
     private Button contactbtn;
 
+    
+    
+    @FXML
+    private ComboBox Combo_Gender;
+    private static DatabaseProfileEdit ed;
+    
+    @FXML
+    private ComboBox comboRoles;
+     private List<Co_Role> coRoles = new ArrayList<>();     
+    
+    
+    private Co_Role co_role;
     /**
      * Initializes the controller class.
      */
@@ -102,6 +124,19 @@ public class EditProfileController implements Initializable {
                /* dateOfBirth.setValue(LOCAL_DATE(rs.getDate("date_of_birth")));*/
                 placeOfBirth.setText(rs.getString("place_of_birth"));
                 profession.setText(rs.getString("profession"));
+                
+                
+         ed = new DatabaseProfileEdit();
+         ed.getObject();
+         //ed.Clean_Lists();
+         //ed.EditQuery("pm_roles");
+         coRoles = ed.FetchData("pm_roles");
+         co_role = new Co_Role();
+//         co_role.setId_list(ed.getId_list());
+//         co_role.setDescription_list(ed.getDescription_list());
+          
+          comboRoles.setItems(FXCollections.observableArrayList(coRoles));
+         
             }
             
             usernamebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -121,12 +156,35 @@ public class EditProfileController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
+        
+        contactbtn.setOnAction(new EventHandler<ActionEvent>(){
+            @Override public void handle(ActionEvent e){
+                try {
+                    handleEditAction(e);
+                } catch (IOException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        
+        
+        
     }    
-
+    
     @FXML
     private void handleButtonAction(MouseEvent event) {
         
     }
+    @FXML
+     private void handleEditAction(ActionEvent event) throws IOException, SQLException {
+         
+     }
     
-    
+
 }
