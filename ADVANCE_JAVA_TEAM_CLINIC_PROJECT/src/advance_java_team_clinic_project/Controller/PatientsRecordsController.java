@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -20,18 +21,14 @@ import javafx.scene.control.ListView;
  */
 public class PatientsRecordsController extends NewStage implements Initializable {
 
-    @FXML
-    private ListView<String> recordsList;
-
-    ObservableList<String> rLists = FXCollections.observableArrayList("1","2","3","4");
+    private TableView<String> tableList;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        recordsList.setItems(rLists);
-        recordsList.setPrefHeight(rLists.size() * 24); // default size each row = 24
+        
     }    
     
 }
