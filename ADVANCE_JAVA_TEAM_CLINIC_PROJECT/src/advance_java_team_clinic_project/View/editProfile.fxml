@@ -82,7 +82,7 @@
       <Text layoutX="241.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS DETAILS" />
       <Text layoutX="445.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTACT DETAILS" />
       <ComboBox fx:id="comboGender" layoutX="620.0" layoutY="198.0" prefWidth="150.0" />
-      <ComboBox fx:id="comboEcuStatus" layoutX="40.0" layoutY="367.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboEcoStatus" layoutX="40.0" layoutY="367.0" prefWidth="150.0" />
       <ComboBox fx:id="comboNationality" layoutX="419.0" layoutY="375.0" prefWidth="150.0" />
       <ComboBox fx:id="comboRole" layoutX="31.0" layoutY="471.0" prefWidth="150.0" />
       <Button layoutX="261.0" layoutY="542.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" text="Cancel" />

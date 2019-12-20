@@ -91,17 +91,16 @@ public class EditProfileController implements Initializable {
 
     private static DatabaseProfileEdit ed;
     @FXML
-    private ComboBox<?> comboGender;
+    private ComboBox comboGender;
     @FXML
-    private ComboBox<?> comboEcoStatus;
+    private ComboBox comboEcoStatus;
     @FXML
-    private ComboBox<?> comboNationality;
+    private ComboBox comboNationality;
     @FXML
-    private ComboBox<?> comboRole;
-    
-    private Number gender,ecoStatus,nationality,role;
+    private ComboBox comboRole;
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
-
+    
+    private Integer genderId,ecoStatusId,nationalityId,roleId;
     /**
      * Initializes the controller class.
      */
@@ -125,11 +124,15 @@ public class EditProfileController implements Initializable {
                 /* dateOfBirth.setValue(LOCAL_DATE(rs.getDate("date_of_birth")));*/
                 placeOfBirth.setText(rs.getString("place_of_birth"));
                 profession.setText(rs.getString("profession"));
-
-
+                genderId = rs.getInt("gender_id");
+                ecoStatusId = rs.getInt("eco_status_id");
+                nationalityId = rs.getInt("nationality_id");
+                roleId = rs.getInt("role_id");
+                System.out.println("genderId: "+genderId +" ecostatusid: "+ ecoStatusId+" nationalityid: "+ nationalityId + " roleId"+ roleId);
+                
                 setComboValues();
                 setComboEventListeners();
-                
+                 
             }
 
             usernamebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -153,17 +156,13 @@ public class EditProfileController implements Initializable {
         
         
         
-        contactbtn.setOnAction(new EventHandler<ActionEvent>(){
-            @Override public void handle(ActionEvent e){
-                try {
-                    handleEditAction(e);
-                } catch (IOException ex) {
-                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+      /*  contactbtn.setOnAction((ActionEvent e) -> {
+            try {
+                handleEditAction(e);
+            } catch (IOException | SQLException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
+        });*/
         
         
     }
@@ -171,14 +170,17 @@ public class EditProfileController implements Initializable {
     private void setComboValues() throws SQLException {
         ed = new DatabaseProfileEdit();
         ed.getObject();
-        customCombo = ed.FetchData("pm_roles");
+        customCombo = ed.FetchData("PM_ROLES");
         comboRole.setItems(FXCollections.observableArrayList(customCombo));
-        customCombo = ed.FetchData("pm_nationalities");
+        customCombo = ed.FetchData("PM_NATIONALITIES");
         comboNationality.setItems(FXCollections.observableArrayList(customCombo));
-        customCombo = ed.FetchData("pm_eco_status");
+        customCombo = ed.FetchData("PM_ECO_STATUS");
         comboEcoStatus.setItems(FXCollections.observableArrayList(customCombo));
-        customCombo = ed.FetchData("pm_genders");
+        customCombo = ed.FetchData("PM_GENDERS");
         comboGender.setItems(FXCollections.observableArrayList(customCombo));
+        
+        //comboRole.getSelectionModel().select(roleId);
+
     }
 
     private void setComboEventListeners() {
@@ -190,20 +192,20 @@ public class EditProfileController implements Initializable {
         });
         comboNationality.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
-                CustomCombo coRole = (CustomCombo) comboNationality.getSelectionModel().getSelectedItem();
-                System.out.println(coRole.getId() + coRole.getDescription());
+                CustomCombo coNationality = (CustomCombo) comboNationality.getSelectionModel().getSelectedItem();
+                System.out.println(coNationality.getId() + coNationality.getDescription());
             }
         });
         comboEcoStatus.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
-                CustomCombo coRole = (CustomCombo) comboEcoStatus.getSelectionModel().getSelectedItem();
-                System.out.println(coRole.getId() + coRole.getDescription());
+                CustomCombo coEcoStatus = (CustomCombo) comboEcoStatus.getSelectionModel().getSelectedItem();
+                System.out.println(coEcoStatus.getId() + coEcoStatus.getDescription());
             }
         });
         comboGender.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
-                CustomCombo coRole = (CustomCombo) comboGender.getSelectionModel().getSelectedItem();
-                System.out.println(coRole.getId() + coRole.getDescription());
+                CustomCombo coGender = (CustomCombo) comboGender.getSelectionModel().getSelectedItem();
+                System.out.println(coGender.getId() + coGender.getDescription());
             }
         });
     }
