@@ -36,7 +36,7 @@ public class DatabaseProfileDetails {
                     + "b.date_of_birth, "
                     + "b.fathers_name, "
                     + "b.mothers_name, "
-                    + "b.gender, "
+                    + "b.gender_id, "
                     + "b.eco_status_id, "
                     + "b.global_code, "
                     + "b.nationality_id, "
