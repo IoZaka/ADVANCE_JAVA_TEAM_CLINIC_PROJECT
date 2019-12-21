@@ -15,8 +15,11 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,6 +104,7 @@ public class EditProfileController implements Initializable {
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
     
     private Integer genderId,ecoStatusId,nationalityId,roleId;
+    private LocalDate lDateOfBirth;
     /**
      * Initializes the controller class.
      */
@@ -121,8 +125,13 @@ public class EditProfileController implements Initializable {
                 ama.setText(rs.getString("ama"));
                 fathersName.setText(rs.getString("fathers_name"));
                 mothersName.setText(rs.getString("mothers_name"));
-                /* dateOfBirth.setValue(LOCAL_DATE(rs.getDate("date_of_birth")));*/
-                placeOfBirth.setText(rs.getString("place_of_birth"));
+                //lDateOfBirth = rs.getLocalDate("date_of_birth");
+                java.sql.Date dbSqlDate = rs.getDate("date_of_birth");
+                System.out.println(dbSqlDate);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY",Locale.ENGLISH);
+                dateOfBirth.setValue(LocalDate.parse("21-02-1995",formatter));
+               // LocalDate parse;
+               // parse = LocalDate.parse(rs.getString("date_of_birth"));
                 profession.setText(rs.getString("profession"));
                 genderId = rs.getInt("gender_id");
                 ecoStatusId = rs.getInt("eco_status_id");
@@ -156,13 +165,13 @@ public class EditProfileController implements Initializable {
         
         
         
-      /*  contactbtn.setOnAction((ActionEvent e) -> {
+        contactbtn.setOnAction((ActionEvent e) -> {
             try {
                 handleEditAction(e);
             } catch (IOException | SQLException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });*/
+        });
         
         
     }
@@ -183,29 +192,40 @@ public class EditProfileController implements Initializable {
 
     }
 
+    public static final LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        System.out.println(localDate);
+        return localDate;
+    }
+
     private void setComboEventListeners() {
         comboRole.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomCombo coRole = (CustomCombo) comboRole.getSelectionModel().getSelectedItem();
                 System.out.println(coRole.getId() + coRole.getDescription());
+                genderId = coRole.getId();
             }
         });
         comboNationality.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomCombo coNationality = (CustomCombo) comboNationality.getSelectionModel().getSelectedItem();
                 System.out.println(coNationality.getId() + coNationality.getDescription());
+                nationalityId = coNationality.getId();
             }
         });
         comboEcoStatus.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomCombo coEcoStatus = (CustomCombo) comboEcoStatus.getSelectionModel().getSelectedItem();
                 System.out.println(coEcoStatus.getId() + coEcoStatus.getDescription());
+                ecoStatusId = coEcoStatus.getId();
             }
         });
         comboGender.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomCombo coGender = (CustomCombo) comboGender.getSelectionModel().getSelectedItem();
                 System.out.println(coGender.getId() + coGender.getDescription());
+                genderId = coGender.getId();
             }
         });
     }
