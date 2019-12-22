@@ -53,14 +53,14 @@ public class PatientsDashboardController extends NewStage implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadUIonSamePane("../View/patientsRecords.fxml");
+        loadUIonSamePane("../View/patientsRecords.fxml", patientPane);
         recordsBtn.setSelected(true);
         usernameText.setText(usernameText.getText() + user.getUsername());
         textPane.setTextAlignment(TextAlignment.CENTER);
         recordsBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-               loadUIonSamePane("../View/patientsRecords.fxml");
+               loadUIonSamePane("../View/patientsRecords.fxml", patientPane);
                clearSelectedButtons();
                recordsBtn.setSelected(true);
             }
@@ -69,7 +69,7 @@ public class PatientsDashboardController extends NewStage implements Initializab
         editProfileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-               loadUIonSamePane("../View/editProfile.fxml");
+               loadUIonSamePane("../View/editProfile.fxml", patientPane);
                clearSelectedButtons();
                editProfileBtn.setSelected(true);
             }
@@ -78,7 +78,7 @@ public class PatientsDashboardController extends NewStage implements Initializab
         makeAnAppointment.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-               loadUIonSamePane("../View/Appointment.fxml");
+               loadUIonSamePane("../View/Appointment.fxml", patientPane);
                clearSelectedButtons();
                makeAnAppointment.setSelected(true);
             }
@@ -104,15 +104,4 @@ public class PatientsDashboardController extends NewStage implements Initializab
        editProfileBtn.setSelected(false);
        makeAnAppointment.setSelected(false);
     }
-    
-    private void loadUIonSamePane(String path){
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(path));
-        }catch(IOException ex){
-            
-        }
-        patientPane.setCenter(root);
-    }
-
 }
