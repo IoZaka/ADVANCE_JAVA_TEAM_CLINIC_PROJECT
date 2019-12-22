@@ -91,15 +91,15 @@ public class EditProfileController implements Initializable {
 
     private static DatabaseProfileEdit ed;
     @FXML
-    private ComboBox<?> comboGender;
+    private ComboBox comboGender;
     @FXML
-    private ComboBox<?> comboEcoStatus;
+    private ComboBox comboEcoStatus;
     @FXML
-    private ComboBox<?> comboNationality;
+    private ComboBox comboNationality;
     @FXML
-    private ComboBox<?> comboRole;
+    private ComboBox comboRole;
     
-    private Number gender,ecoStatus,nationality,role;
+    private int gender,ecoStatus,nationality,role;
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
 
     /**
