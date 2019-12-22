@@ -81,21 +81,21 @@ public class LoginViewController extends NewStage implements Initializable {
 
        
     private void handleLoginAction(ActionEvent event) throws IOException {
-        try {
-            ak = new DatabaseLoginRegister();
-            userNameGiven = userNameTxtField.getText();
-            passWordGiven = passWordField.getText();
-            
-            /**/
-            Stage currentStage = (Stage) loginPane.getScene().getWindow();
-            
-            ak.getObject();
-            if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
-                setNewStage("../View/patientsDashboard.fxml", currentStage);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            ak = new DatabaseLoginRegister();
+//            userNameGiven = userNameTxtField.getText();
+//            passWordGiven = passWordField.getText();
+//            
+//            /**/
+          Stage currentStage = (Stage) loginPane.getScene().getWindow();
+//            
+//            ak.getObject();
+//            if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
+                setNewStage("../View/doctorsDashboard.fxml", currentStage);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     private void handleRegisterAction(ActionEvent event) throws IOException { 

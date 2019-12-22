@@ -54,7 +54,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadUIonSamePane("../View/profileAdminPane.fxml");
+        loadUIonSamePane("../View/profilePane.fxml", adminPane);
         profileBtn.setSelected(true);
         usernameText.setText(usernameText.getText());
         usernamePane.setTextAlignment(TextAlignment.CENTER);
@@ -62,7 +62,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
         profileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                loadUIonSamePane("../View/profileAdminPane.fxml");
+                loadUIonSamePane("../View/profilePane.fxml", adminPane);
                 clearSelectedButtons();
                 profileBtn.setSelected(true);
             }
@@ -87,15 +87,5 @@ public class AdminDashboardController extends NewStage implements Initializable 
         enterNewUserBtn.setSelected(false);
         searchUserBtn.setSelected(false);
         grantPermissionsBtn.setSelected(false);
-    }
-    
-    private void loadUIonSamePane(String path){
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(path));
-        }catch(IOException ex){
-            
-        }
-        adminPane.setCenter(root);
     }
 }
