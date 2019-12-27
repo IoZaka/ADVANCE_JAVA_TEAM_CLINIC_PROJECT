@@ -9,22 +9,13 @@ import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -39,8 +30,6 @@ import javafx.stage.Stage;
  */
 public class PatientsRecordViewController extends NewStage implements Initializable {
 
-    @FXML
-    private Button homeBtn;
     @FXML
     private ImageView detailsBtn;
     @FXML
@@ -77,22 +66,21 @@ public class PatientsRecordViewController extends NewStage implements Initializa
 
     @FXML
     private void handleButtonAction(MouseEvent event) throws IOException {
-
-        Stage currentStage = (Stage)recordsPane.getScene().getWindow();;
-        
+        Stage currentStage = (Stage) recordsPane.getScene().getWindow();;
         final Node source = (Node) event.getSource();
         String id = source.getId();
-        
-        if(id.equals("detailsBtn")){
-            if(detailsPane.getOpacity() == 1){detailsPane.setOpacity(0);}
-            else{detailsPane.setOpacity(1);}
-        }else if(id.equals("logoutBtnIcon") || id.equals("logOutBtn")){
+        if (id.equals("detailsBtn")) {
+            if (detailsPane.getOpacity() == 1) {
+                detailsPane.setOpacity(0);
+            } else {
+                detailsPane.setOpacity(1);
+            }
+        } else if (id.equals("logoutBtnIcon") || id.equals("logOutBtn")) {
             user.setInstance(user);
             setNewStage("../View/loginStyleFX.fxml", currentStage);
-        }else if(id.equals("editProfileBtn")){
+        } else if (id.equals("editProfileBtn")) {
             setNewStage("../View/editProfile.fxml", currentStage);
         }
         currentStage.show();
     }
-
 }
