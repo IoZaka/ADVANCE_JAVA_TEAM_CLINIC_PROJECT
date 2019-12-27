@@ -47,7 +47,7 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class EditProfileController implements Initializable {
+public class EditProfileController extends NewStage implements Initializable {
 
     @FXML
     private Button homeBtn;
@@ -105,6 +105,10 @@ public class EditProfileController implements Initializable {
     
     private Integer genderId,ecoStatusId,nationalityId,roleId;
     private LocalDate lDateOfBirth;
+    @FXML
+    private Button cancelBtn;
+    @FXML
+    private Button submitBtn;
     /**
      * Initializes the controller class.
      */
@@ -117,7 +121,7 @@ public class EditProfileController implements Initializable {
             rs = ak.fetchBasicInfoData(user.getId());
             if (rs.next()) {
                 usernamebtn.setText(rs.getString("username"));
-                name.setText(rs.getString("name"));
+                name.setText(rs.getString("firstname"));
                 surname.setText(rs.getString("surname"));
                 /*insurancebtn.setText(String.valueOf(rs.getInt("insurance_id")));*/
                 code.setText(rs.getString("global_code"));
@@ -125,18 +129,16 @@ public class EditProfileController implements Initializable {
                 ama.setText(rs.getString("ama"));
                 fathersName.setText(rs.getString("fathers_name"));
                 mothersName.setText(rs.getString("mothers_name"));
-                //lDateOfBirth = rs.getLocalDate("date_of_birth");
-                java.sql.Date dbSqlDate = rs.getDate("date_of_birth");
-                System.out.println(dbSqlDate);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY",Locale.ENGLISH);
-                dateOfBirth.setValue(LocalDate.parse("21-02-1995",formatter));
-               // LocalDate parse;
-               // parse = LocalDate.parse(rs.getString("date_of_birth"));
+                dateOfBirth.setValue(LOCAL_DATE(rs.getString("date_of_birth")));
+                dateOfBirth.setPromptText("dd-MM-yyyy");
+                System.out.println("auto mou epistrefei i vasi:"+rs.getString("date_of_birth"));
+                System.out.println("auto mou epistrefei i function:"+LOCAL_DATE(rs.getString("date_of_birth")));
                 profession.setText(rs.getString("profession"));
                 genderId = rs.getInt("gender_id");
                 ecoStatusId = rs.getInt("eco_status_id");
                 nationalityId = rs.getInt("nationality_id");
                 roleId = rs.getInt("role_id");
+                placeOfBirth.setText(rs.getString("place_of_birth"));
                 System.out.println("genderId: "+genderId +" ecostatusid: "+ ecoStatusId+" nationalityid: "+ nationalityId + " roleId"+ roleId);
                 
                 setComboValues();
@@ -158,9 +160,52 @@ public class EditProfileController implements Initializable {
                     }
                 }
             });
+            
+            homeBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+                    try {
+                        setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            
+            cancelBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+                    try {
+                        setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        
+            submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        ak = new DatabaseProfileDetails();
+                        ak.getObject();
+                        ak.updateBasicInfoData(user.getId(),roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), "21/02/1995", fathersName.getText(), mothersName.getText(),genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+
+            });
+
         } catch (SQLException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+            
         
         
         
@@ -181,21 +226,30 @@ public class EditProfileController implements Initializable {
         ed.getObject();
         customCombo = ed.FetchData("PM_ROLES");
         comboRole.setItems(FXCollections.observableArrayList(customCombo));
+        InitiateComboList(roleId, comboRole);
         customCombo = ed.FetchData("PM_NATIONALITIES");
         comboNationality.setItems(FXCollections.observableArrayList(customCombo));
+        InitiateComboList (nationalityId, comboNationality);
         customCombo = ed.FetchData("PM_ECO_STATUS");
         comboEcoStatus.setItems(FXCollections.observableArrayList(customCombo));
+        InitiateComboList (ecoStatusId, comboEcoStatus);
         customCombo = ed.FetchData("PM_GENDERS");
         comboGender.setItems(FXCollections.observableArrayList(customCombo));
-        
-        //comboRole.getSelectionModel().select(roleId);
-
+        InitiateComboList(genderId,comboGender);
     }
-
+    
+    private void InitiateComboList(Integer lId,ComboBox lComboBox){
+        for (CustomCombo r : customCombo) {
+            if(r.getId() == lId){
+                lComboBox.setValue(r.getDescription());
+            }
+        }
+    }
+    
     public static final LocalDate LOCAL_DATE(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy",Locale.FRENCH);
         LocalDate localDate = LocalDate.parse(dateString, formatter);
-        System.out.println(localDate);
+        System.out.println("auto exw mesa stin function" + localDate + " auto pou mpike einai to:"+ dateString);
         return localDate;
     }
 
