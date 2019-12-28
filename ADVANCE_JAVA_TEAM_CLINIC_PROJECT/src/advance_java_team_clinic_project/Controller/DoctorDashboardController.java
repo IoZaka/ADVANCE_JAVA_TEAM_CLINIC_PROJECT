@@ -5,6 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,9 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -28,50 +27,67 @@ import javafx.stage.Stage;
  *
  * @author Chris
  */
-public class AdminDashboardController extends NewStage implements Initializable {
+public class DoctorDashboardController extends NewStage implements Initializable {
 
-    @FXML
-    private BorderPane adminPane;
-    @FXML
-    private ToggleButton profileBtn;
     @FXML
     private TextFlow usernamePane;
     @FXML
     private Text usernameText;
     @FXML
+    private ToggleButton profileBtn;
+    @FXML
     private ToggleButton editProfileBtn;
     @FXML
-    private ToggleButton enterNewUserBtn;
-    @FXML
-    private ToggleButton searchUserBtn;
-    @FXML
-    private ToggleButton grantPermissionsBtn;
+    private ToggleButton patientsBtn;
     @FXML
     private ToggleButton logoutBtn;
+    @FXML
+    private BorderPane patientsPane;
 
+    User user = User.getInstance();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadUIonSamePane("../View/profilePane.fxml", adminPane);
+        loadUIonSamePane("../View/profilePane.fxml", patientsPane);
         profileBtn.setSelected(true);
-        usernameText.setText(usernameText.getText());
+        usernameText.setText(usernameText.getText() + user.getUsername());
         usernamePane.setTextAlignment(TextAlignment.CENTER);
         
         profileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                loadUIonSamePane("../View/profilePane.fxml", adminPane);
+                loadUIonSamePane("../View/profilePane.fxml", patientsPane);
                 clearSelectedButtons();
                 profileBtn.setSelected(true);
             }
         });
         
+        editProfileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                loadUIonSamePane("../View/editProfile.fxml", patientsPane);
+                clearSelectedButtons();
+                editProfileBtn.setSelected(true);
+            }
+        });
+        
+        patientsBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                loadUIonSamePane("../View/doctorsPatientsPane.fxml", patientsPane);
+                clearSelectedButtons();
+                patientsBtn.setSelected(true);
+            }
+        });
+        
+        
         logoutBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                Stage currentStage = (Stage) adminPane.getScene().getWindow();
+                Stage currentStage = (Stage) patientsPane.getScene().getWindow();
                 try {
                     setNewStage("../View/loginStyleFX.fxml", currentStage);
                 } catch (IOException ex) {
@@ -84,8 +100,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
     private void clearSelectedButtons(){
         profileBtn.setSelected(false);
         editProfileBtn.setSelected(false);
-        enterNewUserBtn.setSelected(false);
-        searchUserBtn.setSelected(false);
-        grantPermissionsBtn.setSelected(false);
+        patientsBtn.setSelected(false);
     }
+    
 }

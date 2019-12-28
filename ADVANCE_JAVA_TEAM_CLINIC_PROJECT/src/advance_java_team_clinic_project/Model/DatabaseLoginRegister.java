@@ -11,6 +11,8 @@ import advance_java_team_clinic_project.Model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -19,9 +21,9 @@ import javafx.stage.StageStyle;
 public class DatabaseLoginRegister {
 
     private Statement stmt;
-    private String sql,existSql,regSql;
-    private ResultSet rs,regRs;
-    private String username, password, role, created, updated;
+    private String sql,existSql,regSql, pwdSql;
+    private ResultSet rs,regRs, pwdRs;
+    private String username, password, role, created, updated, hashPwd;
     private DatabaseConnection object;
     User user = User.getInstance();
     public Integer roleId;
@@ -36,11 +38,13 @@ public class DatabaseLoginRegister {
         alert.initStyle(StageStyle.UTILITY);
         /* End of Alert Initialiization*/
         stmt = object.connection.createStatement();
-        sql = "select id, password, role_id, name as firstname, surname, username from pm_users where username = '" + userName + "'";
+        hashPwd = makeHashPwd(passWord);
+        sql = "select id, password, role_id, firstname as firstname, surname, username from pm_users where username = '" + userName + "'";
         rs = stmt.executeQuery(sql);
+
         if (rs.next()) {
             password = rs.getString("password");
-            if (password.equals(passWord)) {
+            if (password.equals(hashPwd)) {
                 user.setRoleID(rs.getInt("role_id"));
                 user.setId(rs.getInt("id"));
                 user.setFirstName(rs.getString("firstname"));
@@ -75,7 +79,8 @@ public class DatabaseLoginRegister {
             alert.showAndWait();
             return false;
         }else if (rs.getInt("existing") == 0){
-            regSql = "insert into pm_users (username,password,role_id) values ('"+userName+"','"+passWord+"',3)";
+            hashPwd = makeHashPwd(passWord);
+            regSql = "insert into pm_users (username,password,role_id) values ('"+userName+"','"+hashPwd+"',3)";
             regRs = stmt.executeQuery(regSql);
             alert.setTitle("Success!");
             alert.setContentText("User was succesfully registered! You may login now.");
@@ -84,5 +89,21 @@ public class DatabaseLoginRegister {
 
         }
         return false;
+    }
+    
+    private String makeHashPwd (String passWord){
+        String localPwd;
+        try {
+            pwdSql = "SELECT DBMS_OBFUSCATION_TOOLKIT.md5(input => UTL_I18N.STRING_TO_RAW (\'"+passWord+"\', 'AL32UTF8')) pwd from dual";
+            pwdRs = stmt.executeQuery(pwdSql);
+            if (pwdRs.next()){
+                localPwd = pwdRs.getString("pwd");
+                pwdRs.close();
+                return localPwd;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseLoginRegister.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

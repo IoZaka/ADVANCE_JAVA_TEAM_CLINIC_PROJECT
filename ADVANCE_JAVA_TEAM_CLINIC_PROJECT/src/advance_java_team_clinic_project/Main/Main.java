@@ -19,11 +19,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
-
         //launch javafx 
         launch(args);
-
-
     }
 
     @Override
@@ -31,9 +28,10 @@ public class Main extends Application {
         //JavaFx Run
         Parent root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
 
+        //fdifdj
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setWidth(800);
+        primaryStage.setWidth(1000);
         primaryStage.setHeight(600);
         primaryStage.setResizable(false);
         primaryStage.show();

@@ -15,11 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -74,7 +72,7 @@ public class SignUpViewController extends NewStage implements Initializable {
                 Scene scene;
                 /**/
 
-                if (!userName.equals(null) && !userName.equals("") /*&& !passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("") */) {
+                if (!userName.equals(null) && !userName.equals("")) {
                     ak = new DatabaseLoginRegister();
                     if (!passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("")) {
                         if (passWord.equals(confirmPassWord)) {
