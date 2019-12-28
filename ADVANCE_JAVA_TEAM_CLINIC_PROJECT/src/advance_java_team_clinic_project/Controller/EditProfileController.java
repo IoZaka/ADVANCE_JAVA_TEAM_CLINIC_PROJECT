@@ -136,8 +136,13 @@ public class EditProfileController extends NewStage implements Initializable {
                     try {
                         ak = new DatabaseProfileDetails();
                         ak.getObject();
-                        ak.updateBasicInfoData(user.getId(), roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), "21/02/1995", fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
-                    } catch (SQLException ex) {
+                        ak.updateBasicInfoData(user.getId(), roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), dateOfBirth.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
+                        User user = User.getInstance();
+                        rs = ak.fetchBasicInfoData(user.getId());
+                        if (rs.next()) {
+                            code.setText(rs.getString("global_code"));
+                        }
+                        }catch (SQLException ex) {
                         Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -209,7 +214,7 @@ public class EditProfileController extends NewStage implements Initializable {
     public static final LocalDate LOCAL_DATE(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy", Locale.FRENCH);
         LocalDate localDate = LocalDate.parse(dateString, formatter);
-        System.out.println("auto exw mesa stin function" + localDate + " auto pou mpike einai to:" + dateString);
+        //System.out.println("auto exw mesa stin function" + localDate + " auto pou mpike einai to:" + dateString);
         return localDate;
     }
 
@@ -218,7 +223,7 @@ public class EditProfileController extends NewStage implements Initializable {
             if (newval != null) {
                 CustomCombo coRole = (CustomCombo) comboRole.getSelectionModel().getSelectedItem();
                 System.out.println(coRole.getId() + coRole.getDescription());
-                genderId = coRole.getId();
+                roleId = coRole.getId();
             }
         });
         comboNationality.valueProperty().addListener((obs, oldval, newval) -> {
