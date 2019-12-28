@@ -16,11 +16,9 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     public static DatabaseConnection instance;
     public Connection connection;
-=======
     //private String url =  "jdbc:oracle:thin:@localhost:1521:xe";
     //private String url =  "jdbc:oracle:thin:@25.57.202.173:1521:xe";
     private String url =  "jdbc:oracle:thin:@25.43.240.217:1521:xe";
->>>>>>> origin/test
     private String username = "javadev";
     private String password = "javadev";
     

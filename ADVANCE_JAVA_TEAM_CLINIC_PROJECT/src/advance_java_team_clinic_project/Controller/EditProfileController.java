@@ -83,7 +83,7 @@ public class EditProfileController extends NewStage implements Initializable {
     private Button contactbtn; 
     @FXML
 
-=======
+
     private ComboBox comboRole; 
     private Number gender,ecoStatus,nationality,role;
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
@@ -99,7 +99,6 @@ public class EditProfileController extends NewStage implements Initializable {
     private Button cancelBtn;
     @FXML
     private Button submitBtn;
->>>>>>> origin/test
     /**
      * Initializes the controller class.
      */
