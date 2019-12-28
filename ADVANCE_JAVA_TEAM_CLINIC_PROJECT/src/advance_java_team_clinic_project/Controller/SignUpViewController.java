@@ -74,7 +74,7 @@ public class SignUpViewController extends NewStage implements Initializable {
                 Scene scene;
                 /**/
 
-                if (!userName.equals(null) && !userName.equals("") /*&& !passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("") */) {
+                if (!userName.equals(null) && !userName.equals("")) {
                     ak = new DatabaseLoginRegister();
                     if (!passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("")) {
                         if (passWord.equals(confirmPassWord)) {

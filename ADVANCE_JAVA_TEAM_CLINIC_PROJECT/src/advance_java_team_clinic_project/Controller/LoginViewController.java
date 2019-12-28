@@ -6,7 +6,6 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
-import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,7 +17,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
