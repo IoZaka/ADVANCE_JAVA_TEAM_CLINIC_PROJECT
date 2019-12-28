@@ -24,7 +24,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -110,8 +113,12 @@ public class EditProfileController extends NewStage implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     try {
-                        Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
-                        setNewStage("../View/checkUsernameWindow.fxml", currentStage);
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkUsernameWindow.fxml"));
+                        Stage checkUsername = new Stage();
+                        Scene scene = new Scene(root);
+                        checkUsername.setTitle("Enter New Username");
+                        checkUsername.setScene(scene);
+                        checkUsername.show();
                     } catch (IOException ex) {
                         Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
                     }
