@@ -91,7 +91,7 @@ public class LoginViewController extends NewStage implements Initializable {
             
             ak.getObject();
             if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
-                setNewStage("../View/doctorsDashboard.fxml", currentStage);
+                setNewStage("../View/patientsDashboard.fxml", currentStage);
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);

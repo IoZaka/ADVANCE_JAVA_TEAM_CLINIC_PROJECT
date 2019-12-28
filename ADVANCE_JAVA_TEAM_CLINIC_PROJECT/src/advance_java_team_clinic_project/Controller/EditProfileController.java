@@ -42,12 +42,8 @@ import javafx.stage.Stage;
 public class EditProfileController extends NewStage implements Initializable {
 
     @FXML
-    private Button homeBtn;
-    @FXML
-    private ImageView detailsBtn;
-    @FXML
     private AnchorPane editProfilePane;
-    private static DatabaseProfileDetails ak;
+    private static DatabaseProfileDetails ak = new DatabaseProfileDetails();
     private ResultSet rs;
     @FXML
     private Button usernamebtn;
@@ -79,7 +75,17 @@ public class EditProfileController extends NewStage implements Initializable {
     private Button addressbtn;
     @FXML
     private Button contactbtn;
-    private static DatabaseProfileEdit ed;
+    private static DatabaseProfileEdit ed = new DatabaseProfileEdit();
+    @FXML
+    private ComboBox comboRole = new ComboBox();
+    
+    private Number gender,ecoStatus,nationality,role;
+    ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
+    private Integer genderId, ecoStatusId, nationalityId, roleId;
+    private LocalDate lDateOfBirth;
+    
+    
+    User user = User.getInstance();
     @FXML
     private ComboBox comboGender;
     @FXML
@@ -87,26 +93,34 @@ public class EditProfileController extends NewStage implements Initializable {
     @FXML
     private ComboBox comboNationality;
     @FXML
-    private ComboBox comboRole;
-    
-    private Number gender,ecoStatus,nationality,role;
-    ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
-    private Integer genderId, ecoStatusId, nationalityId, roleId;
-    private LocalDate lDateOfBirth;
-    @FXML
     private Button cancelBtn;
     @FXML
     private Button submitBtn;
-
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+    public void initialize(URL url, ResourceBundle rb)  {
         try {
-            User user = User.getInstance();
-            ak = new DatabaseProfileDetails();
+            //Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+            setData();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }     
+        usernamebtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    //try {
+                       // setNewStage("../View/checkUsernameWindow.fxml", currentStage);
+                       System.out.println("test2");
+                   // } catch (IOException ex) {
+                   //     Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                   // }
+                }
+        });
+    }
+
+     private void setData() throws SQLException{
             ak.getObject();
             rs = ak.fetchBasicInfoData(user.getId());
             if (rs.next()) {
@@ -131,64 +145,12 @@ public class EditProfileController extends NewStage implements Initializable {
                 placeOfBirth.setText(rs.getString("place_of_birth"));
                 setComboValues();
                 setComboEventListeners();
-            }
-            usernamebtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        setNewStage("../View/checkUsernameWindow.fxml", currentStage);
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            homeBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            cancelBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        setNewStage("../View/patientsRecordsStyle.fxml", currentStage);
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-            submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        ak = new DatabaseProfileDetails();
-                        ak.getObject();
-                        ak.updateBasicInfoData(user.getId(), roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), "21/02/1995", fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-        } catch (SQLException ex) {
-            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        contactbtn.setOnAction((ActionEvent e) -> {
-            try {
-                handleEditAction(e);
-            } catch (IOException | SQLException ex) {
-                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
     }
 
-    private void setComboValues() throws SQLException {
-        ed = new DatabaseProfileEdit();
+    private void setComboValues() throws SQLException{
         ed.getObject();
+
         customCombo = ed.FetchData("PM_ROLES");
         comboRole.setItems(FXCollections.observableArrayList(customCombo));
         InitiateComboList(roleId, comboRole);
@@ -249,9 +211,6 @@ public class EditProfileController extends NewStage implements Initializable {
         });
     }
 
-    @FXML
-    private void handleButtonAction(MouseEvent event) {
-    }
 
     private void handleEditAction(ActionEvent event) throws IOException, SQLException {
     }

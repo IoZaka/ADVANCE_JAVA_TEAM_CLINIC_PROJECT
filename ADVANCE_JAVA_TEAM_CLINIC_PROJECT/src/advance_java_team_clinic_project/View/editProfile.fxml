@@ -43,11 +43,11 @@
       <Text layoutX="571.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ROLE:" />
       <Text layoutX="25.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address Details:" />
       <Text layoutX="338.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Details: " />
-      <ComboBox layoutX="576.0" layoutY="30.0" prefHeight="25.0" prefWidth="94.0" styleClass="editCombobox" stylesheets="@style.css" />
-      <ComboBox layoutX="127.0" layoutY="415.0" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" />
-      <ComboBox layoutX="643.0" layoutY="158.0" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" />
-      <ComboBox layoutX="610.0" layoutY="335.0" prefHeight="25.0" prefWidth="129.0" styleClass="editCombobox" stylesheets="@style.css" />
-      <Button layoutX="284.0" layoutY="488.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editCancelBtn" stylesheets="@style.css" text="Cancel" />
-      <Button layoutX="479.0" layoutY="488.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editSubmitBtn" stylesheets="@style.css" text="Submit" />
+      <ComboBox fx:id="comboGender" layoutX="576.0" layoutY="30.0" prefHeight="25.0" prefWidth="94.0" styleClass="editCombobox" stylesheets="@style.css" />
+      <ComboBox fx:id="comboEcoStatus" layoutX="127.0" layoutY="415.0" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" />
+      <ComboBox fx:id="comboNationality" layoutX="643.0" layoutY="158.0" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" />
+      <ComboBox fx:id="comboRole" layoutX="610.0" layoutY="335.0" prefHeight="25.0" prefWidth="129.0" styleClass="editCombobox" stylesheets="@style.css" />
+      <Button fx:id="cancelBtn" layoutX="284.0" layoutY="488.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editCancelBtn" stylesheets="@style.css" text="Cancel" />
+      <Button fx:id="submitBtn" layoutX="479.0" layoutY="488.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editSubmitBtn" stylesheets="@style.css" text="Submit" />
    </children>
 </AnchorPane>
