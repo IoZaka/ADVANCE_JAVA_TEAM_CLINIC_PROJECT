@@ -5,7 +5,6 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +13,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -56,67 +54,59 @@ public class SignUpViewController extends NewStage implements Initializable {
     private ImageView backBtn;
 
     @Override
+    @SuppressWarnings("empty-statement")
     public void initialize(URL location, ResourceBundle resources) {
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
 
-        registerBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                passWord = registerPassword.getText();
-                confirmPassWord = confirmPassword.getText();
-                userName = registerUsername.getText();
-                /**/
-                Stage currentStage = (Stage) signUpPane.getScene().getWindow();;
-                Parent root;
-                Scene scene;
-                /**/
-
-                if (!userName.equals(null) && !userName.equals("")) {
-                    ak = new DatabaseLoginRegister();
-                    if (!passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("")) {
-                        if (passWord.equals(confirmPassWord)) {
-                            try {
-                                ak.getObject();
-                                if (ak.registerQuery(userName, passWord) == true) {
-                                    root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
-                                    scene = new Scene(root);
-                                    currentStage.setScene(scene);
-                                };
-                            } catch (SQLException ex) {
-                                Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (IOException ex) {
-                                Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
+        registerBtn.setOnAction((ActionEvent e) -> {
+            passWord = registerPassword.getText();
+            confirmPassWord = confirmPassword.getText();
+            userName = registerUsername.getText();
+            /**/
+            Stage currentStage = (Stage) signUpPane.getScene().getWindow();
+            ;
+            Parent root;
+            Scene scene;
+            /**/
+            if (!userName.equals(null) && !userName.equals("")) {
+                ak = new DatabaseLoginRegister();
+                if (!passWord.equals(null) && !passWord.equals("") && !confirmPassWord.equals(null) && !confirmPassWord.equals("")) {
+                    if (passWord.equals(confirmPassWord)) {
+                        try {
+                            ak.getObject();
+                            if (ak.registerQuery(userName, passWord) == true) {
+                                root = FXMLLoader.load(SignUpViewController.this.getClass().getResource("../View/loginStyleFX.fxml"));
+                                scene = new Scene(root);
+                                currentStage.setScene(scene);
                             }
-
-                        } else {
-                            alert.setTitle("Incorrect password");
-                            alert.setContentText("Passwords do not match!");
-                            alert.showAndWait();
+                            ;
+                        } catch (SQLException | IOException ex) {
+                            Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
                         alert.setTitle("Incorrect password");
-                        alert.setContentText("Please enter valid passwords!");
+                        alert.setContentText("Passwords do not match!");
                         alert.showAndWait();
                     }
                 } else {
-
-                    alert.setTitle("Incorrect username");
-                    alert.setContentText("Please enter a valid username!");
+                    alert.setTitle("Incorrect password");
+                    alert.setContentText("Please enter valid passwords!");
                     alert.showAndWait();
                 }
+            } else {
+                alert.setTitle("Incorrect username");
+                alert.setContentText("Please enter a valid username!");
+                alert.showAndWait();
             }
         });
-        
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                Stage currentStage = (Stage)signUpPane.getScene().getWindow();
-                try {
-                    setNewStage("../View/loginStyleFX.fxml",currentStage);
-                } catch (IOException ex) {
-                    Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+        backBtn.setOnMouseClicked((MouseEvent event) -> {
+            Stage currentStage = (Stage) signUpPane.getScene().getWindow();
+            try {
+                setNewStage("../View/loginStyleFX.fxml", currentStage);
+            } catch (IOException ex) {
+                Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }

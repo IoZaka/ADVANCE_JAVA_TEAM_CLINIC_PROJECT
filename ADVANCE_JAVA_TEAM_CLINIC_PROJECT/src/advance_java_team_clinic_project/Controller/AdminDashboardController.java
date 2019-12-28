@@ -10,11 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -51,6 +48,9 @@ public class AdminDashboardController extends NewStage implements Initializable 
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,30 +58,24 @@ public class AdminDashboardController extends NewStage implements Initializable 
         profileBtn.setSelected(true);
         usernameText.setText(usernameText.getText());
         usernamePane.setTextAlignment(TextAlignment.CENTER);
-        
-        profileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                loadUIonSamePane("../View/profilePane.fxml", adminPane);
-                clearSelectedButtons();
-                profileBtn.setSelected(true);
-            }
+
+        profileBtn.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/profilePane.fxml", adminPane);
+            clearSelectedButtons();
+            profileBtn.setSelected(true);
         });
-        
-        logoutBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                Stage currentStage = (Stage) adminPane.getScene().getWindow();
-                try {
-                    setNewStage("../View/loginStyleFX.fxml", currentStage);
-                } catch (IOException ex) {
-                    Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+        logoutBtn.setOnMouseClicked((MouseEvent event) -> {
+            Stage currentStage = (Stage) adminPane.getScene().getWindow();
+            try {
+                setNewStage("../View/loginStyleFX.fxml", currentStage);
+            } catch (IOException ex) {
+                Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
-    
-    private void clearSelectedButtons(){
+
+    private void clearSelectedButtons() {
         profileBtn.setSelected(false);
         editProfileBtn.setSelected(false);
         enterNewUserBtn.setSelected(false);

@@ -11,11 +11,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -31,7 +28,6 @@ import javafx.stage.Stage;
  */
 public class PatientsDashboardController extends NewStage implements Initializable {
 
-   
     User user = User.getInstance();
     @FXML
     private Text usernameText;
@@ -50,6 +46,9 @@ public class PatientsDashboardController extends NewStage implements Initializab
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,51 +56,38 @@ public class PatientsDashboardController extends NewStage implements Initializab
         recordsBtn.setSelected(true);
         usernameText.setText(usernameText.getText() + user.getUsername());
         textPane.setTextAlignment(TextAlignment.CENTER);
-        recordsBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-               loadUIonSamePane("../View/patientsRecords.fxml", patientPane);
-               clearSelectedButtons();
-               recordsBtn.setSelected(true);
+        recordsBtn.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/patientsRecords.fxml", patientPane);
+            clearSelectedButtons();
+            recordsBtn.setSelected(true);
+        });
+
+        editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/editProfile.fxml", patientPane);
+            clearSelectedButtons();
+            editProfileBtn.setSelected(true);
+        });
+
+        makeAnAppointment.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/Appointment.fxml", patientPane);
+            clearSelectedButtons();
+            makeAnAppointment.setSelected(true);
+        });
+
+        logoutBtn.setOnMouseClicked((MouseEvent event) -> {
+            Stage currentStage = (Stage) patientPane.getScene().getWindow();
+            try {
+                setNewStage("../View/loginStyleFX.fxml", currentStage);
+            } catch (IOException ex) {
+                Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
-        editProfileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-               loadUIonSamePane("../View/editProfile.fxml", patientPane);
-               clearSelectedButtons();
-               editProfileBtn.setSelected(true);
-            }
-        });
-        
-        makeAnAppointment.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-               loadUIonSamePane("../View/Appointment.fxml", patientPane);
-               clearSelectedButtons();
-               makeAnAppointment.setSelected(true);
-            }
-        });
-        
-        logoutBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                Stage currentStage = (Stage) patientPane.getScene().getWindow();
-                try {
-                    setNewStage("../View/loginStyleFX.fxml", currentStage);
-                } catch (IOException ex) {
-                    Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        
+
     }
-    
-    
-    void clearSelectedButtons(){
-       recordsBtn.setSelected(false);
-       editProfileBtn.setSelected(false);
-       makeAnAppointment.setSelected(false);
+
+    void clearSelectedButtons() {
+        recordsBtn.setSelected(false);
+        editProfileBtn.setSelected(false);
+        makeAnAppointment.setSelected(false);
     }
 }

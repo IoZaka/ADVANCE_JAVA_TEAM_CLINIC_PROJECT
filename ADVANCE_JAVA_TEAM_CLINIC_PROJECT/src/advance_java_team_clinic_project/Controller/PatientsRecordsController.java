@@ -8,11 +8,7 @@ package advance_java_team_clinic_project.Controller;
 import advance_java_team_clinic_project.Model.User;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 
 /**
@@ -28,6 +24,8 @@ public class PatientsRecordsController extends NewStage implements Initializable
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

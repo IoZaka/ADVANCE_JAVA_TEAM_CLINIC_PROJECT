@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +31,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -47,10 +45,10 @@ public class EditProfileController extends NewStage implements Initializable {
     @FXML
     private AnchorPane editProfilePane;
     private static DatabaseProfileDetails ak = new DatabaseProfileDetails();
-    private static DatabaseProfileEdit ed = new DatabaseProfileEdit();
+    private static final DatabaseProfileEdit ed = new DatabaseProfileEdit();
     private ResultSet rs;
     User user = User.getInstance();
-    
+
     @FXML
     private Button usernamebtn;
     @FXML
@@ -80,13 +78,11 @@ public class EditProfileController extends NewStage implements Initializable {
     @FXML
     private Button addressbtn;
     @FXML
-    private Button contactbtn; 
+    private Button contactbtn;
     @FXML
-    private ComboBox comboRole; 
-    private Number gender,ecoStatus,nationality,role;
+    private ComboBox comboRole;
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
     private Integer genderId, ecoStatusId, nationalityId, roleId;
-    private LocalDate lDateOfBirth;
     @FXML
     private ComboBox comboGender;
     @FXML
@@ -97,64 +93,58 @@ public class EditProfileController extends NewStage implements Initializable {
     private Button cancelBtn;
     @FXML
     private Button submitBtn;
+
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)  {
+    public void initialize(URL url, ResourceBundle rb) {
         try {
             setData();
         } catch (SQLException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }     
-        
-        
-        usernamebtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkUsernameWindow.fxml"));
-                        Stage checkUsername = new Stage();
-                        Scene scene = new Scene(root);
-                        checkUsername.setTitle("Enter New Username");
-                        checkUsername.setScene(scene);
-                        checkUsername.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+        }
+
+        usernamebtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                Parent root = FXMLLoader.load(EditProfileController.this.getClass().getResource("../View/checkUsernameWindow.fxml"));
+                Stage checkUsername = new Stage();
+                Scene scene = new Scene(root);
+                checkUsername.setTitle("Enter New Username");
+                checkUsername.setScene(scene);
+                checkUsername.show();
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
-        
-        cancelBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
-                        setNewStage("../View/patientsDashboard.fxml", currentStage);
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+
+        cancelBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+                setNewStage("../View/patientsDashboard.fxml", currentStage);
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
-      
-        submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        ak = new DatabaseProfileDetails();
-                        ak.getObject();
-                        ak.updateBasicInfoData(user.getId(), roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), dateOfBirth.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
-                        User user = User.getInstance();
-                        rs = ak.fetchBasicInfoData(user.getId());
-                        if (rs.next()) {
-                            code.setText(rs.getString("global_code"));
-                        }
-                        }catch (SQLException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+
+        submitBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                ak = new DatabaseProfileDetails();
+                ak.getObject();
+                ak.updateBasicInfoData(user.getId(), roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), dateOfBirth.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
+                User user1 = User.getInstance();
+                rs = ak.fetchBasicInfoData(user1.getId());
+                if (rs.next()) {
+                    code.setText(rs.getString("global_code"));
                 }
-         });
-     
+            } catch (SQLException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
         contactbtn.setOnAction((ActionEvent e) -> {
             try {
                 handleEditAction(e);
@@ -162,38 +152,38 @@ public class EditProfileController extends NewStage implements Initializable {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+
     }
 
-     private void setData() throws SQLException{
-            ak.getObject();
-            rs = ak.fetchBasicInfoData(user.getId());
-            if (rs.next()) {
-                usernamebtn.setText(rs.getString("username"));
-                name.setText(rs.getString("firstname"));
-                surname.setText(rs.getString("surname"));
-                /*insurancebtn.setText(String.valueOf(rs.getInt("insurance_id")));*/
-                code.setText(rs.getString("global_code"));
-                amka.setText(rs.getString("amka"));
-                ama.setText(rs.getString("ama"));
-                fathersName.setText(rs.getString("fathers_name"));
-                mothersName.setText(rs.getString("mothers_name"));
-                dateOfBirth.setValue(LOCAL_DATE(rs.getString("date_of_birth")));
-                dateOfBirth.setPromptText("dd-MM-yyyy");
-                System.out.println("auto mou epistrefei i vasi:" + rs.getString("date_of_birth"));
-                System.out.println("auto mou epistrefei i function:" + LOCAL_DATE(rs.getString("date_of_birth")));
-                profession.setText(rs.getString("profession"));
-                genderId = rs.getInt("gender_id");
-                ecoStatusId = rs.getInt("eco_status_id");
-                nationalityId = rs.getInt("nationality_id");
-                roleId = rs.getInt("role_id");
-                placeOfBirth.setText(rs.getString("place_of_birth"));
-                setComboValues();
-                setComboEventListeners();
+    private void setData() throws SQLException {
+        ak.getObject();
+        rs = ak.fetchBasicInfoData(user.getId());
+        if (rs.next()) {
+            usernamebtn.setText(rs.getString("username"));
+            name.setText(rs.getString("firstname"));
+            surname.setText(rs.getString("surname"));
+            /*insurancebtn.setText(String.valueOf(rs.getInt("insurance_id")));*/
+            code.setText(rs.getString("global_code"));
+            amka.setText(rs.getString("amka"));
+            ama.setText(rs.getString("ama"));
+            fathersName.setText(rs.getString("fathers_name"));
+            mothersName.setText(rs.getString("mothers_name"));
+            dateOfBirth.setValue(LOCAL_DATE(rs.getString("date_of_birth")));
+            dateOfBirth.setPromptText("dd-MM-yyyy");
+            System.out.println("auto mou epistrefei i vasi:" + rs.getString("date_of_birth"));
+            System.out.println("auto mou epistrefei i function:" + LOCAL_DATE(rs.getString("date_of_birth")));
+            profession.setText(rs.getString("profession"));
+            genderId = rs.getInt("gender_id");
+            ecoStatusId = rs.getInt("eco_status_id");
+            nationalityId = rs.getInt("nationality_id");
+            roleId = rs.getInt("role_id");
+            placeOfBirth.setText(rs.getString("place_of_birth"));
+            setComboValues();
+            setComboEventListeners();
         }
     }
 
-    private void setComboValues() throws SQLException{
+    private void setComboValues() throws SQLException {
         ed.getObject();
 
         customCombo = ed.FetchData("PM_ROLES");
@@ -211,17 +201,14 @@ public class EditProfileController extends NewStage implements Initializable {
     }
 
     private void InitiateComboList(Integer lId, ComboBox lComboBox) {
-        for (CustomCombo r : customCombo) {
-            if (r.getId() == lId) {
-                lComboBox.setValue(r.getDescription());
-            }
-        }
+        customCombo.stream().filter((r) -> (r.getId() == lId)).forEachOrdered((r) -> {
+            lComboBox.setValue(r.getDescription());
+        });
     }
 
     public static final LocalDate LOCAL_DATE(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy", Locale.FRENCH);
         LocalDate localDate = LocalDate.parse(dateString, formatter);
-        //System.out.println("auto exw mesa stin function" + localDate + " auto pou mpike einai to:" + dateString);
         return localDate;
     }
 
@@ -229,33 +216,28 @@ public class EditProfileController extends NewStage implements Initializable {
         comboRole.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomCombo coRole = (CustomCombo) comboRole.getSelectionModel().getSelectedItem();
-                System.out.println(coRole.getId() + coRole.getDescription());
                 roleId = coRole.getId();
             }
         });
         comboNationality.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomCombo coNationality = (CustomCombo) comboNationality.getSelectionModel().getSelectedItem();
-                System.out.println(coNationality.getId() + coNationality.getDescription());
                 nationalityId = coNationality.getId();
             }
         });
         comboEcoStatus.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomCombo coEcoStatus = (CustomCombo) comboEcoStatus.getSelectionModel().getSelectedItem();
-                System.out.println(coEcoStatus.getId() + coEcoStatus.getDescription());
                 ecoStatusId = coEcoStatus.getId();
             }
         });
         comboGender.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomCombo coGender = (CustomCombo) comboGender.getSelectionModel().getSelectedItem();
-                System.out.println(coGender.getId() + coGender.getDescription());
                 genderId = coGender.getId();
             }
         });
     }
-
 
     private void handleEditAction(ActionEvent event) throws IOException, SQLException {
     }
