@@ -65,18 +65,18 @@ public class CheckUsernameController implements Initializable {
             Logger.getLogger(CheckUsernameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        for(String i:usernames){
-            System.out.println(i.toString());
-            newUsernameInput.addEventFilter(KeyEvent.KEY_RELEASED , usernameValidation(i.toString()));  
-        }
+       
+        newUsernameInput.addEventFilter(KeyEvent.KEY_RELEASED , usernameValidation(usernames));  
+    
     }    
     
-    public EventHandler<KeyEvent> usernameValidation(final String username) {
+    public EventHandler<KeyEvent> usernameValidation(ArrayList<String> usernames) {
         return new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent e) {
                 TextField txt_TextField = (TextField) e.getSource();
-                if(txt_TextField.getText().equals(username)){
+                for(String i:usernames){
+                    if(txt_TextField.getText().equals(i)){
                     statusIcon.setImage(new Image(getClass().getResourceAsStream("../View/images/error.png")));
                     submitBtn.setDisable(true);
                     statusText.setText("Username already exists.");
@@ -85,6 +85,7 @@ public class CheckUsernameController implements Initializable {
                     statusText.setText("");
                     submitBtn.setDisable(false);
                 }
+                } 
             }
         };
     }    
