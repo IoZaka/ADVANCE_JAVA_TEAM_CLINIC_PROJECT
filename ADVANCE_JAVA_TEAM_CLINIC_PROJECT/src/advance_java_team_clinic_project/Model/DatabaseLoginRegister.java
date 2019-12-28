@@ -36,7 +36,7 @@ public class DatabaseLoginRegister {
         alert.initStyle(StageStyle.UTILITY);
         /* End of Alert Initialiization*/
         stmt = object.connection.createStatement();
-        sql = "select id, password, role_id, name as firstname, surname, username from pm_users where username = '" + userName + "'";
+        sql = "select id, password, role_id, firstname as firstname, surname, username from pm_users where username = '" + userName + "'";
         rs = stmt.executeQuery(sql);
         if (rs.next()) {
             password = rs.getString("password");
