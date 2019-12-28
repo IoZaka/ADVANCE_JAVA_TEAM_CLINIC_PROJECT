@@ -5,6 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.User;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -22,6 +23,8 @@ import javafx.scene.control.TableView;
 public class PatientsRecordsController extends NewStage implements Initializable {
 
     private TableView<String> tableList;
+    User user = User.getInstance();
+
     
     /**
      * Initializes the controller class.

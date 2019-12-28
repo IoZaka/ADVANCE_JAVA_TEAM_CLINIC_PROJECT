@@ -3,20 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/AdminDashboardController.java</file>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/PatientsDashboardController.java</file>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/AppointmentSuccessController.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/CustomCombo.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/SignUpViewController.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/PatientsRecordViewController.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/EditProfileController.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/NewStage.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/View/editProfile.fxml</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseLoginRegister.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseProfileDetails.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/LoginViewController.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseProfileEdit.java</file>
-            <file>file:/E:/ZK/github/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/AdminDashboardController.java</file>
+            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseConnection.java</file>
         </group>
     </open-files>
 </project-private>
