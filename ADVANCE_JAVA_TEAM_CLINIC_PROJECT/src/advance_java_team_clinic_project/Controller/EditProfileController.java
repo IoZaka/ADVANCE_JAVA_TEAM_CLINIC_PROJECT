@@ -125,6 +125,22 @@ public class EditProfileController extends NewStage implements Initializable {
                 }
         });
         
+        passwordbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkPasswordWindow.fxml"));
+                        Stage checkUsername = new Stage();
+                        Scene scene = new Scene(root);
+                        checkUsername.setTitle("Enter New Password");
+                        checkUsername.setScene(scene);
+                        checkUsername.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+        });
+        
         cancelBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -155,11 +171,51 @@ public class EditProfileController extends NewStage implements Initializable {
                 }
          });
      
-        contactbtn.setOnAction((ActionEvent e) -> {
-            try {
-                handleEditAction(e);
-            } catch (IOException | SQLException ex) {
-                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+       contactbtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkContactDetails.fxml"));
+                        Stage checkUsername = new Stage();
+                        Scene scene = new Scene(root);
+                        checkUsername.setTitle("Contact Details");
+                        checkUsername.setScene(scene);
+                        checkUsername.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+        });
+       
+       insurancebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkInsuranceDetails.fxml"));
+                        Stage checkUsername = new Stage();
+                        Scene scene = new Scene(root);
+                        checkUsername.setTitle("Insurance Details");
+                        checkUsername.setScene(scene);
+                        checkUsername.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+        });
+       
+       addressbtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkAddressDetails.fxml"));
+                        Stage checkUsername = new Stage();
+                        Scene scene = new Scene(root);
+                        checkUsername.setTitle("Address Details");
+                        checkUsername.setScene(scene);
+                        checkUsername.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
             }
         });
         

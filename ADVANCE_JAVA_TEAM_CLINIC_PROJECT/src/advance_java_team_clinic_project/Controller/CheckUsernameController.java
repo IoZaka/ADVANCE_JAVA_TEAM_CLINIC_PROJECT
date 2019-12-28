@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 /**
@@ -65,29 +66,18 @@ public class CheckUsernameController implements Initializable {
             Logger.getLogger(CheckUsernameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       
-        newUsernameInput.addEventFilter(KeyEvent.KEY_RELEASED , usernameValidation(usernames));  
-    
-    }    
-    
-    public EventHandler<KeyEvent> usernameValidation(ArrayList<String> usernames) {
-        return new EventHandler<KeyEvent>() {
+        submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(KeyEvent e) {
-                TextField txt_TextField = (TextField) e.getSource();
-                for(String i:usernames){
-                    if(txt_TextField.getText().equals(i)){
-                    statusIcon.setImage(new Image(getClass().getResourceAsStream("../View/images/error.png")));
-                    submitBtn.setDisable(true);
-                    statusText.setText("Username already exists.");
-                }else{
-                    statusIcon.setImage(null);
-                    statusText.setText("");
-                    submitBtn.setDisable(false);
-                }
-                } 
+            public void handle(MouseEvent event) {
+               String usernameField = newUsernameInput.getText();
+               if(usernames.contains(usernameField)){
+                   statusIcon.setImage(new Image(getClass().getResourceAsStream("../View/images/error.png")));
+                   statusText.setText("Username already exists.");   
+               }
+                       
+ 
             }
-        };
+        });
+
     }    
-    
 }
