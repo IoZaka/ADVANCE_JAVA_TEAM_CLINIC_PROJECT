@@ -52,6 +52,13 @@ public class DatabaseProfileDetails {
         return rs;
     }
     
+    public ResultSet fetchAllUsernames() throws SQLException{
+        stmt = object.connection.createStatement();
+        sql = "select username from pm_users";
+        rs = stmt.executeQuery(sql);
+        return rs;
+    }
+    
     public void updateBasicInfoData(Integer userId,Integer lRole_Id, String lSurname, String lName, String lAmka, String lAma, String lDate_of_birth, String lFathers_name, String lMothers_name, 
             Integer lGender_id, Integer lEco_status_id, Integer lNationality_id, String lProffesion, String lPlace_of_birth/*, Integer lMember_id*/) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

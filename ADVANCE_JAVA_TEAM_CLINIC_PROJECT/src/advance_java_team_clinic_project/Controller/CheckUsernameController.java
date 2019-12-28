@@ -5,9 +5,15 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.DatabaseProfileDetails;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,14 +40,35 @@ public class CheckUsernameController implements Initializable {
     @FXML
     private Text statusText;
 
-  
+    ArrayList<String> usernames;
+    private static DatabaseProfileDetails ak = new DatabaseProfileDetails();
+    private ResultSet rs;
+
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        newUsernameInput.addEventFilter(KeyEvent.KEY_RELEASED , usernameValidation("christos"));  
+        usernames = new ArrayList<String>();
+        try {
+            ak.getObject();
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckUsernameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            rs = ak.fetchAllUsernames();
+            while(rs.next()){
+                usernames.add(rs.getString("username"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CheckUsernameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(String i:usernames){
+            System.out.println(i.toString());
+            newUsernameInput.addEventFilter(KeyEvent.KEY_RELEASED , usernameValidation(i.toString()));  
+        }
     }    
     
     public EventHandler<KeyEvent> usernameValidation(final String username) {
