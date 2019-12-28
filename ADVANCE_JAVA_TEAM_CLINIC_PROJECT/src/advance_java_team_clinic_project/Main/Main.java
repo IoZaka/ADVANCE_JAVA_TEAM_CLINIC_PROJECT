@@ -28,6 +28,7 @@ public class Main extends Application {
         //JavaFx Run
         Parent root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
 
+        //fdifdj
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setWidth(1000);
