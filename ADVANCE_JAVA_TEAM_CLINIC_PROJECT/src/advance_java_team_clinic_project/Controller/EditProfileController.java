@@ -44,7 +44,10 @@ public class EditProfileController extends NewStage implements Initializable {
     @FXML
     private AnchorPane editProfilePane;
     private static DatabaseProfileDetails ak = new DatabaseProfileDetails();
+    private static DatabaseProfileEdit ed = new DatabaseProfileEdit();
     private ResultSet rs;
+    User user = User.getInstance();
+    
     @FXML
     private Button usernamebtn;
     @FXML
@@ -74,18 +77,13 @@ public class EditProfileController extends NewStage implements Initializable {
     @FXML
     private Button addressbtn;
     @FXML
-    private Button contactbtn;
-    private static DatabaseProfileEdit ed = new DatabaseProfileEdit();
+    private Button contactbtn; 
     @FXML
-    private ComboBox comboRole = new ComboBox();
-    
+    private ComboBox comboRole; 
     private Number gender,ecoStatus,nationality,role;
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
     private Integer genderId, ecoStatusId, nationalityId, roleId;
     private LocalDate lDateOfBirth;
-    
-    
-    User user = User.getInstance();
     @FXML
     private ComboBox comboGender;
     @FXML
@@ -102,22 +100,57 @@ public class EditProfileController extends NewStage implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)  {
         try {
-            //Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
             setData();
         } catch (SQLException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }     
+        
+        
         usernamebtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    //try {
-                       // setNewStage("../View/checkUsernameWindow.fxml", currentStage);
-                       System.out.println("test2");
-                   // } catch (IOException ex) {
-                   //     Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                   // }
+                    try {
+                        Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+                        setNewStage("../View/checkUsernameWindow.fxml", currentStage);
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
         });
+        
+        cancelBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+                        setNewStage("../View/patientsDashboard.fxml", currentStage);
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+        });
+      
+        submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        ak = new DatabaseProfileDetails();
+                        ak.getObject();
+                        ak.updateBasicInfoData(user.getId(), roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), "21/02/1995", fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+         });
+     
+        contactbtn.setOnAction((ActionEvent e) -> {
+            try {
+                handleEditAction(e);
+            } catch (IOException | SQLException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
     }
 
      private void setData() throws SQLException{
