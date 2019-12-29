@@ -22,12 +22,10 @@ public class DatabaseProfileEdit {
     private Statement stmt;
     private String sql;
     private ResultSet rs;
-    private int id;
     private DatabaseConnection object;
     User user = User.getInstance();
     public Integer roleId;
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    private List<CustomCombo> coRoles;
 
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
