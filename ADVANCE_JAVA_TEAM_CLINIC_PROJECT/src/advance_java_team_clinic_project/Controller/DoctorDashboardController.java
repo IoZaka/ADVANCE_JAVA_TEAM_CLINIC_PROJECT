@@ -11,7 +11,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
@@ -45,9 +44,12 @@ public class DoctorDashboardController extends NewStage implements Initializable
     private BorderPane patientsPane;
 
     User user = User.getInstance();
-    
+
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,52 +57,39 @@ public class DoctorDashboardController extends NewStage implements Initializable
         profileBtn.setSelected(true);
         usernameText.setText(usernameText.getText() + user.getUsername());
         usernamePane.setTextAlignment(TextAlignment.CENTER);
-        
-        profileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                loadUIonSamePane("../View/profilePane.fxml", patientsPane);
-                clearSelectedButtons();
-                profileBtn.setSelected(true);
-            }
+
+        profileBtn.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/profilePane.fxml", patientsPane);
+            clearSelectedButtons();
+            profileBtn.setSelected(true);
         });
-        
-        editProfileBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                loadUIonSamePane("../View/editProfile.fxml", patientsPane);
-                clearSelectedButtons();
-                editProfileBtn.setSelected(true);
-            }
+
+        editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/editProfile.fxml", patientsPane);
+            clearSelectedButtons();
+            editProfileBtn.setSelected(true);
         });
-        
-        patientsBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                loadUIonSamePane("../View/doctorsPatientsPane.fxml", patientsPane);
-                clearSelectedButtons();
-                patientsBtn.setSelected(true);
-            }
+
+        patientsBtn.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/doctorsPatientsPane.fxml", patientsPane);
+            clearSelectedButtons();
+            patientsBtn.setSelected(true);
         });
-        
-        
-        logoutBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                Stage currentStage = (Stage) patientsPane.getScene().getWindow();
-                try {
-                    setNewStage("../View/loginStyleFX.fxml", currentStage);
-                } catch (IOException ex) {
-                    Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+        logoutBtn.setOnMouseClicked((MouseEvent event) -> {
+            Stage currentStage = (Stage) patientsPane.getScene().getWindow();
+            try {
+                setNewStage("../View/loginStyleFX.fxml", currentStage);
+            } catch (IOException ex) {
+                Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
-    
-    private void clearSelectedButtons(){
+
+    private void clearSelectedButtons() {
         profileBtn.setSelected(false);
         editProfileBtn.setSelected(false);
         patientsBtn.setSelected(false);
     }
-    
+
 }

@@ -5,9 +5,6 @@
  */
 package advance_java_team_clinic_project.Model;
 
-import advance_java_team_clinic_project.Model.DatabaseConnection;
-import advance_java_team_clinic_project.Model.DatabaseConnection;
-import advance_java_team_clinic_project.Model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,14 +12,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.stage.StageStyle;
 
 public class DatabaseLoginRegister {
 
     private Statement stmt;
-    private String sql,existSql,regSql, pwdSql;
-    private ResultSet rs,regRs, pwdRs;
+    private String sql, existSql, regSql, pwdSql;
+    private ResultSet rs, regRs, pwdRs;
     private String username, password, role, created, updated, hashPwd;
     private DatabaseConnection object;
     User user = User.getInstance();
@@ -31,7 +27,8 @@ public class DatabaseLoginRegister {
 
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
-    } 
+    }
+
     public boolean loginQuery(String userName, String passWord) throws SQLException {
         /* Alert Initialization */
         alert.setHeaderText(null);
@@ -65,22 +62,22 @@ public class DatabaseLoginRegister {
         }
         return false;
     }
-    
-    public boolean registerQuery(String userName, String passWord) throws SQLException{
+
+    public boolean registerQuery(String userName, String passWord) throws SQLException {
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
-        existSql = "select count(*) as existing from pm_users where username ='"+userName+"'";
+        existSql = "select count(*) as existing from pm_users where username ='" + userName + "'";
         rs = stmt.executeQuery(existSql);
         rs.next();
-        if (rs.getInt("existing") > 0){
+        if (rs.getInt("existing") > 0) {
             alert.setTitle("Wrong username");
             alert.setContentText("Username already existing, please add another username.");
             alert.showAndWait();
             return false;
-        }else if (rs.getInt("existing") == 0){
+        } else if (rs.getInt("existing") == 0) {
             hashPwd = makeHashPwd(passWord);
-            regSql = "insert into pm_users (username,password,role_id) values ('"+userName+"','"+hashPwd+"',3)";
+            regSql = "insert into pm_users (username,password,role_id) values ('" + userName + "','" + hashPwd + "',3)";
             regRs = stmt.executeQuery(regSql);
             alert.setTitle("Success!");
             alert.setContentText("User was succesfully registered! You may login now.");
@@ -90,13 +87,13 @@ public class DatabaseLoginRegister {
         }
         return false;
     }
-    
-    private String makeHashPwd (String passWord){
+
+    private String makeHashPwd(String passWord) {
         String localPwd;
         try {
-            pwdSql = "SELECT DBMS_OBFUSCATION_TOOLKIT.md5(input => UTL_I18N.STRING_TO_RAW (\'"+passWord+"\', 'AL32UTF8')) pwd from dual";
+            pwdSql = "SELECT DBMS_OBFUSCATION_TOOLKIT.md5(input => UTL_I18N.STRING_TO_RAW (\'" + passWord + "\', 'AL32UTF8')) pwd from dual";
             pwdRs = stmt.executeQuery(pwdSql);
-            if (pwdRs.next()){
+            if (pwdRs.next()) {
                 localPwd = pwdRs.getString("pwd");
                 pwdRs.close();
                 return localPwd;

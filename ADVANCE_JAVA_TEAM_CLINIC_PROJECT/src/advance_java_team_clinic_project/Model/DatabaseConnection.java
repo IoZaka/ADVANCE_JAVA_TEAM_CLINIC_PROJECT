@@ -30,7 +30,6 @@ public class DatabaseConnection {
             } catch (SQLException ex){
                 System.out.println("Database Connection Creation Failed: " + ex.getMessage());
             } catch (Exception e) {
-                e.printStackTrace();
             }
     }
     

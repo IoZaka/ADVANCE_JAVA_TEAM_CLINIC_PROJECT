@@ -8,6 +8,8 @@ package advance_java_team_clinic_project.Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.stage.StageStyle;
 
@@ -83,6 +85,16 @@ public class DatabaseProfileDetails {
         alert.setTitle("Update");
         alert.setContentText("Update submitted");
         alert.showAndWait();
+    }
+    
+    public void updateUsername (Integer userId, String userName){
+        try {
+            stmt = object.connection.createStatement();
+            sql = "update pm_users set username = \'"+ userName +"\' where id = " + userId;
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseProfileDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 

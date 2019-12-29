@@ -6,7 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseProfileDetails;
-import java.io.InputStream;
+import advance_java_team_clinic_project.Model.User;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +31,7 @@ import javafx.scene.text.Text;
  * @author Chris
  */
 public class CheckUsernameController implements Initializable {
-    
+
     @FXML
     private TextField newUsernameInput;
     @FXML
@@ -42,42 +42,62 @@ public class CheckUsernameController implements Initializable {
     private Text statusText;
 
     ArrayList<String> usernames;
-    private static DatabaseProfileDetails ak = new DatabaseProfileDetails();
+
+    private static final DatabaseProfileDetails ak = new DatabaseProfileDetails();
     private ResultSet rs;
 
-    
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        usernames = new ArrayList<String>();
+        User user = User.getInstance();
         try {
+            usernames = new ArrayList<>();
             ak.getObject();
-        } catch (SQLException ex) {
-            Logger.getLogger(CheckUsernameController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             rs = ak.fetchAllUsernames();
-            while(rs.next()){
+            while (rs.next()) {
                 usernames.add(rs.getString("username"));
             }
+
+            usernames.stream().map((i) -> {
+                return i;
+            }).forEachOrdered((i) -> {
+                newUsernameInput.addEventFilter(KeyEvent.KEY_RELEASED, usernameValidation(i));
+            });
+
+            statusIcon.setImage(null);
+            submitBtn.setDisable(true);
+            statusText.setText("Enter a username");
         } catch (SQLException ex) {
             Logger.getLogger(CheckUsernameController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               String usernameField = newUsernameInput.getText();
-               if(usernames.contains(usernameField)){
-                   statusIcon.setImage(new Image(getClass().getResourceAsStream("../View/images/error.png")));
-                   statusText.setText("Username already exists.");   
-               }
-                       
- 
-            }
-        });
 
-    }    
+        submitBtn.setOnMouseClicked((MouseEvent event) -> {
+            ak.updateUsername(user.getId(), newUsernameInput.getText());
+        });
+    }
+
+    public EventHandler<KeyEvent> usernameValidation(final String username) {
+        return (KeyEvent e) -> {
+            TextField txt_TextField = (TextField) e.getSource();
+            if (txt_TextField.getText().equals(username)) {
+                statusIcon.setImage(new Image(getClass().getResourceAsStream("../View/images/error.png")));
+                submitBtn.setDisable(true);
+                statusText.setText("Username already exists.");
+            } else if (txt_TextField.getText().equals(null) || txt_TextField.getText().equals("")) {
+                statusIcon.setImage(null);
+                submitBtn.setDisable(true);
+                statusText.setText("Enter a username");
+            } else {
+                statusIcon.setImage(null);
+                statusText.setText("");
+                submitBtn.setDisable(false);
+            }
+        };
+    }
+
 }
