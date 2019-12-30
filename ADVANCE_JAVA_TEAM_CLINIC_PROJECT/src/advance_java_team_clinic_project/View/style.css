@@ -176,7 +176,7 @@ and open the template in the editor.
     -fx-background-radius: 2em;
 }
 
-.editUsernameBtn:hover,.editPasswordBtn:hover,.editAddressBtn:hover,.editContactBtn:hover, .editInsuranceBtn:hover, editSubmitBtn:hover {
+.editUsernameBtn:hover,.editPasswordBtn:hover,.editAddressBtn:hover,.editContactBtn:hover, .editInsuranceBtn:hover, .editSubmitBtn:hover {
     -fx-background-color: #385ca8;
 }
 
@@ -198,7 +198,8 @@ and open the template in the editor.
 }
 
 
-.editNameText, .editSurnameText, .editPlaceBirthText, .editFathersNameText, .editMothersNameText, .editAmaText, .editAmkaText, .editProfessionText {
+.editInputStyle
+{
     -fx-prompt-text-fill: #304e8e;
     -fx-text-fill: #304e8e;
     -fx-background-color: -fx-text-box-border, -fx-background;

@@ -10,17 +10,17 @@
 <AnchorPane id="AnchorPane" fx:id="editProfilePane" maxHeight="600.0" maxWidth="820.0" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
    <children>
       <Button fx:id="usernamebtn" layoutX="233.0" layoutY="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" styleClass="editUsernameBtn" stylesheets="@style.css" text="Change Username" />
-      <TextField fx:id="name" layoutX="73.0" layoutY="165.0" styleClass="editNameText" stylesheets="@style.css" />
-      <TextField fx:id="surname" layoutX="350.0" layoutY="165.0" styleClass="editSurnameText" stylesheets="@style.css" />
+      <TextField fx:id="name" layoutX="73.0" layoutY="165.0" styleClass="editInputStyle" stylesheets="@style.css" />
+      <TextField fx:id="surname" layoutX="350.0" layoutY="165.0" styleClass="editInputStyle" stylesheets="@style.css" />
       <Button fx:id="insurancebtn" layoutX="676.0" layoutY="375.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editInsuranceBtn" stylesheets="@style.css" text="Insurance Details" />
-      <TextField fx:id="code" disable="true" layoutX="104.0" layoutY="98.0" prefHeight="25.0" prefWidth="94.0" />
-      <TextField fx:id="amka" layoutX="350.0" layoutY="100.0" styleClass="editAmkaText" stylesheets="@style.css" />
-      <TextField fx:id="ama" layoutX="590.0" layoutY="100.0" styleClass="editAmaText" stylesheets="@style.css" />
-      <TextField fx:id="fathersName" layoutX="253.0" layoutY="300.0" styleClass="editFathersNameText" stylesheets="@style.css" />
-      <TextField fx:id="mothersName" layoutX="513.0" layoutY="300.0" styleClass="editMothersNameText" stylesheets="@style.css" />
+      <TextField fx:id="code" disable="true" layoutX="104.0" layoutY="98.0" prefHeight="25.0" prefWidth="94.0" styleClass="editInputStyle" />
+      <TextField fx:id="amka" layoutX="350.0" layoutY="100.0" styleClass="editInputStyle" stylesheets="@style.css" />
+      <TextField fx:id="ama" layoutX="590.0" layoutY="100.0" styleClass="editInputStyle" stylesheets="@style.css" />
+      <TextField fx:id="fathersName" layoutX="253.0" layoutY="300.0" styleClass="editInputStyle" stylesheets="@style.css" />
+      <TextField fx:id="mothersName" layoutX="513.0" layoutY="300.0" styleClass="editInputStyle" stylesheets="@style.css" />
       <DatePicker fx:id="dateOfBirth" layoutX="588.0" layoutY="226.0" />
-      <TextField fx:id="placeOfBirth" layoutX="350.0" layoutY="225.0" styleClass="editPlaceBirthText" stylesheets="@style.css" />
-      <TextField fx:id="profession" layoutX="590.0" layoutY="165.0" styleClass="editProfessionText" stylesheets="@style.css" />
+      <TextField fx:id="placeOfBirth" layoutX="350.0" layoutY="225.0" styleClass="editInputStyle" stylesheets="@style.css" />
+      <TextField fx:id="profession" layoutX="590.0" layoutY="165.0" styleClass="editInputStyle" stylesheets="@style.css" />
       <Button fx:id="passwordbtn" layoutX="472.0" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="Change password" />
       <Button fx:id="addressbtn" layoutX="123.0" layoutY="375.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" styleClass="editAddressBtn" stylesheets="@style.css" text="Address details" />
       <Button fx:id="contactbtn" layoutX="426.0" layoutY="375.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" styleClass="editContactBtn" stylesheets="@style.css" text="Contact details" />

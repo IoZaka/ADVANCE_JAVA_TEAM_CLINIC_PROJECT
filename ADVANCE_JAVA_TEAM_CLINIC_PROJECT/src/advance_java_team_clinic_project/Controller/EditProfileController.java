@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -116,19 +117,46 @@ public class EditProfileController extends NewStage implements Initializable {
                 Scene scene = new Scene(root);
                 checkUsername.setTitle("Enter New Username");
                 checkUsername.setScene(scene);
+                checkUsername.setResizable(false);
                 checkUsername.show();
             } catch (IOException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
-        cancelBtn.setOnMouseClicked((MouseEvent event) -> {
-            try {
-                Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
-                setNewStage("../View/patientsDashboard.fxml", currentStage);
-            } catch (IOException ex) {
-                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        
+        passwordbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkPasswordWindow.fxml"));
+                        Stage checkPassword = new Stage();
+                        Scene scene = new Scene(root);
+                        checkPassword.setTitle("Enter New Password");
+                        checkPassword.setScene(scene);
+                        checkPassword.setResizable(false);
+                        checkPassword.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+        });
+        
+        cancelBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+                        if(roleId == 1){
+                            setNewStage("../View/AdminDashboard.fxml", currentStage);
+                        }else if(roleId == 2){
+                            setNewStage("../View/doctorsDashboard.fxml", currentStage);
+                        }else{
+                            setNewStage("../View/patientsDashboard.fxml", currentStage);
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
         });
 
         submitBtn.setOnMouseClicked((MouseEvent event) -> {
@@ -144,13 +172,56 @@ public class EditProfileController extends NewStage implements Initializable {
             } catch (SQLException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
+         });
+     
+       contactbtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkContactDetails.fxml"));
+                        Stage checkContact = new Stage();
+                        Scene scene = new Scene(root);
+                        checkContact.setTitle("Contact Details");
+                        checkContact.setScene(scene);
+                        checkContact.setResizable(false);
+                        checkContact.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
         });
-
-        contactbtn.setOnAction((ActionEvent e) -> {
-            try {
-                handleEditAction(e);
-            } catch (IOException | SQLException ex) {
-                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+       
+       insurancebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkInsuranceDetails.fxml"));
+                        Stage checkInsurance = new Stage();
+                        Scene scene = new Scene(root);
+                        checkInsurance.setTitle("Insurance Details");
+                        checkInsurance.setScene(scene);
+                        checkInsurance.setResizable(false);
+                        checkInsurance.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+        });
+       
+       addressbtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkAddressDetails.fxml"));
+                        Stage checkAddress = new Stage();
+                        Scene scene = new Scene(root);
+                        checkAddress.setTitle("Address Details");
+                        checkAddress.setScene(scene);
+                        checkAddress.setResizable(false);
+                        checkAddress.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
             }
         });
 
