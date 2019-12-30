@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.PatientsRecordsController">
+<AnchorPane id="AnchorPane" maxWidth="820.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.PatientsRecordsController">
    <children>
       <Text fill="#385ca8" layoutX="317.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOUR RECORDS">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <TableView fx:id="tableList" layoutX="255.0" layoutY="155.0" prefHeight="200.0" prefWidth="443.0">
-        <columns>
-          <TableColumn prefWidth="104.15087890625" text="id" />
-          <TableColumn prefWidth="95.0943603515625" text="App Date" />
-          <TableColumn prefWidth="84.226318359375" text="Comments" />
-          <TableColumn prefWidth="103.2452392578125" text="App code" />  
-          <TableColumn prefWidth="103.2452392578125" text="Created" />  
-          <TableColumn prefWidth="103.2452392578125" text="Updated" />  
-          <TableColumn prefWidth="75.0" text="Firstname patient" />
-          <TableColumn prefWidth="75.0" text="Surname patient" />
-          <TableColumn prefWidth="104.15087890625" text="Surname doctor" />
-          <TableColumn prefWidth="95.0943603515625" text="Firstname doctor" />
-          <TableColumn prefWidth="84.226318359375" text="Surname updated" />
-          <TableColumn prefWidth="103.2452392578125" text="Firstname updated" />  
-        </columns>
-      </TableView>
+      <TableView fx:id="recordsTable" layoutY="156.0" maxWidth="820.0" minWidth="820.0" prefHeight="200.0" prefWidth="820.0" />
    </children>
 </AnchorPane>
