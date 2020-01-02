@@ -12,6 +12,6 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <TableView fx:id="recordsTable" layoutX="10.0" layoutY="157.0" maxWidth="800.0" minWidth="800.0" prefHeight="200.0" prefWidth="800.0" />
+      <TableView fx:id="recordsTable" layoutX="26.0" layoutY="212.0" prefHeight="200.0" prefWidth="765.0" />
    </children>
 </AnchorPane>

@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 
 /**
@@ -22,6 +23,10 @@ public class CheckPasswordWindowController implements Initializable {
     private PasswordField passwordInput;
     @FXML
     private PasswordField passwordRepeatInput;
+    @FXML
+    private PasswordField currentPassword;
+    @FXML
+    private Button submitBtn;
 
     /**
      * Initializes the controller class.
