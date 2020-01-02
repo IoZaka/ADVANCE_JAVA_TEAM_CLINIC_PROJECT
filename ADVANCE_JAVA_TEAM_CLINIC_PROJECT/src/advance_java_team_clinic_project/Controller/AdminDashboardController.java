@@ -64,6 +64,12 @@ public class AdminDashboardController extends NewStage implements Initializable 
             clearSelectedButtons();
             profileBtn.setSelected(true);
         });
+        
+        editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/editProfile.fxml", adminPane);
+            clearSelectedButtons();
+            editProfileBtn.setSelected(true);
+        });
 
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {
             Stage currentStage = (Stage) adminPane.getScene().getWindow();

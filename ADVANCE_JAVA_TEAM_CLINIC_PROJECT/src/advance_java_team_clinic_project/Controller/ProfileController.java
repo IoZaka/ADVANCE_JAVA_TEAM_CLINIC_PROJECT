@@ -7,27 +7,21 @@ package advance_java_team_clinic_project.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
- * @author Tasos
+ * @author Chris
  */
-public class AppointmentSuccessController implements Initializable {
-
-    @FXML
-    private AnchorPane successAppPane;
+public class ProfileController implements Initializable {
 
     /**
      * Initializes the controller class.
-     * @param url
-     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
+        // TODO
     }    
+    
 }

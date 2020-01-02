@@ -6,6 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
+import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -50,6 +51,8 @@ public class LoginViewController extends NewStage implements Initializable {
 
     String userNameGiven;
     String passWordGiven;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -87,7 +90,13 @@ public class LoginViewController extends NewStage implements Initializable {
 
             ak.getObject();
             if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
-                setNewStage("../View/patientsDashboard.fxml", currentStage);
+                User user = User.getInstance();
+                System.out.println(user.getId());
+                if(user.getId() == 4){
+                    setNewStage("../View/AdminDashboard.fxml", currentStage);
+                }else if(user.getId() == 3){
+                    setNewStage("../View/patientsDashboard.fxml", currentStage);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
