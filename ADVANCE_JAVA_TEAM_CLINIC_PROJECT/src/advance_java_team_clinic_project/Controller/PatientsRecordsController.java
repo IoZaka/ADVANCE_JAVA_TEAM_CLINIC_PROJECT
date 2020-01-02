@@ -18,6 +18,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -54,15 +56,11 @@ public class PatientsRecordsController implements Initializable{
                     public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {
                         return new SimpleStringProperty(param.getValue().get(j).toString());
                     }                    
-                });
-                
+                });   
                 recordsTable.getColumns().add(col);
                 System.out.println("Column ["+i+"] ");
             }
-            
             while(rs.next()){
-                String patient = rs.getString("patient");
-                System.out.println("gggggggggg"+patient);
                 //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
                 for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
@@ -76,10 +74,8 @@ public class PatientsRecordsController implements Initializable{
             recordsTable.setItems(data);
         } catch (SQLException ex) {
             Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-            }    
+        }   
+    }  
 }
     
 
