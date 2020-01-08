@@ -6,6 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
+import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -50,6 +51,8 @@ public class LoginViewController extends NewStage implements Initializable {
 
     String userNameGiven;
     String passWordGiven;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -76,6 +79,12 @@ public class LoginViewController extends NewStage implements Initializable {
         });
     }
 
+    /**
+     * Function that triggers when the user presses the login button.
+     * Connects with database and checks if the user exists or not.
+     * @param event
+     * @throws IOException 
+     */
     private void handleLoginAction(ActionEvent event) throws IOException {
         try {
             ak = new DatabaseLoginRegister();
@@ -87,13 +96,25 @@ public class LoginViewController extends NewStage implements Initializable {
 
             ak.getObject();
             if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
-                setNewStage("../View/patientsDashboard.fxml", currentStage);
+                User user = User.getInstance();
+                System.out.println(user.getRoleID());
+                if(user.getRoleID() == 4){
+                    setNewStage("../View/AdminDashboard.fxml", currentStage);
+                }else if(user.getRoleID() == 3){
+                    setNewStage("../View/AdminDashboard.fxml", currentStage);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Function that triggers when the user presses the register button.
+     * Returns a new page with the sign up selection.
+     * @param event
+     * @throws IOException 
+     */
     @SuppressWarnings("empty-statement")
     private void handleRegisterAction(ActionEvent event) throws IOException {
         Stage currentStage = (Stage) loginPane.getScene().getWindow();;

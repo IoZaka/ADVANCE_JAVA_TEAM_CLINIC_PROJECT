@@ -81,6 +81,12 @@ public class CheckUsernameController implements Initializable {
         });
     }
 
+    /**
+     * EventHandler that checks what the user types on the keyboard.
+     * @param username
+     * @return 
+     */
+    
     public EventHandler<KeyEvent> usernameValidation(final String username) {
         return (KeyEvent e) -> {
             TextField txt_TextField = (TextField) e.getSource();

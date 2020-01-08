@@ -225,12 +225,27 @@ public class EditProfileController extends NewStage implements Initializable {
         });
 
     }
-
+    /**
+     * Returns the user's data from the database and shows it on the screen.
+     * @throws SQLException 
+     */
     private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchBasicInfoData(user.getId());
+        
+        while(rs.next()){
+            for(int i=1;i<rs.getMetaData().getColumnCount();i++){
+               
+            }
+        }
+        
         if (rs.next()) {
-            usernamebtn.setText(rs.getString("username"));
+            if(rs.getString("username") != null){
+                usernamebtn.setText(rs.getString("username"));
+            }else{
+                usernamebtn.setText(rs.getString("den iparxei username"));
+            }
+            
             name.setText(rs.getString("firstname"));
             surname.setText(rs.getString("surname"));
             /*insurancebtn.setText(String.valueOf(rs.getInt("insurance_id")));*/
@@ -244,7 +259,10 @@ public class EditProfileController extends NewStage implements Initializable {
             System.out.println("auto mou epistrefei i vasi:" + rs.getString("date_of_birth"));
             System.out.println("auto mou epistrefei i function:" + LOCAL_DATE(rs.getString("date_of_birth")));
             profession.setText(rs.getString("profession"));
-            genderId = rs.getInt("gender_id");
+                genderId = rs.getInt("gender_id");
+                if(genderId==null){
+                    genderId = 0;
+                }
             ecoStatusId = rs.getInt("eco_status_id");
             nationalityId = rs.getInt("nationality_id");
             roleId = rs.getInt("role_id");
@@ -254,6 +272,10 @@ public class EditProfileController extends NewStage implements Initializable {
         }
     }
 
+    /**
+     * Returns the ComboBox Values from the database
+     * @throws SQLException 
+     */
     private void setComboValues() throws SQLException {
         ed.getObject();
 
@@ -283,6 +305,9 @@ public class EditProfileController extends NewStage implements Initializable {
         return localDate;
     }
 
+    /**
+     * Set the ComboBox Event Listeners
+     */
     private void setComboEventListeners() {
         comboRole.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
@@ -308,8 +333,5 @@ public class EditProfileController extends NewStage implements Initializable {
                 genderId = coGender.getId();
             }
         });
-    }
-
-    private void handleEditAction(ActionEvent event) throws IOException, SQLException {
     }
 }
