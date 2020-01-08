@@ -51,8 +51,6 @@ public class LoginViewController extends NewStage implements Initializable {
 
     String userNameGiven;
     String passWordGiven;
-    
-    
 
     /**
      * Initializes the controller class.
