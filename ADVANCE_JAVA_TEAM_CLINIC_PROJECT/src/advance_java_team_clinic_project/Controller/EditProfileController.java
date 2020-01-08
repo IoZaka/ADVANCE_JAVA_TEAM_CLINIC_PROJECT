@@ -240,12 +240,7 @@ public class EditProfileController extends NewStage implements Initializable {
         }
         
         if (rs.next()) {
-            if(rs.getString("username") != null){
-                usernamebtn.setText(rs.getString("username"));
-            }else{
-                usernamebtn.setText(rs.getString("den iparxei username"));
-            }
-            
+            usernamebtn.setText(rs.getString("username"));
             name.setText(rs.getString("firstname"));
             surname.setText(rs.getString("surname"));
             /*insurancebtn.setText(String.valueOf(rs.getInt("insurance_id")));*/
@@ -259,10 +254,7 @@ public class EditProfileController extends NewStage implements Initializable {
             System.out.println("auto mou epistrefei i vasi:" + rs.getString("date_of_birth"));
             System.out.println("auto mou epistrefei i function:" + LOCAL_DATE(rs.getString("date_of_birth")));
             profession.setText(rs.getString("profession"));
-                genderId = rs.getInt("gender_id");
-                if(genderId==null){
-                    genderId = 0;
-                }
+            genderId = rs.getInt("gender_id");
             ecoStatusId = rs.getInt("eco_status_id");
             nationalityId = rs.getInt("nationality_id");
             roleId = rs.getInt("role_id");

@@ -119,7 +119,7 @@ public class PatientsRecordsController implements Initializable{
     }  
     
     /**
-     * 
+     * Returns data from a database
      * @param rs
      * @return
      * @throws SQLException 
