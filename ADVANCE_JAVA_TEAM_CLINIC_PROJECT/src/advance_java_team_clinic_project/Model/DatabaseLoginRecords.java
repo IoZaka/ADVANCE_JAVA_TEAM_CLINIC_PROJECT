@@ -27,6 +27,11 @@ public class DatabaseLoginRecords {
         object = DatabaseConnection.getInstance();
     }
 
+    /**
+     * Fetches Data from Database.
+     * @return
+     * @throws SQLException 
+     */
     public ResultSet fetchBasicInfoData() throws SQLException {
         stmt = object.connection.createStatement();
         sql = "select a.id, \n" +

@@ -29,6 +29,13 @@ public class DatabaseLoginRegister {
         object = DatabaseConnection.getInstance();
     }
 
+    /**
+     * Returns true/false if the login information is correct or not.
+     * @param userName
+     * @param passWord
+     * @return
+     * @throws SQLException 
+     */
     public boolean loginQuery(String userName, String passWord) throws SQLException {
         /* Alert Initialization */
         alert.setHeaderText(null);
@@ -63,6 +70,13 @@ public class DatabaseLoginRegister {
         return false;
     }
 
+    /**
+     * Returns true/false if the register information is correct or not.
+     * @param userName
+     * @param passWord
+     * @return
+     * @throws SQLException 
+     */
     public boolean registerQuery(String userName, String passWord) throws SQLException {
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
@@ -88,6 +102,11 @@ public class DatabaseLoginRegister {
         return false;
     }
 
+    /**
+     * Generates the string password to Hash.
+     * @param passWord
+     * @return 
+     */
     private String makeHashPwd(String passWord) {
         String localPwd;
         try {
