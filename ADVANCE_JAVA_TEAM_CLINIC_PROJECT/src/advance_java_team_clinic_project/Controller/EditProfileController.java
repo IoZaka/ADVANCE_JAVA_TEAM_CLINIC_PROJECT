@@ -233,11 +233,11 @@ public class EditProfileController extends NewStage implements Initializable {
         ak.getObject();
         rs = ak.fetchBasicInfoData(user.getId());
         
-        while(rs.next()){
-            for(int i=1;i<rs.getMetaData().getColumnCount();i++){
-               
-            }
-        }
+//        while(rs.next()){
+//            for(int i=1;i<rs.getMetaData().getColumnCount();i++){
+//               
+//            }
+//        }
         
         if (rs.next()) {
             usernamebtn.setText(rs.getString("username"));

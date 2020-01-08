@@ -99,9 +99,9 @@ public class LoginViewController extends NewStage implements Initializable {
                 User user = User.getInstance();
                 System.out.println(user.getRoleID());
                 if(user.getRoleID() == 4){
-                    setNewStage("../View/AdminDashboard.fxml", currentStage);
+                    setNewStage("../View/PatientsDashboard.fxml", currentStage);
                 }else if(user.getRoleID() == 3){
-                    setNewStage("../View/AdminDashboard.fxml", currentStage);
+                    setNewStage("../View/PatientsDashboard.fxml", currentStage);
                 }
             }
         } catch (SQLException ex) {
