@@ -225,16 +225,19 @@ public class EditProfileController extends NewStage implements Initializable {
         });
 
     }
-
+    /**
+     * Returns the user's data from the database and shows it on the screen.
+     * @throws SQLException 
+     */
     private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchBasicInfoData(user.getId());
         
-//        while(rs.next()){
-//            for(int i=1;i<rs.getMetaData().getColumnCount();i++){
-//               
-//            }
-//        }
+        while(rs.next()){
+            for(int i=1;i<rs.getMetaData().getColumnCount();i++){
+               
+            }
+        }
         
         if (rs.next()) {
             if(rs.getString("username") != null){
@@ -243,44 +246,48 @@ public class EditProfileController extends NewStage implements Initializable {
                 usernamebtn.setText(rs.getString("den iparxei username"));
             }
             
-//            name.setText(rs.getString("firstname"));
-//            surname.setText(rs.getString("surname"));
-//            /*insurancebtn.setText(String.valueOf(rs.getInt("insurance_id")));*/
-//            code.setText(rs.getString("global_code"));
-//            amka.setText(rs.getString("amka"));
-//            ama.setText(rs.getString("ama"));
-//            fathersName.setText(rs.getString("fathers_name"));
-//            mothersName.setText(rs.getString("mothers_name"));
-//            dateOfBirth.setValue(LOCAL_DATE(rs.getString("date_of_birth")));
-//            dateOfBirth.setPromptText("dd-MM-yyyy");
-//            System.out.println("auto mou epistrefei i vasi:" + rs.getString("date_of_birth"));
-//            System.out.println("auto mou epistrefei i function:" + LOCAL_DATE(rs.getString("date_of_birth")));
-//            profession.setText(rs.getString("profession"));
+            name.setText(rs.getString("firstname"));
+            surname.setText(rs.getString("surname"));
+            /*insurancebtn.setText(String.valueOf(rs.getInt("insurance_id")));*/
+            code.setText(rs.getString("global_code"));
+            amka.setText(rs.getString("amka"));
+            ama.setText(rs.getString("ama"));
+            fathersName.setText(rs.getString("fathers_name"));
+            mothersName.setText(rs.getString("mothers_name"));
+            dateOfBirth.setValue(LOCAL_DATE(rs.getString("date_of_birth")));
+            dateOfBirth.setPromptText("dd-MM-yyyy");
+            System.out.println("auto mou epistrefei i vasi:" + rs.getString("date_of_birth"));
+            System.out.println("auto mou epistrefei i function:" + LOCAL_DATE(rs.getString("date_of_birth")));
+            profession.setText(rs.getString("profession"));
                 genderId = rs.getInt("gender_id");
                 if(genderId==null){
                     genderId = 0;
                 }
-//            ecoStatusId = rs.getInt("eco_status_id");
-//            nationalityId = rs.getInt("nationality_id");
-//            roleId = rs.getInt("role_id");
-//            placeOfBirth.setText(rs.getString("place_of_birth"));
+            ecoStatusId = rs.getInt("eco_status_id");
+            nationalityId = rs.getInt("nationality_id");
+            roleId = rs.getInt("role_id");
+            placeOfBirth.setText(rs.getString("place_of_birth"));
             setComboValues();
-//            setComboEventListeners();
+            setComboEventListeners();
         }
     }
 
+    /**
+     * Returns the ComboBox Values from the database
+     * @throws SQLException 
+     */
     private void setComboValues() throws SQLException {
         ed.getObject();
 
-//        customCombo = ed.FetchData("PM_ROLES");
-//        comboRole.setItems(FXCollections.observableArrayList(customCombo));
-//        InitiateComboList(roleId, comboRole);
-//        customCombo = ed.FetchData("PM_NATIONALITIES");
-//        comboNationality.setItems(FXCollections.observableArrayList(customCombo));
-//        InitiateComboList(nationalityId, comboNationality);
-//        customCombo = ed.FetchData("PM_ECO_STATUS");
-//        comboEcoStatus.setItems(FXCollections.observableArrayList(customCombo));
-//        InitiateComboList(ecoStatusId, comboEcoStatus);
+        customCombo = ed.FetchData("PM_ROLES");
+        comboRole.setItems(FXCollections.observableArrayList(customCombo));
+        InitiateComboList(roleId, comboRole);
+        customCombo = ed.FetchData("PM_NATIONALITIES");
+        comboNationality.setItems(FXCollections.observableArrayList(customCombo));
+        InitiateComboList(nationalityId, comboNationality);
+        customCombo = ed.FetchData("PM_ECO_STATUS");
+        comboEcoStatus.setItems(FXCollections.observableArrayList(customCombo));
+        InitiateComboList(ecoStatusId, comboEcoStatus);
         customCombo = ed.FetchData("PM_GENDERS");
         comboGender.setItems(FXCollections.observableArrayList(customCombo));
         InitiateComboList(genderId, comboGender);
@@ -298,6 +305,9 @@ public class EditProfileController extends NewStage implements Initializable {
         return localDate;
     }
 
+    /**
+     * Set the ComboBox Event Listeners
+     */
     private void setComboEventListeners() {
         comboRole.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
@@ -323,8 +333,5 @@ public class EditProfileController extends NewStage implements Initializable {
                 genderId = coGender.getId();
             }
         });
-    }
-
-    private void handleEditAction(ActionEvent event) throws IOException, SQLException {
     }
 }

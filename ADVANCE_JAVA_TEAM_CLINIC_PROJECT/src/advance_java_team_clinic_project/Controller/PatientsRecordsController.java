@@ -118,6 +118,12 @@ public class PatientsRecordsController implements Initializable{
         }   
     }  
     
+    /**
+     * 
+     * @param rs
+     * @return
+     * @throws SQLException 
+     */
     private ArrayList databaseRecords(ResultSet rs) throws SQLException {
         ArrayList<Records> data = new ArrayList();
         
