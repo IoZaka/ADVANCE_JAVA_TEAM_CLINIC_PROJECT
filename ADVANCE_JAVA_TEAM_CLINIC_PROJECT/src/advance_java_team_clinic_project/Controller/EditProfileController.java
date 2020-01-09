@@ -232,13 +232,7 @@ public class EditProfileController extends NewStage implements Initializable {
     private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchBasicInfoData(user.getId());
-        
-//        while(rs.next()){
-//            for(int i=1;i<rs.getMetaData().getColumnCount();i++){
-//               
-//            }
-//        }
-        
+             
         if (rs.next()) {
             usernamebtn.setText(rs.getString("username"));
             name.setText(rs.getString("firstname"));

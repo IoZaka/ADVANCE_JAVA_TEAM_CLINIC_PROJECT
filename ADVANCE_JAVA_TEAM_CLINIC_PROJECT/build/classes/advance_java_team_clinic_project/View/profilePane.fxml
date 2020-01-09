@@ -41,27 +41,17 @@
             </Text>
             <Pane prefHeight="475.0" prefWidth="780.0" styleClass="profileInfo" stylesheets="@style.css" GridPane.rowIndex="1">
                <children>
-                  <Text layoutX="25.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" wrappingWidth="112.98307228088379">
+                  <Text fx:id="firstNameText" layoutX="25.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" wrappingWidth="599.9830722808838">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <Text layoutX="25.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" wrappingWidth="112.98307228088379">
+                  <Text fx:id="lastNameText" layoutX="25.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" wrappingWidth="599.9830722808838">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <Text layoutX="25.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="112.98307228088379">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="25.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" wrappingWidth="112.98307228088379">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="25.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" wrappingWidth="127.98307228088379">
+                  <Text fx:id="usernameText" layoutX="25.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="599.9830722808838">
                      <font>
                         <Font size="17.0" />
                      </font>
