@@ -21,7 +21,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -123,39 +122,33 @@ public class EditProfileController extends NewStage implements Initializable {
             }
         });
         
-        passwordbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkPasswordWindow.fxml"));
-                        Stage checkPassword = new Stage();
-                        Scene scene = new Scene(root);
-                        checkPassword.setTitle("Enter New Password");
-                        checkPassword.setScene(scene);
-                        checkPassword.setResizable(false);
-                        checkPassword.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+        passwordbtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("../View/checkPasswordWindow.fxml"));
+                Stage checkPassword = new Stage();
+                Scene scene = new Scene(root);
+                checkPassword.setTitle("Enter New Password");
+                checkPassword.setScene(scene);
+                checkPassword.setResizable(false);
+                checkPassword.show();
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         
-        cancelBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    try {
-                        Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
-                        if(roleId == 1){
-                            setNewStage("../View/AdminDashboard.fxml", currentStage);
-                        }else if(roleId == 2){
-                            setNewStage("../View/doctorsDashboard.fxml", currentStage);
-                        }else{
-                            setNewStage("../View/patientsDashboard.fxml", currentStage);
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+        cancelBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
+                if(roleId == 1){
+                    setNewStage("../View/AdminDashboard.fxml", currentStage);
+                }else if(roleId == 2){
+                    setNewStage("../View/doctorsDashboard.fxml", currentStage);
+                }else{
+                    setNewStage("../View/patientsDashboard.fxml", currentStage);
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         submitBtn.setOnMouseClicked((MouseEvent event) -> {
@@ -264,6 +257,7 @@ public class EditProfileController extends NewStage implements Initializable {
         customCombo = ed.FetchData("PM_ROLES");
         comboRole.setItems(FXCollections.observableArrayList(customCombo));
         InitiateComboList(roleId, comboRole);
+        comboRole.setDisable(true);
         customCombo = ed.FetchData("PM_NATIONALITIES");
         comboNationality.setItems(FXCollections.observableArrayList(customCombo));
         InitiateComboList(nationalityId, comboNationality);
