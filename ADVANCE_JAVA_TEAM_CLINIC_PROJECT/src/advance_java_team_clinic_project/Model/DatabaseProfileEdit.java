@@ -31,6 +31,11 @@ public class DatabaseProfileEdit {
         object = DatabaseConnection.getInstance();
     }
 
+    /**
+     * @param tableName
+     * @return
+     * @throws SQLException 
+     */
     public ObservableList<CustomCombo> FetchData(String tableName) throws SQLException {
         ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
         stmt = object.connection.createStatement();

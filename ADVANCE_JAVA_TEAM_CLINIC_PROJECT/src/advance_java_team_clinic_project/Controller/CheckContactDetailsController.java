@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 /**
@@ -21,13 +22,13 @@ public class CheckContactDetailsController implements Initializable {
     @FXML
     private Button submitBtn;
     @FXML
-    private TextField address;
+    private TextField email;
     @FXML
-    private TextField city;
+    private TextField relativeTelephoneNumber;
     @FXML
-    private TextField county;
+    private TextField telephoneNumber;
     @FXML
-    private TextField postalCode;
+    private TextField cellphoneNumber;
 
     /**
      * Initializes the controller class.

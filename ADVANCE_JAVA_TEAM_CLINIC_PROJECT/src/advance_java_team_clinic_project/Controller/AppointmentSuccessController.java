@@ -27,5 +27,7 @@ public class AppointmentSuccessController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}    
+    public void initialize(URL url, ResourceBundle rb) {
+    
+    }    
 }

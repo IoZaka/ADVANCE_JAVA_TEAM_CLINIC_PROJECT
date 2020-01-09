@@ -80,7 +80,6 @@ public class CheckUsernameController implements Initializable {
             ak.updateUsername(user.getId(), newUsernameInput.getText());
         });
     }
-
     public EventHandler<KeyEvent> usernameValidation(final String username) {
         return (KeyEvent e) -> {
             TextField txt_TextField = (TextField) e.getSource();

@@ -26,6 +26,12 @@ public class DatabaseProfileDetails {
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
     } 
+    /**
+     * Returns userID's information from data.
+     * @param userId
+     * @return
+     * @throws SQLException 
+     */
     public ResultSet fetchBasicInfoData(Integer userId) throws SQLException {
         stmt = object.connection.createStatement();
         sql = "select a.id, "
@@ -53,14 +59,35 @@ public class DatabaseProfileDetails {
         rs = stmt.executeQuery(sql);
         return rs;
     }
-    
+    /**
+     * Returns all the users from the database.
+     * @return
+     * @throws SQLException 
+     */
     public ResultSet fetchAllUsernames() throws SQLException{
         stmt = object.connection.createStatement();
         sql = "select username from pm_users";
         rs = stmt.executeQuery(sql);
         return rs;
     }
-    
+    /**
+     * Updates information from the database.
+     * @param userId
+     * @param lRole_Id
+     * @param lSurname
+     * @param lName
+     * @param lAmka
+     * @param lAma
+     * @param lDate_of_birth
+     * @param lFathers_name
+     * @param lMothers_name
+     * @param lGender_id
+     * @param lEco_status_id
+     * @param lNationality_id
+     * @param lProffesion
+     * @param lPlace_of_birth
+     * @throws SQLException 
+     */
     public void updateBasicInfoData(Integer userId,Integer lRole_Id, String lSurname, String lName, String lAmka, String lAma, String lDate_of_birth, String lFathers_name, String lMothers_name, 
             Integer lGender_id, Integer lEco_status_id, Integer lNationality_id, String lProffesion, String lPlace_of_birth/*, Integer lMember_id*/) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -87,6 +114,11 @@ public class DatabaseProfileDetails {
         alert.showAndWait();
     }
     
+    /**
+     * Update userID's username.
+     * @param userId
+     * @param userName 
+     */
     public void updateUsername (Integer userId, String userName){
         try {
             stmt = object.connection.createStatement();

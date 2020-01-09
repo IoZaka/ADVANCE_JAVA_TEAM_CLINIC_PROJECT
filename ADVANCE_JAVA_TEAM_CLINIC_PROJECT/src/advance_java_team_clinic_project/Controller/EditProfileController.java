@@ -225,7 +225,10 @@ public class EditProfileController extends NewStage implements Initializable {
         });
 
     }
-
+    /**
+     * Returns the user's data from the database and shows it on the screen.
+     * @throws SQLException 
+     */
     private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchBasicInfoData(user.getId());
@@ -282,7 +285,6 @@ public class EditProfileController extends NewStage implements Initializable {
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;
     }
-
     private void setComboEventListeners() {
         comboRole.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
@@ -310,6 +312,4 @@ public class EditProfileController extends NewStage implements Initializable {
         });
     }
 
-    private void handleEditAction(ActionEvent event) throws IOException, SQLException {
-    }
 }

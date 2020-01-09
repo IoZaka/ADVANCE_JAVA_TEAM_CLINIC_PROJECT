@@ -11,7 +11,7 @@ public class User {
     private String username;
     private String firstName;
     private String surname;
-    private int ruleID;
+    private int ruleID;    
     public int getRuleID() {
         return ruleID;
     }
