@@ -66,6 +66,7 @@ public class CheckInsuranceDetailsController implements Initializable {
         });
     }    
     
+    
        private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchInsuranceInfoData(user.getId());
