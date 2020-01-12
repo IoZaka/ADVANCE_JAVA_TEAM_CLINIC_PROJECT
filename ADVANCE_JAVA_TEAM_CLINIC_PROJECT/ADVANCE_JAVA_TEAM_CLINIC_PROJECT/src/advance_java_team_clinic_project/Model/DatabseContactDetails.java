@@ -28,11 +28,11 @@ private Statement stmt;
     
     /**
      * Returns userID's information from data.
-     * @param userId
+     * @param contact_id
      * @return
      * @throws SQLException 
      */
-    public ResultSet fetchContactInfoData(Integer userId) throws SQLException {
+    public ResultSet fetchContactInfoData(Integer contact_id) throws SQLException {
         stmt = object.connection.createStatement();
         sql = "select id, "
                     + "tel_number,"
@@ -40,17 +40,17 @@ private Statement stmt;
                     + "email, "
                     + "relative_tel_number "
                 + "from pm_contact_details "
-                + "where id = " + userId;
+                + "where id = " + contact_id;
         rs = stmt.executeQuery(sql);
         return rs;
     }
     
-    public void updateContactDetails(Integer userId,String tel_number,String cel_number, String email, String relative_tel_number) throws SQLException {
+    public void updateContactDetails(Integer contact_id,Integer tel_number,Integer cel_number, String email, Integer relative_tel_number) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
-        sql_contact = "update pm_contact_details set tel_number=" + tel_number + ",cel_number=\'" + cel_number + "\',email=\'" + email + "\',relative_tel_number=\'" + relative_tel_number + "\' where id =" + userId;
+        sql_contact = "update pm_contact_details set tel_number=" + tel_number + ",cel_number=" + cel_number + ",email=\'" + email + "\',relative_tel_number=" + relative_tel_number + " where id =" + contact_id;
         rs = stmt.executeQuery(sql_contact);
         alert.setTitle("Update");
         alert.setContentText("Update submitted");
