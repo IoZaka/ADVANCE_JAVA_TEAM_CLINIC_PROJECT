@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Model;
 
-public class User {
+abstract public class User {
 
     private int id;
     private String username;
@@ -68,7 +68,7 @@ public class User {
     public static User getInstance() 
     { 
         if (instance == null) 
-            instance = new User(); 
+            instance = new User() {}; 
   
         return instance; 
     } 

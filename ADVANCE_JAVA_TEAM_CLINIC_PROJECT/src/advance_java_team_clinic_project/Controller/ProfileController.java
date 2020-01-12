@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 /**
@@ -26,6 +27,8 @@ public class ProfileController implements Initializable {
     private Text lastNameText;
     @FXML
     private Text usernameText;
+    @FXML
+    private AnchorPane profilePane;
     /**
      * Initializes the controller class.
      */
