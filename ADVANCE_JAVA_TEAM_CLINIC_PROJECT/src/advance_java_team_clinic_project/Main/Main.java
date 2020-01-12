@@ -7,6 +7,7 @@ package advance_java_team_clinic_project.Main;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+
 import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -29,8 +30,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //JavaFx Run
         Parent root = FXMLLoader.load(getClass().getResource("../View/loginStyleFX.fxml"));
-
-        
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setWidth(1000);

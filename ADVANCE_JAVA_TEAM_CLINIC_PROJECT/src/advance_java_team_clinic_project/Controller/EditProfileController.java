@@ -232,7 +232,6 @@ public class EditProfileController extends NewStage implements Initializable {
     private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchBasicInfoData(user.getId());
-             
         if (rs.next()) {
             usernamebtn.setText(rs.getString("username"));
             name.setText(rs.getString("firstname"));
@@ -258,10 +257,6 @@ public class EditProfileController extends NewStage implements Initializable {
         }
     }
 
-    /**
-     * Returns the ComboBox Values from the database
-     * @throws SQLException 
-     */
     private void setComboValues() throws SQLException {
         ed.getObject();
 
@@ -290,10 +285,6 @@ public class EditProfileController extends NewStage implements Initializable {
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;
     }
-
-    /**
-     * Set the ComboBox Event Listeners
-     */
     private void setComboEventListeners() {
         comboRole.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
@@ -320,4 +311,5 @@ public class EditProfileController extends NewStage implements Initializable {
             }
         });
     }
+
 }

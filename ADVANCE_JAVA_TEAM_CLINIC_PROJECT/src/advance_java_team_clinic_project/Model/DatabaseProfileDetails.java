@@ -26,7 +26,6 @@ public class DatabaseProfileDetails {
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
     } 
-    
     /**
      * Returns userID's information from data.
      * @param userId
@@ -60,7 +59,6 @@ public class DatabaseProfileDetails {
         rs = stmt.executeQuery(sql);
         return rs;
     }
-    
     /**
      * Returns all the users from the database.
      * @return
@@ -72,7 +70,6 @@ public class DatabaseProfileDetails {
         rs = stmt.executeQuery(sql);
         return rs;
     }
-    
     /**
      * Updates information from the database.
      * @param userId

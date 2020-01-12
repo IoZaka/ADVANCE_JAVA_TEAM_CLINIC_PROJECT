@@ -20,8 +20,6 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -134,6 +132,7 @@ public class PatientsRecordsController implements Initializable{
             
            
       
+
         } catch (SQLException ex) {
             Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
         }   

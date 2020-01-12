@@ -28,7 +28,6 @@ public class DatabaseLoginRegister {
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
     }
-
     /**
      * Returns true/false if the login information is correct or not.
      * @param userName
@@ -101,7 +100,6 @@ public class DatabaseLoginRegister {
         }
         return false;
     }
-
     /**
      * Generates the string password to Hash.
      * @param passWord

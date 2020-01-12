@@ -30,7 +30,6 @@ public class CheckContactDetailsController implements Initializable {
     @FXML
     private TextField cellphoneNumber;
 
-
     /**
      * Initializes the controller class.
      */
