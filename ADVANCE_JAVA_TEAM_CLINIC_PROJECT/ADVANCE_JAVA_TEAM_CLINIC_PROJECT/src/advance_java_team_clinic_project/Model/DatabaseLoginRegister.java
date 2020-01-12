@@ -43,7 +43,7 @@ public class DatabaseLoginRegister {
         /* End of Alert Initialiization*/
         stmt = object.connection.createStatement();
         hashPwd = makeHashPwd(passWord);
-        sql = "select id, password, role_id, firstname as firstname, surname, username from pm_users where username = '" + userName + "'";
+        sql = "select id, password, role_id, firstname as firstname, surname, username, address_id, contact_id from pm_users where username = '" + userName + "'";
         rs = stmt.executeQuery(sql);
 
         if (rs.next()) {
@@ -54,6 +54,8 @@ public class DatabaseLoginRegister {
                 user.setFirstName(rs.getString("firstname"));
                 user.setSurname(rs.getString("surname"));
                 user.setUsername(rs.getString("username"));
+                user.setAddressID(rs.getInt("address_id"));
+                user.setContactID(rs.getInt("contact_id"));
                 return true;
             } else if (password != passWord) {
                 alert.setTitle("Incorrect Password");

@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,12 +56,12 @@ public class CheckAddressDetailsController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(CheckAddressDetailsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        addTextLimiter(postalCode);
         submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {           
             try {
-                ak.updateAddressDetails(user.getId(), address.getText(), city.getText(), county.getText(), postalCode.getText());
+                ak.updateAddressDetails(user.getAddressID(), address.getText(), city.getText(), county.getText(),Integer.parseInt(postalCode.getText()));
             } catch (SQLException ex) {
                 Logger.getLogger(CheckContactDetailsController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -70,15 +72,26 @@ public class CheckAddressDetailsController implements Initializable {
 
    private void setData() throws SQLException {
         ak.getObject();
-        rs = ak.fetchAddressInfoData(user.getId());
+        rs = ak.fetchAddressInfoData(user.getAddressID());
         if (rs.next()) {
             address.setText(rs.getString("address"));
             city.setText(rs.getString("city"));
             county.setText(rs.getString("county"));
-            postalCode.setText(rs.getString("postal_code"));  
+            postalCode.setText(String.valueOf(rs.getInt("postal_code")));  
         } 
   }
    
+   public static void addTextLimiter(final TextField tf) {
+    tf.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+            if (tf.getText().length() > 5) {
+                String s = tf.getText().substring(0, 5);
+                tf.setText(s);
+            }
+        }
+    });
+}
    
    
    

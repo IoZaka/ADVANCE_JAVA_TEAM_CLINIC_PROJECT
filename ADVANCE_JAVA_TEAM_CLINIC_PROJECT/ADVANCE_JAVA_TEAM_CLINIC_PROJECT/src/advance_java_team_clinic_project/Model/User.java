@@ -11,7 +11,26 @@ public class User {
     private String username;
     private String firstName;
     private String surname;
-    private int ruleID;    
+    private int ruleID;
+    private int addressID;   
+    private int contactID; 
+
+    public void setContactID(int contactID) {
+        this.contactID = contactID;
+    }
+
+    public int getContactID() {
+        return contactID;
+    }
+
+    public int getAddressID() {
+        return addressID;
+    }
+
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
+    }
+    
     public int getRuleID() {
         return ruleID;
     }
