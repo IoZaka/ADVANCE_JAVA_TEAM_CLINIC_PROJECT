@@ -66,6 +66,7 @@ public class CheckAddressDetailsController implements Initializable {
         }
         });
     }
+    
 
    private void setData() throws SQLException {
         ak.getObject();
