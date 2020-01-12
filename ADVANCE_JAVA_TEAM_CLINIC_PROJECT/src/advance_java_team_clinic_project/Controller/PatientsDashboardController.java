@@ -106,7 +106,7 @@ public class PatientsDashboardController extends NewStage implements Initializab
                         Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
-                    // ... user chose CANCEL or closed the dialog
+                    clearSelectedButtons();
                 }
         });
 
@@ -116,5 +116,6 @@ public class PatientsDashboardController extends NewStage implements Initializab
         recordsBtn.setSelected(false);
         editProfileBtn.setSelected(false);
         makeAnAppointment.setSelected(false);
+        logoutBtn.setSelected(false);
     }
 }

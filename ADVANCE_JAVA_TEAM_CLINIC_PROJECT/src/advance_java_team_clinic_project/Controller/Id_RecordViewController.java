@@ -7,17 +7,24 @@ package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
 import advance_java_team_clinic_project.Model.Records;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -39,6 +46,12 @@ public class Id_RecordViewController implements Initializable {
     private DatabaseLoginRecords  ak;
     private ResultSet rs;
     private Integer id;
+    @FXML
+    private Button backBtn;
+    @FXML
+    private Button diagnoseInfoBtn;
+    @FXML
+    private AnchorPane idRecordPane;
     
     /**
      * Initializes the controller class.
@@ -48,6 +61,36 @@ public class Id_RecordViewController implements Initializable {
         appDateInput.setDisable(true);
         appCodeInput.setDisable(true);
         createdInput.setDisable(true);
+        commentsTextArea.setDisable(true);
+        
+        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/patientsRecords.fxml"));
+                    Parent root = (Parent)loader.load();
+                    idRecordPane.getChildren().clear();
+                    idRecordPane.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        diagnoseInfoBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/patientsRecords.fxml"));
+                    Parent root = (Parent)loader.load();
+                    idRecordPane.getChildren().clear();
+                    idRecordPane.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
     }    
     
     public void setID(String id){

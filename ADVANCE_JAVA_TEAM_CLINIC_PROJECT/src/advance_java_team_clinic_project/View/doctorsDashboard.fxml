@@ -41,7 +41,7 @@
                   <Insets top="35.0" />
                </VBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="patientsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Patients">
+            <ToggleButton fx:id="appointmentsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Appointments">
                <VBox.margin>
                   <Insets top="35.0" />
                </VBox.margin>

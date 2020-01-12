@@ -91,7 +91,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
                         Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
-                    // ... user chose CANCEL or closed the dialog
+                    clearSelectedButtons();
                 }
         });
     }
@@ -104,5 +104,6 @@ public class AdminDashboardController extends NewStage implements Initializable 
         enterNewUserBtn.setSelected(false);
         searchUserBtn.setSelected(false);
         grantPermissionsBtn.setSelected(false);
+        logoutBtn.setSelected(false);
     }
 }

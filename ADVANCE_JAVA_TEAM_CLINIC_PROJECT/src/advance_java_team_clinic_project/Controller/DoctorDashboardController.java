@@ -41,13 +41,13 @@ public class DoctorDashboardController extends NewStage implements Initializable
     @FXML
     private ToggleButton editProfileBtn;
     @FXML
-    private ToggleButton patientsBtn;
-    @FXML
     private ToggleButton logoutBtn;
     @FXML
     private BorderPane doctorPane;
 
     User user = User.getInstance();
+    @FXML
+    private ToggleButton appointmentsBtn;
 
     /**
      * Initializes the controller class.
@@ -74,10 +74,10 @@ public class DoctorDashboardController extends NewStage implements Initializable
             editProfileBtn.setSelected(true);
         });
 
-        patientsBtn.setOnMouseClicked((MouseEvent event) -> {
-            loadUIonSamePane("../View/doctorsPatientsPane.fxml", doctorPane);
+        appointmentsBtn.setOnMouseClicked((MouseEvent event) -> {
+            loadUIonSamePane("../View/patientsRecords.fxml", doctorPane);
             clearSelectedButtons();
-            patientsBtn.setSelected(true);
+            appointmentsBtn.setSelected(true);
         });
 
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {
@@ -105,7 +105,7 @@ public class DoctorDashboardController extends NewStage implements Initializable
     private void clearSelectedButtons() {
         profileBtn.setSelected(false);
         editProfileBtn.setSelected(false);
-        patientsBtn.setSelected(false);
+        appointmentsBtn.setSelected(false);
     }
 
 }

@@ -7,6 +7,7 @@ package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
 import advance_java_team_clinic_project.Model.Records;
+import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -28,6 +29,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -36,7 +39,7 @@ import javafx.util.Callback;
  *
  * @author Tasos
  */
-public class PatientsRecordsController implements Initializable{
+public class PatientsRecordsController extends NewStage implements Initializable{
     
 
     
@@ -55,10 +58,16 @@ public class PatientsRecordsController implements Initializable{
     TableColumn doctorCol = new TableColumn("DOCTOR");
     TableColumn updatedByCol = new TableColumn("UPDATED BY");
     TableColumn createdByCol = new TableColumn("CREATED BY");
-    
+    @FXML
+    private Text textHead;
+    User user = User.getInstance();
+    @FXML
+    private AnchorPane recordsPane;
  
     public void initialize(URL location, ResourceBundle resources) {
        
+       
+        
        idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
        appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
        commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
@@ -89,16 +98,12 @@ public class PatientsRecordsController implements Initializable{
                                 try {                               
                                     FXMLLoader loader = new FXMLLoader(PatientsRecordsController.this.getClass().getResource("../View/id_RecordView.fxml"));
                                     Parent root = (Parent)loader.load();
-                                    Stage recordStage = new Stage();
                                     Id_RecordViewController id = loader.getController();
                                     String getID = btn.getText().substring(4);
                                     id.setID(getID);
                                     //Scene
-                                    Scene scene = new Scene(root);
-                                    recordStage.setTitle("ID RECORD");
-                                    recordStage.setScene(scene);
-                                    recordStage.setResizable(false);
-                                    recordStage.show();
+                                    recordsPane.getChildren().clear();
+                                    recordsPane.getChildren().add(root);
                                 } catch (IOException ex) {
                                     Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -110,6 +115,13 @@ public class PatientsRecordsController implements Initializable{
                 return cell;
            }
        };
+       switch(user.getRoleID()){
+           case 2:
+               textHead.setText("YOUR APPOINTMENTS");
+               break;
+           case 3:
+               textHead.setText("YOUR RECORDS");
+       } 
             
         try {
             ak = new DatabaseLoginRecords();
