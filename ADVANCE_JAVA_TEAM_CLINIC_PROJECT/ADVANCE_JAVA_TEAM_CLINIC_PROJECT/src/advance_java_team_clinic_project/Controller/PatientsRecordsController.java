@@ -87,7 +87,6 @@ public class PatientsRecordsController implements Initializable{
                             data = getTableView().getItems().get(getIndex());
                             btn.setText(data.idProperty().getValue());
                             btn.setOnAction((ActionEvent event) -> { 
-                           
                             }); 
                             setGraphic(btn);
                         }
