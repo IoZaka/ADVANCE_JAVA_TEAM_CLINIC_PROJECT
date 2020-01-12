@@ -5,13 +5,32 @@
  */
 package advance_java_team_clinic_project.Model;
 
-abstract public class User {
+public class User {
 
     private int id;
     private String username;
     private String firstName;
     private String surname;
-    private int ruleID;    
+    private int ruleID;
+    private int addressID;   
+    private int contactID; 
+
+    public void setContactID(int contactID) {
+        this.contactID = contactID;
+    }
+
+    public int getContactID() {
+        return contactID;
+    }
+
+    public int getAddressID() {
+        return addressID;
+    }
+
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
+    }
+    
     public int getRuleID() {
         return ruleID;
     }
@@ -68,7 +87,7 @@ abstract public class User {
     public static User getInstance() 
     { 
         if (instance == null) 
-            instance = new User() {}; 
+            instance = new User(); 
   
         return instance; 
     } 

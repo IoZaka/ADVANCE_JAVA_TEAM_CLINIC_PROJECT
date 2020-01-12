@@ -54,7 +54,6 @@ public class LoginViewController extends NewStage implements Initializable {
     
     
 
-
     /**
      * Initializes the controller class.
      *
@@ -79,7 +78,6 @@ public class LoginViewController extends NewStage implements Initializable {
             }
         });
     }
-
 
     /**
      * Function that triggers when the user presses the login button.
@@ -110,7 +108,6 @@ public class LoginViewController extends NewStage implements Initializable {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     
     /**
      * Function that triggers when the user presses the register button.
@@ -118,7 +115,6 @@ public class LoginViewController extends NewStage implements Initializable {
      * @param event
      * @throws IOException 
      */
-
     @SuppressWarnings("empty-statement")
     private void handleRegisterAction(ActionEvent event) throws IOException {
         Stage currentStage = (Stage) loginPane.getScene().getWindow();;

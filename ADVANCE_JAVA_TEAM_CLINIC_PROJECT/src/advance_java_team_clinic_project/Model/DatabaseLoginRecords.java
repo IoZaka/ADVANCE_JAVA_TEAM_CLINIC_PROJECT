@@ -26,6 +26,7 @@ public class DatabaseLoginRecords {
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
     }
+
     /**
      * Fetches Data from Database.
      * @return

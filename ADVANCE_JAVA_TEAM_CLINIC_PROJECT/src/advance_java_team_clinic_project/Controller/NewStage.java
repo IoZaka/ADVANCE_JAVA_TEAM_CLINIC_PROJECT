@@ -29,7 +29,6 @@ public abstract class NewStage {
         currentStage.setScene(scene);
     }
     
-
     /**
      * Load a pane on a specific JavaFX scene.
      * @param path

@@ -26,6 +26,7 @@ public class DatabaseProfileDetails {
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
     } 
+    
     /**
      * Returns userID's information from data.
      * @param userId
@@ -59,6 +60,7 @@ public class DatabaseProfileDetails {
         rs = stmt.executeQuery(sql);
         return rs;
     }
+    
     /**
      * Returns all the users from the database.
      * @return
@@ -70,6 +72,7 @@ public class DatabaseProfileDetails {
         rs = stmt.executeQuery(sql);
         return rs;
     }
+    
     /**
      * Updates information from the database.
      * @param userId
@@ -128,17 +131,5 @@ public class DatabaseProfileDetails {
             Logger.getLogger(DatabaseProfileDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public ResultSet getPassword(Integer userId){
-        try {
-            stmt = object.connection.createStatement();
-            sql = "select password from pm_users where id = '" + userId + "'";
-            rs = stmt.executeQuery(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseProfileDetails.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return rs;
-    }
-    
 }
 
