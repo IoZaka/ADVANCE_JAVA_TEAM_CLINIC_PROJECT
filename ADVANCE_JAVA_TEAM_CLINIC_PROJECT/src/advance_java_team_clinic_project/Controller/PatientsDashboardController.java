@@ -8,18 +8,30 @@ package advance_java_team_clinic_project.Controller;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -73,14 +85,29 @@ public class PatientsDashboardController extends NewStage implements Initializab
             clearSelectedButtons();
             makeAnAppointment.setSelected(true);
         });
-
+        
+        
+        
+        
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {
-            Stage currentStage = (Stage) patientPane.getScene().getWindow();
-            try {
-                setNewStage("../View/loginStyleFX.fxml", currentStage);
-            } catch (IOException ex) {
-                Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          Stage currentStage = (Stage) patientPane.getScene().getWindow();
+
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("");
+                alert.setHeaderText("Do you want to Logout?");
+                //alert.setContentText("");
+                alert.initStyle(StageStyle.UTILITY);
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    try {
+                        setNewStage("../View/loginStyleFX.fxml", currentStage);
+                    } catch (IOException ex) {
+                        Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    // ... user chose CANCEL or closed the dialog
+                }
         });
 
     }

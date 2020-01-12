@@ -50,10 +50,9 @@ public class PatientsRecordsController implements Initializable{
     @FXML
     private TableView<Records> recordsTable = new TableView<>();    
       
-    TableColumn idCol = new TableColumn("id");
+    TableColumn idCol = new TableColumn("CODE");
     TableColumn appDateCol = new TableColumn("APP DATE");
     TableColumn commentsCol = new TableColumn("COMMENTS");
-    TableColumn appCodeCol = new TableColumn("APP CODE");
     TableColumn createdDateCol = new TableColumn("CREATED");
     TableColumn updatedDateCol = new TableColumn("UPDATED");
     TableColumn patientCol = new TableColumn("PATIENT");
@@ -64,10 +63,9 @@ public class PatientsRecordsController implements Initializable{
  
     public void initialize(URL location, ResourceBundle resources) {
        
-       idCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+       idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
        appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
        commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
-       appCodeCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
        createdDateCol.setCellValueFactory(new PropertyValueFactory<>("created"));
        updatedDateCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
        patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
@@ -79,10 +77,8 @@ public class PatientsRecordsController implements Initializable{
        Callback<TableColumn<Records, Void>, TableCell<Records, Void>>  cellFactory = new Callback<TableColumn<Records,Void>, TableCell<Records,Void>>(){
            @Override
            public TableCell<Records, Void> call(TableColumn<Records, Void> param) {
-               final TableCell<Records, Void> cell = new TableCell<Records, Void>() {
-
-                    private final Button btn = new Button();
-
+             TableCell<Records, Void> cell = new TableCell<Records, Void>() {
+                    private Button btn = new Button();
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
@@ -92,13 +88,16 @@ public class PatientsRecordsController implements Initializable{
                             Records data = new Records();
                             data = getTableView().getItems().get(getIndex());
                             btn.setText(data.idProperty().getValue());
-                            btn.setOnMouseClicked((MouseEvent event) -> {
+                            btn.setOnMouseClicked((MouseEvent event) -> { 
+                            
                                 try {                               
                                     FXMLLoader loader = new FXMLLoader(PatientsRecordsController.this.getClass().getResource("../View/id_RecordView.fxml"));
                                     Parent root = (Parent)loader.load();
                                     Stage recordStage = new Stage();
                                     Id_RecordViewController id = loader.getController();
-                                    id.setLabelText(btn.getText());
+                                    String getID = btn.getText().substring(4);
+                                    id.setID(getID);
+                                    //Scene
                                     Scene scene = new Scene(root);
                                     recordStage.setTitle("ID RECORD");
                                     recordStage.setScene(scene);
@@ -124,10 +123,10 @@ public class PatientsRecordsController implements Initializable{
            
             idCol.setCellFactory(cellFactory);
             recordsTable.getColumns().add(idCol);
-            recordsTable.getColumns().addAll(appDateCol,commentsCol,appCodeCol,
+            recordsTable.getColumns().addAll(appDateCol,commentsCol,
                     createdDateCol,updatedDateCol,patientCol,doctorCol,updatedByCol,createdByCol);
-            recordsTable.setItems(data);
-
+            recordsTable.setItems(data);        
+            
         } catch (SQLException ex) {
             Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
         }   
@@ -144,10 +143,9 @@ public class PatientsRecordsController implements Initializable{
         
         while(rs.next()){
             Records record = new Records();
-            record.idProperty().set(rs.getString("id"));
+            record.idProperty().set(rs.getString("app_code"));
             record.app_dateProperty().set(rs.getString("app_date"));
             record.commentsProperty().set(rs.getString("comments"));
-            record.app_codeProperty().set(rs.getString("app_code"));
             record.createdProperty().set(rs.getString("created"));
             record.updatedProperty().set(rs.getString("updated"));
             record.patientProperty().set(rs.getString("patient"));

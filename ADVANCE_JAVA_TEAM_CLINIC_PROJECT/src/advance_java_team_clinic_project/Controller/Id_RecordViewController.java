@@ -6,6 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
+import advance_java_team_clinic_project.Model.Records;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,15 +28,11 @@ public class Id_RecordViewController implements Initializable {
 
     
     @FXML
-    private Label recordID;
-    @FXML
     private TextField appDateInput;
     @FXML
     private TextField appCodeInput;
     @FXML
     private TextField createdInput;
-    @FXML
-    private TextField doctorInput;
     @FXML
     private TextArea commentsTextArea;
 
@@ -51,26 +48,23 @@ public class Id_RecordViewController implements Initializable {
         appDateInput.setDisable(true);
         appCodeInput.setDisable(true);
         createdInput.setDisable(true);
-        doctorInput.setDisable(true);
-        commentsTextArea.setDisable(true);
-        
-        
-//        try {
-//            ak = new DatabaseLoginRecords();
-//            ak.getObject();
-//            System.out.println(id);
-//            rs = ak.fetchBasicInfoData(id);
-//            if(rs.next()){
-//                System.out.println(rs.getString("app_date"));
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-        
     }    
     
-    public void setLabelText(String id){
-        recordID.setText(id);
+    public void setID(String id){
+        this.id = Integer.valueOf(id);
+        try {
+            ak = new DatabaseLoginRecords();
+            ak.getObject();
+            rs = ak.fetchBasicInfoData(Integer.parseInt(id));
+            if(rs.next()){
+                appDateInput.setText(rs.getString("app_date"));
+                appCodeInput.setText(rs.getString("app_code"));
+                createdInput.setText(rs.getString("created"));
+                commentsTextArea.setText(rs.getString("comments"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
     }
 }

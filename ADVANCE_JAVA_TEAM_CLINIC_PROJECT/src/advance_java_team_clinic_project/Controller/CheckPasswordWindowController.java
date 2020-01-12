@@ -19,10 +19,14 @@ import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -47,6 +51,8 @@ public class CheckPasswordWindowController implements Initializable {
     private static final DatabaseProfileDetails ak = new DatabaseProfileDetails();
     private ResultSet rs;
     private DatabaseConnection object;
+    @FXML
+    private AnchorPane passwordPane;
     /**
      * Initializes the controller class.
      */
@@ -77,9 +83,25 @@ public class CheckPasswordWindowController implements Initializable {
                 String password = makeHashPwd(currentPassword.getText());
                 if(password.equals(hashPwd)){
                     String newPassword = makeHashPwd(passwordRepeatInput.getText());
-                    System.out.println(newPassword);
+                    String updateSql = "update pm_users set password = \'"+ newPassword +"\',updated_by = " + user.getId() +" where id = " + user.getId();
+                    try {
+                        rs = stmt.executeQuery(updateSql);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CheckPasswordWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Password successfully changed!");
+                    alert.showAndWait();
+                    Stage s = (Stage)passwordPane.getScene().getWindow();
+                    s.close();
                 }else{
-                    System.out.println("Wrong password");
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Wrong current password.");
+                    alert.showAndWait();
                 }
             }
         });

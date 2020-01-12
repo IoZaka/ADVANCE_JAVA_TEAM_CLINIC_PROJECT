@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -26,14 +25,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="recordID" opacity="0.0" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets left="50.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="APP DATE" GridPane.rowIndex="1">
                <font>
                   <Font size="16.0" />
@@ -47,7 +38,7 @@
                   <Insets left="20.0" top="10.0" />
                </GridPane.margin>
             </TextField>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="APP CODE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CODE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="60.0" left="70.0" />
                </GridPane.margin>
@@ -73,20 +64,7 @@
                   <Insets left="20.0" top="10.0" />
                </GridPane.margin>
             </TextField>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DOCTOR" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets bottom="60.0" left="70.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <TextField fx:id="doctorInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="20.0" top="10.0" />
-               </GridPane.margin>
-            </TextField>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="COMMENTS: " GridPane.rowIndex="3">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="COMMENTS: " GridPane.rowIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
@@ -94,7 +72,7 @@
                   <Insets left="70.0" />
                </GridPane.margin>
             </Text>
-            <TextArea fx:id="commentsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextArea fx:id="commentsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
