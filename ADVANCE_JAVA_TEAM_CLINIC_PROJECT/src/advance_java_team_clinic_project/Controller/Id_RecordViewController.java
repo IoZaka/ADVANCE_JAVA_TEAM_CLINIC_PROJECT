@@ -54,7 +54,7 @@ public class Id_RecordViewController implements Initializable {
         doctorInput.setDisable(true);
         commentsTextArea.setDisable(true);
         
-        System.out.println(recordID.getText());
+        
 //        try {
 //            ak = new DatabaseLoginRecords();
 //            ak.getObject();

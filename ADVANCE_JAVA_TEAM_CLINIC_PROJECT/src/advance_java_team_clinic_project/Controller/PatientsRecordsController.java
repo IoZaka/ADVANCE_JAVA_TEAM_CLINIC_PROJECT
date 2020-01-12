@@ -115,9 +115,7 @@ public class PatientsRecordsController implements Initializable{
                 return cell;
            }
        };
-       
-       
-        
+            
         try {
             ak = new DatabaseLoginRecords();
             ak.getObject();
@@ -129,9 +127,6 @@ public class PatientsRecordsController implements Initializable{
             recordsTable.getColumns().addAll(appDateCol,commentsCol,appCodeCol,
                     createdDateCol,updatedDateCol,patientCol,doctorCol,updatedByCol,createdByCol);
             recordsTable.setItems(data);
-            
-           
-      
 
         } catch (SQLException ex) {
             Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
