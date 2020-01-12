@@ -3,9 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/PatientsRecordsController.java</file>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseLoginRecords.java</file>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/Id_RecordViewController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/ContactDetails.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/EditProfileController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/Insurance_Details.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseProfileEdit.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseProfileDetails.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/CheckAddressDetailsController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/CheckPasswordWindowController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/CheckContactDetailsController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/DoctorsPatientsController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/AppointmentSuccessController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/CheckInsuranceDetailsController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/DoctorDashboardController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseLoginRegister.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/View/checkContactDetails.fxml</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseInsuranceDetails.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/LoginViewController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/View/checkAddressDetails.fxml</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabseContactDetails.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/PatientsRecordsController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/NewStage.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseLoginRecords.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/InsuranceCompanies.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseConnection.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseCheckAddressDetails.java</file>
         </group>
     </open-files>
 </project-private>

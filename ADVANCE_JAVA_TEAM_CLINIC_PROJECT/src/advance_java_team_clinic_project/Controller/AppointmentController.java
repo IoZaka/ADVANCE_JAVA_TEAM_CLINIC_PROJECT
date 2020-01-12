@@ -15,8 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -31,10 +29,6 @@ public class AppointmentController implements Initializable {
     private Button submitBtn;
     @FXML
     private Pane appointmentPane;
-    @FXML
-    private TextArea reasonText;
-    @FXML
-    private DatePicker desiredDate;
 
     /**
      * Initializes the controller class.

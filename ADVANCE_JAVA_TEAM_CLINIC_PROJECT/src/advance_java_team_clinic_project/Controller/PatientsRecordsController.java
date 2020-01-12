@@ -7,7 +7,6 @@ package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
 import advance_java_team_clinic_project.Model.Records;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,23 +15,19 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -48,8 +43,8 @@ public class PatientsRecordsController implements Initializable{
     private ResultSet rs;
     private ObservableList data;  
     @FXML
-    private TableView<Records> recordsTable = new TableView<>();    
-      
+    private TableView<Records> recordsTable = new TableView<>();
+    
     TableColumn idCol = new TableColumn("id");
     TableColumn appDateCol = new TableColumn("APP DATE");
     TableColumn commentsCol = new TableColumn("COMMENTS");
@@ -63,7 +58,6 @@ public class PatientsRecordsController implements Initializable{
     
  
     public void initialize(URL location, ResourceBundle resources) {
-       
        idCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
        appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
        commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
@@ -92,21 +86,7 @@ public class PatientsRecordsController implements Initializable{
                             Records data = new Records();
                             data = getTableView().getItems().get(getIndex());
                             btn.setText(data.idProperty().getValue());
-                            btn.setOnMouseClicked((MouseEvent event) -> {
-                                try {                               
-                                    FXMLLoader loader = new FXMLLoader(PatientsRecordsController.this.getClass().getResource("../View/id_RecordView.fxml"));
-                                    Parent root = (Parent)loader.load();
-                                    Stage recordStage = new Stage();
-                                    Id_RecordViewController id = loader.getController();
-                                    id.setLabelText(btn.getText());
-                                    Scene scene = new Scene(root);
-                                    recordStage.setTitle("ID RECORD");
-                                    recordStage.setScene(scene);
-                                    recordStage.setResizable(false);
-                                    recordStage.show();
-                                } catch (IOException ex) {
-                                    Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                            btn.setOnAction((ActionEvent event) -> { 
                             }); 
                             setGraphic(btn);
                         }
@@ -132,7 +112,6 @@ public class PatientsRecordsController implements Initializable{
             
            
       
-
         } catch (SQLException ex) {
             Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
         }   

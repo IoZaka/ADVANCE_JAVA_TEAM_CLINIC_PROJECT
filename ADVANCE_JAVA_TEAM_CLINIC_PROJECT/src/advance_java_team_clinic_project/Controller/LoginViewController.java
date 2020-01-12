@@ -54,7 +54,6 @@ public class LoginViewController extends NewStage implements Initializable {
     
     
 
-
     /**
      * Initializes the controller class.
      *
@@ -80,7 +79,6 @@ public class LoginViewController extends NewStage implements Initializable {
         });
     }
 
-
     /**
      * Function that triggers when the user presses the login button.
      * Connects with database and checks if the user exists or not.
@@ -98,20 +96,14 @@ public class LoginViewController extends NewStage implements Initializable {
 
             ak.getObject();
             if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
-//                User user = User.getInstance();
-//                System.out.println(user.getRoleID());
-//                if(user.getRoleID() == 4){
+                User user = User.getInstance();
+                System.out.println(user.getRoleID());
                     setNewStage("../View/patientsDashboard.fxml", currentStage);
-
-//                }else if(user.getRoleID() == 3){
-//                    setNewStage("../View/patientsDashboard.fxml", currentStage);
-//                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     
     /**
      * Function that triggers when the user presses the register button.
@@ -119,7 +111,6 @@ public class LoginViewController extends NewStage implements Initializable {
      * @param event
      * @throws IOException 
      */
-
     @SuppressWarnings("empty-statement")
     private void handleRegisterAction(ActionEvent event) throws IOException {
         Stage currentStage = (Stage) loginPane.getScene().getWindow();;
