@@ -21,6 +21,8 @@ public class DatabaseCheckAddressDetails {
         object = DatabaseConnection.getInstance();
     } 
     
+    
+    
     /**
      * Returns userID's information from data.
      * @param userId
