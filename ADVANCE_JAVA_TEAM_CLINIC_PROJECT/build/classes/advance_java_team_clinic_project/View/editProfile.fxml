@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="editProfilePane" minHeight="600.0" minWidth="920.0" prefHeight="600.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
+<AnchorPane id="AnchorPane" fx:id="editProfilePane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
    <children>
       <GridPane prefHeight="82.0" prefWidth="820.0">
         <columnConstraints>
