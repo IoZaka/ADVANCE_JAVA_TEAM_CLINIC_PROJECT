@@ -74,15 +74,21 @@
                </GridPane.margin>
             </Text>
             <TextArea fx:id="commentsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="backBtn" mnemonicParsing="false" text="Back" GridPane.rowIndex="3">
+            <Button fx:id="backBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="75.0" styleClass="backBtn" stylesheets="@style.css" text="Back" GridPane.rowIndex="3">
                <GridPane.margin>
-                  <Insets left="100.0" />
+                  <Insets left="100.0" top="40.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
             </Button>
-            <Button fx:id="diagnoseInfoBtn" mnemonicParsing="false" text="Diagnose Info" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button fx:id="diagnoseInfoBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Diagnose Info" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <GridPane.margin>
-                  <Insets left="50.0" />
+                  <Insets left="50.0" top="40.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
             </Button>
          </children>
       </GridPane>
