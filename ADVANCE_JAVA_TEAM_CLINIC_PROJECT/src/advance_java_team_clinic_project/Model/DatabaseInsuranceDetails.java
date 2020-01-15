@@ -35,7 +35,7 @@ private Statement stmt;
     public ResultSet fetchInsuranceInfoData(Integer userId) throws SQLException {
         stmt = object.connection.createStatement();
         sql = "select id, "
-                    + "ins_expire_date,"
+                    +"to_char(pm_patients_ins_info.ins_expire_date,'dd-MM-yyyy') ins_expire_date,"
                     + "european, "
                     + "ekas, "
                     + "ins_comments "
@@ -45,12 +45,12 @@ private Statement stmt;
         return rs;
     }
     
-    public void updateInsuranceDetails(Integer userId,String ins_expire_date,String european, String ekas, String ins_comments) throws SQLException {
+    public void updateInsuranceDetails(Integer userId,String ins_expire_date,Integer european, Integer ekas, String ins_comments) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
-        sql_contact = "update pm_patients_ins_info set ins_expire_date=" + ins_expire_date + ",european=\'" + european + "\',ekas=\'" + ekas + "\',ins_comments=\'" + ins_comments + "\' where id =" + userId;
+        sql_contact = "update pm_patients_ins_info set ins_expire_date = to_date(\'"+ins_expire_date+"\','dd-mm-yyyy'),european=" + european + ",ekas=" + ekas + ",ins_comments=\'" + ins_comments + "\' where id =" + userId;
         rs = stmt.executeQuery(sql_contact);
         alert.setTitle("Update");
         alert.setContentText("Update submitted");
