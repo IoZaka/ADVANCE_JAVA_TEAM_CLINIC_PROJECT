@@ -74,7 +74,8 @@ public class CheckInsuranceDetailsController implements Initializable {
             } catch (SQLException ex) {
                 Logger.getLogger(CheckInsuranceDetailsController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            insureanceComments.clear();
+            insureanceComments
+                    .clear();
         }
         });
     }    
@@ -85,13 +86,14 @@ public class CheckInsuranceDetailsController implements Initializable {
         System.out.println("irthe");
         if (rs.next()) {
             insuranceExpiredDate.setValue(LOCAL_DATE(rs.getString("ins_expire_date")));
-            european.getItems().clear();
             euroc = rs.getInt("european");
-            if(euroc==0){european.getItems().addAll("no");}
-            else{european.getItems().addAll("yes");}
+            european.getItems().addAll("yes","no");
+            ekas.getItems().addAll("yes","no");
+            if(euroc==0){european.setValue("no");}
+            else{european.setValue("yes");}
             ekac = rs.getInt("ekas");
-             if(ekac==0){ekas.getItems().addAll("no");}
-            else{ekas.getItems().addAll("yes");}
+             if(ekac==0){ekas.setValue("no");}
+            else{ekas.setValue("yes");}
             insureanceComments.setText(rs.getString("ins_comments"));
         } 
 }
