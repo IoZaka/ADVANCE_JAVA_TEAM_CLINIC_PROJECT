@@ -81,7 +81,7 @@ public class Id_RecordViewController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/patientsRecords.fxml"));
+                    FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
                     Parent root = (Parent)loader.load();
                     idRecordPane.getChildren().clear();
                     idRecordPane.getChildren().add(root);
