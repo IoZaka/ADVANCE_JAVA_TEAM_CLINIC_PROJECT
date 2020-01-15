@@ -165,7 +165,7 @@ and open the template in the editor.
 
 /*==============EDIT PROFILE CSS==============*/
 
-.editUsernameBtn,.editPasswordBtn,.editAddressBtn,.editContactBtn, .editInsuranceBtn, .editSubmitBtn, .diagnosisInfoBtn{
+.editUsernameBtn,.editPasswordBtn,.editAddressBtn,.editContactBtn, .editInsuranceBtn, .editSubmitBtn {
     -fx-background-color: #304e8e;
     -fx-text-fill: #fff;
     -fx-background-radius: 0.5em;
@@ -176,18 +176,18 @@ and open the template in the editor.
     -fx-background-radius: 2em;
 }
 
-.editUsernameBtn:hover,.editPasswordBtn:hover,.editAddressBtn:hover,.editContactBtn:hover, .editInsuranceBtn:hover, .editSubmitBtn:hover, .diagnosisInfoBtn:hover {
+.editUsernameBtn:hover,.editPasswordBtn:hover,.editAddressBtn:hover,.editContactBtn:hover, .editInsuranceBtn:hover, .editSubmitBtn:hover {
     -fx-background-color: #385ca8;
 }
 
-.editCancelBtn, .backBtn {
+.editCancelBtn {
     -fx-background-color: #c0392b;
     -fx-text-fill: #fff;
     -fx-background-radius: 2em;
     -fx-cursor: hand;
 }
 
-.editCancelBtn:hover, .backBtn:hover {
+.editCancelBtn:hover {
     -fx-background-color: #e74c3c;
 }
 

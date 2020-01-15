@@ -7,14 +7,11 @@ package advance_java_team_clinic_project.Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -22,7 +19,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -76,27 +72,14 @@ public class AdminDashboardController extends NewStage implements Initializable 
         });
 
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {
-          Stage currentStage = (Stage) adminPane.getScene().getWindow();
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("");
-                alert.setHeaderText("Do you want to Logout?");
-                alert.initStyle(StageStyle.UTILITY);
-
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK){
-                    try {
-                        setNewStage("../View/loginStyleFX.fxml", currentStage);
-                    } catch (IOException ex) {
-                        Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    clearSelectedButtons();
-                }
+            Stage currentStage = (Stage) adminPane.getScene().getWindow();
+            try {
+                setNewStage("../View/loginStyleFX.fxml", currentStage);
+            } catch (IOException ex) {
+                Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
-    
-  
 
     private void clearSelectedButtons() {
         profileBtn.setSelected(false);
@@ -104,6 +87,5 @@ public class AdminDashboardController extends NewStage implements Initializable 
         enterNewUserBtn.setSelected(false);
         searchUserBtn.setSelected(false);
         grantPermissionsBtn.setSelected(false);
-        logoutBtn.setSelected(false);
     }
 }

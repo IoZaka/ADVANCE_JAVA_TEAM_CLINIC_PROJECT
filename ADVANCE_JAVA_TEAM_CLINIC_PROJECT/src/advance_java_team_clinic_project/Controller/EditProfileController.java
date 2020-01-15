@@ -268,7 +268,6 @@ public class EditProfileController extends NewStage implements Initializable {
         customCombo = ed.FetchData("PM_ROLES");
         comboRole.setItems(FXCollections.observableArrayList(customCombo));
         InitiateComboList(roleId, comboRole);
-        if(roleId != 1) comboRole.setDisable(true);
         customCombo = ed.FetchData("PM_NATIONALITIES");
         comboNationality.setItems(FXCollections.observableArrayList(customCombo));
         InitiateComboList(nationalityId, comboNationality);

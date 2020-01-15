@@ -131,17 +131,5 @@ public class DatabaseProfileDetails {
             Logger.getLogger(DatabaseProfileDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public ResultSet getPassword(Integer userId){
-        try{
-            stmt = object.connection.createStatement();
-            sql = "select password from pm_users where id= "+userId;
-            rs = stmt.executeQuery(sql);
-        }catch(SQLException ex){
-            
-        }
-        return rs;
-    }
-    
 }
 
