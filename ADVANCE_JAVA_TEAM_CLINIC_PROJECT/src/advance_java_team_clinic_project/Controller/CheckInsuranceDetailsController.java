@@ -64,18 +64,15 @@ public class CheckInsuranceDetailsController implements Initializable {
         submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {      
-        euro = european.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to euro ginete 0
-       System.out.println(euro);
+         euro = european.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to euro ginete 0
             if(euro!=0){euro = 1;}
-        eka = ekas.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to eka ginete 0
+         eka = ekas.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to eka ginete 0
             if(eka!=0){eka = 1;}
             try {
                 ak.updateInsuranceDetails(user.getId(), insuranceExpiredDate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), euro, eka, insureanceComments.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(CheckInsuranceDetailsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            insureanceComments
-                    .clear();
+            } 
         }
         });
     }    
@@ -83,7 +80,6 @@ public class CheckInsuranceDetailsController implements Initializable {
        private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchInsuranceInfoData(user.getId());
-        System.out.println("irthe");
         if (rs.next()) {
             insuranceExpiredDate.setValue(LOCAL_DATE(rs.getString("ins_expire_date")));
             euroc = rs.getInt("european");
