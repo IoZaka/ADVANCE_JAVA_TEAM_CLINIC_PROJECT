@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane fx:id="patientsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.DoctorDashboardController">
+<BorderPane fx:id="doctorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.DoctorDashboardController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" styleClass="sidebar" stylesheets="@style.css" BorderPane.alignment="CENTER">
          <children>
@@ -36,12 +36,12 @@
                   <Insets top="35.0" />
                </VBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="editProfileBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Edit Profile">
+            <ToggleButton fx:id="appointmentsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Appointments">
                <VBox.margin>
                   <Insets top="35.0" />
                </VBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="patientsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Patients">
+            <ToggleButton fx:id="editProfileBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Edit Profile">
                <VBox.margin>
                   <Insets top="35.0" />
                </VBox.margin>

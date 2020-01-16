@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -45,8 +46,6 @@ public class DiagnosisInfoController implements Initializable {
     @FXML
     private Button admissionInfoBtn;
     @FXML
-    private TextField medicineInput;
-    @FXML
     private TextField commentsInput;
 
     User user = User.getInstance();
@@ -54,6 +53,10 @@ public class DiagnosisInfoController implements Initializable {
     private AnchorPane diagnosisPanel;
     
     private Integer id;
+    @FXML
+    private TextArea medicineText;
+    @FXML
+    private Button testsBtn;
     
     /**
      * Initializes the controller class.
@@ -66,7 +69,7 @@ public class DiagnosisInfoController implements Initializable {
         updatedDateInput.setEditable(false);
         updatedByInput.setEditable(false);
         patientType.setEditable(false);
-        medicineInput.setEditable(false);
+        medicineText.setEditable(false);
         commentsInput.setEditable(false);
         
         

@@ -96,6 +96,8 @@ public class Id_RecordViewController implements Initializable {
             ak.getObject();
             rs = ak.fetchBasicInfoData(Integer.parseInt(id));
             if(rs.next()){
+                doctorInput.setText(rs.getString("doctor"));
+                patientInput.setText(rs.getString("patient"));
                 appDateInput.setText(rs.getString("app_date"));
                 appCodeInput.setText(rs.getString("app_code"));
                 createdInput.setText(rs.getString("created"));
