@@ -84,6 +84,7 @@ public class CheckInsuranceDetailsController implements Initializable {
        private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchInsuranceInfoData(user.getId());
+        System.out.println("irthe");
         if (rs.next()) {
             insuId = rs.getInt("ins_comp_id");
             insuranceExpiredDate.setValue(LOCAL_DATE(rs.getString("ins_expire_date")));
