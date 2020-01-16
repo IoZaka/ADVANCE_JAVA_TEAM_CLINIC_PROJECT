@@ -88,7 +88,7 @@ public class Id_RecordViewController implements Initializable {
         try {
             ak = new DatabaseLoginRecords();
             ak.getObject();
-            rs = ak.fetchBasicInfoData();
+            rs = ak.fetchBasicInfoData(Integer.parseInt(id));
             if(rs.next()){
                 appDateInput.setText(rs.getString("app_date"));
                 appCodeInput.setText(rs.getString("app_code"));

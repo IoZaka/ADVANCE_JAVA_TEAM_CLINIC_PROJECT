@@ -19,11 +19,9 @@ import javafx.stage.StageStyle;
  */
 public class DatabaseProfileDetails {
     private Statement stmt;
-    private String sql, sql_users, sql_user_details,hashPwd,password;
+    private String sql, sql_users, sql_user_details;
     private ResultSet rs;
     private DatabaseConnection object;
-    private DatabaseLoginRegister DLR;
-    User user = User.getInstance();
 
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
@@ -133,4 +131,17 @@ public class DatabaseProfileDetails {
             Logger.getLogger(DatabaseProfileDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public ResultSet getPassword(Integer userId){
+        try{
+            stmt = object.connection.createStatement();
+            sql = "select password from pm_users where id= "+userId;
+            rs = stmt.executeQuery(sql);
+        }catch(SQLException ex){
+            
+        }
+        return rs;
+    }
+    
 }
+
