@@ -109,7 +109,7 @@ public class DatabaseLoginRegister {
      * @param passWord
      * @return 
      */
-    private String makeHashPwd(String passWord) {
+    public String makeHashPwd(String passWord) {
         String localPwd;
         try {
             pwdSql = "SELECT DBMS_OBFUSCATION_TOOLKIT.md5(input => UTL_I18N.STRING_TO_RAW (\'" + passWord + "\', 'AL32UTF8')) pwd from dual";
