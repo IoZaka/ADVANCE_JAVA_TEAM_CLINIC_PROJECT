@@ -7,6 +7,7 @@ package advance_java_team_clinic_project.Controller;
 
 import static advance_java_team_clinic_project.Controller.EditProfileController.LOCAL_DATE;
 import advance_java_team_clinic_project.Model.DatabaseInsuranceDetails;
+import advance_java_team_clinic_project.Model.DatabaseProfileEdit;
 import advance_java_team_clinic_project.Model.User;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -43,8 +44,10 @@ public class CheckInsuranceDetailsController implements Initializable {
     @FXML
     private ComboBox ekas;
     @FXML
+    private ComboBox Insurancec;
+    @FXML
     private TextArea insureanceComments;
-
+    private static final DatabaseProfileEdit ed = new DatabaseProfileEdit();
     private int euro=0,eka=0,euroc=0,ekac=0;
     private static DatabaseInsuranceDetails ak = new DatabaseInsuranceDetails();
     private ResultSet rs;
