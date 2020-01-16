@@ -92,6 +92,22 @@ public class DiagnosisInfoController implements Initializable {
             }
         });
         
+        admissionInfoBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AdmissionInfoView.fxml"));
+                    Parent root = (Parent)loader.load();
+                    AdmissionInfoController admissionInfoID = loader.getController();
+                    admissionInfoID.setAdmissionID(id);
+                    diagnosisPanel.getChildren().clear();
+                    diagnosisPanel.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
     }
     
 }
