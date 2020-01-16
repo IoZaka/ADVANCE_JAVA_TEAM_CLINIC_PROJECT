@@ -37,18 +37,18 @@ public class Records {
     public StringProperty updated_byProperty(){return updated_by;}
     public StringProperty created_byProperty(){return created_by;}
     
-    public Records(String id, String app_date, String comments, String app_code, String created, String updated, String patient, String doctor, String updated_by, String created_by){
-      this.id.set(id);
-      this.app_date.set(app_date);
-      this.comments.set(comments);
-      this.app_code.set(app_code);
-      this.created.set(created);
-      this.updated.set(updated);
-      this.patient.set(patient);
-      this.doctor.set(doctor);
-      this.updated_by.set(updated_by);
-      this.created_by.set(created_by);
-    }
+//    public Records(String id, String app_date, String comments, String app_code, String created, String updated, String patient, String doctor, String updated_by, String created_by){
+//      this.id.set(id);
+//      this.app_date.set(app_date);
+//      this.comments.set(comments);
+//      this.app_code.set(app_code);
+//      this.created.set(created);
+//      this.updated.set(updated);
+//      this.patient.set(patient);
+//      this.doctor.set(doctor);
+//      this.updated_by.set(updated_by);
+//      this.created_by.set(created_by);
+//    }
     
     public Records(){}
     

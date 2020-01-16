@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.scene.control.Alert;
 import javafx.stage.StageStyle;
+import static sun.misc.MessageUtils.where;
 
 /**
  *
@@ -21,7 +22,7 @@ private Statement stmt;
     private String sql,sql_contact;
     private ResultSet rs;
     private DatabaseConnection object;
-
+    private User user =User.getInstance();
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
     } 
@@ -35,12 +36,12 @@ private Statement stmt;
     public ResultSet fetchInsuranceInfoData(Integer userId) throws SQLException {
         stmt = object.connection.createStatement();
         sql = "select id, "
-                    +"to_char(pm_patients_ins_info.ins_expire_date,'dd-MM-yyyy') ins_expire_date,"
+                    +"to_char(ins_expire_date,'dd-MM-yyyy') ins_expire_date,"
                     + "european, "
                     + "ekas, "
                     + "ins_comments "
                 + "from pm_patients_ins_info "
-                + "where id = " + userId;
+                + "where user_id = " + userId;
         rs = stmt.executeQuery(sql);
         return rs;
     }
@@ -50,7 +51,7 @@ private Statement stmt;
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
-        sql_contact = "update pm_patients_ins_info set ins_expire_date = to_date(\'"+ins_expire_date+"\','dd-mm-yyyy'),european=" + european + ",ekas=" + ekas + ",ins_comments=\'" + ins_comments + "\' where id =" + userId;
+        sql_contact = "update pm_patients_ins_info set ins_expire_date = to_date(\'"+ins_expire_date+"\','dd-mm-yyyy'),european=" + european + ",ekas=" + ekas + ",ins_comments=\'" + ins_comments + "\' ,updated_by="+ user.getId() + " where user_id =" + userId;
         rs = stmt.executeQuery(sql_contact);
         alert.setTitle("Update");
         alert.setContentText("Update submitted");

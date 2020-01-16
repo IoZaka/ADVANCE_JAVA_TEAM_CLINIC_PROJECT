@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -51,8 +50,6 @@ public class LoginViewController extends NewStage implements Initializable {
 
     String userNameGiven;
     String passWordGiven;
-    
-    
 
     /**
      * Initializes the controller class.
@@ -98,16 +95,13 @@ public class LoginViewController extends NewStage implements Initializable {
             if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
                 User user = User.getInstance();
                 System.out.println(user.getRoleID());
-                switch(user.getRoleID()){
-                    case 1:
-                        setNewStage("../View/AdminDashboard.fxml", currentStage);
-                        break;
-                    case 2:
-                        setNewStage("../View/doctorsDashboard.fxml", currentStage);
-                        break;
-                    case 3:
-                        setNewStage("../View/patientsDashboard.fxml", currentStage);
-                        break;             
+                if(user.getRoleID() == 1){
+                    setNewStage("../View/PatientsDashboard.fxml", currentStage);
+                }
+                else if(user.getRoleID() == 4){
+                    setNewStage("../View/PatientsDashboard.fxml", currentStage);
+                }else if(user.getRoleID() == 3){
+                    setNewStage("../View/PatientsDashboard.fxml", currentStage);
                 }
             }
         } catch (SQLException ex) {
