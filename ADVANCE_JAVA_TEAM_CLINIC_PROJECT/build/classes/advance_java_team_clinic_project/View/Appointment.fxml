@@ -13,14 +13,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="appointmentPane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="appointmentPane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AppointmentController">
    <children>
       <Label graphicTextGap="6.0" layoutX="279.0" layoutY="97.0" prefHeight="18.0" prefWidth="274.0" text="Reason of appoinment" textAlignment="CENTER" AnchorPane.topAnchor="97.0">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <TextArea layoutX="68.0" layoutY="189.0" prefHeight="176.0" prefWidth="266.0" promptText="Type the reason here :" style="-fx-background-color: #385ca8;" />
+      <TextArea fx:id="reasonText" layoutX="68.0" layoutY="189.0" prefHeight="176.0" prefWidth="266.0" promptText="Type the reason here :" style="-fx-background-color: #385ca8;" />
       <GridPane layoutX="400.0" layoutY="200.0" prefHeight="134.0" prefWidth="400.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -39,19 +39,20 @@ private Statement stmt;
                     +"to_char(ins_expire_date,'dd-MM-yyyy') ins_expire_date,"
                     + "european, "
                     + "ekas, "
-                    + "ins_comments "
+                    + "ins_comments, "
+                    + "ins_comp_id "
                 + "from pm_patients_ins_info "
                 + "where user_id = " + userId;
         rs = stmt.executeQuery(sql);
         return rs;
     }
     
-    public void updateInsuranceDetails(Integer userId,String ins_expire_date,Integer european, Integer ekas, String ins_comments) throws SQLException {
+    public void updateInsuranceDetails(Integer userId,String ins_expire_date,Integer european, Integer ekas, String ins_comments,Integer ins_comp_id) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
-        sql_contact = "update pm_patients_ins_info set ins_expire_date = to_date(\'"+ins_expire_date+"\','dd-mm-yyyy'),european=" + european + ",ekas=" + ekas + ",ins_comments=\'" + ins_comments + "\' ,updated_by="+ user.getId() + " where user_id =" + userId;
+        sql_contact = "update pm_patients_ins_info set ins_expire_date = to_date(\'"+ins_expire_date+"\','dd-mm-yyyy'),european=" + european + ",ekas=" + ekas + ",ins_comments=\'" + ins_comments + "\',ins_comp_id=" + ins_comp_id +",updated_by="+ user.getId() + " where user_id =" + userId;
         rs = stmt.executeQuery(sql_contact);
         alert.setTitle("Update");
         alert.setContentText("Update submitted");

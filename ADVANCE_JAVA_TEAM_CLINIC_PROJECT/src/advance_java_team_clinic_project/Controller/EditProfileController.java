@@ -245,8 +245,6 @@ public class EditProfileController extends NewStage implements Initializable {
             mothersName.setText(rs.getString("mothers_name"));
             dateOfBirth.setValue(LOCAL_DATE(rs.getString("date_of_birth")));
             dateOfBirth.setPromptText("dd-MM-yyyy");
-            System.out.println("auto mou epistrefei i vasi:" + rs.getString("date_of_birth"));
-            System.out.println("auto mou epistrefei i function:" + LOCAL_DATE(rs.getString("date_of_birth")));
             profession.setText(rs.getString("profession"));
             genderId = rs.getInt("gender_id");
             ecoStatusId = rs.getInt("eco_status_id");
