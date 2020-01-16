@@ -98,6 +98,24 @@
                   <Insets bottom="50.0" left="200.0" />
                </GridPane.margin>
             </Text>
+            <TextField fx:id="doctorInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0">
+               <GridPane.margin>
+                  <Insets left="150.0" top="20.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PATIENT" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="50.0" left="200.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="patientInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="150.0" top="20.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
       </GridPane>
    </children>

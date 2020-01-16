@@ -55,16 +55,22 @@ public class Id_RecordViewController implements Initializable {
     private AnchorPane idRecordPane;
     
     User user = User.getInstance();
+    @FXML
+    private TextField doctorInput;
+    @FXML
+    private TextField patientInput;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        appDateInput.setEditable(true);
-        appCodeInput.setEditable(true);
-        createdInput.setEditable(true);
+        appDateInput.setEditable(false);
+        appCodeInput.setEditable(false);
+        createdInput.setEditable(false);
         commentsTextArea.setEditable(false);
+        doctorInput.setEditable(false);
+        patientInput.setEditable(false);
         
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
