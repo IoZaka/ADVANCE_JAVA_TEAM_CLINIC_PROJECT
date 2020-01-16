@@ -52,5 +52,28 @@ public class DatabaseLoginRecords {
         rs = stmt.executeQuery(sql);
         return rs;
     }
+    
+    public ResultSet fetchBasicInfoData(Integer appID) throws SQLException{
+        stmt = object.connection.createStatement();
+        System.out.println("APPID: " + appID);
+        sql = "select a.id, " +
+              "to_char(a.app_date,'dd/mm/yyyy') app_date, " +
+              "a.comments, " +
+              "a.app_code, " +
+              "to_char(a.created,'dd/mm/yyyy') created, " +
+              "to_char(a.updated,'dd/mm/yyyy') updated, " +
+              "b.Surname || ' ' || b.firstname patient, " +
+              "c.Surname || ' ' || c.firstname doctor, " +
+              "d.Surname || ' ' || d.firstname updated_by, " +
+              "e.Surname || ' ' || e.firstname created_by " +
+              "from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e " +
+              "where a.patient_id = b.id " +
+              "and a.doctor_id = c.id " +
+              "and a.updated_by = d.id " +
+              "and a.created_by = e.id " + 
+              "and a.id = " + appID; 
+            rs = stmt.executeQuery(sql);
+        return rs;
+    }
 
 }
