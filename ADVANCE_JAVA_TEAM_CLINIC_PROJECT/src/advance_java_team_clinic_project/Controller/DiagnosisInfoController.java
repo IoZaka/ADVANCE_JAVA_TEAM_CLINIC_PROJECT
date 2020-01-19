@@ -5,9 +5,13 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.DatabaseConnection;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,9 +49,6 @@ public class DiagnosisInfoController implements Initializable {
     private Button backBtn;
     @FXML
     private Button admissionInfoBtn;
-    @FXML
-    private TextField commentsInput;
-
     User user = User.getInstance();
     @FXML
     private AnchorPane diagnosisPanel;
@@ -57,6 +58,18 @@ public class DiagnosisInfoController implements Initializable {
     private TextArea medicineText;
     @FXML
     private Button testsBtn;
+    @FXML
+    private TextArea commentsText;
+    @FXML
+    private TextField doctorInput;
+    @FXML
+    private TextField patientInput;
+    
+    //Database
+    private Statement stmt;
+    private ResultSet rs;
+    private String sql;
+    private DatabaseConnection object;
     
     /**
      * Initializes the controller class.
@@ -68,17 +81,29 @@ public class DiagnosisInfoController implements Initializable {
         createdByInput.setEditable(false);
         updatedDateInput.setEditable(false);
         updatedByInput.setEditable(false);
-        patientType.setEditable(false);
-        medicineText.setEditable(false);
-        commentsInput.setEditable(false);
-        
-        
-        
+        patientInput.setEditable(false);
+        doctorInput.setEditable(false);
+        commentsText.setEditable(false);  
     }   
     
     public void setDiagnosisID(String id){
           
         this.id = Integer.valueOf(id);  
+        
+        try {
+            object = DatabaseConnection.getInstance();
+            stmt = object.connection.createStatement();
+            sql = "select id from pm_diagnosis where app_info_id= " + Integer.valueOf(id);
+            rs = stmt.executeQuery(sql);
+            if(rs.next()){
+                System.out.println(rs.getString("id"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
@@ -110,7 +135,8 @@ public class DiagnosisInfoController implements Initializable {
                 }
             }
         });
-        
+       
     }
-    
 }
+    
+
