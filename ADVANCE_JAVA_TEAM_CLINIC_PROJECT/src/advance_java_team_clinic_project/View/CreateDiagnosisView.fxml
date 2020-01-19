@@ -71,7 +71,7 @@
                   <Insets left="130.0" top="130.0" />
                </GridPane.margin>
             </TextArea>
-            <Button fx:id="submitBtn" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Submit" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button fx:id="createBtn" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Create" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>
