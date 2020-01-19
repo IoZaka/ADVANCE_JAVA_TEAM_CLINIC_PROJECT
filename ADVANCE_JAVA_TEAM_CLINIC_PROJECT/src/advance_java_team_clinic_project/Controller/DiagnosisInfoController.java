@@ -47,7 +47,6 @@ public class DiagnosisInfoController implements Initializable {
     private ComboBox<?> patientType;
     @FXML
     private Button backBtn;
-    @FXML
     private Button admissionInfoBtn;
     User user = User.getInstance();
     @FXML
@@ -56,8 +55,6 @@ public class DiagnosisInfoController implements Initializable {
     private Integer id;
     @FXML
     private TextArea medicineText;
-    @FXML
-    private Button testsBtn;
     @FXML
     private TextArea commentsText;
     @FXML
@@ -135,6 +132,8 @@ public class DiagnosisInfoController implements Initializable {
                 }
             }
         });
+        
+        
        
     }
 }

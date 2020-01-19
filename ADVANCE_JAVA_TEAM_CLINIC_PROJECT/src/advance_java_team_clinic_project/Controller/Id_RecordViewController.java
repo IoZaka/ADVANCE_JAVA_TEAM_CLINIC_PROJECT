@@ -59,6 +59,8 @@ public class Id_RecordViewController implements Initializable {
     private TextField doctorInput;
     @FXML
     private TextField patientInput;
+    @FXML
+    private Button createDiagnosisBtn;
     
     /**
      * Initializes the controller class.
@@ -71,6 +73,15 @@ public class Id_RecordViewController implements Initializable {
         commentsTextArea.setEditable(false);
         doctorInput.setEditable(false);
         patientInput.setEditable(false);
+        
+        switch(user.getRoleID()){
+                    case 2:
+                        createDiagnosisBtn.setVisible(true);
+                        break;
+                    case 3:
+                        diagnoseInfoBtn.setVisible(true);
+                        break;             
+                }
         
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
@@ -117,6 +128,22 @@ public class Id_RecordViewController implements Initializable {
                     Parent root = (Parent)loader.load();    
                     DiagnosisInfoController diagnosisID = loader.getController();
                     diagnosisID.setDiagnosisID(id);
+                    idRecordPane.getChildren().clear();
+                    idRecordPane.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        createDiagnosisBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/CreateDiagnosisView.fxml"));
+                    Parent root = (Parent)loader.load();    
+                    CreateDiagnosisController appID = loader.getController();
+                    appID.getAPPID(id);
                     idRecordPane.getChildren().clear();
                     idRecordPane.getChildren().add(root);
                 } catch (IOException ex) {
