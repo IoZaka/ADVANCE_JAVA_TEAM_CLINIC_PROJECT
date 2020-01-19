@@ -58,13 +58,17 @@ public class CreateDiagnosisController implements Initializable {
     private ResultSet rs;
     private String sql;
     private DatabaseConnection object;
+    @FXML
+    private Button updateBtn;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        patientType.getItems().add("Inpatient");
+        patientType.getItems().add("Outpatient");
+       
     }    
     
     public void getAPPID(String id){
@@ -75,9 +79,17 @@ public class CreateDiagnosisController implements Initializable {
             Logger.getLogger(CreateDiagnosisController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        patientType.getItems().add("Inpatient");
-        patientType.getItems().add("Outpatient");
-       
+        //An to app_info_id iparxei sto pm_diagnosis, tha emfanizei to updateBtn
+        sql = "select * from pm_diagnosis where app_info_id= " + Integer.valueOf(id);
+        try {
+            rs = stmt.executeQuery(sql);
+            if(rs.next()){
+                updateBtn.setVisible(true);
+                createBtn.setVisible(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateDiagnosisController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){

@@ -5,6 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.DatabaseConnection;
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
 import advance_java_team_clinic_project.Model.Records;
 import advance_java_team_clinic_project.Model.User;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,6 +64,11 @@ public class Id_RecordViewController implements Initializable {
     @FXML
     private Button createDiagnosisBtn;
     
+     
+    private Statement stmt;
+    private String sql;
+    private DatabaseConnection object;
+    
     /**
      * Initializes the controller class.
      */
@@ -102,7 +109,10 @@ public class Id_RecordViewController implements Initializable {
     public void setID(String id){
         
         this.id = Integer.valueOf(id);
+         
         try {
+            object = DatabaseConnection.getInstance();
+            stmt = object.connection.createStatement(); 
             ak = new DatabaseLoginRecords();
             ak.getObject();
             rs = ak.fetchBasicInfoData(Integer.parseInt(id));
@@ -118,7 +128,19 @@ public class Id_RecordViewController implements Initializable {
             Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-         
+        sql = "select app_info_id from pm_diagnosis where app_info_id=" + Integer.valueOf(id);
+        try {
+            rs = stmt.executeQuery(sql);
+            if(rs.next()){
+                diagnoseInfoBtn.setDisable(false);
+                 diagnoseInfoBtn.setText("Diagnose Info");
+            }else{
+                diagnoseInfoBtn.setDisable(true);
+                diagnoseInfoBtn.setText("No diagnose");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         diagnoseInfoBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override

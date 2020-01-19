@@ -47,12 +47,13 @@ public class DiagnosisInfoController implements Initializable {
     private ComboBox<?> patientType;
     @FXML
     private Button backBtn;
+    @FXML
     private Button admissionInfoBtn;
     User user = User.getInstance();
     @FXML
     private AnchorPane diagnosisPanel;
     
-    private Integer id;
+    private String diagID;
     @FXML
     private TextArea medicineText;
     @FXML
@@ -67,6 +68,8 @@ public class DiagnosisInfoController implements Initializable {
     private ResultSet rs;
     private String sql;
     private DatabaseConnection object;
+    @FXML
+    private Button testsBtn;
     
     /**
      * Initializes the controller class.
@@ -84,23 +87,7 @@ public class DiagnosisInfoController implements Initializable {
     }   
     
     public void setDiagnosisID(String id){
-          
-        this.id = Integer.valueOf(id);  
-        
-        try {
-            object = DatabaseConnection.getInstance();
-            stmt = object.connection.createStatement();
-            sql = "select id from pm_diagnosis where app_info_id= " + Integer.valueOf(id);
-            rs = stmt.executeQuery(sql);
-            if(rs.next()){
-                System.out.println(rs.getString("id"));
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+                 
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
@@ -133,6 +120,23 @@ public class DiagnosisInfoController implements Initializable {
             }
         });
         
+        
+        
+        testsBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try{                  
+                    FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testsTableView.fxml"));
+                    Parent root = (Parent)loader.load();
+                    TestsTableViewController diagID = loader.getController();
+                    diagID.setDiagID(id);
+                    diagnosisPanel.getChildren().clear();
+                    diagnosisPanel.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         
        
     }

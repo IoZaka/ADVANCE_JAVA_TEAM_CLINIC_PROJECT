@@ -110,6 +110,14 @@
                   <Insets left="50.0" top="100.0" />
                </GridPane.margin>
             </TextField>
+            <Button fx:id="updateBtn" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Update" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="80.0" top="40.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
    </children>
