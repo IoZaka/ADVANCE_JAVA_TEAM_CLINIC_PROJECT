@@ -72,6 +72,7 @@ public class DatabaseLoginRegister {
         return false;
     }
 
+    
     /**
      * Returns true/false if the register information is correct or not.
      * @param userName

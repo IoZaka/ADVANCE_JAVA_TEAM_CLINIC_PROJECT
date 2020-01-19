@@ -5,8 +5,10 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.DatabaseAppointment;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
@@ -29,10 +32,9 @@ public class AppointmentController implements Initializable {
     @FXML
     private Button submitBtn;
     @FXML
-    private Pane appointmentPane;
-    @FXML
     private TextArea reasonText;
-
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private DatabaseAppointment ap = new DatabaseAppointment();
     /**
      * Initializes the controller class.
      *
@@ -41,15 +43,17 @@ public class AppointmentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            ap.getObject();
+        } catch (SQLException ex) {
+            Logger.getLogger(AppointmentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         submitBtn.setOnMouseClicked((MouseEvent event) -> {
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(AppointmentController.this.getClass().getResource("../View/appointmentSuccess.fxml"));
-            } catch (IOException ex) {
-                Logger.getLogger(AppointmentController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            appointmentPane.getChildren().clear();
-            appointmentPane.getChildren().add(root);
+            ap.makeAppointment(reasonText.getText()); 
+            reasonText.clear();
+            alert.setTitle("Success");
+            alert.setContentText("Appointment successfully submitted");
+            alert.showAndWait();
         });
     }
 

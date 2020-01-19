@@ -46,14 +46,13 @@ public class DatabaseLoginRecords {
               "e.Surname || ' ' || e.firstname created_by\n" +
               "from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e \n" +
               "where a.patient_id = b.id\n" +
-              "and a.doctor_id = c.id\n" +
+              "and a.doctor_id = c.id(+)\n" +
               "and a.updated_by = d.id\n" +
               "and a.created_by = e.id";
         rs = stmt.executeQuery(sql);
         return rs;
     }
-    
-    public ResultSet fetchBasicInfoData(Integer appID) throws SQLException{
+public ResultSet fetchBasicInfoData(Integer appID) throws SQLException{
         stmt = object.connection.createStatement();
         System.out.println("APPID: " + appID);
         sql = "select a.id, " +
@@ -75,5 +74,4 @@ public class DatabaseLoginRecords {
             rs = stmt.executeQuery(sql);
         return rs;
     }
-
 }
