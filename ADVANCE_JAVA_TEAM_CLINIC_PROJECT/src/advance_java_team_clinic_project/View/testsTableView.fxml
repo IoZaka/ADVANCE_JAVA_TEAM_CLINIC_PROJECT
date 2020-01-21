@@ -8,13 +8,13 @@
 
 <AnchorPane id="AnchorPane" fx:id="testsPane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.TestsTableViewController">
    <children>
-      <TableView fx:id="testsTable" layoutX="152.0" layoutY="180.0" prefHeight="200.0" prefWidth="533.0" />
+      <TableView fx:id="testsTable" layoutX="223.0" layoutY="179.0" prefHeight="200.0" prefWidth="392.0" />
       <Text fill="#304e8e" layoutX="378.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TESTS">
          <font>
             <Font size="31.0" />
          </font>
       </Text>
-      <Button fx:id="backBtn" layoutX="204.0" layoutY="467.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="146.0" styleClass="backBtn" stylesheets="@style.css" text="Back">
+      <Button fx:id="backBtn" layoutX="346.0" layoutY="431.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="146.0" styleClass="backBtn" stylesheets="@style.css" text="Back">
          <font>
             <Font size="16.0" />
          </font>

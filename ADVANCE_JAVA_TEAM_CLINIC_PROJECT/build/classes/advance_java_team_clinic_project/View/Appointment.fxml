@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="appointmentPane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AppointmentController">
+<AnchorPane fx:id="appointmentPane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.AppointmentController">
    <children>
       <Label graphicTextGap="6.0" layoutX="279.0" layoutY="97.0" prefHeight="18.0" prefWidth="274.0" text="Reason of appoinment" textAlignment="CENTER" AnchorPane.topAnchor="97.0">
          <font>
