@@ -8,7 +8,9 @@ package advance_java_team_clinic_project.Controller;
 import advance_java_team_clinic_project.Model.DatabaseConnection;
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
 import advance_java_team_clinic_project.Model.Records;
+import advance_java_team_clinic_project.Model.Tests;
 import advance_java_team_clinic_project.Model.User;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,11 +21,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -37,7 +45,7 @@ public class TestsTableViewController implements Initializable {
     @FXML
     private TableView testsTable;
     
-     User user = User.getInstance();
+    User user = User.getInstance();
     private Statement stmt;
     private ResultSet rs;
     private String sql;
@@ -49,6 +57,10 @@ public class TestsTableViewController implements Initializable {
     TableColumn isCompletedCol = new TableColumn("Is Completed");
     TableColumn costCol = new TableColumn("Cost");
     TableColumn isPaidCol = new TableColumn("Is paid");
+    @FXML
+    private Button backBtn;
+    @FXML
+    private AnchorPane testsPane;
     
 
     /**
@@ -56,50 +68,78 @@ public class TestsTableViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        idCol.setCellFactory(new PropertyValueFactory<>("id"));
-        diagIDCol.setCellFactory(new PropertyValueFactory<>("diag_id"));
-        descriptionCol.setCellFactory(new PropertyValueFactory<>("description"));
-        isCompletedCol.setCellFactory(new PropertyValueFactory<>("is_completed"));
-        costCol.setCellFactory(new PropertyValueFactory<>("cost"));
-        isPaidCol.setCellFactory(new PropertyValueFactory<>("is_paid"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        diagIDCol.setCellValueFactory(new PropertyValueFactory<>("diag_id"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        isCompletedCol.setCellValueFactory(new PropertyValueFactory<>("is_completed"));
+        costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        isPaidCol.setCellValueFactory(new PropertyValueFactory<>("is_paid"));
         
         testsTable.getColumns().addAll(idCol,diagIDCol,descriptionCol,
                 isCompletedCol,costCol,isPaidCol);
-        testsTable.setItems(data);   
+          
         
     }     
     
     public void setDiagID(String id){
-        String testID = null;
+        String diag_ID = null;
+        
+        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
+                    Parent root = (Parent)loader.load();
+                    DiagnosisInfoController diagnosisID = loader.getController();
+                    diagnosisID.setDiagnosisID(id);
+                    testsPane.getChildren().clear();
+                    testsPane.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
             sql = "select id from pm_diagnosis where app_info_id=" + Integer.valueOf(id);
             rs = stmt.executeQuery(sql);
             if(rs.next()){
-                testID = rs.getString("id");
+                diag_ID = rs.getString("id");
             }else{
                 System.out.println("doesnt work");
             }
-            
-            //sql = "select id from pm_diag_tests where diag_id= " + Integer.valueOf(testID);
-            sql = "select * from pm_diag_tests";
+
+            sql = "select * from pm_diag_tests where diag_id= " + Integer.valueOf(diag_ID);
+            //sql = "select a.id id, a.description, decode(a.is_completed,0,'No',1,'Yes') is_completed,cost,\n" +
+               // "decode(a.is_paid,0,'No',1,'Yes') is_paid, b.description status from pm_diag_tests a, \n" +
+               // "pm_status b where a.status_id = b.id and diag_id= " +testID;
             rs = stmt.executeQuery(sql);
-            System.out.println(rs);
-            
+            data = FXCollections.observableArrayList(databaseTests(rs));
+            testsTable.setItems(data);          
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+    }
+    
+    private ArrayList databaseTests(ResultSet rs) throws SQLException {
+        ArrayList<Tests> data = new ArrayList();
         
+        if(rs.next()){
+            Tests test = new Tests();
+            test.idProperty().set(rs.getString("id"));
+            test.diag_idProperty().set(rs.getString("diag_id"));
+            test.descriptionProperty().set(rs.getString("description"));
+            test.is_completedProperty().set(rs.getString("is_completed"));
+            test.costProperty().set(rs.getString("cost"));
+            test.is_paidProperty().set(rs.getString("is_paid"));
+            data.add(test);
+        }
+        return data;
     }
     
 }
 
 
 
-/*
-select a.id id, a.description, decode(a.is_completed,0,'No',1,'Yes') is_completed,cost,
-decode(a.is_paid,0,'No',1,'Yes') is_paid, b.description status from pm_diag_tests a, 
-pm_status b where a.status_id = b.id and diag_id = edw_tha_baleis_to_id_tou_diagnosis_me_java_kwdika ;
-*/

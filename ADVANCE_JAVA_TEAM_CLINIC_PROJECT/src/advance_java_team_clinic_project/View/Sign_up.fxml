@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="signUpPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #385ca8;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.SignUpViewController">
+<Pane fx:id="signUpPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #385ca8;" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.SignUpViewController">
    <children>
       <TextField fx:id="registerUsername" layoutX="409.0" layoutY="275.0" prefHeight="38.0" prefWidth="215.0" promptText="Username " styleClass="registerUsernameInput" stylesheets="@style.css" />
       <PasswordField fx:id="registerPassword" layoutX="409.0" layoutY="333.0" prefHeight="38.0" prefWidth="215.0" promptText="Password " styleClass="registerPasswordInput" />
