@@ -8,12 +8,18 @@ package advance_java_team_clinic_project.Model;
 public class User {
 
     private int id;
-    private String username;
-    private String firstName;
-    private String surname;
+    private String username,name,surname,firstName;
     private int ruleID;
     private int addressID;   
     private int contactID; 
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void setContactID(int contactID) {
         this.contactID = contactID;

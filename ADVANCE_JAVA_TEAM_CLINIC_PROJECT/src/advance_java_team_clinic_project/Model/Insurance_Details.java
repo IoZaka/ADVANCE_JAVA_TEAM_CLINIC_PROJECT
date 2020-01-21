@@ -5,7 +5,7 @@ package advance_java_team_clinic_project.Model;
  * @author User
  */
 public class Insurance_Details {
-     private int id;
+    private int id;
     private String description;
 
     public void setId(int id) {
