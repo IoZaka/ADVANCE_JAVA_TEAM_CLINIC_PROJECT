@@ -126,7 +126,7 @@ public class PatientsRecordsController extends NewStage implements Initializable
         try {
             ak = new DatabaseLoginRecords();
             ak.getObject();
-            rs = ak.fetchBasicInfoData();
+            rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId());
             data = FXCollections.observableArrayList(databaseRecords(rs));
            
             idCol.setCellFactory(cellFactory);

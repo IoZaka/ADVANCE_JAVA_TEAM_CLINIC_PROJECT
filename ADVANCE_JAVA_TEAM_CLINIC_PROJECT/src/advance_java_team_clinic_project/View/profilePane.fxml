@@ -56,6 +56,11 @@
                         <Font size="17.0" />
                      </font>
                   </Text>
+                  <Text fx:id="roleText" layoutX="25.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role: " wrappingWidth="599.9830722808838">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
                </children>
                <GridPane.margin>
                   <Insets bottom="40.0" left="20.0" right="20.0" top="-140.0" />

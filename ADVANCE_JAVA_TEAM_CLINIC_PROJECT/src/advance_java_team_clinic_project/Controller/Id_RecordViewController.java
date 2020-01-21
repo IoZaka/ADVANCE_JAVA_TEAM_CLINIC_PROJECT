@@ -64,6 +64,7 @@ public class Id_RecordViewController implements Initializable {
     @FXML
     private Button createDiagnosisBtn;
     
+    private Integer diagID = -1;
      
     private Statement stmt;
     private String sql;
@@ -108,7 +109,7 @@ public class Id_RecordViewController implements Initializable {
     
     public void setID(String id){
         
-        this.id = Integer.valueOf(id);
+        
          
         try {
             object = DatabaseConnection.getInstance();
@@ -123,24 +124,19 @@ public class Id_RecordViewController implements Initializable {
                 appCodeInput.setText(rs.getString("app_code"));
                 createdInput.setText(rs.getString("created"));
                 commentsTextArea.setText(rs.getString("comments"));
+                diagID = rs.getInt("diagnosis");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        sql = "select app_info_id from pm_diagnosis where app_info_id=" + Integer.valueOf(id);
-        try {
-            rs = stmt.executeQuery(sql);
-            if(rs.next()){
-                diagnoseInfoBtn.setDisable(false);
-                 diagnoseInfoBtn.setText("Diagnose Info");
-            }else{
-                diagnoseInfoBtn.setDisable(true);
-                diagnoseInfoBtn.setText("No diagnose");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+             
+         if(diagID == -1){
+                    diagnoseInfoBtn.setDisable(true);
+                    diagnoseInfoBtn.setText("No diagnose");
+                }else {
+                    diagnoseInfoBtn.setDisable(false);
+                    diagnoseInfoBtn.setText("Diagnose Info");
+                }
         
         diagnoseInfoBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
@@ -149,7 +145,7 @@ public class Id_RecordViewController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
                     Parent root = (Parent)loader.load();    
                     DiagnosisInfoController diagnosisID = loader.getController();
-                    diagnosisID.setDiagnosisID(id);
+                    diagnosisID.setDiagnosisID(id,diagID);
                     idRecordPane.getChildren().clear();
                     idRecordPane.getChildren().add(root);
                 } catch (IOException ex) {

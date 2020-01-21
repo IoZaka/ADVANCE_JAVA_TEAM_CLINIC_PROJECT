@@ -81,8 +81,8 @@ public class TestsTableViewController implements Initializable {
         
     }     
     
-    public void setDiagID(String id){
-        String diag_ID = null;
+    public void setTestID(String id, Integer diagID){
+        
         
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
@@ -91,7 +91,7 @@ public class TestsTableViewController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
                     Parent root = (Parent)loader.load();
                     DiagnosisInfoController diagnosisID = loader.getController();
-                    diagnosisID.setDiagnosisID(id);
+                    diagnosisID.setDiagnosisID(id,diagID);
                     testsPane.getChildren().clear();
                     testsPane.getChildren().add(root);
                 } catch (IOException ex) {
@@ -103,15 +103,7 @@ public class TestsTableViewController implements Initializable {
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
-            sql = "select id from pm_diagnosis where app_info_id=" + Integer.valueOf(id);
-            rs = stmt.executeQuery(sql);
-            if(rs.next()){
-                diag_ID = rs.getString("id");
-            }else{
-                System.out.println("doesnt work");
-            }
-
-            sql = "select * from pm_diag_tests where diag_id= " + Integer.valueOf(diag_ID);
+            sql = "select * from pm_diag_tests where diag_id= " + Integer.valueOf(diagID);
             //sql = "select a.id id, a.description, decode(a.is_completed,0,'No',1,'Yes') is_completed,cost,\n" +
                // "decode(a.is_paid,0,'No',1,'Yes') is_paid, b.description status from pm_diag_tests a, \n" +
                // "pm_status b where a.status_id = b.id and diag_id= " +testID;

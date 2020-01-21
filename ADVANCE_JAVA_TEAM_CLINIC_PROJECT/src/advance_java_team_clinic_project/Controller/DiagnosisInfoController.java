@@ -53,7 +53,6 @@ public class DiagnosisInfoController implements Initializable {
     @FXML
     private AnchorPane diagnosisPanel;
     
-    private String diagID;
     @FXML
     private TextArea medicineText;
     @FXML
@@ -86,7 +85,7 @@ public class DiagnosisInfoController implements Initializable {
         commentsText.setEditable(false);  
     }   
     
-    public void setDiagnosisID(String id){
+    public void setDiagnosisID(String id, Integer diagID){
                  
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
@@ -111,7 +110,7 @@ public class DiagnosisInfoController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AdmissionInfoView.fxml"));
                     Parent root = (Parent)loader.load();
                     AdmissionInfoController admissionInfoID = loader.getController();
-                    admissionInfoID.setAdmissionID(id);
+                    admissionInfoID.setAdmissionID(diagID);
                     diagnosisPanel.getChildren().clear();
                     diagnosisPanel.getChildren().add(root);
                 } catch (IOException ex) {
@@ -128,8 +127,8 @@ public class DiagnosisInfoController implements Initializable {
                 try{                  
                     FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testsTableView.fxml"));
                     Parent root = (Parent)loader.load();
-                    TestsTableViewController diagID = loader.getController();
-                    diagID.setDiagID(id);
+                    TestsTableViewController testID = loader.getController();
+                    testID.setTestID(id,diagID);
                     diagnosisPanel.getChildren().clear();
                     diagnosisPanel.getChildren().add(root);
                 } catch (IOException ex) {

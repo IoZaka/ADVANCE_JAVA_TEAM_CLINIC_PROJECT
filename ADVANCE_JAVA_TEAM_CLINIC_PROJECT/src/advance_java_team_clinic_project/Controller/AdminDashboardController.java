@@ -5,6 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -50,6 +51,8 @@ public class AdminDashboardController extends NewStage implements Initializable 
     @FXML
     private ToggleButton logoutBtn;
 
+    User user = User.getInstance();
+    
     /**
      * Initializes the controller class.
      *
@@ -60,7 +63,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
     public void initialize(URL url, ResourceBundle rb) {
         loadUIonSamePane("../View/profilePane.fxml", adminPane);
         profileBtn.setSelected(true);
-        usernameText.setText(usernameText.getText());
+        usernameText.setText(usernameText.getText() + user.getUsername());
         usernamePane.setTextAlignment(TextAlignment.CENTER);
 
         profileBtn.setOnMouseClicked((MouseEvent event) -> {
