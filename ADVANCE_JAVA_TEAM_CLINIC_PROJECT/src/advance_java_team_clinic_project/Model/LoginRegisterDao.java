@@ -1,5 +1,4 @@
 package advance_java_team_clinic_project.Model;
-
 /**
  *
  * @author Tasos

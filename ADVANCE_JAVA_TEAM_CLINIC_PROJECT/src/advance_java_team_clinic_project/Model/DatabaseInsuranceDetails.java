@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package advance_java_team_clinic_project.Model;
 
 import java.sql.Date;
@@ -27,11 +22,11 @@ private Statement stmt;
     private User user = User.getInstance();
     
     public void getObject() {
-    try {
-        object = DatabaseConnection.getInstance();
-    } catch (SQLException ex) {
-        Logger.getLogger(DatabaseInsuranceDetails.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            object = DatabaseConnection.getInstance();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseInsuranceDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
     
     /**
