@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.stage.StageStyle;
 import static sun.misc.MessageUtils.where;
@@ -17,13 +19,13 @@ import static sun.misc.MessageUtils.where;
  *
  * @author Tasos
  */
-public class DatabaseInsuranceDetails {
+public class DatabaseInsuranceDetails implements InsuranceDetailsDao{
 private Statement stmt;
     private String sql,sql_contact;
     private ResultSet rs;
     private DatabaseConnection object;
     private User user = User.getInstance();
-    public void getObject() throws SQLException {
+    public void getObject() {
         object = DatabaseConnection.getInstance();
     } 
     
@@ -33,8 +35,13 @@ private Statement stmt;
      * @return
      * @throws SQLException 
      */
-    public ResultSet fetchInsuranceInfoData(Integer userId) throws SQLException {
+@Override
+    public ResultSet fetchInsuranceInfoData(Integer userId)  {
+    try {
         stmt = object.connection.createStatement();
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseInsuranceDetails.class.getName()).log(Level.SEVERE, null, ex);
+    }
         sql = "select id, "
                     +"to_char(ins_expire_date,'dd-MM-yyyy') ins_expire_date,"
                     + "european, "
@@ -43,17 +50,29 @@ private Statement stmt;
                     + "ins_comp_id "
                 + "from pm_patients_ins_info "
                 + "where user_id = " + userId;
+    try {
         rs = stmt.executeQuery(sql);
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseInsuranceDetails.class.getName()).log(Level.SEVERE, null, ex);
+    }
         return rs;
     }
     
-    public void updateInsuranceDetails(Integer userId,String ins_expire_date,Integer european, Integer ekas, String ins_comments,Integer ins_comp_id) throws SQLException {
+    public void updateInsuranceDetails(Integer userId,String ins_expire_date,Integer european, Integer ekas, String ins_comments,Integer ins_comp_id) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
+    try {
         stmt = object.connection.createStatement();
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseInsuranceDetails.class.getName()).log(Level.SEVERE, null, ex);
+    }
         sql_contact = "update pm_patients_ins_info set ins_expire_date = to_date(\'"+ins_expire_date+"\','dd-mm-yyyy'),european=" + european + ",ekas=" + ekas + ",ins_comments=\'" + ins_comments + "\',ins_comp_id=" + ins_comp_id +",updated_by="+ user.getId() + " where user_id =" + userId;
+    try {
         rs = stmt.executeQuery(sql_contact);
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseInsuranceDetails.class.getName()).log(Level.SEVERE, null, ex);
+    }
         alert.setTitle("Update");
         alert.setContentText("Update submitted");
         alert.showAndWait();
