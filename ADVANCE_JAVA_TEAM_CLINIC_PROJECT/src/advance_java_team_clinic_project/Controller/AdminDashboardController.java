@@ -74,7 +74,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
             profileBtn.setSelected(true);
         });
         
-        Parametrics.setOnMouseClicked((MouseEvent event) -> {
+        parametricsBtn.setOnMouseClicked((MouseEvent event) -> {
             loadUIonSamePane("../View/AdminParametrics.fxml", adminPane);
             clearSelectedButtons();
             parametricsBtn.setSelected(true);
