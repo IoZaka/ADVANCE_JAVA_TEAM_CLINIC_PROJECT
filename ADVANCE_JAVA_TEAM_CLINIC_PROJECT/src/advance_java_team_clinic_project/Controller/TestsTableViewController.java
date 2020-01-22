@@ -27,11 +27,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -43,13 +45,7 @@ public class TestsTableViewController implements Initializable {
     private ObservableList data;  
     
     @FXML
-    private TableView testsTable;
-    
-    User user = User.getInstance();
-    private Statement stmt;
-    private ResultSet rs;
-    private String sql;
-    private DatabaseConnection object;
+    private TableView<Tests> testsTable = new TableView<>();
     
     TableColumn idCol = new TableColumn("ID");
     TableColumn diagIDCol = new TableColumn("Diag ID");
@@ -62,6 +58,7 @@ public class TestsTableViewController implements Initializable {
     @FXML
     private AnchorPane testsPane;
     
+    Tests tests = new Tests();
 
     /**
      * Initializes the controller class.
@@ -73,16 +70,40 @@ public class TestsTableViewController implements Initializable {
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         isCompletedCol.setCellValueFactory(new PropertyValueFactory<>("is_completed"));
         costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
-        isPaidCol.setCellValueFactory(new PropertyValueFactory<>("is_paid"));
-        
-        testsTable.getColumns().addAll(idCol,diagIDCol,descriptionCol,
-                isCompletedCol,costCol,isPaidCol);
-          
-        
+        isPaidCol.setCellValueFactory(new PropertyValueFactory<>("is_paid"));     
     }     
     
     public void setTestID(String id, Integer diagID){
         
+        Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = new Callback<TableColumn<Tests, String>, TableCell<Tests, String>>() {
+            public TableCell call(final TableColumn<Tests, String> param) {
+                final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
+                    final Button btn = new Button();
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            Tests test = new Tests();
+                            test = getTableView().getItems().get(getIndex());
+                            btn.setText(test.idProperty().getValue());
+                            btn.setOnAction(event -> {
+                                
+                            });
+                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+     
+        idCol.setCellFactory(cellFactory);
+        testsTable.getColumns().add(idCol);
+        testsTable.getColumns().addAll(diagIDCol,descriptionCol,isCompletedCol,costCol,isPaidCol);
         
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
@@ -100,19 +121,13 @@ public class TestsTableViewController implements Initializable {
             }
         });
         
+      
         try {
-            object = DatabaseConnection.getInstance();
-            stmt = object.connection.createStatement();
-            sql = "select * from pm_diag_tests where diag_id= " + Integer.valueOf(diagID);
-            //sql = "select a.id id, a.description, decode(a.is_completed,0,'No',1,'Yes') is_completed,cost,\n" +
-               // "decode(a.is_paid,0,'No',1,'Yes') is_paid, b.description status from pm_diag_tests a, \n" +
-               // "pm_status b where a.status_id = b.id and diag_id= " +testID;
-            rs = stmt.executeQuery(sql);
-            data = FXCollections.observableArrayList(databaseTests(rs));
-            testsTable.setItems(data);          
+            data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }     
+        testsTable.setItems(data);          
     }
     
     private ArrayList databaseTests(ResultSet rs) throws SQLException {
