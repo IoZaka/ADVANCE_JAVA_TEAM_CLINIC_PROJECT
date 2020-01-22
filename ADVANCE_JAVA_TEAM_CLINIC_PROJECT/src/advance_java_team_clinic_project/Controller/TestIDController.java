@@ -5,10 +5,16 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.Tests;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -40,13 +46,35 @@ public class TestIDController implements Initializable {
     private DatePicker createdDate;
     @FXML
     private DatePicker updatedDate;
+    @FXML
+    private Button backBtn;
 
+    Tests tests = new Tests();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      
     }    
     
+    public void setTestIDView(Integer testID){
+        
+        ResultSet rs = tests.getTestByID(testID);
+        try {
+            if(rs.next()){
+                descriptionInput.setText(rs.getString("description"));
+                costInput.setText(rs.getString("cost"));
+                resultsInput.setText(rs.getString("results"));
+                isPaidInput.setText(rs.getString("is_paid"));
+                //caseStatusInput.setText(rs.getString("status"));
+                createdByInput.setText(rs.getString("created_by"));
+                updatedByInput.setText(rs.getString("updated_by"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TestIDController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

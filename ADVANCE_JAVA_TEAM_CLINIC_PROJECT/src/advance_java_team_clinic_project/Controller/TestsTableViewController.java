@@ -58,6 +58,7 @@ public class TestsTableViewController implements Initializable {
     @FXML
     private AnchorPane testsPane;
     
+    User user = User.getInstance();
     Tests tests = new Tests();
 
     /**
@@ -90,7 +91,19 @@ public class TestsTableViewController implements Initializable {
                             test = getTableView().getItems().get(getIndex());
                             btn.setText(test.idProperty().getValue());
                             btn.setOnAction(event -> {
-                                
+                                    FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
+                                    Parent root = null;
+                                try {
+                                    root = (Parent)loader.load();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                    TestIDController id = loader.getController();
+                                    String testID = btn.getText();
+                                    id.setTestIDView(Integer.valueOf(testID));
+                                    //Scene
+                                    testsPane.getChildren().clear();
+                                    testsPane.getChildren().add(root);
                             });
                             setGraphic(btn);
                             setText(null);
@@ -123,6 +136,14 @@ public class TestsTableViewController implements Initializable {
         
       
         try {
+            switch(user.getRoleID()){
+                case 3:
+                    data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
+                    break;
+                case 5:
+                    data = FXCollections.observableArrayList(databaseTests(tests.getAllTests()));
+                    break;
+            }
             data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,7 +154,7 @@ public class TestsTableViewController implements Initializable {
     private ArrayList databaseTests(ResultSet rs) throws SQLException {
         ArrayList<Tests> data = new ArrayList();
         
-        if(rs.next()){
+        while(rs.next()){
             Tests test = new Tests();
             test.idProperty().set(rs.getString("id"));
             test.diag_idProperty().set(rs.getString("diag_id"));
