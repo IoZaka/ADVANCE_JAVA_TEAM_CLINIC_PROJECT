@@ -83,32 +83,26 @@ public class LoginViewController extends NewStage implements Initializable {
      * @throws IOException 
      */
     private void handleLoginAction(ActionEvent event) throws IOException {
-        try {
-            ak = new DatabaseLoginRegister();
-            userNameGiven = userNameTxtField.getText();
-            passWordGiven = passWordField.getText();
-
-            /**/
-            Stage currentStage = (Stage) loginPane.getScene().getWindow();
-
-            ak.getObject();
-            if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
-                User user = User.getInstance();
-                System.out.println(user.getRoleID());
-                switch(user.getRoleID()){
-                    case 1:
-                        setNewStage("../View/AdminDashboard.fxml", currentStage);
-                        break;
-                    case 2:
-                        setNewStage("../View/doctorsDashboard.fxml", currentStage);
-                        break;
-                    case 3:
-                        setNewStage("../View/patientsDashboard.fxml", currentStage);
-                        break;             
-                }
+        ak = new DatabaseLoginRegister();
+        userNameGiven = userNameTxtField.getText();
+        passWordGiven = passWordField.getText();
+        /**/
+        Stage currentStage = (Stage) loginPane.getScene().getWindow();
+        ak.getObject();
+        if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
+            User user = User.getInstance();
+            System.out.println(user.getRoleID());
+            switch(user.getRoleID()){
+                case 1:
+                    setNewStage("../View/AdminDashboard.fxml", currentStage);
+                    break;
+                case 2:
+                    setNewStage("../View/doctorsDashboard.fxml", currentStage);
+                    break;
+                case 3:
+                    setNewStage("../View/patientsDashboard.fxml", currentStage);
+                    break;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

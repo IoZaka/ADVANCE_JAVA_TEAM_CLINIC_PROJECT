@@ -73,11 +73,7 @@ public class CheckInsuranceDetailsController implements Initializable {
             if(euro!=0){euro = 1;}
             eka = ekas.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to eka ginete 0
             if(eka!=0){eka = 1;}
-            try {
-                ak.updateInsuranceDetails(user.getId(), insuranceExpiredDate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), euro, eka, insureanceComments.getText(),insuId);
-            } catch (SQLException ex) {
-                Logger.getLogger(CheckInsuranceDetailsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ak.updateInsuranceDetails(user.getId(), insuranceExpiredDate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), euro, eka, insureanceComments.getText(),insuId);
        });
     }    
     

@@ -81,7 +81,7 @@ public class SignUpViewController extends NewStage implements Initializable {
                                 currentStage.setScene(scene);
                             }
                             ;
-                        } catch (SQLException | IOException ex) {
+                        } catch (IOException ex) {
                             Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
