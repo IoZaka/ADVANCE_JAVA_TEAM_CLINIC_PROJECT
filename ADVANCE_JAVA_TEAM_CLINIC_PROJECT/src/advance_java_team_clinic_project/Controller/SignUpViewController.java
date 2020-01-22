@@ -79,9 +79,8 @@ public class SignUpViewController extends NewStage implements Initializable {
                                 root = FXMLLoader.load(SignUpViewController.this.getClass().getResource("../View/loginStyleFX.fxml"));
                                 scene = new Scene(root);
                                 currentStage.setScene(scene);
-                            }
-                            ;
-                        } catch (SQLException | IOException ex) {
+                            };
+                        } catch (IOException ex) {
                             Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {

@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.CheckAddressDetailsController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.CheckAddressDetailsController">
    <children>
       <Text fill="#385ca8" layoutX="210.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address Details">
          <font>

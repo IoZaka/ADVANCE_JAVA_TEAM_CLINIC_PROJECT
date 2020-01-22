@@ -45,12 +45,6 @@ public class TestsTableViewController implements Initializable {
     @FXML
     private TableView testsTable;
     
-    User user = User.getInstance();
-    private Statement stmt;
-    private ResultSet rs;
-    private String sql;
-    private DatabaseConnection object;
-    
     TableColumn idCol = new TableColumn("ID");
     TableColumn diagIDCol = new TableColumn("Diag ID");
     TableColumn descriptionCol = new TableColumn("Description");
@@ -62,6 +56,7 @@ public class TestsTableViewController implements Initializable {
     @FXML
     private AnchorPane testsPane;
     
+    Tests tests = new Tests();
 
     /**
      * Initializes the controller class.
@@ -75,10 +70,7 @@ public class TestsTableViewController implements Initializable {
         costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
         isPaidCol.setCellValueFactory(new PropertyValueFactory<>("is_paid"));
         
-        testsTable.getColumns().addAll(idCol,diagIDCol,descriptionCol,
-                isCompletedCol,costCol,isPaidCol);
-          
-        
+        testsTable.getColumns().addAll(idCol,diagIDCol,descriptionCol,isCompletedCol,costCol,isPaidCol);  
     }     
     
     public void setTestID(String id, Integer diagID){
@@ -99,20 +91,13 @@ public class TestsTableViewController implements Initializable {
                 }
             }
         });
-        
+
         try {
-            object = DatabaseConnection.getInstance();
-            stmt = object.connection.createStatement();
-            sql = "select * from pm_diag_tests where diag_id= " + Integer.valueOf(diagID);
-            //sql = "select a.id id, a.description, decode(a.is_completed,0,'No',1,'Yes') is_completed,cost,\n" +
-               // "decode(a.is_paid,0,'No',1,'Yes') is_paid, b.description status from pm_diag_tests a, \n" +
-               // "pm_status b where a.status_id = b.id and diag_id= " +testID;
-            rs = stmt.executeQuery(sql);
-            data = FXCollections.observableArrayList(databaseTests(rs));
-            testsTable.setItems(data);          
+            data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        testsTable.setItems(data);          
     }
     
     private ArrayList databaseTests(ResultSet rs) throws SQLException {
