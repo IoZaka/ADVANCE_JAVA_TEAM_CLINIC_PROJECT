@@ -49,12 +49,12 @@ public class AdminParametricsController {
     private Button btEcoStatus;
 
     public void initialize(URL url, ResourceBundle rb) {
-        usernamebtn.setOnMouseClicked((MouseEvent event) -> {
-
-            
-            
-            
-        });
+//        usernamebtn.setOnMouseClicked((MouseEvent event) -> {
+//
+//            
+//            
+//            
+//        });
 
 }
 }
