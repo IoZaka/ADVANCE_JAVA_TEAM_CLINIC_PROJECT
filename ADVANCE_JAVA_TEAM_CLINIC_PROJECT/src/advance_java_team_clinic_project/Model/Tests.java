@@ -54,4 +54,30 @@ public class Tests {
         return rs;
     }
     
+    public ResultSet getTestByID(Integer testID){
+        try {
+            object = DatabaseConnection.getInstance();
+            stmt = object.connection.createStatement();
+            sql = "select * from pm_diag_tests where id= " + testID;
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rs;
+    }
+    
+    public ResultSet getAllTests(){
+        try{
+            object = DatabaseConnection.getInstance();
+            stmt = object.connection.createStatement();
+            sql = "select * from pm_diag_tests";
+            rs = stmt.executeQuery(sql);
+        }catch (SQLException ex) {
+            Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    
 }
