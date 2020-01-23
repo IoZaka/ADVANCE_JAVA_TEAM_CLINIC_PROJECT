@@ -41,8 +41,6 @@ public class AdminDashboardController extends NewStage implements Initializable 
     @FXML
     private Text usernameText;
     @FXML
-    private ToggleButton Parametrics;
-    @FXML
     private ToggleButton editProfileBtn;
     @FXML
     private ToggleButton enterNewUserBtn;
@@ -54,6 +52,8 @@ public class AdminDashboardController extends NewStage implements Initializable 
     private ToggleButton logoutBtn;
 
     User user = User.getInstance();
+    @FXML
+    private ToggleButton parametricsBtn;
     
     /**
      * Initializes the controller class.
@@ -74,10 +74,10 @@ public class AdminDashboardController extends NewStage implements Initializable 
             profileBtn.setSelected(true);
         });
         
-        Parametrics.setOnMouseClicked((MouseEvent event) -> {
+        parametricsBtn.setOnMouseClicked((MouseEvent event) -> {
             loadUIonSamePane("../View/AdminParametrics.fxml", adminPane);
             clearSelectedButtons();
-            Parametrics.setSelected(true);
+            parametricsBtn.setSelected(true);
         });
         
         editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
@@ -115,6 +115,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
         enterNewUserBtn.setSelected(false);
         searchUserBtn.setSelected(false);
         grantPermissionsBtn.setSelected(false);
+        parametricsBtn.setSelected(false);
         logoutBtn.setSelected(false);
     }
 }

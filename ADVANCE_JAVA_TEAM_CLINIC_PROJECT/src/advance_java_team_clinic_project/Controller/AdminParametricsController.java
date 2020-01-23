@@ -30,8 +30,6 @@ import javafx.scene.layout.AnchorPane;
  */
 public class AdminParametricsController {
     
-    @FXML
-    private AnchorPane AdminParametrics;
     private ResultSet rs;
     User user = User.getInstance();
 
@@ -49,12 +47,7 @@ public class AdminParametricsController {
     private Button btEcoStatus;
 
     public void initialize(URL url, ResourceBundle rb) {
-//        usernamebtn.setOnMouseClicked((MouseEvent event) -> {
-//
-//            
-//            
-//            
-//        });
+        
 
-}
+    }
 }

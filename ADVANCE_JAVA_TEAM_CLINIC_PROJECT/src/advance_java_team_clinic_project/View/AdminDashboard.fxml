@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane fx:id="adminPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AdminDashboardController">
+<BorderPane fx:id="adminPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.AdminDashboardController">
    <left>
       <VBox prefHeight="600.0" prefWidth="180.0" styleClass="sidebar" stylesheets="@style.css" BorderPane.alignment="CENTER">
          <children>
@@ -33,33 +33,36 @@
             </TextFlow>
             <ToggleButton fx:id="profileBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Profile">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </ToggleButton>
             <ToggleButton fx:id="editProfileBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Edit Profile">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </ToggleButton>
             <ToggleButton fx:id="enterNewUserBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Enter New User">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </ToggleButton>
             <ToggleButton fx:id="searchUserBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Search User">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="grantPermissionsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Grand Permissions">
+            <ToggleButton fx:id="grantPermissionsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Grant Permissions">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </ToggleButton>
-            <ToggleButton fx:id="Parametrics" mnemonicParsing="false" prefHeight="44.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Parametrics" />
+            <ToggleButton fx:id="parametricsBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Parametrics">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin></ToggleButton>
             <ToggleButton fx:id="logoutBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="sidebarBtns" stylesheets="@style.css" text="Logout">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </ToggleButton>
          </children></VBox>
