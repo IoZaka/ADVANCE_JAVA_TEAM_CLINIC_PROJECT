@@ -99,9 +99,43 @@ public class TestIDController implements Initializable {
                     Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        });
+        });  
+    }
+    
+    public void setTestIDView(Integer testID){
         
+        ResultSet rs = tests.getTestByID(testID);
         
+        try {
+            if(rs.next()){
+                diagID = rs.getInt("diag_id");
+                descriptionInput.setText(rs.getString("description"));
+                costInput.setText(rs.getString("cost"));
+                resultsInput.setText(rs.getString("results"));
+                isPaidInput.setText(rs.getString("is_paid"));
+                //caseStatusInput.setText(rs.getString("status"));
+                createdByInput.setText(rs.getString("created_by"));
+                updatedByInput.setText(rs.getString("updated_by"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TestIDController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(TestIDController.this.getClass().getResource("../View/testsTableView.fxml"));
+                    Parent root = (Parent)loader.load();
+                    TestsTableViewController testID = loader.getController();
+                    testID.setID();
+                    testIDPane.getChildren().clear();
+                    testIDPane.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });  
     }
     
     

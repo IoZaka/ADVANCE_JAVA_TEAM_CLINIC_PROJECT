@@ -102,6 +102,9 @@ public class LoginViewController extends NewStage implements Initializable {
                 case 3:
                     setNewStage("../View/patientsDashboard.fxml", currentStage);
                     break;
+                case 5:
+                    setNewStage("../View/ClinicCenterMenu.fxml", currentStage);
+                    break;
             }
         }
     }

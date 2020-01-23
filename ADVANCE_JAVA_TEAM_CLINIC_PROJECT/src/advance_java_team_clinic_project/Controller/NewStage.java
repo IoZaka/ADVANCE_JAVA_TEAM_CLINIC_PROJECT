@@ -6,6 +6,8 @@
 package advance_java_team_clinic_project.Controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -43,5 +45,5 @@ public abstract class NewStage {
         }
         pane.setCenter(root);
     }
-    
+      
 }

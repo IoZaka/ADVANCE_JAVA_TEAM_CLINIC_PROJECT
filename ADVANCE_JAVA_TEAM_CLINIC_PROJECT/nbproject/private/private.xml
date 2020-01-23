@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/Tests.java</file>
+            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/ClinicCenterMenuController.java</file>
+            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/AdminDashboardController.java</file>
+            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/AdminParametricsController.java</file>
+            <file>file:/C:/Users/Chris/Desktop/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/View/ClinicCenterMenuController.java</file>
         </group>
     </open-files>
 </project-private>
