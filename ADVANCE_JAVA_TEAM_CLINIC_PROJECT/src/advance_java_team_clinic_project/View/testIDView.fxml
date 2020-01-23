@@ -156,12 +156,12 @@
                   <Insets bottom="130.0" left="180.0" />
                </GridPane.margin>
             </DatePicker>
-            <Button fx:id="backBtn" maxWidth="130.0" minWidth="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="130.0" styleClass="backBtn" stylesheets="@style.css" text="Back" GridPane.rowIndex="2">
+            <Button fx:id="backBtn" maxWidth="203.0" minWidth="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="203.0" styleClass="backBtn" stylesheets="@style.css" text="Go back to Tests" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="230.0" top="50.0" />
+                  <Insets left="50.0" top="60.0" />
                </GridPane.margin>
             </Button>
          </children>

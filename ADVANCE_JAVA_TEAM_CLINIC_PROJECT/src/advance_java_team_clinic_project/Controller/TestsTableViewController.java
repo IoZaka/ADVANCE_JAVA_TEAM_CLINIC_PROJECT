@@ -47,8 +47,7 @@ public class TestsTableViewController implements Initializable {
     @FXML
     private TableView<Tests> testsTable = new TableView<>();
     
-    TableColumn idCol = new TableColumn("ID");
-    TableColumn diagIDCol = new TableColumn("Diag ID");
+    TableColumn idCol = new TableColumn("Edit");
     TableColumn descriptionCol = new TableColumn("Description");
     TableColumn isCompletedCol = new TableColumn("Is Completed");
     TableColumn costCol = new TableColumn("Cost");
@@ -66,15 +65,15 @@ public class TestsTableViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        testsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        diagIDCol.setCellValueFactory(new PropertyValueFactory<>("diag_id"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         isCompletedCol.setCellValueFactory(new PropertyValueFactory<>("is_completed"));
         costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
         isPaidCol.setCellValueFactory(new PropertyValueFactory<>("is_paid"));     
     }     
     
-    public void setTestID(String id, Integer diagID){
+    public void setTestID(String appID, Integer diagID){
         
         Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = new Callback<TableColumn<Tests, String>, TableCell<Tests, String>>() {
             public TableCell call(final TableColumn<Tests, String> param) {
@@ -93,14 +92,14 @@ public class TestsTableViewController implements Initializable {
                             btn.setOnAction(event -> {
                                     FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
                                     Parent root = null;
-                                try {
-                                    root = (Parent)loader.load();
-                                } catch (IOException ex) {
-                                    Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                    try {
+                                        root = (Parent)loader.load();
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                     TestIDController id = loader.getController();
                                     String testID = btn.getText();
-                                    id.setTestIDView(Integer.valueOf(testID));
+                                    id.setTestIDView(appID,Integer.valueOf(testID));
                                     //Scene
                                     testsPane.getChildren().clear();
                                     testsPane.getChildren().add(root);
@@ -116,7 +115,7 @@ public class TestsTableViewController implements Initializable {
      
         idCol.setCellFactory(cellFactory);
         testsTable.getColumns().add(idCol);
-        testsTable.getColumns().addAll(diagIDCol,descriptionCol,isCompletedCol,costCol,isPaidCol);
+        testsTable.getColumns().addAll(descriptionCol,isCompletedCol,costCol,isPaidCol);
         
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
@@ -125,7 +124,7 @@ public class TestsTableViewController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
                     Parent root = (Parent)loader.load();
                     DiagnosisInfoController diagnosisID = loader.getController();
-                    diagnosisID.setDiagnosisID(id,diagID);
+                    diagnosisID.setDiagnosisID(appID,diagID);
                     testsPane.getChildren().clear();
                     testsPane.getChildren().add(root);
                 } catch (IOException ex) {

@@ -67,7 +67,7 @@ public class PatientsRecordsController extends NewStage implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
        
        
-        
+       recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
        idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
        appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
        commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));

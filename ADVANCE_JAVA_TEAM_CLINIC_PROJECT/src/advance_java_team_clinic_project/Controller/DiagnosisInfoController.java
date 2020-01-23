@@ -127,7 +127,7 @@ public class DiagnosisInfoController implements Initializable {
                 try{                  
                     FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testsTableView.fxml"));
                     Parent root = (Parent)loader.load();
-                     TestsTableViewController testID = loader.getController();
+                    TestsTableViewController testID = loader.getController();
                     testID.setTestID(id,diagID);
                     diagnosisPanel.getChildren().clear();
                     diagnosisPanel.getChildren().add(root);
