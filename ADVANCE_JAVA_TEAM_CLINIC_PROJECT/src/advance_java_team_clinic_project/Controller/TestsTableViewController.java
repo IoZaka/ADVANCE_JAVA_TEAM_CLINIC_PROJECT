@@ -148,6 +148,7 @@ public class TestsTableViewController implements Initializable {
    
     
     public void setID(){ 
+        backBtn.setVisible(false);
         Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = new Callback<TableColumn<Tests, String>, TableCell<Tests, String>>() {
             public TableCell call(final TableColumn<Tests, String> param) {
                 final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
@@ -194,6 +195,8 @@ public class TestsTableViewController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
                 
     }
     
