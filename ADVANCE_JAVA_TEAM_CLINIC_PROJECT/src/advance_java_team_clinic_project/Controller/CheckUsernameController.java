@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -83,10 +83,10 @@ public class CheckUsernameController implements Initializable {
 
     /**
      * EventHandler that checks what the user types on the keyboard.
+     *
      * @param username
-     * @return 
+     * @return
      */
-    
     public EventHandler<KeyEvent> usernameValidation(final String username) {
         return (KeyEvent e) -> {
             TextField txt_TextField = (TextField) e.getSource();

@@ -1,20 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.DatabaseConnection;
-import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
-import advance_java_team_clinic_project.Model.Records;
 import advance_java_team_clinic_project.Model.Tests;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -42,11 +38,11 @@ import javafx.util.Callback;
  */
 public class TestsTableViewController implements Initializable {
 
-    private ObservableList data;  
-    
+    private ObservableList data;
+
     @FXML
     private TableView<Tests> testsTable = new TableView<>();
-    
+
     TableColumn idCol = new TableColumn("ID");
     TableColumn diagIDCol = new TableColumn("Diag ID");
     TableColumn descriptionCol = new TableColumn("Description");
@@ -57,7 +53,7 @@ public class TestsTableViewController implements Initializable {
     private Button backBtn;
     @FXML
     private AnchorPane testsPane;
-    
+
     User user = User.getInstance();
     Tests tests = new Tests();
 
@@ -71,15 +67,16 @@ public class TestsTableViewController implements Initializable {
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         isCompletedCol.setCellValueFactory(new PropertyValueFactory<>("is_completed"));
         costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
-        isPaidCol.setCellValueFactory(new PropertyValueFactory<>("is_paid"));     
-    }     
-    
-    public void setTestID(String id, Integer diagID){
-        
+        isPaidCol.setCellValueFactory(new PropertyValueFactory<>("is_paid"));
+    }
+
+    public void setTestID(String id, Integer diagID) {
+
         Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = new Callback<TableColumn<Tests, String>, TableCell<Tests, String>>() {
             public TableCell call(final TableColumn<Tests, String> param) {
                 final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
                     final Button btn = new Button();
+
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -91,19 +88,19 @@ public class TestsTableViewController implements Initializable {
                             test = getTableView().getItems().get(getIndex());
                             btn.setText(test.idProperty().getValue());
                             btn.setOnAction(event -> {
-                                    FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
-                                    Parent root = null;
+                                FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
+                                Parent root = null;
                                 try {
-                                    root = (Parent)loader.load();
+                                    root = (Parent) loader.load();
                                 } catch (IOException ex) {
                                     Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                                    TestIDController id = loader.getController();
-                                    String testID = btn.getText();
-                                    id.setTestIDView(Integer.valueOf(testID));
-                                    //Scene
-                                    testsPane.getChildren().clear();
-                                    testsPane.getChildren().add(root);
+                                TestIDController id = loader.getController();
+                                String testID = btn.getText();
+                                id.setTestIDView(Integer.valueOf(testID));
+                                //Scene
+                                testsPane.getChildren().clear();
+                                testsPane.getChildren().add(root);
                             });
                             setGraphic(btn);
                             setText(null);
@@ -113,19 +110,19 @@ public class TestsTableViewController implements Initializable {
                 return cell;
             }
         };
-     
+
         idCol.setCellFactory(cellFactory);
         testsTable.getColumns().add(idCol);
-        testsTable.getColumns().addAll(diagIDCol,descriptionCol,isCompletedCol,costCol,isPaidCol);
-        
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        testsTable.getColumns().addAll(diagIDCol, descriptionCol, isCompletedCol, costCol, isPaidCol);
+
+        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
                     FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
-                    Parent root = (Parent)loader.load();
+                    Parent root = (Parent) loader.load();
                     DiagnosisInfoController diagnosisID = loader.getController();
-                    diagnosisID.setDiagnosisID(id,diagID);
+                    diagnosisID.setDiagnosisID(id, diagID);
                     testsPane.getChildren().clear();
                     testsPane.getChildren().add(root);
                 } catch (IOException ex) {
@@ -133,10 +130,9 @@ public class TestsTableViewController implements Initializable {
                 }
             }
         });
-        
-      
+
         try {
-            switch(user.getRoleID()){
+            switch (user.getRoleID()) {
                 case 3:
                     data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
                     break;
@@ -147,14 +143,14 @@ public class TestsTableViewController implements Initializable {
             data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }     
-        testsTable.setItems(data);          
+        }
+        testsTable.setItems(data);
     }
-    
+
     private ArrayList databaseTests(ResultSet rs) throws SQLException {
         ArrayList<Tests> data = new ArrayList();
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             Tests test = new Tests();
             test.idProperty().set(rs.getString("id"));
             test.diag_idProperty().set(rs.getString("diag_id"));
@@ -166,8 +162,5 @@ public class TestsTableViewController implements Initializable {
         }
         return data;
     }
-    
+
 }
-
-
-

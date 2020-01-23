@@ -3,14 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.AdminParametricsController">
-   <children>
-      <Button fx:id="btroles" layoutX="170.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="ROLES" />
-      <Button fx:id="btinsuranceCompanies" layoutX="170.0" layoutY="255.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="INSURANCE &#10;COMPANIES" />
-      <Button fx:id="btGenders" layoutX="344.0" layoutY="255.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="GENDERS" />
-      <Button fx:id="btnationalities" layoutX="344.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="NATIONALITIES" />
-      <Button fx:id="btEcoStatus" layoutX="521.0" layoutY="255.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="ECO STATUS" />
-      <Button fx:id="btmembers" layoutX="521.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="MEMBERS" />
-   </children>
+<AnchorPane fx:id="AdminParametricsPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AdminParametricsController">
+    <children>
+        <Button fx:id="btroles" layoutX="170.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="ROLES" />
+        <Button fx:id="btinsuranceCompanies" layoutX="170.0" layoutY="255.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="INSURANCE &#10;COMPANIES" />
+        <Button fx:id="btGenders" layoutX="344.0" layoutY="255.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="GENDERS" />
+        <Button fx:id="btnationalities" layoutX="344.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="NATIONALITIES" />
+        <Button fx:id="btEcoStatus" layoutX="521.0" layoutY="255.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="ECO STATUS" />
+        <Button fx:id="btmembers" layoutX="521.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="MEMBERS" />
+    </children>
 </AnchorPane>

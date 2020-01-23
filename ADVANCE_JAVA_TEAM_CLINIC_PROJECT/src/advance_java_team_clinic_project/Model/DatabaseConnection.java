@@ -11,39 +11,39 @@ import java.sql.SQLException;
 
 /**
  * Made with Singleton Pattern
+ *
  * @author Beast
  */
 public class DatabaseConnection {
+
     public static DatabaseConnection instance;
     public Connection connection;
-   // private String url =  "jdbc:oracle:thin:@localhost:1521:xe";
-   private String url =  "jdbc:oracle:thin:@25.43.240.217:1521:xe";
+    // private String url =  "jdbc:oracle:thin:@localhost:1521:xe";
+    private String url = "jdbc:oracle:thin:@25.43.240.217:1521:xe";
     //private String url =  "jdbc:oracle:thin:@localhost:1521:xe";
     private String username = "javadev";
     private String password = "javadev";
-    
-    
-    
+
     public DatabaseConnection() throws SQLException {
         try {
             this.connection = DriverManager.getConnection(url, username, password);
-            } catch (SQLException ex){
-                System.out.println("Database Connection Creation Failed: " + ex.getMessage());
-            } catch (Exception e) {
-            }
+        } catch (SQLException ex) {
+            System.out.println("Database Connection Creation Failed: " + ex.getMessage());
+        } catch (Exception e) {
+        }
     }
-    
+
     public Connection getConnection() {
         return connection;
     }
-    
+
     public static DatabaseConnection getInstance() throws SQLException {
         if (instance == null) {
             instance = new DatabaseConnection();
-        } else if (instance.getConnection().isClosed()){
+        } else if (instance.getConnection().isClosed()) {
             instance = new DatabaseConnection();
         }
         return instance;
     }
-     
+
 }

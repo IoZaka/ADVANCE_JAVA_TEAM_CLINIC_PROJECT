@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -18,16 +17,16 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Tasos
  */
-public class ParametersPanelController implements Initializable {
+public class AdminNewDiscriptionController implements Initializable {
 
     @FXML
-    private AnchorPane ParametricsPanel;
+    private AnchorPane EditForm;
     @FXML
-    private TableView<?> tableview;
-    @FXML
-    private Button backBtn;
+    private Button TextArea;
     @FXML
     private Button createBtn;
+    @FXML
+    private Button backBtn;
 
     /**
      * Initializes the controller class.
@@ -35,6 +34,7 @@ public class ParametersPanelController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+
+    }
+
 }

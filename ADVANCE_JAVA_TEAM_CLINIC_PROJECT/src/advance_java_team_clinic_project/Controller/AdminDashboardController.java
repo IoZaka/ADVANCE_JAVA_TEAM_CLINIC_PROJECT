@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -54,7 +54,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
     User user = User.getInstance();
     @FXML
     private ToggleButton parametricsBtn;
-    
+
     /**
      * Initializes the controller class.
      *
@@ -73,13 +73,13 @@ public class AdminDashboardController extends NewStage implements Initializable 
             clearSelectedButtons();
             profileBtn.setSelected(true);
         });
-        
+
         parametricsBtn.setOnMouseClicked((MouseEvent event) -> {
-            loadUIonSamePane("../View/ParametricsPanel.fxml", adminPane);
+            loadUIonSamePane("../View/AdminParametrics.fxml", adminPane);
             clearSelectedButtons();
             parametricsBtn.setSelected(true);
         });
-        
+
         editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
             loadUIonSamePane("../View/editProfile.fxml", adminPane);
             clearSelectedButtons();
@@ -87,27 +87,25 @@ public class AdminDashboardController extends NewStage implements Initializable 
         });
 
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {
-          Stage currentStage = (Stage) adminPane.getScene().getWindow();
+            Stage currentStage = (Stage) adminPane.getScene().getWindow();
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("");
-                alert.setHeaderText("Do you want to Logout?");
-                alert.initStyle(StageStyle.UTILITY);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("");
+            alert.setHeaderText("Do you want to Logout?");
+            alert.initStyle(StageStyle.UTILITY);
 
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK){
-                    try {
-                        setNewStage("../View/loginStyleFX.fxml", currentStage);
-                    } catch (IOException ex) {
-                        Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    clearSelectedButtons();
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    setNewStage("../View/loginStyleFX.fxml", currentStage);
+                } catch (IOException ex) {
+                    Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                clearSelectedButtons();
+            }
         });
     }
-    
-  
 
     private void clearSelectedButtons() {
         profileBtn.setSelected(false);

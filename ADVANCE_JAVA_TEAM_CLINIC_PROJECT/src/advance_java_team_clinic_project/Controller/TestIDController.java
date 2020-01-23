@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -50,20 +50,20 @@ public class TestIDController implements Initializable {
     private Button backBtn;
 
     Tests tests = new Tests();
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
-    }    
-    
-    public void setTestIDView(Integer testID){
-        
+
+    }
+
+    public void setTestIDView(Integer testID) {
+
         ResultSet rs = tests.getTestByID(testID);
         try {
-            if(rs.next()){
+            if (rs.next()) {
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
                 resultsInput.setText(rs.getString("results"));
@@ -75,6 +75,6 @@ public class TestIDController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(TestIDController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }

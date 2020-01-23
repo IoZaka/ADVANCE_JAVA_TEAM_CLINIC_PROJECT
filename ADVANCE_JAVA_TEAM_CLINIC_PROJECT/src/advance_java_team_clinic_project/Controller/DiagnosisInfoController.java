@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -10,7 +10,6 @@ import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -52,7 +51,7 @@ public class DiagnosisInfoController implements Initializable {
     User user = User.getInstance();
     @FXML
     private AnchorPane diagnosisPanel;
-    
+
     @FXML
     private TextArea medicineText;
     @FXML
@@ -61,7 +60,7 @@ public class DiagnosisInfoController implements Initializable {
     private TextField doctorInput;
     @FXML
     private TextField patientInput;
-    
+
     //Database
     private Statement stmt;
     private ResultSet rs;
@@ -69,30 +68,30 @@ public class DiagnosisInfoController implements Initializable {
     private DatabaseConnection object;
     @FXML
     private Button testsBtn;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         createdDateInput.setEditable(false);
         createdByInput.setEditable(false);
         updatedDateInput.setEditable(false);
         updatedByInput.setEditable(false);
         patientInput.setEditable(false);
         doctorInput.setEditable(false);
-        commentsText.setEditable(false);  
-    }   
-    
-    public void setDiagnosisID(String id, Integer diagID){
-                 
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        commentsText.setEditable(false);
+    }
+
+    public void setDiagnosisID(String id, Integer diagID) {
+
+        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
                     FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/id_RecordView.fxml"));
-                    Parent root = (Parent)loader.load();
+                    Parent root = (Parent) loader.load();
                     Id_RecordViewController idRecord = loader.getController();
                     idRecord.setID(id);
                     diagnosisPanel.getChildren().clear();
@@ -102,13 +101,13 @@ public class DiagnosisInfoController implements Initializable {
                 }
             }
         });
-        
-        admissionInfoBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+        admissionInfoBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
                     FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AdmissionInfoView.fxml"));
-                    Parent root = (Parent)loader.load();
+                    Parent root = (Parent) loader.load();
                     AdmissionInfoController admissionInfoID = loader.getController();
                     admissionInfoID.setAdmissionID(diagID);
                     diagnosisPanel.getChildren().clear();
@@ -118,17 +117,15 @@ public class DiagnosisInfoController implements Initializable {
                 }
             }
         });
-        
-        
-        
-        testsBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+        testsBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                try{                  
+                try {
                     FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testsTableView.fxml"));
-                    Parent root = (Parent)loader.load();
-                     TestsTableViewController testID = loader.getController();
-                    testID.setTestID(id,diagID);
+                    Parent root = (Parent) loader.load();
+                    TestsTableViewController testID = loader.getController();
+                    testID.setTestID(id, diagID);
                     diagnosisPanel.getChildren().clear();
                     diagnosisPanel.getChildren().add(root);
                 } catch (IOException ex) {
@@ -136,9 +133,6 @@ public class DiagnosisInfoController implements Initializable {
                 }
             }
         });
-        
-       
+
     }
 }
-    
-
