@@ -42,7 +42,6 @@ public class AdminParametricsController extends NewStage implements Initializabl
     private Button pm_members;
     @FXML
     private AnchorPane AdminParametricsPanel;
-    private AdminViewParametersController newWindow = new AdminViewParametersController();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,9 +72,10 @@ public class AdminParametricsController extends NewStage implements Initializabl
         try {
             FXMLLoader loader = new FXMLLoader(AdminParametricsController.this.getClass().getResource("../View/AdminViewParameters.fxml"));
             Parent root = (Parent) loader.load();
+            AdminViewParametersController newWindow = loader.getController();
+            newWindow.setWindow(tableName);
             AdminParametricsPanel.getChildren().clear();
             AdminParametricsPanel.getChildren().add(root);
-            newWindow.setWindow(tableName);
         } catch (IOException ex) {
             Logger.getLogger(AdminParametricsController.class.getName()).log(Level.SEVERE, null, ex);
         }
