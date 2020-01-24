@@ -9,7 +9,6 @@ import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,10 +76,11 @@ public class LoginViewController extends NewStage implements Initializable {
     }
 
     /**
-     * Function that triggers when the user presses the login button.
-     * Connects with database and checks if the user exists or not.
+     * Function that triggers when the user presses the login button. Connects
+     * with database and checks if the user exists or not.
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
     private void handleLoginAction(ActionEvent event) throws IOException {
         ak = new DatabaseLoginRegister();
@@ -92,7 +92,7 @@ public class LoginViewController extends NewStage implements Initializable {
         if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
             User user = User.getInstance();
             System.out.println(user.getRoleID());
-            switch(user.getRoleID()){
+            switch (user.getRoleID()) {
                 case 1:
                     setNewStage("../View/AdminDashboard.fxml", currentStage);
                     break;
@@ -108,12 +108,13 @@ public class LoginViewController extends NewStage implements Initializable {
             }
         }
     }
-    
+
     /**
-     * Function that triggers when the user presses the register button.
-     * Returns a new page with the sign up selection.
+     * Function that triggers when the user presses the register button. Returns
+     * a new page with the sign up selection.
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
     @SuppressWarnings("empty-statement")
     private void handleRegisterAction(ActionEvent event) throws IOException {

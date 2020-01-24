@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Model;
 
@@ -18,13 +18,13 @@ import javafx.beans.property.StringProperty;
  * @author Chris
  */
 public class Tests {
-    
+
     User user = User.getInstance();
     private Statement stmt;
     private ResultSet rs;
     private String sql;
     private DatabaseConnection object;
-    
+
     private StringProperty id = new SimpleStringProperty();
     private StringProperty diag_id = new SimpleStringProperty();
     private StringProperty description = new SimpleStringProperty();
@@ -80,11 +80,11 @@ public class Tests {
         } catch (SQLException ex) {
             Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return rs;
     }
-    
-    public ResultSet getTestByID(Integer testID){
+
+    public ResultSet getTestByID(Integer testID) {
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
@@ -114,12 +114,12 @@ public class Tests {
         } catch (SQLException ex) {
             Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return rs;
     }
-    
-    public ResultSet getAllTests(){
-        try{
+
+    public ResultSet getAllTests() {
+        try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
             sql = "select 'Test-'||a.id id, " +
@@ -143,7 +143,7 @@ public class Tests {
                     "  and ap.patient_id = e.id " +
                     "  and ap.doctor_id = f.id(+)";
             rs = stmt.executeQuery(sql);
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;

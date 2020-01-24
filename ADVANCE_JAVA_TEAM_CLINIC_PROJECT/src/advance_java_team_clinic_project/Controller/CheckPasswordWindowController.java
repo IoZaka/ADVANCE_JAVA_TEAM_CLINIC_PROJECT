@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -43,32 +43,32 @@ public class CheckPasswordWindowController implements Initializable {
     private PasswordField currentPassword;
     @FXML
     private Button submitBtn;
-    
+
     private String hashPwd;
     User user = User.getInstance();
     private Statement stmt;
-    
+
     private static final DatabaseProfileDetails ak = new DatabaseProfileDetails();
     private ResultSet rs;
     private DatabaseConnection object;
     @FXML
     private AnchorPane passwordPane;
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)  {
-        
-        
+    public void initialize(URL url, ResourceBundle rb) {
+
         try {
             object = DatabaseConnection.getInstance();
             ak.getObject();
             stmt = object.connection.createStatement();
             rs = ak.getPassword(user.getId());
-            if(rs.next()){
+            if (rs.next()) {
                 hashPwd = rs.getString("password");
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(CheckPasswordWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,28 +76,28 @@ public class CheckPasswordWindowController implements Initializable {
         submitBtn.setDisable(true);
         passwordRepeatInput.addEventFilter(KeyEvent.KEY_RELEASED, newPasswordRepeatValidation());
         passwordInput.addEventFilter(KeyEvent.KEY_RELEASED, newPasswordValidation());
-        
-        submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+        submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 String password = makeHashPwd(currentPassword.getText());
-                if(password.equals(hashPwd)){
+                if (password.equals(hashPwd)) {
                     String newPassword = makeHashPwd(passwordRepeatInput.getText());
-                    String updateSql = "update pm_users set password = \'"+ newPassword +"\',updated_by = " + user.getId() +" where id = " + user.getId();
+                    String updateSql = "update pm_users set password = \'" + newPassword + "\',updated_by = " + user.getId() + " where id = " + user.getId();
                     try {
                         rs = stmt.executeQuery(updateSql);
                     } catch (SQLException ex) {
                         Logger.getLogger(CheckPasswordWindowController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("");
                     alert.setHeaderText(null);
                     alert.setContentText("Password successfully changed!");
                     alert.showAndWait();
-                    Stage s = (Stage)passwordPane.getScene().getWindow();
+                    Stage s = (Stage) passwordPane.getScene().getWindow();
                     s.close();
-                }else{
+                } else {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("Wrong current password.");
@@ -105,36 +105,36 @@ public class CheckPasswordWindowController implements Initializable {
                 }
             }
         });
-        
-    }  
-    
-   public EventHandler<KeyEvent> newPasswordRepeatValidation() {
+
+    }
+
+    public EventHandler<KeyEvent> newPasswordRepeatValidation() {
         return (KeyEvent e) -> {
             PasswordField txt_TextField = (PasswordField) e.getSource();
-            if(txt_TextField.getText().equals(passwordInput.getText()) && !currentPassword.getText().isEmpty()){
+            if (txt_TextField.getText().equals(passwordInput.getText()) && !currentPassword.getText().isEmpty()) {
                 submitBtn.setDisable(false);
-            }else{
+            } else {
                 submitBtn.setDisable(true);
             }
         };
-     }
-   
-   public EventHandler<KeyEvent> newPasswordValidation() {
+    }
+
+    public EventHandler<KeyEvent> newPasswordValidation() {
         return (KeyEvent e) -> {
             PasswordField txt_TextField = (PasswordField) e.getSource();
-            if(txt_TextField.getText().equals(passwordRepeatInput.getText()) && !currentPassword.getText().isEmpty()){
+            if (txt_TextField.getText().equals(passwordRepeatInput.getText()) && !currentPassword.getText().isEmpty()) {
                 submitBtn.setDisable(false);
-            }else{
+            } else {
                 submitBtn.setDisable(true);
             }
         };
-     }
-   
-   
-   /**
+    }
+
+    /**
      * Generates the string password to Hash.
+     *
      * @param passWord
-     * @return 
+     * @return
      */
     private String makeHashPwd(String passWord) {
         String localPwd;

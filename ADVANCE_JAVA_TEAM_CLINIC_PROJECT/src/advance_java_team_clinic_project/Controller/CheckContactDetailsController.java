@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -19,7 +19,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -29,6 +28,7 @@ import javafx.scene.input.MouseEvent;
  * @author Chris
  */
 public class CheckContactDetailsController implements Initializable {
+
     @FXML
     private Button submitBtn;
     @FXML
@@ -45,10 +45,10 @@ public class CheckContactDetailsController implements Initializable {
     private static DatabseContactDetails ak = new DatabseContactDetails();
     private ResultSet rs;
     User user = User.getInstance();
-    
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {    
-        
+    public void initialize(URL url, ResourceBundle rb) {
+
         try {
             setData();
         } catch (SQLException ex) {
@@ -56,23 +56,21 @@ public class CheckContactDetailsController implements Initializable {
         }
         addTextLimiter(email);
         addTextLimiter(relativeTelephoneNumber);
-        
+
         submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {           
-            try {
-                ak.updateContactDetails(user.getContactID(), Integer.parseInt(telephoneNumber.getText()), Integer.parseInt(cellphoneNumber.getText()), email.getText(), Integer.parseInt(relativeTelephoneNumber.getText()));
-            } catch (SQLException ex) {
-                Logger.getLogger(CheckContactDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    ak.updateContactDetails(user.getContactID(), Integer.parseInt(telephoneNumber.getText()), Integer.parseInt(cellphoneNumber.getText()), email.getText(), Integer.parseInt(relativeTelephoneNumber.getText()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(CheckContactDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }
         });
-        
-        
-        
+
     }
 
-   private void setData() throws SQLException {
+    private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchContactInfoData(user.getContactID());
         if (rs.next()) {
@@ -80,27 +78,19 @@ public class CheckContactDetailsController implements Initializable {
             cellphoneNumber.setText(String.valueOf(rs.getString("cel_number")));
             email.setText(rs.getString("email"));
             relativeTelephoneNumber.setText(String.valueOf(rs.getString("relative_tel_number")));
-        } 
         }
-   
-   
-   public static void addTextLimiter(final TextField tf) {
-    tf.textProperty().addListener(new ChangeListener<String>() {
-        @Override
-        public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
-            if (tf.getText().length() > 10) {
-                String s = tf.getText().substring(0, 10);
-                tf.setText(s);
+    }
+
+    public static void addTextLimiter(final TextField tf) {
+        tf.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+                if (tf.getText().length() > 10) {
+                    String s = tf.getText().substring(0, 10);
+                    tf.setText(s);
+                }
             }
-        }
-    });
-}
-   
-   
-   
-   
-   
-   
-   
-   
+        });
+    }
+
 }

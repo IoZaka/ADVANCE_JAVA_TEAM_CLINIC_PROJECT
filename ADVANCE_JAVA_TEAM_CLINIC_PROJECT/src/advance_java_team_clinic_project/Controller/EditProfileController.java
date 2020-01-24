@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -121,7 +121,7 @@ public class EditProfileController extends NewStage implements Initializable {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+
         passwordbtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("../View/checkPasswordWindow.fxml"));
@@ -135,15 +135,15 @@ public class EditProfileController extends NewStage implements Initializable {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
+
         cancelBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
-                if(roleId == 1){
+                if (roleId == 1) {
                     setNewStage("../View/AdminDashboard.fxml", currentStage);
-                }else if(roleId == 2){
+                } else if (roleId == 2) {
                     setNewStage("../View/doctorsDashboard.fxml", currentStage);
-                }else{
+                } else {
                     setNewStage("../View/patientsDashboard.fxml", currentStage);
                 }
             } catch (IOException ex) {
@@ -164,68 +164,70 @@ public class EditProfileController extends NewStage implements Initializable {
             } catch (SQLException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
-         });
-     
-       contactbtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+        });
+
+        contactbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkContactDetails.fxml"));
-                        Stage checkContact = new Stage();
-                        Scene scene = new Scene(root);
-                        checkContact.setTitle("Contact Details");
-                        checkContact.setScene(scene);
-                        checkContact.setResizable(false);
-                        checkContact.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/checkContactDetails.fxml"));
+                    Stage checkContact = new Stage();
+                    Scene scene = new Scene(root);
+                    checkContact.setTitle("Contact Details");
+                    checkContact.setScene(scene);
+                    checkContact.setResizable(false);
+                    checkContact.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
-       
-       insurancebtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+        insurancebtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkInsuranceDetails.fxml"));
-                        Stage checkInsurance = new Stage();
-                        Scene scene = new Scene(root);
-                        checkInsurance.setTitle("Insurance Details");
-                        checkInsurance.setScene(scene);
-                        checkInsurance.setResizable(false);
-                        checkInsurance.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/checkInsuranceDetails.fxml"));
+                    Stage checkInsurance = new Stage();
+                    Scene scene = new Scene(root);
+                    checkInsurance.setTitle("Insurance Details");
+                    checkInsurance.setScene(scene);
+                    checkInsurance.setResizable(false);
+                    checkInsurance.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
-       
-       addressbtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+        addressbtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
-                        Parent root = FXMLLoader.load(getClass().getResource("../View/checkAddressDetails.fxml"));
-                        Stage checkAddress = new Stage();
-                        Scene scene = new Scene(root);
-                        checkAddress.setTitle("Address Details");
-                        checkAddress.setScene(scene);
-                        checkAddress.setResizable(false);
-                        checkAddress.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/checkAddressDetails.fxml"));
+                    Stage checkAddress = new Stage();
+                    Scene scene = new Scene(root);
+                    checkAddress.setTitle("Address Details");
+                    checkAddress.setScene(scene);
+                    checkAddress.setResizable(false);
+                    checkAddress.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
     }
+
     /**
      * Returns the user's data from the database and shows it on the screen.
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     private void setData() throws SQLException {
         ak.getObject();
         rs = ak.fetchBasicInfoData(user.getId());
-             
+
         if (rs.next()) {
             usernamebtn.setText(rs.getString("username"));
             name.setText(rs.getString("firstname"));
@@ -251,7 +253,8 @@ public class EditProfileController extends NewStage implements Initializable {
 
     /**
      * Returns the ComboBox Values from the database
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     private void setComboValues() throws SQLException {
         ed.getObject();

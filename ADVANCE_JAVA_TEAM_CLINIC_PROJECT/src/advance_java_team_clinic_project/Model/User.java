@@ -8,10 +8,10 @@ package advance_java_team_clinic_project.Model;
 public class User {
 
     private int id;
-    private String username,name,surname,firstName;
+    private String username, name, surname, firstName;
     private int ruleID;
-    private int addressID;   
-    private int contactID; 
+    private int addressID;
+    private int contactID;
 
     public void setName(String name) {
         this.name = name;
@@ -36,15 +36,22 @@ public class User {
     public void setAddressID(int addressID) {
         this.addressID = addressID;
     }
-    
+
     public int getRuleID() {
         return ruleID;
     }
+
     public void setRuleID(int ruleID) {
         this.ruleID = ruleID;
-    }  
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     private int roleID;
     private String code;
     private static User instance = null;
@@ -56,6 +63,7 @@ public class User {
     public void setRoleID(int roleID) {
         this.roleID = roleID;
     }
+
     public String getUsername() {
         return username;
     }
@@ -63,6 +71,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -87,20 +96,19 @@ public class User {
         this.code = code;
     }
 
+    private User() {
+    }
 
-    private User(){} 
-  
-    public static User getInstance() 
-    { 
-        if (instance == null) 
-            instance = new User(); 
-  
-        return instance; 
-    } 
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User();
+        }
+
+        return instance;
+    }
 
     public void setInstance(User instance) {
         User.instance = null;
     }
-   
 
 }

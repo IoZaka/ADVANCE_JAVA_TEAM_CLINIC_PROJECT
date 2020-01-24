@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -81,24 +81,24 @@ public class DoctorDashboardController extends NewStage implements Initializable
         });
 
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {
-          Stage currentStage = (Stage) doctorPane.getScene().getWindow();
+            Stage currentStage = (Stage) doctorPane.getScene().getWindow();
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("");
-                alert.setHeaderText("Do you want to Logout?");
-                //alert.setContentText("");
-                alert.initStyle(StageStyle.UTILITY);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("");
+            alert.setHeaderText("Do you want to Logout?");
+            //alert.setContentText("");
+            alert.initStyle(StageStyle.UTILITY);
 
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK){
-                    try {
-                        setNewStage("../View/loginStyleFX.fxml", currentStage);
-                    } catch (IOException ex) {
-                        Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    // ... user chose CANCEL or closed the dialog
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                try {
+                    setNewStage("../View/loginStyleFX.fxml", currentStage);
+                } catch (IOException ex) {
+                    Logger.getLogger(PatientsDashboardController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
         });
     }
 

@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -31,16 +31,17 @@ public class ProfileController implements Initializable {
     private AnchorPane profilePane;
     @FXML
     private Text roleText;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         firstNameText.setText(firstNameText.getText() + " " + user.getFirstName());
-        lastNameText.setText(lastNameText.getText()+ " " + user.getSurname());
+        lastNameText.setText(lastNameText.getText() + " " + user.getSurname());
         usernameText.setText(usernameText.getText() + " " + user.getUsername());
-        
-        switch(user.getRoleID()){
+
+        switch (user.getRoleID()) {
             case 1:
                 roleText.setText(roleText.getText() + "ADMIN");
                 break;
@@ -54,7 +55,7 @@ public class ProfileController implements Initializable {
                 roleText.setText(roleText.getText() + "CLINIC");
                 break;
         }
-        
-    }    
-    
+
+    }
+
 }

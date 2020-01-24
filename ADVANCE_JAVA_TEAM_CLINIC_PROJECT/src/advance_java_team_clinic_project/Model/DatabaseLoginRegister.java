@@ -35,12 +35,13 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
 
     /**
      * Returns true/false if the login information is correct or not.
+     *
      * @param userName
      * @param passWord
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public boolean loginQuery(String userName, String passWord)  {
+    public boolean loginQuery(String userName, String passWord) {
         try {
             /* Alert Initialization */
             alert.setHeaderText(null);
@@ -50,7 +51,7 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
             hashPwd = makeHashPwd(passWord);
             sql = "select id, password, role_id, firstname as firstname, surname, username, address_id, contact_id from pm_users where username = '" + userName + "'";
             rs = stmt.executeQuery(sql);
-            
+
             if (rs.next()) {
                 try {
                     password = rs.getString("password");
@@ -81,22 +82,22 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
                 alert.setContentText("The Username you have entered does not match any existing user!");
                 alert.showAndWait();
                 return false;
-            }            
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseLoginRegister.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    
     /**
      * Returns true/false if the register information is correct or not.
+     *
      * @param userName
      * @param passWord
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public boolean registerQuery(String userName, String passWord)  {
+    public boolean registerQuery(String userName, String passWord) {
         try {
             alert.setHeaderText(null);
             alert.initStyle(StageStyle.UTILITY);
@@ -116,7 +117,7 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
                 alert.setTitle("Success!");
                 alert.setContentText("User was succesfully registered! You may login now.");
                 alert.showAndWait();
-                return true;    
+                return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseLoginRegister.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,8 +127,9 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
 
     /**
      * Generates the string password to Hash.
+     *
      * @param passWord
-     * @return 
+     * @return
      */
     public String makeHashPwd(String passWord) {
         String localPwd;

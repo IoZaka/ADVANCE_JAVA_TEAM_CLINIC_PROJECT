@@ -8,7 +8,6 @@ package advance_java_team_clinic_project.Controller;
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;

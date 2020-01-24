@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
@@ -60,7 +60,7 @@ public class CreateDiagnosisController implements Initializable {
     private DatabaseConnection object;
     @FXML
     private Button updateBtn;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -68,36 +68,35 @@ public class CreateDiagnosisController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         patientType.getItems().add("Inpatient");
         patientType.getItems().add("Outpatient");
-       
-    }    
-    
-    public void getAPPID(String id){
+
+    }
+
+    public void getAPPID(String id) {
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
         } catch (SQLException ex) {
             Logger.getLogger(CreateDiagnosisController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         //An to app_info_id iparxei sto pm_diagnosis, tha emfanizei to updateBtn
         sql = "select * from pm_diagnosis where app_info_id= " + Integer.valueOf(id);
         try {
             rs = stmt.executeQuery(sql);
-            if(rs.next()){
+            if (rs.next()) {
                 updateBtn.setVisible(true);
                 createBtn.setVisible(false);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CreateDiagnosisController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
                     FXMLLoader loader = new FXMLLoader(CreateDiagnosisController.this.getClass().getResource("../View/id_RecordView.fxml"));
-                    Parent root = (Parent)loader.load();
+                    Parent root = (Parent) loader.load();
                     Id_RecordViewController idRecord = loader.getController();
                     idRecord.setID(id);
                     diagnosisPanel.getChildren().clear();
@@ -107,21 +106,20 @@ public class CreateDiagnosisController implements Initializable {
                 }
             }
         });
-        
-        createBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+        createBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 try {
                     sql = "insert into pm_diagnosis(app_info_id, created_by, updated_by) values"
-                            + " ("+Integer.valueOf(id)+", "+user.getId()+", "+user.getId()+")";
-                     rs = stmt.executeQuery(sql);
+                            + " (" + Integer.valueOf(id) + ", " + user.getId() + ", " + user.getId() + ")";
+                    rs = stmt.executeQuery(sql);
                 } catch (SQLException ex) {
                     Logger.getLogger(CreateDiagnosisController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }         
+            }
         });
-        
+
     }
-    
-    
+
 }

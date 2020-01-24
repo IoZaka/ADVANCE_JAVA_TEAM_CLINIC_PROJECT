@@ -1,20 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.DatabaseConnection;
-import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
-import advance_java_team_clinic_project.Model.Records;
 import advance_java_team_clinic_project.Model.Tests;
 import advance_java_team_clinic_project.Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -42,8 +38,8 @@ import javafx.util.Callback;
  */
 public class TestsTableViewController implements Initializable {
 
-    private ObservableList data;  
-    
+    private ObservableList data;
+
     @FXML
     private TableView<Tests> testsTable = new TableView<>();
     
@@ -66,7 +62,7 @@ public class TestsTableViewController implements Initializable {
     private Button backBtn;
     @FXML
     private AnchorPane testsPane;
-    
+
     User user = User.getInstance();
     Tests tests = new Tests();
 
@@ -103,6 +99,7 @@ public class TestsTableViewController implements Initializable {
             public TableCell call(final TableColumn<Tests, String> param) {
                 final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
                     final Button btn = new Button();
+
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -143,7 +140,7 @@ public class TestsTableViewController implements Initializable {
             public void handle(MouseEvent event) {
                 try {
                     FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
-                    Parent root = (Parent)loader.load();
+                    Parent root = (Parent) loader.load();
                     DiagnosisInfoController diagnosisID = loader.getController();
                     diagnosisID.setDiagnosisID(appID,diagID);
                     testsPane.getChildren().clear();
@@ -221,8 +218,8 @@ public class TestsTableViewController implements Initializable {
     
      private ArrayList databaseTests(ResultSet rs) throws SQLException {
         ArrayList<Tests> data = new ArrayList();
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             Tests test = new Tests();
             test.idProperty().set(rs.getString("id"));
             //test.diag_idProperty().set(rs.getString("diag_id"));
@@ -245,8 +242,5 @@ public class TestsTableViewController implements Initializable {
         }
         return data;
     }
-    
+
 }
-
-
-
