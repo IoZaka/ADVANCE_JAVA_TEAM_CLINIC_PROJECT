@@ -28,45 +28,54 @@ public class AdminParametricsController extends NewStage implements Initializabl
 
     private ResultSet rs;
     User user = User.getInstance();
-
     @FXML
-    private Button btroles;
+    private Button pm_roles;
     @FXML
-    private Button btnationalities;
+    private Button pm_insurance_companies;
     @FXML
-    private Button btmembers;
+    private Button pm_genders;
     @FXML
-    private Button btinsuranceCompanies;
+    private Button pm_nationalities;
     @FXML
-    private Button btGenders;
+    private Button pm_eco_status;
     @FXML
-    private Button btEcoStatus;
+    private Button pm_members;
     @FXML
     private AnchorPane AdminParametricsPanel;
-    private String idButton;
     private AdminViewParametersController newWindow = new AdminViewParametersController();
-
-    public String getIdButton() {
-        return idButton;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        btroles.setOnMouseClicked((MouseEvent event) -> {
-            idButton = "pm_roles";
-            goToNextPage(idButton);
+        pm_roles.setOnMouseClicked((MouseEvent event) -> {
+            goToNextPage("pm_roles",pm_roles.getText());
+   
+        });
+        pm_insurance_companies.setOnMouseClicked((MouseEvent event) -> {
+            goToNextPage("pm_insurance_companies",pm_insurance_companies.getText());
+        });
+        pm_genders.setOnMouseClicked((MouseEvent event) -> {
+            goToNextPage("pm_genders",pm_genders.getText());
+        });
+        pm_nationalities.setOnMouseClicked((MouseEvent event) -> {
+            goToNextPage("pm_nationalities",pm_nationalities.getText());
+        });
+        pm_eco_status.setOnMouseClicked((MouseEvent event) -> {
+            goToNextPage("pm_eco_status",pm_eco_status.getText());
+        });
+        pm_members.setOnMouseClicked((MouseEvent event) -> {
+            goToNextPage("pm_members",pm_members.getText());
         });
 
     }
 
-    private void goToNextPage(String tableName) {
+
+    private void goToNextPage(String tableName, String lName) {
         try {
-            newWindow.setWindow(tableName);
             FXMLLoader loader = new FXMLLoader(AdminParametricsController.this.getClass().getResource("../View/AdminViewParameters.fxml"));
             Parent root = (Parent) loader.load();
             AdminParametricsPanel.getChildren().clear();
             AdminParametricsPanel.getChildren().add(root);
+            newWindow.setWindow(tableName);
         } catch (IOException ex) {
             Logger.getLogger(AdminParametricsController.class.getName()).log(Level.SEVERE, null, ex);
         }

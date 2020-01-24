@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="ParametricsPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AdminViewParametersController">
     <children>
-        <Text layoutX="330.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPTION">
+        <Text fx:id="DescriptionLayout" layoutX="330.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPTION">
             <font>
                 <Font size="23.0" />
             </font>

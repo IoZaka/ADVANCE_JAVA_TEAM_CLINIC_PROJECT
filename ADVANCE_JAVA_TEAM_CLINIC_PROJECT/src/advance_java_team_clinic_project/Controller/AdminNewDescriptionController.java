@@ -17,7 +17,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Tasos
  */
-public class AdminNewDiscriptionController implements Initializable {
+public class AdminNewDescriptionController implements Initializable {
 
     @FXML
     private AnchorPane EditForm;
