@@ -82,7 +82,7 @@ public class ClinicCenterMenuController extends NewStage implements Initializabl
                 FXMLLoader loader = new FXMLLoader(ClinicCenterMenuController.this.getClass().getResource("../View/testsTableView.fxml"));
                 Parent root = (Parent)loader.load();
                 TestsTableViewController allTests = loader.getController();
-                allTests.setID();
+                allTests.setTests();
                 clinicCenterPane.setCenter(root);
             } catch (IOException ex) {
                 Logger.getLogger(ClinicCenterMenuController.class.getName()).log(Level.SEVERE, null, ex);

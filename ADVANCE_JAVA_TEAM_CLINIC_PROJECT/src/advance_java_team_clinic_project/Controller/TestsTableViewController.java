@@ -49,9 +49,19 @@ public class TestsTableViewController implements Initializable {
     
     TableColumn idCol = new TableColumn("Edit");
     TableColumn descriptionCol = new TableColumn("Description");
-    TableColumn isCompletedCol = new TableColumn("Is Completed");
+    TableColumn isCompletedCol = new TableColumn("Completed");
     TableColumn costCol = new TableColumn("Cost");
-    TableColumn isPaidCol = new TableColumn("Is paid");
+    TableColumn isPaidCol = new TableColumn("Paid");
+    TableColumn resultsCol = new TableColumn("Results");
+    TableColumn statusCol = new TableColumn("Status");
+    TableColumn createdCol = new TableColumn("Created");
+    TableColumn createdByCol = new TableColumn("Created By");
+    TableColumn updatedCol = new TableColumn("Updated");
+    TableColumn updatedByCol = new TableColumn("Updated By");
+    TableColumn patientCol = new TableColumn("Patient");
+    TableColumn doctorCol = new TableColumn("Doctor");
+    
+    
     @FXML
     private Button backBtn;
     @FXML
@@ -66,16 +76,26 @@ public class TestsTableViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         testsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
+        //For All
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         isCompletedCol.setCellValueFactory(new PropertyValueFactory<>("is_completed"));
         costCol.setCellValueFactory(new PropertyValueFactory<>("cost"));
         isPaidCol.setCellValueFactory(new PropertyValueFactory<>("is_paid"));
+        resultsCol.setCellValueFactory(new PropertyValueFactory<>("results"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status_id"));
+        doctorCol.setCellValueFactory(new PropertyValueFactory<>("doctor"));
+        //For Clinic
+        createdCol.setCellValueFactory(new PropertyValueFactory<>("created"));
+        createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
+        updatedCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
+        updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
+        patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
         
         
         
-        
-        
+        testsTable.getColumns().addAll(idCol,descriptionCol,isCompletedCol,costCol,isPaidCol,resultsCol,statusCol,doctorCol);
     }     
     
     public void setTestID(String appID, Integer diagID){
@@ -117,8 +137,6 @@ public class TestsTableViewController implements Initializable {
             }
         };
         idCol.setCellFactory(cellFactory);
-        testsTable.getColumns().add(idCol);
-        testsTable.getColumns().addAll(descriptionCol,isCompletedCol,costCol,isPaidCol);
         
         backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
             @Override
@@ -138,16 +156,17 @@ public class TestsTableViewController implements Initializable {
 
         try {
             data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
+            testsTable.setItems(data);  
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-            testsTable.setItems(data);          
+                    
     } 
  
 
    
-    
-    public void setID(){ 
+    //FOR CLINIC CENTER
+    public void setTests(){ 
         backBtn.setVisible(false);
         Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = new Callback<TableColumn<Tests, String>, TableCell<Tests, String>>() {
             public TableCell call(final TableColumn<Tests, String> param) {
@@ -172,7 +191,7 @@ public class TestsTableViewController implements Initializable {
                                         Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                     TestIDController id = loader.getController();
-                                    String testID = btn.getText();
+                                    String testID = btn.getText().substring(5);
                                     id.setTestIDView(Integer.valueOf(testID));
                                     //Scene
                                     testsPane.getChildren().clear();
@@ -187,10 +206,10 @@ public class TestsTableViewController implements Initializable {
             }
         };
         idCol.setCellFactory(cellFactory);
-        testsTable.getColumns().add(idCol);
-        testsTable.getColumns().addAll(descriptionCol,isCompletedCol,costCol,isPaidCol);
+        
         try {
             data = FXCollections.observableArrayList(databaseTests(tests.getAllTests()));
+            testsTable.getColumns().addAll(createdCol,createdByCol,updatedCol,updatedByCol,patientCol);
             testsTable.setItems(data); 
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -210,7 +229,18 @@ public class TestsTableViewController implements Initializable {
             test.descriptionProperty().set(rs.getString("description"));
             test.is_completedProperty().set(rs.getString("is_completed"));
             test.costProperty().set(rs.getString("cost"));
-            test.is_paidProperty().set(rs.getString("is_paid"));
+            test.is_paidProperty().set(rs.getString("paid"));
+            test.resultsProperty().set(rs.getString("results"));
+            test.status_idProperty().set(rs.getString("status"));
+            test.doctorProperty().set(rs.getString("doctor"));
+            if(user.getRoleID() == 5){
+                test.createdProperty().set(rs.getString("created"));
+                test.created_byProperty().set(rs.getString("createdby"));
+                test.updatedProperty().set(rs.getString("updated"));
+                test.updated_byProperty().set(rs.getString("updated_by"));
+                test.patientProperty().set(rs.getString("patient"));
+            }
+            
             data.add(test);
         }
         return data;

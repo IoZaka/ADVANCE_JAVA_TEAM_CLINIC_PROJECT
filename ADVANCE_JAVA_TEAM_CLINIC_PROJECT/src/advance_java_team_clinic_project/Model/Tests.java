@@ -31,6 +31,16 @@ public class Tests {
     private StringProperty is_completed = new SimpleStringProperty();
     private StringProperty cost = new SimpleStringProperty();
     private StringProperty is_paid = new SimpleStringProperty();
+    private StringProperty status_id = new SimpleStringProperty();
+    private StringProperty results = new SimpleStringProperty();
+    private StringProperty created = new SimpleStringProperty();
+    private StringProperty created_by = new SimpleStringProperty();
+    private StringProperty updated = new SimpleStringProperty();
+    private StringProperty updated_by = new SimpleStringProperty();
+    private StringProperty patient = new SimpleStringProperty();
+    private StringProperty doctor = new SimpleStringProperty();
+    
+    
     
     public StringProperty idProperty(){ return id;}
     public StringProperty diag_idProperty(){return diag_id;}
@@ -38,6 +48,15 @@ public class Tests {
     public StringProperty is_completedProperty(){return is_completed;}
     public StringProperty costProperty(){return cost;}
     public StringProperty is_paidProperty(){return is_paid;}
+    public StringProperty status_idProperty(){return status_id;}
+    public StringProperty resultsProperty(){return results;}
+    public StringProperty createdProperty(){return created;}
+    public StringProperty created_byProperty(){return created_by;}
+    public StringProperty updatedProperty(){return updated;}
+    public StringProperty updated_byProperty(){return updated_by;}
+    public StringProperty patientProperty(){return patient;}
+    public StringProperty doctorProperty(){return doctor;}
+    
     
     public Tests(){}
     
@@ -45,7 +64,18 @@ public class Tests {
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
-            sql = "select * from pm_diag_tests where diag_id= " + diagID;
+            sql = "select 'Test-'||a.id id, " +
+                    "a.description, " +
+                    "a.cost, " +
+                    "a.results, " +
+                    "decode(a.is_paid,1,'Yes','No') Paid, " +
+                    "decode(a.status_id,1,'Completed','In progresss') status, " +
+                    "decode(a.is_completed,1,'Yes','No') is_completed, " +               
+                    "f.SURNAME || ' ' || f.FIRSTNAME doctor " +
+                    "from pm_diag_tests a, pm_diagnosis diag , pm_appointment_info ap,pm_users f " +
+                    "  where a.diag_id = " + diagID +
+                    "  and diag.APP_INFO_ID = ap.id " +
+                    "  and ap.doctor_id = f.id(+)";
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +88,28 @@ public class Tests {
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
-            sql = "select * from pm_diag_tests where id= " + testID;
+            //sql = "select * from pm_diag_tests where id= " + testID;
+            sql = "select 'Test-'||a.id id, " +
+                    "a.description, " +
+                    "a.cost, " +
+                    "a.results, " +
+                    "decode(a.is_paid,1,'Yes','No') Paid, " +
+                    "decode(a.status_id,1,'Completed','In progresss') status, " +
+                    "decode(a.is_completed,1,'Yes','No') is_completed, " +
+                    "a.created, " +
+                    "c.SURNAME || ' ' || c.FIRSTNAME createdby, " +
+                    "a.updated, " +
+                    "d.SURNAME || ' ' || d.FIRSTNAME updated_by, " +
+                    "e.SURNAME || ' ' || e.FIRSTNAME patient, " +
+                    "f.SURNAME || ' ' || f.FIRSTNAME doctor " +
+                    "from pm_diag_tests a, pm_users c, pm_users d, pm_diagnosis diag , pm_appointment_info ap, pm_users e, pm_users f " +
+                    "where a.created_by = c.id " +
+                    "  and a.updated_by = d.id " +
+                    "  and a.diag_id = diag.id " +
+                    "  and diag.APP_INFO_ID = ap.id " +
+                    "  and ap.patient_id = e.id " +
+                    "  and ap.doctor_id = f.id(+) " + 
+                    "  and a.id = " + testID;
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,7 +122,26 @@ public class Tests {
         try{
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
-            sql = "select * from pm_diag_tests";
+            sql = "select 'Test-'||a.id id, " +
+                    "a.description, " +
+                    "a.cost, " +
+                    "a.results, " +
+                    "decode(a.is_paid,1,'Yes','No') Paid, " +
+                    "decode(a.status_id,1,'Completed','In progresss') status, " +
+                    "decode(a.is_completed,1,'Yes','No') is_completed, " +
+                    "a.created, " +
+                    "c.SURNAME || ' ' || c.FIRSTNAME createdby, " +
+                    "a.updated, " +
+                    "d.SURNAME || ' ' || d.FIRSTNAME updated_by, " +
+                    "e.SURNAME || ' ' || e.FIRSTNAME patient, " +
+                    "f.SURNAME || ' ' || f.FIRSTNAME doctor " +
+                    "from pm_diag_tests a, pm_users c, pm_users d, pm_diagnosis diag , pm_appointment_info ap, pm_users e, pm_users f " +
+                    "where a.created_by = c.id " +
+                    "  and a.updated_by = d.id " +
+                    "  and a.diag_id = diag.id " +
+                    "  and diag.APP_INFO_ID = ap.id " +
+                    "  and ap.patient_id = e.id " +
+                    "  and ap.doctor_id = f.id(+)";
             rs = stmt.executeQuery(sql);
         }catch (SQLException ex) {
             Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
