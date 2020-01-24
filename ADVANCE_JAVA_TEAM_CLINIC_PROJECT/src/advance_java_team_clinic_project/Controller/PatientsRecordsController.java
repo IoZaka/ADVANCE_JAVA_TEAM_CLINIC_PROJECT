@@ -108,9 +108,9 @@ public class PatientsRecordsController extends NewStage implements Initializable
                             setGraphic(btn);
                         }
                     }
-                };
-                return cell;
-            }
+                }
+            };
+            return cell;
         };
         switch (user.getRoleID()) {
             case 2:
