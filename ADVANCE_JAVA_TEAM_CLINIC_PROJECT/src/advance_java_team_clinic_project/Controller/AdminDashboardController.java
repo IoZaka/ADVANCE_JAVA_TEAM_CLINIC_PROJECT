@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -13,7 +13,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleButton;
@@ -49,7 +51,7 @@ public class AdminDashboardController extends NewStage implements Initializable 
     @FXML
     private ToggleButton logoutBtn;
 
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     @FXML
     private ToggleButton parametricsBtn;
 
@@ -78,10 +80,37 @@ public class AdminDashboardController extends NewStage implements Initializable 
             parametricsBtn.setSelected(true);
         });
 
+        searchUserBtn.setOnMouseClicked((MouseEvent event) -> {
+            clearSelectedButtons();
+            searchUserBtn.setSelected(true);
+            FXMLLoader loader = new FXMLLoader(AdminDashboardController.this.getClass().getResource("../View/searchUserView.fxml"));
+            Parent root = null;
+            try {
+                root = (Parent)loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            SearchUserController searchController = loader.getController();
+            searchController.setResults("");
+            adminPane.setCenter(root);
+            adminPane.setCenter(root);
+        });
+        
         editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
-            loadUIonSamePane("../View/editProfile.fxml", adminPane);
             clearSelectedButtons();
             editProfileBtn.setSelected(true);
+            FXMLLoader loader = new FXMLLoader(AdminDashboardController.this.getClass().getResource("../View/editProfile.fxml"));
+            Parent root = null;
+            try {
+                root = (Parent)loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            EditProfileController editController = loader.getController();
+            editController.myInit(user.getId());
+            adminPane.setCenter(root);
+            adminPane.setCenter(root);
+        
         });
 
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {

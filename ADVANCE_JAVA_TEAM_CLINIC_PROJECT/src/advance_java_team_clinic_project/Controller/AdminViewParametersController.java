@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,6 +33,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 /**
@@ -74,27 +76,16 @@ public class AdminViewParametersController extends NewStage implements Initializ
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        parametricsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         idCol.setCellValueFactory(new PropertyValueFactory<>("code"));
         descrCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         createdDateCol.setCellValueFactory(new PropertyValueFactory<>("created"));
         updatedDateCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
-        updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
-        createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
+        updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updatedby"));
+        createdByCol.setCellValueFactory(new PropertyValueFactory<>("createdby"));
                 
-        createBtn.setOnMouseClicked((MouseEvent event) -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/AdminNewDiscription.fxml"));
-                Stage createB = new Stage();
-                Scene scene = new Scene(root);
-                createB.setTitle("Enter New Description ");
-                createB.setScene(scene);
-                createB.setResizable(false);
-                createB.show();
-            } catch (IOException ex) {
-                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+       
      
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
@@ -106,24 +97,94 @@ public class AdminViewParametersController extends NewStage implements Initializ
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-     
-        parametricsTable.getColumns().add(descrCol);
+        parametricsTable.getColumns().addAll(idCol,descrCol,createdDateCol,createdByCol,updatedDateCol,updatedByCol);
+   
      
     }
     
 
-    public void setWindow(String tableName) {  
+    public void setWindow(String tableName, String lName) {  
         Parametrics pm = new Parametrics();
         ResultSet rs = null;
         rs = pm.getDesc(tableName);
+        System.out.println(lName);
+        DescriptionLayout.setText(lName);
         try {
             data = FXCollections.observableArrayList(fillParametricsTable(rs));
         } catch (SQLException ex) {
             Logger.getLogger(AdminViewParametersController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        createBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(AdminViewParametersController.this.getClass().getResource("../View/AdminNewComponent.fxml"));
+                Parent root = (Parent) loader.load();  
+                Stage createB = new Stage();
+                Scene scene = new Scene(root);
+                createB.setTitle("Enter New Description ");
+                createB.setScene(scene);
+                createB.setResizable(false);
+                createB.setOnCloseRequest((WindowEvent event1) -> {setWindow(tableName, lName);});
+                createB.show();
+                
+                AdminNewComponentController createComp = loader.getController();
+                createComp.createComponent(tableName);
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        Callback<TableColumn<Parametrics, Void>, TableCell<Parametrics, Void>>  cellFactory = new Callback<TableColumn<Parametrics,Void>, TableCell<Parametrics,Void>>(){
+           @Override
+           public TableCell<Parametrics, Void> call(TableColumn<Parametrics, Void> param) {
+             TableCell<Parametrics, Void> cell = new TableCell<Parametrics, Void>() {
+                    private Button btn = new Button();
 
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            Parametrics data = new Parametrics();
+                            Integer id;
+                            data = getTableView().getItems().get(getIndex());
+                            id = Integer.valueOf(data.idProperty().getValue());
+                            String desc = data.descriptionProperty().getValue();
+                            btn.setText("EDIT");
+                            btn.setOnMouseClicked((MouseEvent event) -> {
+                            
+                            
+                                try {
+//                                    Parent root = FXMLLoader.load(getClass().getResource("../View/AdminNewComponent.fxml"));
+                                    Stage createB = new Stage();
+                                    
+                                    FXMLLoader loader = new FXMLLoader(AdminViewParametersController.this.getClass().getResource("../View/AdminNewComponent.fxml"));
+                                    Parent root = (Parent) loader.load();  
+                                    Scene scene = new Scene(root);
+                                    createB.setTitle("EDIT");
+                                    createB.setScene(scene);
+                                    createB.setResizable(false);
+                                    createB.setOnCloseRequest((WindowEvent event1) -> {setWindow(tableName, lName);});
+                                    createB.show();
+                                   
+                                    AdminNewComponentController editComp = loader.getController();
+                                    editComp.editComponent(tableName, id, desc);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            });
+                            setGraphic(btn);
+                        }
+                    }
+                    
+             };
+            return cell;
+           }
+        };
+        idCol.setCellFactory(cellFactory);
+        
         parametricsTable.setItems(data);
-        DescriptionLayout.setText(tableName);
     }
     
     public ArrayList fillParametricsTable(ResultSet rs) throws SQLException{
@@ -132,7 +193,12 @@ public class AdminViewParametersController extends NewStage implements Initializ
         
         while (rs.next()) {
                 Parametrics pm = new Parametrics();
+                pm.idProperty().set(rs.getString("id"));
                 pm.descriptionProperty().set(rs.getString("description"));
+                pm.createdProperty().set(rs.getString("created"));
+                pm.createdbyProperty().set(rs.getString("createdby"));
+                pm.updatedProperty().set(rs.getString("updated"));
+                pm.updatedbyProperty().set(rs.getString("updatedby"));
                 data.add(pm);
             }
        return data;

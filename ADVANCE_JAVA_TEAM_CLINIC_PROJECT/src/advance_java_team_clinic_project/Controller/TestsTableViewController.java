@@ -6,7 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.Tests;
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -63,7 +63,7 @@ public class TestsTableViewController implements Initializable {
     @FXML
     private AnchorPane testsPane;
 
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     Tests tests = new Tests();
 
     /**

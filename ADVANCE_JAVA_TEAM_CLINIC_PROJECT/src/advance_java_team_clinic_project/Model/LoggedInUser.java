@@ -5,7 +5,10 @@
  */
 package advance_java_team_clinic_project.Model;
 
-public class User {
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+public class LoggedInUser {
 
     private int id;
     private String username, name, surname, firstName;
@@ -13,6 +16,8 @@ public class User {
     private int addressID;
     private int contactID;
 
+
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -54,7 +59,7 @@ public class User {
     }
     private int roleID;
     private String code;
-    private static User instance = null;
+    private static LoggedInUser instance = null;
 
     public int getRoleID() {
         return roleID;
@@ -96,19 +101,22 @@ public class User {
         this.code = code;
     }
 
-    private User() {
+    
+   
+    
+    private LoggedInUser() {
     }
 
-    public static User getInstance() {
+    public static LoggedInUser getInstance() {
         if (instance == null) {
-            instance = new User();
+            instance = new LoggedInUser();
         }
 
         return instance;
     }
 
-    public void setInstance(User instance) {
-        User.instance = null;
+    public void setInstance(LoggedInUser instance) {
+        LoggedInUser.instance = null;
     }
 
 }

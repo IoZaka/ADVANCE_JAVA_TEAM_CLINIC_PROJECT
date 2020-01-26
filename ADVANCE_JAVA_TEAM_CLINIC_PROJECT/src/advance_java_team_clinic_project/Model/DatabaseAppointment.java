@@ -16,7 +16,7 @@ public class DatabaseAppointment {
     private String sql, sql_contact;
     private ResultSet rs;
     private DatabaseConnection object;
-    private User user = User.getInstance();
+    private LoggedInUser user = LoggedInUser.getInstance();
 
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();

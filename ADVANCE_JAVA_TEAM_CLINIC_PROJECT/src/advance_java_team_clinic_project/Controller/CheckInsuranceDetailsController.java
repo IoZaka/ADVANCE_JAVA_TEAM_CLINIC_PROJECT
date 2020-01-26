@@ -9,7 +9,7 @@ import static advance_java_team_clinic_project.Controller.EditProfileController.
 import advance_java_team_clinic_project.Model.CustomCombo;
 import advance_java_team_clinic_project.Model.DatabaseInsuranceDetails;
 import advance_java_team_clinic_project.Model.DatabaseProfileEdit;
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,7 +50,7 @@ public class CheckInsuranceDetailsController implements Initializable {
     private int euro = 0, eka = 0, euroc = 0, ekac = 0, insuId;
     private static DatabaseInsuranceDetails ak = new DatabaseInsuranceDetails();
     private ResultSet rs;
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
 
     /**

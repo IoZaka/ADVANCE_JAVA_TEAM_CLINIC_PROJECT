@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -27,7 +27,7 @@ import javafx.scene.layout.AnchorPane;
 public class AdminParametricsController extends NewStage implements Initializable {
 
     private ResultSet rs;
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     @FXML
     private Button pm_roles;
     @FXML
@@ -42,27 +42,33 @@ public class AdminParametricsController extends NewStage implements Initializabl
     private Button pm_members;
     @FXML
     private AnchorPane AdminParametricsPanel;
+    @FXML
+    private Button pm_questions;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         pm_roles.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_roles",pm_roles.getText());
+            goToNextPage("pm_roles","ROLES");
    
         });
         pm_insurance_companies.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_insurance_companies",pm_insurance_companies.getText());
+            goToNextPage("pm_insurance_companies","INSURANCES");
         });
         pm_genders.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_genders",pm_genders.getText());
+            goToNextPage("pm_genders","GENDERS");
         });
         pm_nationalities.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_nationalities",pm_nationalities.getText());
+            goToNextPage("pm_nationalities","NATIONALITIES");
         });
         pm_eco_status.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_eco_status",pm_eco_status.getText());
+            goToNextPage("pm_eco_status","ECO STATUS");
         });
         pm_members.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_members",pm_members.getText());
+            goToNextPage("pm_members","MEMBERS");
+        });
+        
+        pm_questions.setOnMouseClicked((MouseEvent event) -> {
+            goToNextPage("pm_questions","QUESTIONS");
         });
 
     }
@@ -73,7 +79,7 @@ public class AdminParametricsController extends NewStage implements Initializabl
             FXMLLoader loader = new FXMLLoader(AdminParametricsController.this.getClass().getResource("../View/AdminViewParameters.fxml"));
             Parent root = (Parent) loader.load();
             AdminViewParametersController newWindow = loader.getController();
-            newWindow.setWindow(tableName);
+            newWindow.setWindow(tableName, lName);
             AdminParametricsPanel.getChildren().clear();
             AdminParametricsPanel.getChildren().add(root);
         } catch (IOException ex) {

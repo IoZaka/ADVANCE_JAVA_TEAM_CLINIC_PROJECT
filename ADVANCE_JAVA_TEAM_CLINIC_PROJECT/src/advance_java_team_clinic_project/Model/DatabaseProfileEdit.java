@@ -22,7 +22,7 @@ public class DatabaseProfileEdit {
     private String sql;
     private ResultSet rs;
     private DatabaseConnection object;
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     public Integer roleId;
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
 

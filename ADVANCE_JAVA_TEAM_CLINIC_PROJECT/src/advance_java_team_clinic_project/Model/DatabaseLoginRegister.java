@@ -21,7 +21,7 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
     private ResultSet rs, regRs, pwdRs;
     private String username, password, role, created, updated, hashPwd;
     private DatabaseConnection object;
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     public Integer roleId;
     Alert alert = new Alert(AlertType.INFORMATION);
 

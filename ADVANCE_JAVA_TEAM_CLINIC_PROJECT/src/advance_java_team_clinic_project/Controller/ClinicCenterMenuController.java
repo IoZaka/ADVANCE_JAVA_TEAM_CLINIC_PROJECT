@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -47,7 +47,7 @@ public class ClinicCenterMenuController extends NewStage implements Initializabl
     @FXML
     private ToggleButton logoutBtn;
     
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     @FXML
     private BorderPane clinicCenterPane;
 
@@ -68,9 +68,20 @@ public class ClinicCenterMenuController extends NewStage implements Initializabl
         });
         
         editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
-            loadUIonSamePane("../View/editProfile.fxml", clinicCenterPane);
             clearSelectedButtons();
             editProfileBtn.setSelected(true);
+            FXMLLoader loader = new FXMLLoader(ClinicCenterMenuController.this.getClass().getResource("../View/editProfile.fxml"));
+            Parent root = null;
+            try {
+                root = (Parent)loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            EditProfileController editController = loader.getController();
+            editController.myInit(user.getId());
+            clinicCenterPane.setCenter(root);
+            clinicCenterPane.setCenter(root);
+        
         });
         
         clinicalTestsBtn.setOnMouseClicked((MouseEvent event) -> {

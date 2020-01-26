@@ -6,7 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseProfileDetails;
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +23,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -45,6 +48,8 @@ public class CheckUsernameController implements Initializable {
 
     private static final DatabaseProfileDetails ak = new DatabaseProfileDetails();
     private ResultSet rs;
+    @FXML
+    private AnchorPane checkUsernamePane;
 
     /**
      * Initializes the controller class.
@@ -54,7 +59,10 @@ public class CheckUsernameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        User user = User.getInstance();
+  
+    }
+    
+    public void myInit(Integer userID){
         try {
             usernames = new ArrayList<>();
             ak.getObject();
@@ -77,7 +85,9 @@ public class CheckUsernameController implements Initializable {
         }
 
         submitBtn.setOnMouseClicked((MouseEvent event) -> {
-            ak.updateUsername(user.getId(), newUsernameInput.getText());
+            ak.updateUsername(userID, newUsernameInput.getText());
+             Stage stage = (Stage) checkUsernamePane.getScene().getWindow();
+             checkUsernamePane.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         });
     }
 

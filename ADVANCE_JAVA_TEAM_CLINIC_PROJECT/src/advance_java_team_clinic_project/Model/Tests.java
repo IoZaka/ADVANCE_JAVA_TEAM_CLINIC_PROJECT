@@ -19,7 +19,7 @@ import javafx.beans.property.StringProperty;
  */
 public class Tests {
 
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     private Statement stmt;
     private ResultSet rs;
     private String sql;

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.CheckUsernameController">
+<AnchorPane id="AnchorPane" fx:id="checkUsernamePane" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.CheckUsernameController">
     <children>
         <TextField fx:id="newUsernameInput" layoutX="125.0" layoutY="87.0" promptText="Enter new Username" styleClass="editInputStyle" stylesheets="@style.css">
             <cursor>

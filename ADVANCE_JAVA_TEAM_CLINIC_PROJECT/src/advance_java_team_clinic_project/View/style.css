@@ -180,14 +180,14 @@ and open the template in the editor.
     -fx-background-color: #385ca8;
 }
 
-.editCancelBtn, .backBtn {
+.editCancelBtn, .backBtn, .deleteBtn {
     -fx-background-color: #c0392b;
     -fx-text-fill: #fff;
     -fx-background-radius: 2em;
     -fx-cursor: hand;
 }
 
-.editCancelBtn:hover, .backBtn:hover {
+.editCancelBtn:hover, .backBtn:hover, .deleteBtn {
     -fx-background-color: #e74c3c;
 }
 

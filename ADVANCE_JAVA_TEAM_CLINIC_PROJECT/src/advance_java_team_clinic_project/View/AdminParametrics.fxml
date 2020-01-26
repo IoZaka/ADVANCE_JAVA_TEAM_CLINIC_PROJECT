@@ -11,5 +11,6 @@
         <Button fx:id="pm_nationalities" layoutX="344.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="NATIONALITIES" />
         <Button fx:id="pm_eco_status" layoutX="521.0" layoutY="255.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="ECO STATUS" />
         <Button fx:id="pm_members" layoutX="521.0" layoutY="147.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="MEMBERS" />
+      <Button fx:id="pm_questions" layoutX="344.0" layoutY="355.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="112.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="QUESTIONS" />
     </children>
 </AnchorPane>

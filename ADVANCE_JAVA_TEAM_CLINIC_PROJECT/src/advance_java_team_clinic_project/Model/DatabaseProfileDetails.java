@@ -5,12 +5,14 @@
  */
 package advance_java_team_clinic_project.Model;
 
+import advance_java_team_clinic_project.Controller.CheckPasswordWindowController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
@@ -23,7 +25,8 @@ public class DatabaseProfileDetails {
     private String sql, sql_users, sql_user_details;
     private ResultSet rs;
     private DatabaseConnection object;
-
+    LoggedInUser user = LoggedInUser.getInstance();
+    
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
     }
@@ -101,7 +104,7 @@ public class DatabaseProfileDetails {
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
-        sql_users = "update pm_users set role_id=" + lRole_Id + ",surname=\'" + lSurname + "\',firstname=\'" + lName + "\' where id =" + userId;
+        sql_users = "update pm_users set role_id=" + lRole_Id + ",surname=\'" + lSurname + "\',firstname=\'" + lName + "\',updated_by= "+user.getId()+" where id =" + userId;
         sql_user_details = "update pm_patients_basic_info set "
                 + "amka=\'" + lAmka
                 + "\',ama=\'" + lAma
@@ -113,7 +116,7 @@ public class DatabaseProfileDetails {
                 + ",nationality_id=" + lNationality_id
                 + ",profession=\'" + lProffesion
                 + "\',place_of_birth=\'" + lPlace_of_birth
-                + "\' where user_id =" + userId;
+                + "\',updated_by= "+user.getId()+" where user_id =" + userId;
         rs = stmt.executeQuery(sql_users);
         rs = stmt.executeQuery(sql_user_details);
         alert.setTitle("Update");
@@ -130,7 +133,7 @@ public class DatabaseProfileDetails {
     public void updateUsername(Integer userId, String userName) {
         try {
             stmt = object.connection.createStatement();
-            sql = "update pm_users set username = \'" + userName + "\' where id = " + userId;
+            sql = "update pm_users set username = \'" + userName + "\',updated_by= " + user.getId()+" where id = " + userId;
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseProfileDetails.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,6 +149,54 @@ public class DatabaseProfileDetails {
 
         }
         return rs;
+    }
+    
+    public boolean updatePassword(Integer userID, String password, String newPassword){
+        String hashPwd = null;
+        rs = getPassword(userID);
+        try {
+            if (rs.next()) {
+                hashPwd = rs.getString("password"); //get password from database
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseProfileDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String hashPassword = makeHashPwd(password); //hash current password textfield
+        if (hashPassword.equals(hashPwd)) {
+                    String newHashPwd = makeHashPwd(newPassword);
+                    String updateSql = "update pm_users set password = \'" + newHashPwd + "\',updated_by = " + user.getId() + " where id = " + userID;
+                    try {
+                        rs = stmt.executeQuery(updateSql);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CheckPasswordWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    return true;
+
+                } else {return false;}
+    }
+    
+    /**
+     * Generates the string password to Hash.
+     *
+     * @param passWord
+     * @return
+     */
+    private String makeHashPwd(String passWord) {
+        String localPwd;
+        String pwdSql;
+        try {
+            pwdSql = "SELECT DBMS_OBFUSCATION_TOOLKIT.md5(input => UTL_I18N.STRING_TO_RAW (\'" + passWord + "\', 'AL32UTF8')) pwd from dual";
+            rs = stmt.executeQuery(pwdSql);
+            if (rs.next()) {
+                localPwd = rs.getString("pwd");
+                rs.close();
+                return localPwd;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseLoginRegister.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

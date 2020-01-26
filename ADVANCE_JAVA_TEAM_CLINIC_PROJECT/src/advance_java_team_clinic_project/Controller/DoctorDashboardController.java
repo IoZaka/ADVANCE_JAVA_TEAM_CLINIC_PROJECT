@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -13,7 +13,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleButton;
@@ -45,7 +47,7 @@ public class DoctorDashboardController extends NewStage implements Initializable
     @FXML
     private BorderPane doctorPane;
 
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     @FXML
     private ToggleButton appointmentsBtn;
 
@@ -69,9 +71,20 @@ public class DoctorDashboardController extends NewStage implements Initializable
         });
 
         editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
-            loadUIonSamePane("../View/editProfile.fxml", doctorPane);
             clearSelectedButtons();
             editProfileBtn.setSelected(true);
+            FXMLLoader loader = new FXMLLoader(DoctorDashboardController.this.getClass().getResource("../View/editProfile.fxml"));
+            Parent root = null;
+            try {
+                root = (Parent)loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            EditProfileController editController = loader.getController();
+            editController.myInit(user.getId());
+            doctorPane.setCenter(root);
+            doctorPane.setCenter(root);
+        
         });
 
         appointmentsBtn.setOnMouseClicked((MouseEvent event) -> {

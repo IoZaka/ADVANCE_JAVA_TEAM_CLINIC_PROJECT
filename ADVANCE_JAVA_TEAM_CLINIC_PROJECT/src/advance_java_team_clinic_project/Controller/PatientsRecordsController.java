@@ -7,7 +7,7 @@ package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
 import advance_java_team_clinic_project.Model.Records;
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -56,7 +56,7 @@ public class PatientsRecordsController extends NewStage implements Initializable
     TableColumn createdByCol = new TableColumn("CREATED BY");
     @FXML
     private Text textHead;
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     @FXML
     private AnchorPane recordsPane;
 

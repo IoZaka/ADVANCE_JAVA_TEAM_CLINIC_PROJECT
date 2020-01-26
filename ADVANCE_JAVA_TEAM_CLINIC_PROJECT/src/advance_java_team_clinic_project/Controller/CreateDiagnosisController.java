@@ -6,7 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseConnection;
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -53,7 +53,7 @@ public class CreateDiagnosisController implements Initializable {
     private TextField patientInput;
 
     //Database
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     private Statement stmt;
     private ResultSet rs;
     private String sql;

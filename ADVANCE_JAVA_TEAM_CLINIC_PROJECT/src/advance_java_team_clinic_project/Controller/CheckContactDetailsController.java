@@ -6,7 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabseContactDetails;
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,7 +44,7 @@ public class CheckContactDetailsController implements Initializable {
      */
     private static DatabseContactDetails ak = new DatabseContactDetails();
     private ResultSet rs;
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

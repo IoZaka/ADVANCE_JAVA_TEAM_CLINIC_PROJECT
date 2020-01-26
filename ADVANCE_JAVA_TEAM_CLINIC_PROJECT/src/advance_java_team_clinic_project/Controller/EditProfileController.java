@@ -8,7 +8,7 @@ package advance_java_team_clinic_project.Controller;
 import advance_java_team_clinic_project.Model.CustomCombo;
 import advance_java_team_clinic_project.Model.DatabaseProfileDetails;
 import advance_java_team_clinic_project.Model.DatabaseProfileEdit;
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -34,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -47,7 +48,7 @@ public class EditProfileController extends NewStage implements Initializable {
     private static DatabaseProfileDetails ak = new DatabaseProfileDetails();
     private static final DatabaseProfileEdit ed = new DatabaseProfileEdit();
     private ResultSet rs;
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
 
     @FXML
     private Button usernamebtn;
@@ -102,12 +103,36 @@ public class EditProfileController extends NewStage implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+
+    }
+    
+    public void myInit(Integer userID){
         try {
-            setData();
+            setData(userID);
         } catch (SQLException ex) {
             Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        if(userID!=user.getId()){
+            insurancebtn.setDisable(true);
+            contactbtn.setDisable(true);
+            passwordbtn.setDisable(true);
+            usernamebtn.setDisable(true);
+            addressbtn.setDisable(true);
+        }else{
+            insurancebtn.setDisable(false);
+            contactbtn.setDisable(false);
+            passwordbtn.setDisable(false);
+            usernamebtn.setDisable(false);
+            addressbtn.setDisable(false);
+        }
+        
+        if(user.getRoleID() == 1 && userID != user.getId()){
+            comboRole.setDisable(false);
+        }else{
+            comboRole.setDisable(true);
+        }
+        
         usernamebtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 Parent root = FXMLLoader.load(EditProfileController.this.getClass().getResource("../View/checkUsernameWindow.fxml"));
@@ -116,6 +141,7 @@ public class EditProfileController extends NewStage implements Initializable {
                 checkUsername.setTitle("Enter New Username");
                 checkUsername.setScene(scene);
                 checkUsername.setResizable(false);
+                checkUsername.setOnCloseRequest((WindowEvent event1) -> {myInit(userID);});
                 checkUsername.show();
             } catch (IOException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
@@ -155,8 +181,8 @@ public class EditProfileController extends NewStage implements Initializable {
             try {
                 ak = new DatabaseProfileDetails();
                 ak.getObject();
-                ak.updateBasicInfoData(user.getId(), roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), dateOfBirth.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
-                User user1 = User.getInstance();
+                ak.updateBasicInfoData(userID, roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), dateOfBirth.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
+                LoggedInUser user1 = LoggedInUser.getInstance();
                 rs = ak.fetchBasicInfoData(user1.getId());
                 if (rs.next()) {
                     code.setText(rs.getString("global_code"));
@@ -216,7 +242,6 @@ public class EditProfileController extends NewStage implements Initializable {
                 }
             }
         });
-
     }
 
     /**
@@ -224,10 +249,9 @@ public class EditProfileController extends NewStage implements Initializable {
      *
      * @throws SQLException
      */
-    private void setData() throws SQLException {
+    private void setData(Integer userID) throws SQLException {
         ak.getObject();
-        rs = ak.fetchBasicInfoData(user.getId());
-
+        rs = ak.fetchBasicInfoData(userID);
         if (rs.next()) {
             usernamebtn.setText(rs.getString("username"));
             name.setText(rs.getString("firstname"));
@@ -262,7 +286,7 @@ public class EditProfileController extends NewStage implements Initializable {
         customCombo = ed.FetchData("PM_ROLES");
         comboRole.setItems(FXCollections.observableArrayList(customCombo));
         InitiateComboList(roleId, comboRole);
-        comboRole.setDisable(true);
+        
         customCombo = ed.FetchData("PM_NATIONALITIES");
         comboNationality.setItems(FXCollections.observableArrayList(customCombo));
         InitiateComboList(nationalityId, comboNationality);

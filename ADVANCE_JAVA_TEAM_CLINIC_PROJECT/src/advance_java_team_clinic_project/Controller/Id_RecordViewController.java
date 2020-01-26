@@ -7,7 +7,7 @@ package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseConnection;
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
-import advance_java_team_clinic_project.Model.User;
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -53,7 +53,7 @@ public class Id_RecordViewController implements Initializable {
     @FXML
     private AnchorPane idRecordPane;
 
-    User user = User.getInstance();
+    LoggedInUser user = LoggedInUser.getInstance();
     @FXML
     private TextField doctorInput;
     @FXML
