@@ -47,8 +47,6 @@ public class AdminDashboardController extends NewStage implements Initializable 
     @FXML
     private ToggleButton searchUserBtn;
     @FXML
-    private ToggleButton grantPermissionsBtn;
-    @FXML
     private ToggleButton logoutBtn;
 
     User user = User.getInstance();
@@ -112,7 +110,6 @@ public class AdminDashboardController extends NewStage implements Initializable 
         editProfileBtn.setSelected(false);
         enterNewUserBtn.setSelected(false);
         searchUserBtn.setSelected(false);
-        grantPermissionsBtn.setSelected(false);
         parametricsBtn.setSelected(false);
         logoutBtn.setSelected(false);
     }

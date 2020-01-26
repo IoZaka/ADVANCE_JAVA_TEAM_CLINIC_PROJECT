@@ -67,7 +67,7 @@ public class AdminParametricsController extends NewStage implements Initializabl
 
     }
 
-
+    //lName = pm_roles -> ROLES
     private void goToNextPage(String tableName, String lName) {
         try {
             FXMLLoader loader = new FXMLLoader(AdminParametricsController.this.getClass().getResource("../View/AdminViewParameters.fxml"));
