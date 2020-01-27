@@ -97,7 +97,7 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
      * @return
      * @throws SQLException
      */
-    public boolean registerQuery(String userName, String passWord) {
+    public boolean registerQuery(String userName, String passWord, Integer question1, Integer question2, String answer1, String answer2) {
         try {
             alert.setHeaderText(null);
             alert.initStyle(StageStyle.UTILITY);
@@ -112,7 +112,7 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
                 return false;
             } else if (rs.getInt("existing") == 0) {
                 hashPwd = makeHashPwd(passWord);
-                regSql = "insert into pm_users (username,password,role_id) values ('" + userName + "','" + hashPwd + "',3)";
+                regSql = "insert into pm_users (username, password, role_id, question_1_id , answer_1, question_2_id, answer_2) values ('" + userName + "','" + hashPwd + "',3, "+ question1 +",'"+ answer1 + "'," + question2 + ",'" + answer2 + "')";
                 regRs = stmt.executeQuery(regSql);
                 alert.setTitle("Success!");
                 alert.setContentText("User was succesfully registered! You may login now.");

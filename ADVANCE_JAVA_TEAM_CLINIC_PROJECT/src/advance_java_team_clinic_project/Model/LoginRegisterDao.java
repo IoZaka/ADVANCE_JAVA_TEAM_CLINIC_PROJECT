@@ -15,7 +15,7 @@ public interface LoginRegisterDao {
 
     public boolean loginQuery(String userName, String passWord);
 
-    public boolean registerQuery(String userName, String passWord);
+   public boolean registerQuery(String userName, String passWord, Integer question1, Integer question2, String answer1, String answer2);
 
     public String makeHashPwd(String passWord);
 }
