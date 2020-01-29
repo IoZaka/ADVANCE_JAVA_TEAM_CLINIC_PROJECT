@@ -111,7 +111,7 @@ public class SearchUserController implements Initializable {
                                 try {
                                     root = (Parent)loader.load();
                                 } catch (IOException ex) {
-                                    Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(UserMenuController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                                 EditProfileController editController = loader.getController();
                                 editController.myInit(id);

@@ -90,22 +90,7 @@ public class LoginViewController extends NewStage implements Initializable {
         Stage currentStage = (Stage) loginPane.getScene().getWindow();
         ak.getObject();
         if (ak.loginQuery(userNameGiven, passWordGiven) == true) {
-            LoggedInUser user = LoggedInUser.getInstance();
-            System.out.println(user.getRoleID());
-            switch (user.getRoleID()) {
-                case 1:
-                    setNewStage("../View/AdminDashboard.fxml", currentStage);
-                    break;
-                case 2:
-                    setNewStage("../View/doctorsDashboard.fxml", currentStage);
-                    break;
-                case 3:
-                    setNewStage("../View/patientsDashboard.fxml", currentStage);
-                    break;
-                case 5:
-                    setNewStage("../View/ClinicCenterMenu.fxml", currentStage);
-                    break;
-            }
+            setNewStage("../View/userMenuView.fxml", currentStage);
         }
     }
 
