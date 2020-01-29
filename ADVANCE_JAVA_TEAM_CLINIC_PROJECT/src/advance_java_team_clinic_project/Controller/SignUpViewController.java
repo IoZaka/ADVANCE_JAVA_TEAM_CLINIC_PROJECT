@@ -44,6 +44,20 @@ public class SignUpViewController extends NewStage implements Initializable {
     private Pane signUpPane;
     @FXML
     private Button registerBtn;
+<<<<<<< Updated upstream
+=======
+    @FXML
+    private ComboBox FirstQuestionCombo;
+    @FXML
+    private ComboBox SecondQuestionCombo;
+    @FXML
+    private TextField FirstAnswerQuestion;
+    @FXML
+    private TextField SecondAnswerQuestion;
+
+    ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
+    private static final DatabaseProfileEdit ed = new DatabaseProfileEdit();
+>>>>>>> Stashed changes
 
     private String passWord;
     private String confirmPassWord;
