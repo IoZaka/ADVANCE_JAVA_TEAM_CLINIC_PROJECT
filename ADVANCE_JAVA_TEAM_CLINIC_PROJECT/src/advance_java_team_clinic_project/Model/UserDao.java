@@ -7,8 +7,8 @@ import java.util.List;
  * @author Tasos
  */
 public interface UserDao {
-    public List<User> getAllUsers();
-    public User getUser(int userId);
-    public void updateUser(User user);
-    public void deleteUser(User user);
+    public List<Users> getAllUsers();
+    public Users getUser(int userId);
+    public void updateUser(Users user);
+    public void deleteUser(Users user);
 }

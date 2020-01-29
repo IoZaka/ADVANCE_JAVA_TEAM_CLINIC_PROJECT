@@ -17,12 +17,13 @@ import javafx.stage.StageStyle;
 public class DatabaseLoginRegister implements LoginRegisterDao {
 
     private Statement stmt;
-    private String sql, existSql, regSql, pwdSql;
+    private String sql, existSql, regSql, pwdSql, questSql, chgRs;
     private ResultSet rs, regRs, pwdRs;
-    private String username, password, role, created, updated, hashPwd;
+    private String username, password, role, created, updated, hashPwd, answer1, answer2;
     private DatabaseConnection object;
+    private int questionId1, questionId2;
     LoggedInUser user = LoggedInUser.getInstance();
-    public Integer roleId;
+    public Integer roleId, Id;
     Alert alert = new Alert(AlertType.INFORMATION);
 
     public void getObject() {
@@ -112,7 +113,7 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
                 return false;
             } else if (rs.getInt("existing") == 0) {
                 hashPwd = makeHashPwd(passWord);
-                regSql = "insert into pm_users (username, password, role_id, question_1_id , answer_1, question_2_id, answer_2) values ('" + userName + "','" + hashPwd + "',3, "+ question1 +",'"+ answer1 + "'," + question2 + ",'" + answer2 + "')";
+                regSql = "insert into pm_users (username, password, role_id, question_1_id , answer_1, question_2_id, answer_2) values ('" + userName + "','" + hashPwd + "',3, " + question1 + ",'" + answer1 + "'," + question2 + ",'" + answer2 + "')";
                 regRs = stmt.executeQuery(regSql);
                 alert.setTitle("Success!");
                 alert.setContentText("User was succesfully registered! You may login now.");
@@ -140,10 +141,43 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
                 localPwd = pwdRs.getString("pwd");
                 pwdRs.close();
                 return localPwd;
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseLoginRegister.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public int recoveryPassword(String username, Integer questionAnswerId, String answer) { //Sigrinei to id tou question kai to answer pou edwse o xristis sto recovery password kai an einai idia me tin basi tote girnaei 1 allios 0
+        try {
+            stmt = object.connection.createStatement();
+            questSql = "select id,question_1_id,question_2_id,answer_1,answer_2 from pm_users where username = '" + username + "'";
+            rs = stmt.executeQuery(questSql);
+            Id = -1;
+            if (rs.next()) {
+                questionId1 = rs.getInt("question_1_id");
+                answer1 = rs.getString("answer_1");
+                questionId2 = rs.getInt("question_2_id");
+                answer2 = rs.getString("answer_2");
+                if ((questionAnswerId == questionId1) && (answer.equals(answer1)) || (questionAnswerId == questionId2) && (answer.equals(answer2))) {
+                    Id = rs.getInt("Id");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseLoginRegister.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Id;
+    }
+
+    public void changePassword(String password, Integer Id) {
+        try {
+            stmt = object.connection.createStatement();
+            hashPwd = makeHashPwd(password);
+            chgRs = "update pm_users set password = '" + hashPwd + "' where id = " + Id;;
+            rs = stmt.executeQuery(chgRs);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseLoginRegister.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
