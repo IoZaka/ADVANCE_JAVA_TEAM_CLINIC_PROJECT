@@ -39,15 +39,23 @@ import javafx.stage.StageStyle;
  */
 public class SignUpViewController extends NewStage implements Initializable {
 
+    @FXML
     private TextField registerUsername;
+    @FXML
     private PasswordField registerPassword;
+    @FXML
     private PasswordField confirmPassword;
+    @FXML
     private Pane signUpPane;
     @FXML
     private Button registerBtn;
+    @FXML
     private ComboBox FirstQuestionCombo;
+    @FXML
     private ComboBox SecondQuestionCombo;
+    @FXML
     private TextField FirstAnswerQuestion;
+    @FXML
     private TextField SecondAnswerQuestion;
 
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
@@ -59,14 +67,6 @@ public class SignUpViewController extends NewStage implements Initializable {
     private static DatabaseLoginRegister ak;
     @FXML
     private ImageView backBtn;
-    @FXML
-    private TextField UsernameText;
-    @FXML
-    private ComboBox<?> ComboQuest;
-    @FXML
-    private TextField AnswerPass;
-    @FXML
-    private Pane RecoveryPane;
 
     @Override
     @SuppressWarnings("empty-statement")
