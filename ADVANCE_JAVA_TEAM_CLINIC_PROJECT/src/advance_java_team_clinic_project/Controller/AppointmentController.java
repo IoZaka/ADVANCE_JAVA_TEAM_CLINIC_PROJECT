@@ -1,26 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Project for TEI OF CRETE lesson
+ *  Plan Driven and Agile Programming
+ *  TP4129 - TP4187 - TP4145
  */
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseAppointment;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -35,6 +31,7 @@ public class AppointmentController implements Initializable {
     private TextArea reasonText;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private DatabaseAppointment ap = new DatabaseAppointment();
+
     /**
      * Initializes the controller class.
      *
@@ -49,7 +46,7 @@ public class AppointmentController implements Initializable {
             Logger.getLogger(AppointmentController.class.getName()).log(Level.SEVERE, null, ex);
         }
         submitBtn.setOnMouseClicked((MouseEvent event) -> {
-            ap.makeAppointment(reasonText.getText()); 
+            ap.makeAppointment(reasonText.getText());
             reasonText.clear();
             alert.setTitle("Success");
             alert.setContentText("Appointment successfully submitted");

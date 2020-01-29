@@ -7,14 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.CheckUsernameController">
-   <children>
-      <TextField fx:id="newUsernameInput" layoutX="125.0" layoutY="87.0" promptText="Enter new Username" styleClass="editInputStyle" stylesheets="@style.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor></TextField>
-      <Button fx:id="submitBtn" layoutX="167.0" layoutY="138.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="66.0" styleClass="editSubmitBtn" stylesheets="@style.css" text="Submit" />
-      <ImageView fx:id="statusIcon" fitHeight="37.0" fitWidth="25.0" layoutX="122.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="statusText" layoutX="153.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="134.0" />
-   </children>
+<AnchorPane id="AnchorPane" fx:id="checkUsernamePane" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.CheckUsernameController">
+    <children>
+        <TextField fx:id="newUsernameInput" layoutX="125.0" layoutY="87.0" promptText="Enter new Username" styleClass="editInputStyle" stylesheets="@style.css">
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor>
+        </TextField>
+        <Button fx:id="submitBtn" layoutX="167.0" layoutY="138.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="66.0" styleClass="editSubmitBtn" stylesheets="@style.css" text="Submit" />
+        <ImageView fx:id="statusIcon" fitHeight="37.0" fitWidth="25.0" layoutX="122.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
+        <Text fx:id="statusText" layoutX="153.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="134.0" />
+    </children>
 </AnchorPane>
