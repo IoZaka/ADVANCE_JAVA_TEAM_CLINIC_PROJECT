@@ -10,6 +10,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -107,13 +113,15 @@ public class TestIDController implements Initializable {
         
         try {
             if(rs.next()){
-                diagID = rs.getInt("diag_id");
+                //diagID = rs.getInt("diag_id");
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
                 resultsInput.setText(rs.getString("results"));
-                isPaidInput.setText(rs.getString("paid"));
+                isPaidInput.setText(rs.getString("Paid"));
                 caseStatusInput.setText(rs.getString("status"));
                 createdByInput.setText(rs.getString("createdby"));
+                createdDate.setValue(LOCAL_DATE(rs.getString("created")));
+                updatedDate.setValue(LOCAL_DATE(rs.getString("updated")));
                 updatedByInput.setText(rs.getString("updated_by"));
             }
         } catch (SQLException ex) {
@@ -135,6 +143,12 @@ public class TestIDController implements Initializable {
                 }
             }
         });  
+    }
+    
+    public static final LocalDate LOCAL_DATE(String dateString) { 
+        DateTimeFormatter DATE_FORMAT = new DateTimeFormatterBuilder().appendPattern("uuuu-MM-dd HH:mm:ss.S").toFormatter();
+        LocalDate ldt = LocalDate.parse(dateString, DATE_FORMAT);
+        return ldt;
     }
     
     

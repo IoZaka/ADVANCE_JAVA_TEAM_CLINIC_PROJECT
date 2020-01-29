@@ -305,6 +305,7 @@ public class EditProfileController extends NewStage implements Initializable {
     }
 
     public static final LocalDate LOCAL_DATE(String dateString) {
+        System.out.println("DATE" + dateString);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy", Locale.FRENCH);
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="testIDPane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.TestIDController">
+<AnchorPane id="AnchorPane" fx:id="testIDPane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.TestIDController">
    <children>
       <GridPane prefHeight="600.0" prefWidth="820.0">
         <columnConstraints>
@@ -146,12 +146,12 @@
                   <Insets bottom="130.0" left="190.0" />
                </GridPane.margin>
             </TextField>
-            <DatePicker fx:id="createdDate" editable="false" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="1">
+            <DatePicker fx:id="createdDate" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="180.0" top="70.0" />
                </GridPane.margin>
             </DatePicker>
-            <DatePicker fx:id="updatedDate" editable="false" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="2">
+            <DatePicker fx:id="updatedDate" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="130.0" left="180.0" />
                </GridPane.margin>
