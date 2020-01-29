@@ -61,59 +61,54 @@ public class PatientsRecordsController extends NewStage implements Initializable
     private AnchorPane recordsPane;
 
     public void initialize(URL location, ResourceBundle resources) {
-       
-       
-       recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-       idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
-       appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
-       commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
-       createdDateCol.setCellValueFactory(new PropertyValueFactory<>("created"));
-       updatedDateCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
-       patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
-       doctorCol.setCellValueFactory(new PropertyValueFactory<>("doctor"));
-       updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
-       createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
-       
-       
-       Callback<TableColumn<Records, Void>, TableCell<Records, Void>>  cellFactory = new Callback<TableColumn<Records,Void>, TableCell<Records,Void>>(){
-           @Override
-           public TableCell<Records, Void> call(TableColumn<Records, Void> param) {
-             TableCell<Records, Void> cell = new TableCell<Records, Void>() {
-                    private Button btn = new Button();
 
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            Records data = new Records();
-                            data = getTableView().getItems().get(getIndex());
-                            btn.setText(data.idProperty().getValue());
-                            btn.setOnMouseClicked((MouseEvent event) -> {
+        recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
+        appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
+        commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
+        createdDateCol.setCellValueFactory(new PropertyValueFactory<>("created"));
+        updatedDateCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
+        patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
+        doctorCol.setCellValueFactory(new PropertyValueFactory<>("doctor"));
+        updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
+        createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
 
-                                try {
-                                    FXMLLoader loader = new FXMLLoader(PatientsRecordsController.this.getClass().getResource("../View/id_RecordView.fxml"));
-                                    Parent root = (Parent) loader.load();
-                                    Id_RecordViewController id = loader.getController();
-                                    String getID = btn.getText().substring(4);
-                                    id.setID(getID);
-                                    //Scene
-                                    recordsPane.getChildren().clear();
-                                    recordsPane.getChildren().add(root);
-                                } catch (IOException ex) {
-                                    Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                            });
-                            setGraphic(btn);
-                        }
+        Callback<TableColumn<Records, Void>, TableCell<Records, Void>> cellFactory = (TableColumn<Records, Void> param) -> {
+            TableCell<Records, Void> cell = new TableCell<Records, Void>() {
+                private Button btn = new Button();
+
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        Records data = new Records();
+                        data = getTableView().getItems().get(getIndex());
+                        btn.setText(data.idProperty().getValue());
+                        btn.setOnMouseClicked((MouseEvent event) -> {
+
+                            try {
+                                FXMLLoader loader = new FXMLLoader(PatientsRecordsController.this.getClass().getResource("../View/id_RecordView.fxml"));
+                                Parent root = (Parent) loader.load();
+                                Id_RecordViewController id = loader.getController();
+                                String getID = btn.getText().substring(4);
+                                id.setID(getID);
+                                //Scene
+                                recordsPane.getChildren().clear();
+                                recordsPane.getChildren().add(root);
+                            } catch (IOException ex) {
+                                Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                        setGraphic(btn);
                     }
-                    
-             };
+                }
+
+            };
             return cell;
-           }
         };
-           
+
         switch (user.getRoleID()) {
             case 2:
                 textHead.setText("YOUR APPOINTMENTS");

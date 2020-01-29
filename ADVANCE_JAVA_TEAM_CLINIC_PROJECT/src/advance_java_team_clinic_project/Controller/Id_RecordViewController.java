@@ -105,7 +105,7 @@ public class Id_RecordViewController implements Initializable {
     }
 
     public void setID(String id) {
-
+        
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
