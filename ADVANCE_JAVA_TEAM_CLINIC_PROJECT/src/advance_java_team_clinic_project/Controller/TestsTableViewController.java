@@ -109,7 +109,8 @@ public class TestsTableViewController implements Initializable {
                         } else {
                             Tests test = new Tests();
                             test = getTableView().getItems().get(getIndex());
-                            btn.setText(test.idProperty().getValue());
+                            String testID = test.idProperty().getValue().substring(5);
+                            btn.setText("EDIT");
                             btn.setOnAction(event -> {
                                     FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
                                     Parent root = null;
@@ -119,8 +120,7 @@ public class TestsTableViewController implements Initializable {
                                         Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
                                     }
                                     TestIDController id = loader.getController();
-                                    String testID = btn.getText();
-                                    id.setTestIDView(appID,Integer.valueOf(testID));
+                                    id.setTestIDView(appID,diagID,Integer.valueOf(testID));
                                     //Scene
                                     testsPane.getChildren().clear();
                                     testsPane.getChildren().add(root);

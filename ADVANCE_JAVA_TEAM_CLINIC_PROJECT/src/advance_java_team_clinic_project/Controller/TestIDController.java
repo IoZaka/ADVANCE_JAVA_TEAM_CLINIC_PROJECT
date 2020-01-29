@@ -66,18 +66,18 @@ public class TestIDController implements Initializable {
       
     }    
     
-    public void setTestIDView(String id,Integer testID){
+    public void setTestIDView(String appID, Integer diagID ,Integer testID){
         
         ResultSet rs = tests.getTestByID(testID);
         
         try {
             if(rs.next()){
-                diagID = rs.getInt("diag_id");
+                //diagID = rs.getInt("diag_id");
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
                 resultsInput.setText(rs.getString("results"));
-                isPaidInput.setText(rs.getString("is_paid"));
-                caseStatusInput.setText(rs.getString("status_id"));
+                isPaidInput.setText(rs.getString("Paid"));
+                caseStatusInput.setText(rs.getString("status"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(TestIDController.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,7 +90,7 @@ public class TestIDController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(TestIDController.this.getClass().getResource("../View/testsTableView.fxml"));
                     Parent root = (Parent)loader.load();
                     TestsTableViewController testID = loader.getController();
-                    testID.setTestID(id,diagID);
+                    testID.setTestID(appID,diagID);
                     testIDPane.getChildren().clear();
                     testIDPane.getChildren().add(root);
                 } catch (IOException ex) {

@@ -89,15 +89,14 @@ public class PatientsRecordsController extends NewStage implements Initializable
                         } else {
                             Records data = new Records();
                             data = getTableView().getItems().get(getIndex());
-                            btn.setText(data.idProperty().getValue());
+                            String appID = data.idProperty().getValue().substring(4);
+                            btn.setText("OPEN");
                             btn.setOnMouseClicked((MouseEvent event) -> {
-
                                 try {
                                     FXMLLoader loader = new FXMLLoader(PatientsRecordsController.this.getClass().getResource("../View/id_RecordView.fxml"));
                                     Parent root = (Parent) loader.load();
                                     Id_RecordViewController id = loader.getController();
-                                    String getID = btn.getText().substring(4);
-                                    id.setID(getID);
+                                    id.setID(appID);
                                     //Scene
                                     recordsPane.getChildren().clear();
                                     recordsPane.getChildren().add(root);
