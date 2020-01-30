@@ -5,6 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.LoggedInUser;
 import advance_java_team_clinic_project.Model.Tests;
 import java.io.IOException;
 import java.net.URL;
@@ -19,12 +20,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -63,22 +66,23 @@ public class TestIDController implements Initializable {
     private Integer diagID = null;
 
     Tests tests = new Tests();
+    LoggedInUser loggedInUser = LoggedInUser.getInstance();
+    @FXML
+    private ComboBox isCompleted;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
+        isCompleted.getItems().addAll("Yes","No");
     }    
     
     public void setTestIDView(String appID, Integer diagID ,Integer testID){
         
-        ResultSet rs = tests.getTestByID(testID);
-        
+        ResultSet rs = tests.getTestByID(testID);      
         try {
             if(rs.next()){
-                //diagID = rs.getInt("diag_id");
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
                 resultsInput.setText(rs.getString("results"));
@@ -113,7 +117,6 @@ public class TestIDController implements Initializable {
         
         try {
             if(rs.next()){
-                //diagID = rs.getInt("diag_id");
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
                 resultsInput.setText(rs.getString("results"));

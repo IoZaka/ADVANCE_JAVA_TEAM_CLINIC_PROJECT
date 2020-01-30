@@ -135,12 +135,16 @@ public class EditProfileController extends NewStage implements Initializable {
         
         usernamebtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                Parent root = FXMLLoader.load(EditProfileController.this.getClass().getResource("../View/checkUsernameWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(EditProfileController.this.getClass().getResource("../View/checkUsernameWindow.fxml"));
+                Parent root = null;
+                root = (Parent)loader.load();
                 Stage checkUsername = new Stage();
                 Scene scene = new Scene(root);
                 checkUsername.setTitle("Enter New Username");
                 checkUsername.setScene(scene);
                 checkUsername.setResizable(false);
+                CheckUsernameController usernameController = loader.getController();
+                usernameController.myInit(userID);
                 checkUsername.setOnCloseRequest((WindowEvent event1) -> {myInit(userID);});
                 checkUsername.show();
             } catch (IOException ex) {
@@ -150,12 +154,16 @@ public class EditProfileController extends NewStage implements Initializable {
 
         passwordbtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/checkPasswordWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(EditProfileController.this.getClass().getResource("../View/checkPasswordWindow.fxml"));
+                Parent root = null;
+                root = (Parent)loader.load();
                 Stage checkPassword = new Stage();
                 Scene scene = new Scene(root);
                 checkPassword.setTitle("Enter New Password");
                 checkPassword.setScene(scene);
                 checkPassword.setResizable(false);
+                CheckPasswordWindowController passwordController = loader.getController();
+                passwordController.myInit(userID);
                 checkPassword.show();
             } catch (IOException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,18 +171,14 @@ public class EditProfileController extends NewStage implements Initializable {
         });
 
         cancelBtn.setOnMouseClicked((MouseEvent event) -> {
+            
+            Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
             try {
-                Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
-                if (roleId == 1) {
-                    setNewStage("../View/AdminDashboard.fxml", currentStage);
-                } else if (roleId == 2) {
-                    setNewStage("../View/doctorsDashboard.fxml", currentStage);
-                } else {
-                    setNewStage("../View/patientsDashboard.fxml", currentStage);
-                }
+                setNewStage("../View/userMenuView.fxml", currentStage);
             } catch (IOException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
+              
         });
 
         submitBtn.setOnMouseClicked((MouseEvent event) -> {
@@ -305,7 +309,6 @@ public class EditProfileController extends NewStage implements Initializable {
     }
 
     public static final LocalDate LOCAL_DATE(String dateString) {
-        System.out.println("DATE" + dateString);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MM-yyyy", Locale.FRENCH);
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;
