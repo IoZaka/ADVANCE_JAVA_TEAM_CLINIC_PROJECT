@@ -51,6 +51,7 @@ public class Id_RecordViewController extends NewStage implements Initializable {
     private Button backBtn;
     @FXML
     private Button diagnoseInfoBtn;
+    @FXML
     private AnchorPane idRecordPane;
 
     LoggedInUser user = LoggedInUser.getInstance();
@@ -58,9 +59,6 @@ public class Id_RecordViewController extends NewStage implements Initializable {
     private TextField doctorInput;
     @FXML
     private TextField patientInput;
-    @FXML
-
-
     private Integer diagID = -1;
 
     private Statement stmt;
@@ -81,16 +79,18 @@ public class Id_RecordViewController extends NewStage implements Initializable {
         doctorInput.setEditable(false);
         patientInput.setEditable(false);
         
-                backBtn.setOnMouseClicked((MouseEvent event) -> {
-            FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/patientsRecords.fxml"));
-            Parent root = null;
-            try {
-                root = (Parent) loader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+           backBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/patientsRecords.fxml"));
+                    Parent root = (Parent) loader.load();
+                    idRecordPane.getChildren().clear();
+                    idRecordPane.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            idRecordPane.getChildren().clear();
-            idRecordPane.getChildren().add(root);
         });
     }
 
