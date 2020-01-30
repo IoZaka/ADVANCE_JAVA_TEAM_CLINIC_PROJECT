@@ -50,8 +50,6 @@ public class DiagnosisInfoController implements Initializable {
     @FXML
     private TextField patientInput;
     @FXML
-    private Button create_addmission;
-    @FXML
     private Button createDiagnose;
     @FXML
     private Button updateDiagnose;
@@ -62,7 +60,7 @@ public class DiagnosisInfoController implements Initializable {
     @FXML
     private TextField patientTypeInput;
 
-    private Integer appInfoId, admissionId;
+    private Integer appInfoId, admissionID;
     LoggedInUser user = LoggedInUser.getInstance();
     @FXML
     private AnchorPane diagnosisPanel;
@@ -91,7 +89,6 @@ public class DiagnosisInfoController implements Initializable {
         if (user.getRoleID() == 3) {
             medicineText.setEditable(false);
             commentsText.setEditable(false);
-            create_addmission.setVisible(false);
             createDiagnose.setVisible(false);
             updateDiagnose.setVisible(false);
             createDiagnose.setVisible(false);
@@ -100,21 +97,24 @@ public class DiagnosisInfoController implements Initializable {
 
     /**
      *
-     * @param id
+     * @param app_id
      * @param diagID
      */
-    public void setDiagnosisID(String id, Integer diagID) {
-        appInfoId = Integer.valueOf(id);
-        admissionId = -1;
+    public void setDiagnosisID(String app_id, Integer diagID) {
+        appInfoId = Integer.valueOf(app_id);
+        System.out.println("first step");
+        admissionID = -1;
 //        diagInfoModel.getObject();
 
         if (diagID == -1) {
+            System.out.println("second step");
             testsBtn.setVisible(false);
             updateDiagnose.setVisible(false);
-            create_addmission.setVisible(false);
             admissionInfoBtn.setVisible(false);
             testCreate.setVisible(false);
+            System.out.println("third step");
             if (user.getRoleID() != 3) {
+                System.out.println("fourth step");
                 createDiagnose.setVisible(true);
             }
         } else {
@@ -129,7 +129,7 @@ public class DiagnosisInfoController implements Initializable {
                     createdByInput.setText(rs.getString("created_by"));
                     updatedInput.setText(rs.getString("updated"));
                     updatedByInput.setText(rs.getString("updated_by"));
-                    admissionId = rs.getInt("admission_id");
+                    admissionID = rs.getInt("admission_id");
                     doctorInput.setText(rs.getString("doctor"));
                     patientInput.setText(rs.getString("patient"));
                 }
@@ -137,18 +137,32 @@ public class DiagnosisInfoController implements Initializable {
                 Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (user.getRoleID() != 3) {
+                if (admissionID == -1) {
+                    admissionInfoBtn.setText("Create admission");
+                } else if (admissionID > 0) {
+                    admissionInfoBtn.setText("Admission info");
+                }
+                admissionInfoBtn.setVisible(true);
                 updateDiagnose.setVisible(true);
                 testsBtn.setVisible(true);
-                createDiagnose.setVisible(false);
                 testCreate.setVisible(true);
+            } else if (user.getRoleID() == 3) {
+                if (admissionID == -1) {
+                    admissionInfoBtn.setVisible(false);
+                } else if (admissionID > 0) {
+                    admissionInfoBtn.setVisible(true);
+                    admissionInfoBtn.setText("Admission info");
+                }
             }
+            createDiagnose.setVisible(false);
         }
+        System.out.println("six step");
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/id_RecordView.fxml"));
                 Parent root = (Parent) loader.load();
                 Id_RecordViewController idRecord = loader.getController();
-                idRecord.setID(id);
+                idRecord.setID(app_id);
                 diagnosisPanel.getChildren().clear();
                 diagnosisPanel.getChildren().add(root);
             } catch (IOException ex) {
@@ -159,24 +173,24 @@ public class DiagnosisInfoController implements Initializable {
             diagInfoModel.getObject();
             diagInfoModel.updateDiagnoseDetails(diagID, commentsText.getText(), medicineText.getText());
         });
-        
+
         admissionInfoBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AdmissionInfoView.fxml"));
                 Parent root = (Parent) loader.load();
                 AdmissionInfoController admissionInfoID = loader.getController();
-                admissionInfoID.setAdmissionID(diagID);
+                admissionInfoID.setAdmissionID(diagID, admissionID);
                 diagnosisPanel.getChildren().clear();
                 diagnosisPanel.getChildren().add(root);
             } catch (IOException ex) {
                 Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        create_addmission.setOnMouseClicked((MouseEvent event) -> {
+        createDiagnose.setOnMouseClicked((MouseEvent event) -> {
             diagInfoModel.getObject();
             diagInfoModel.createDiagnoseDetails(appInfoId, commentsText.getText(), medicineText.getText());
         });
-        
+
         /* TESTS CONTEXT */
         testCreate.setOnMouseClicked((MouseEvent event) -> {
             FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testIDView.fxml"));
@@ -187,7 +201,7 @@ public class DiagnosisInfoController implements Initializable {
                 Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
             TestIDController testID = loader.getController();
-            testID.setTestIDView(id, -1);
+            testID.setTestIDView(app_id, -1);
             //Scene
             diagnosisPanel.getChildren().clear();
             diagnosisPanel.getChildren().add(root);
@@ -197,7 +211,7 @@ public class DiagnosisInfoController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testsTableView.fxml"));
                 Parent root = (Parent) loader.load();
                 TestsTableViewController testID = loader.getController();
-                testID.setTestID(id, diagID);
+                testID.setTestID(app_id, diagID);
                 diagnosisPanel.getChildren().clear();
                 diagnosisPanel.getChildren().add(root);
             } catch (IOException ex) {

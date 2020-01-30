@@ -16,7 +16,6 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,14 +25,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author Chris
  */
-public class Id_RecordViewController extends NewStage implements Initializable {
+public class Id_RecordViewController implements Initializable {
 
     @FXML
     private TextField appDateInput;
@@ -51,6 +49,7 @@ public class Id_RecordViewController extends NewStage implements Initializable {
     private Button backBtn;
     @FXML
     private Button diagnoseInfoBtn;
+    @FXML
     private AnchorPane idRecordPane;
 
     LoggedInUser user = LoggedInUser.getInstance();
@@ -58,9 +57,6 @@ public class Id_RecordViewController extends NewStage implements Initializable {
     private TextField doctorInput;
     @FXML
     private TextField patientInput;
-    @FXML
-
-
     private Integer diagID = -1;
 
     private Statement stmt;
@@ -80,8 +76,8 @@ public class Id_RecordViewController extends NewStage implements Initializable {
         commentsTextArea.setEditable(false);
         doctorInput.setEditable(false);
         patientInput.setEditable(false);
-        
-                backBtn.setOnMouseClicked((MouseEvent event) -> {
+
+        backBtn.setOnMouseClicked((MouseEvent event) -> {
             FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/patientsRecords.fxml"));
             Parent root = null;
             try {
@@ -94,14 +90,14 @@ public class Id_RecordViewController extends NewStage implements Initializable {
         });
     }
 
-    public void setID(String id) {
+    public void setID(String appID) {
 
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
             ak = new DatabaseLoginRecords();
             ak.getObject();
-            rs = ak.fetchBasicInfoData(Integer.parseInt(id));
+            rs = ak.fetchBasicInfoData(Integer.parseInt(appID));
             if (rs.next()) {
                 doctorInput.setText(rs.getString("doctor"));
                 patientInput.setText(rs.getString("patient"));
@@ -116,15 +112,15 @@ public class Id_RecordViewController extends NewStage implements Initializable {
         }
 
         if (diagID == -1) {
-            if(user.getRoleID() == 3){
+            if (user.getRoleID() == 3) {
                 diagnoseInfoBtn.setVisible(false);
-            }else{
-            diagnoseInfoBtn.setDisable(false);
-            diagnoseInfoBtn.setVisible(true);
-            diagnoseInfoBtn.setText("Create diagnose");
+            } else {
+                if (user.getRoleID() != 3) {
+                    diagnoseInfoBtn.setVisible(true);
+                    diagnoseInfoBtn.setText("Create diagnose");
+                }
             }
         } else {
-            diagnoseInfoBtn.setDisable(false);
             diagnoseInfoBtn.setVisible(true);
             diagnoseInfoBtn.setText("Diagnose Info");
         }
@@ -134,7 +130,7 @@ public class Id_RecordViewController extends NewStage implements Initializable {
                 FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
                 Parent root = (Parent) loader.load();
                 DiagnosisInfoController diagnosisID = loader.getController();
-                diagnosisID.setDiagnosisID(id, diagID);
+                diagnosisID.setDiagnosisID(appID, diagID);
                 idRecordPane.getChildren().clear();
                 idRecordPane.getChildren().add(root);
             } catch (IOException ex) {

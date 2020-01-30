@@ -40,9 +40,11 @@ public class Users {
             stmt = object.connection.createStatement();
             //sql = "select a.id, a.SURNAME || ' ' || a.FIRSTNAME uName, b.description role from pm_users a , pm_roles b where a.role_id = b.id";
             
-            sql = "select a.id, a.SURNAME || ' ' || a.FIRSTNAME uName, b.description role from pm_users a , pm_roles b where a.id!=1 and a.role_id = b.id and "
+            sql = "select a.id, nvl(a.SURNAME,'Surname') || ' ' || nvl(a.FIRSTNAME,'Firstname') uName, b.description role from pm_users a , pm_roles b where a.id!=1 and a.role_id = b.id and "
                     + "(UPPER(a.firstname) like ( '%' || UPPER('"+searchText+"') || '%') or "
-                    + "UPPER(a.SURNAME) like ( '%' || UPPER('"+searchText+"') || '%'))";
+                    + "UPPER(a.SURNAME) like ( '%' || UPPER('"+searchText+"') || '%')) "
+                    + "union "
+                    + "select a.id, nvl(a.SURNAME,'Surname') || ' ' || nvl(a.FIRSTNAME,'Firstname') uName, b.description role from pm_users a , pm_roles b where a.id!=1 and a.role_id = b.id and '"+searchText+"' is null";
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);

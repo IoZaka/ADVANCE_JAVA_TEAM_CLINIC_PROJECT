@@ -88,7 +88,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     public void createDiagnoseDetails(Integer app_info_id, String lComments, String lMeds) {
         try {
             stmt = object.connection.createStatement();
-            sql = "insert into pm_diagnosis (comments,meds,created_by,updated_by,APP_INFO_ID) values ('" + lComments + "','" + lMeds + "'," + user.getId() + "," + user.getId() + "," + app_info_id;
+            sql = "insert into pm_diagnosis (comments,meds,created_by,updated_by,APP_INFO_ID) values ('" + lComments + "','" + lMeds + "'," + user.getId() + "," + user.getId() + "," + app_info_id +")";
             rs = stmt.executeQuery(sql);
             alert.setHeaderText(null);
             alert.initStyle(StageStyle.UTILITY);

@@ -51,8 +51,8 @@ public class AdmissionInfoController implements Initializable {
         // TODO
     }
 
-    public void setAdmissionID(Integer id) {
-        System.out.println(id);
+    public void setAdmissionID(Integer diagID, Integer admissionID) {
+        System.out.println(diagID + " " + admissionID);
     }
 
 }

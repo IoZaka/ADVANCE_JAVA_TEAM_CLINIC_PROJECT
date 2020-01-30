@@ -154,14 +154,6 @@
                         <Insets bottom="70.0" left="115.0" />
                     </GridPane.margin>
                 </TextField>
-                <Button id="create_addmission" fx:id="create_addmission" maxWidth="168.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="168.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Create addmission" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets bottom="115.0" left="34.0" />
-                    </GridPane.margin>
-                </Button>
                 <Button fx:id="createDiagnose" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Create diagnose" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <font>
                         <Font size="16.0" />
