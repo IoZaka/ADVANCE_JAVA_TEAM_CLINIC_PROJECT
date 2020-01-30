@@ -107,12 +107,12 @@ public class PatientsRecordsController extends NewStage implements Initializable
                             setGraphic(btn);
                         }
                     }
-                    
-             };
+                }
+
+            };
             return cell;
-           }
         };
-           
+
         switch (user.getRoleID()) {
             case 2:
                 textHead.setText("YOUR APPOINTMENTS");
