@@ -73,6 +73,15 @@ public class LoginViewController extends NewStage implements Initializable {
                 Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        forgotBtn.setOnAction((ActionEvent e) -> {
+            try {
+                handleRecoveryAction(e);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
     }
 
     /**
@@ -108,4 +117,24 @@ public class LoginViewController extends NewStage implements Initializable {
         currentStage.show();
 
     }
+        /**
+     * Function that triggers when the user presses the Forgot Password button. Returns
+     * a new page with the recovery password panel.
+     *
+     * @param event
+     * @throws IOException
+    
+    
+    */
+
+   @SuppressWarnings("empty-statement")
+   private void handleRecoveryAction(ActionEvent event) throws IOException {
+       Stage currentStage = (Stage) loginPane.getScene().getWindow();
+       setNewStage("../View/PasswordRecovery.fxml", currentStage);
+       currentStage.show();
+
+   }
+    
+    
+    
 }
