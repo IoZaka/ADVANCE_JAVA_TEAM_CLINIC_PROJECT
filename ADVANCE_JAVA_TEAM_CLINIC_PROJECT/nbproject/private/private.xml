@@ -4,9 +4,27 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/PasswordRecoveryController.java</file>
-            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/View/PasswordRecovery.fxml</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseLoginRecords.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseLoginRegister.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseProfileDetails.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/InsuranceCompanies.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/PatientsRecordsController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/CheckAddressDetailsController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/CheckUsernameController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/InsuranceDetailsDao.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/LoggedInUser.java</file>
             <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/PasswordRecoveryPopUpController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseCheckAddressDetails.java</file>
             <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/SignUpViewController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/Insurance_Details.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabaseAppointment.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/LoginViewController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/ProfileController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/DatabseContactDetails.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/CreateDiagnosisController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/AdminViewParametersController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Controller/SearchUserController.java</file>
+            <file>file:/C:/Users/Tasos/Desktop/Java2_Project/ADVANCE_JAVA_TEAM_CLINIC_PROJECT/src/advance_java_team_clinic_project/Model/LoginRegisterDao.java</file>
         </group>
     </open-files>
 </project-private>
