@@ -85,7 +85,7 @@
                         <Font size="16.0" />
                     </font>
                 </Button>
-                <Button fx:id="diagnoseInfoBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Diagnose Info" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <Button fx:id="diagnoseInfoBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="130.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Diagnose Info" GridPane.columnIndex="2" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets left="50.0" top="40.0" />
                     </GridPane.margin>
@@ -119,14 +119,6 @@
                         <Insets bottom="110.0" left="115.0" />
                     </GridPane.margin>
                 </TextField>
-                <Button fx:id="createDiagnosisBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="CREATE DIAGNOSIS" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                    <GridPane.margin>
-                        <Insets left="50.0" top="40.0" />
-                    </GridPane.margin>
-                </Button>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment info" textAlignment="CENTER" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />

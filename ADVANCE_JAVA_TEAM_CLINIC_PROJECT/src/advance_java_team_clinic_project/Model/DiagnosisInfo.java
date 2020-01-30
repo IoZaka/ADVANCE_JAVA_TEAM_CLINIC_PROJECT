@@ -60,7 +60,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
                     + " c.SURNAME || ' ' || c.FIRSTNAME updated_by, "
                     + " nvl(ad.id,-1) admission_id, "
                     + " pat.SURNAME || ' ' || pat.FIRSTNAME patient, "
-                    + " doc.SURNAME || ' ' || pat.FIRSTNAME doctor "
+                    + " doc.SURNAME || ' ' || doc.FIRSTNAME doctor "
                     + " from pm_diagnosis a, pm_users b, pm_users c, pm_addmissions ad, pm_appointment_info ap, pm_users doc, pm_users pat  "
                     + " where a.created_by = b.id "
                     + " and a.updated_by = c.id "
@@ -97,6 +97,11 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
             alert.showAndWait();
         } catch (SQLException ex) {
             Logger.getLogger(DiagnosisInfo.class.getName()).log(Level.SEVERE, null, ex);
+            alert.setHeaderText(null);
+            alert.initStyle(StageStyle.UTILITY);
+            alert.setTitle("Failed");
+            alert.setContentText("Diagnose failed creation!");
+            alert.showAndWait();
         }
     }
 
@@ -121,6 +126,11 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
             alert.showAndWait();
         } catch (SQLException ex) {
             Logger.getLogger(DiagnosisInfo.class.getName()).log(Level.SEVERE, null, ex);
+            alert.setHeaderText(null);
+            alert.initStyle(StageStyle.UTILITY);
+            alert.setTitle("Failure!");
+            alert.setContentText("Diagnose failed to update!");
+            alert.showAndWait();
         }
     }
 

@@ -70,6 +70,8 @@ public class DiagnosisInfoController implements Initializable {
     private DiagnosisInfo diagInfoModel = new DiagnosisInfo();
     ;
     private ResultSet rs;
+    @FXML
+    private Button testCreate;
 
     /**
      * Initializes the controller class.
@@ -79,8 +81,6 @@ public class DiagnosisInfoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("initialize");
-
         createdByInput.setEditable(false);
         updatedByInput.setEditable(false);
         doctorInput.setEditable(false);
@@ -88,7 +88,6 @@ public class DiagnosisInfoController implements Initializable {
         createdInput.setEditable(false);
         updatedInput.setEditable(false);
         patientTypeInput.setEditable(false);
-
         if (user.getRoleID() == 3) {
             medicineText.setEditable(false);
             commentsText.setEditable(false);
@@ -97,8 +96,6 @@ public class DiagnosisInfoController implements Initializable {
             updateDiagnose.setVisible(false);
             createDiagnose.setVisible(false);
         }
-
-        System.out.println("end of initialize");
     }
 
     /**
@@ -116,6 +113,7 @@ public class DiagnosisInfoController implements Initializable {
             updateDiagnose.setVisible(false);
             create_addmission.setVisible(false);
             admissionInfoBtn.setVisible(false);
+            testCreate.setVisible(false);
             if (user.getRoleID() != 3) {
                 createDiagnose.setVisible(true);
             }
@@ -134,20 +132,17 @@ public class DiagnosisInfoController implements Initializable {
                     admissionId = rs.getInt("admission_id");
                     doctorInput.setText(rs.getString("doctor"));
                     patientInput.setText(rs.getString("patient"));
-
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
             if (user.getRoleID() != 3) {
                 updateDiagnose.setVisible(true);
                 testsBtn.setVisible(true);
                 createDiagnose.setVisible(false);
-
+                testCreate.setVisible(true);
             }
         }
-
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/id_RecordView.fxml"));
@@ -160,7 +155,11 @@ public class DiagnosisInfoController implements Initializable {
                 Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        updateDiagnose.setOnMouseClicked((MouseEvent event) -> {
+            diagInfoModel.getObject();
+            diagInfoModel.updateDiagnoseDetails(diagID, commentsText.getText(), medicineText.getText());
+        });
+        
         admissionInfoBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AdmissionInfoView.fxml"));
@@ -173,11 +172,26 @@ public class DiagnosisInfoController implements Initializable {
                 Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
         create_addmission.setOnMouseClicked((MouseEvent event) -> {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            diagInfoModel.getObject();
+            diagInfoModel.createDiagnoseDetails(appInfoId, commentsText.getText(), medicineText.getText());
         });
-
+        
+        /* TESTS CONTEXT */
+        testCreate.setOnMouseClicked((MouseEvent event) -> {
+            FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testIDView.fxml"));
+            Parent root = null;
+            try {
+                root = (Parent) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            TestIDController testID = loader.getController();
+            testID.setTestIDView(id, -1);
+            //Scene
+            diagnosisPanel.getChildren().clear();
+            diagnosisPanel.getChildren().add(root);
+        });
         testsBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testsTableView.fxml"));
@@ -190,6 +204,6 @@ public class DiagnosisInfoController implements Initializable {
                 Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
+        /* END -- TESTS CONTEXT */
     }
 }
