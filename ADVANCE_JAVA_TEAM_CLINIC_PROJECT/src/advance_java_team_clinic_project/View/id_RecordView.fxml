@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="idRecordPane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.Id_RecordViewController">
+<AnchorPane id="AnchorPane" fx:id="idRecordPane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.Id_RecordViewController">
     <children>
-        <GridPane layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="700.0">
+        <GridPane layoutX="60.0" layoutY="50.0" prefHeight="500.0" prefWidth="700.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,43 +26,43 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="APP DATE" GridPane.rowIndex="1">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="APP DATE">
                     <font>
                         <Font size="16.0" />
                     </font>
                     <GridPane.margin>
-                        <Insets bottom="60.0" left="70.0" />
+                        <Insets left="30.0" top="70.0" />
                     </GridPane.margin>
                 </Text>
-                <TextField fx:id="appDateInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="1">
+                <TextField fx:id="appDateInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0">
                     <GridPane.margin>
-                        <Insets left="20.0" top="10.0" />
+                        <Insets left="115.0" top="70.0" />
                     </GridPane.margin>
                 </TextField>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CODE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CODE">
                     <GridPane.margin>
-                        <Insets bottom="60.0" left="70.0" />
+                        <Insets left="30.0" />
                     </GridPane.margin>
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Text>
-                <TextField fx:id="appCodeInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="appCodeInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0">
                     <GridPane.margin>
-                        <Insets left="20.0" top="10.0" />
+                        <Insets left="115.0" />
                     </GridPane.margin>
                 </TextField>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREATED" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREATED" GridPane.rowIndex="1">
                     <GridPane.margin>
-                        <Insets bottom="60.0" left="70.0" />
+                        <Insets left="30.0" top="30.0" />
                     </GridPane.margin>
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Text>
-                <TextField fx:id="createdInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <TextField fx:id="createdInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="1">
                     <GridPane.margin>
-                        <Insets left="20.0" top="10.0" />
+                        <Insets left="115.0" top="30.0" />
                     </GridPane.margin>
                 </TextField>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="COMMENTS: " GridPane.rowIndex="2">
@@ -70,10 +70,13 @@
                         <Font size="20.0" />
                     </font>
                     <GridPane.margin>
-                        <Insets left="70.0" />
+                        <Insets bottom="110.0" left="30.0" />
                     </GridPane.margin>
                 </Text>
-                <TextArea fx:id="commentsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextArea fx:id="commentsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="30.0" top="30.0" />
+               </GridPane.margin></TextArea>
                 <Button fx:id="backBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="75.0" styleClass="backBtn" stylesheets="@style.css" text="Back" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets left="100.0" top="40.0" />
@@ -90,30 +93,30 @@
                         <Font size="13.0" />
                     </font>
                 </Button>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DOCTOR">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DOCTOR" GridPane.rowIndex="1">
                     <font>
                         <Font size="16.0" />
                     </font>
                     <GridPane.margin>
-                        <Insets bottom="50.0" left="200.0" />
+                        <Insets bottom="40.0" left="30.0" />
                     </GridPane.margin>
                 </Text>
-                <TextField fx:id="doctorInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0">
+                <TextField fx:id="doctorInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="1">
                     <GridPane.margin>
-                        <Insets left="150.0" top="20.0" />
+                        <Insets bottom="40.0" left="115.0" />
                     </GridPane.margin>
                 </TextField>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PATIENT" GridPane.columnIndex="1">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PATIENT" GridPane.rowIndex="1">
                     <font>
                         <Font size="16.0" />
                     </font>
                     <GridPane.margin>
-                        <Insets bottom="50.0" left="200.0" />
+                        <Insets bottom="110.0" left="30.0" />
                     </GridPane.margin>
                 </Text>
-                <TextField fx:id="patientInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1">
+                <TextField fx:id="patientInput" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="1">
                     <GridPane.margin>
-                        <Insets left="150.0" top="20.0" />
+                        <Insets bottom="110.0" left="115.0" />
                     </GridPane.margin>
                 </TextField>
                 <Button fx:id="createDiagnosisBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="CREATE DIAGNOSIS" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
@@ -124,6 +127,14 @@
                         <Insets left="50.0" top="40.0" />
                     </GridPane.margin>
                 </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment info" textAlignment="CENTER" GridPane.columnIndex="1">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="74.0" left="30.0" />
+               </GridPane.margin>
+            </Text>
             </children>
         </GridPane>
     </children>

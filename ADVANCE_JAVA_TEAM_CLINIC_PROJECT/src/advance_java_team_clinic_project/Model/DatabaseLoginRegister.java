@@ -26,6 +26,10 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
     public Integer roleId, Id;
     Alert alert = new Alert(AlertType.INFORMATION);
 
+    /**
+     *
+     */
+    @Override
     public void getObject() {
         try {
             object = DatabaseConnection.getInstance();
