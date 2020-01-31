@@ -224,6 +224,6 @@
             </children>
         </GridPane>
         <Button fx:id="cancelBtn" layoutX="293.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="cancelBtn" stylesheets="@style.css" text="Cancel" />
-        <Button fx:id="submitBtn" layoutX="486.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editSubmitBtn" stylesheets="@style.css" text="Submit" />
+        <Button fx:id="submitBtn" layoutX="486.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="submitBtn" stylesheets="@style.css" text="Submit" />
     </children>
 </AnchorPane>

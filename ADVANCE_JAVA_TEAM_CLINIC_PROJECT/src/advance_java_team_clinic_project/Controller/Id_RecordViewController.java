@@ -94,6 +94,7 @@ public class Id_RecordViewController extends NewStage implements Initializable {
         });
     }
 
+    //id = appID
     public void setID(String id) {
 
         try {

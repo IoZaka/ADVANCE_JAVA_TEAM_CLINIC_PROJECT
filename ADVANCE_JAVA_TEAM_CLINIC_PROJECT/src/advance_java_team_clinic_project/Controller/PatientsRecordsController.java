@@ -120,6 +120,10 @@ public class PatientsRecordsController extends NewStage implements Initializable
                 break;
             case 3:
                 textHead.setText("YOUR RECORDS");
+                break;
+            case 4:
+                textHead.setText("APPOINTMENTS");
+                break;
         }
 
         try {

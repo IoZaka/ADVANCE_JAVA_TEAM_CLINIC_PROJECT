@@ -119,12 +119,12 @@
                         <Insets bottom="110.0" left="115.0" />
                     </GridPane.margin>
                 </TextField>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment info" textAlignment="CENTER" GridPane.columnIndex="1">
+            <Text fill="#304e8e" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment info" textAlignment="CENTER" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="74.0" left="30.0" />
+                  <Insets bottom="120.0" left="30.0" />
                </GridPane.margin>
             </Text>
             </children>
