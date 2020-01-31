@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -54,7 +53,7 @@ public class UserMenuController extends NewStage implements Initializable {
     private ToggleButton parametricsBtn;
     @FXML
     private ToggleButton logoutBtn;
-    
+
     LoggedInUser loggedInUser = LoggedInUser.getInstance();
     @FXML
     private VBox buttonsVBox;
@@ -74,63 +73,62 @@ public class UserMenuController extends NewStage implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       // Doctor, Admin, Clinic, Receptionist
-      // Profile, Edit, Profile, Logout
-      
-      usernameText.setText(usernameText.getText() + loggedInUser.getUsername());
-      usernameTextFlow.setTextAlignment(TextAlignment.CENTER);
-      
-      buttonsVBox.getChildren().clear();
-      switch(loggedInUser.getRoleID()){
-          case 1:
-              buttonsVBox.getChildren().addAll(profileBtn,editProfileBtn,enterNewUserBtn,searchUserBtn,parametricsBtn,logoutBtn);
-              loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
-              profileBtn.setSelected(true);
-              break;
-          case 2:
-              buttonsVBox.getChildren().addAll(profileBtn,editProfileBtn,appointmentsBtn,logoutBtn);
-              loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
-              profileBtn.setSelected(true);
-              buttonsVBox.setSpacing(30);
-              break;
-          case 3:
-              buttonsVBox.getChildren().addAll(recordsBtn,editProfileBtn,makeAnAppointmentBtn,logoutBtn);
-              loadUIonSamePane("../View/patientsRecords.fxml", userBorderPane);
-              recordsBtn.setSelected(true);
-              buttonsVBox.setSpacing(30);
-              break;
-          case 5:
-              buttonsVBox.getChildren().addAll(profileBtn,editProfileBtn,testsBtn,logoutBtn);
-              loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
-              profileBtn.setSelected(true);
-              buttonsVBox.setSpacing(30);
-              break;
-          
-            
-      }
-      setMouseControllers();
-    }  
-    
-    public void setMouseControllers(){
+        // Doctor, Admin, Clinic, Receptionist
+        // Profile, Edit, Profile, Logout
+
+        usernameText.setText(usernameText.getText() + loggedInUser.getUsername());
+        usernameTextFlow.setTextAlignment(TextAlignment.CENTER);
+
+        buttonsVBox.getChildren().clear();
+        switch (loggedInUser.getRoleID()) {
+            case 1:
+                buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, enterNewUserBtn, searchUserBtn, parametricsBtn, logoutBtn);
+                loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
+                profileBtn.setSelected(true);
+                break;
+            case 2:
+                buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, appointmentsBtn, logoutBtn);
+                loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
+                profileBtn.setSelected(true);
+                buttonsVBox.setSpacing(30);
+                break;
+            case 3:
+                buttonsVBox.getChildren().addAll(recordsBtn, editProfileBtn, makeAnAppointmentBtn, logoutBtn);
+                loadUIonSamePane("../View/patientsRecords.fxml", userBorderPane);
+                recordsBtn.setSelected(true);
+                buttonsVBox.setSpacing(30);
+                break;
+            case 5:
+                buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, testsBtn, logoutBtn);
+                loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
+                profileBtn.setSelected(true);
+                buttonsVBox.setSpacing(30);
+                break;
+
+        }
+        setMouseControllers();
+    }
+
+    public void setMouseControllers() {
         profileBtn.setOnMouseClicked((MouseEvent event) -> {
             loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
             clearSelectedButtons();
             profileBtn.setSelected(true);
         });
-         
+
         parametricsBtn.setOnMouseClicked((MouseEvent event) -> {
             loadUIonSamePane("../View/AdminParametrics.fxml", userBorderPane);
             clearSelectedButtons();
             parametricsBtn.setSelected(true);
         });
-        
-         searchUserBtn.setOnMouseClicked((MouseEvent event) -> {
+
+        searchUserBtn.setOnMouseClicked((MouseEvent event) -> {
             clearSelectedButtons();
             searchUserBtn.setSelected(true);
             FXMLLoader loader = new FXMLLoader(UserMenuController.this.getClass().getResource("../View/searchUserView.fxml"));
             Parent root = null;
             try {
-                root = (Parent)loader.load();
+                root = (Parent) loader.load();
             } catch (IOException ex) {
                 Logger.getLogger(UserMenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -139,14 +137,14 @@ public class UserMenuController extends NewStage implements Initializable {
             userBorderPane.setCenter(root);
             userBorderPane.setCenter(root);
         });
-         
+
         editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
             clearSelectedButtons();
             editProfileBtn.setSelected(true);
             FXMLLoader loader = new FXMLLoader(UserMenuController.this.getClass().getResource("../View/editProfile.fxml"));
             Parent root = null;
             try {
-                root = (Parent)loader.load();
+                root = (Parent) loader.load();
             } catch (IOException ex) {
                 Logger.getLogger(UserMenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -154,9 +152,9 @@ public class UserMenuController extends NewStage implements Initializable {
             editController.myInit(loggedInUser.getId());
             userBorderPane.setCenter(root);
             userBorderPane.setCenter(root);
-        
+
         });
-        
+
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {
             Stage currentStage = (Stage) userBorderPane.getScene().getWindow();
 
@@ -176,43 +174,43 @@ public class UserMenuController extends NewStage implements Initializable {
                 clearSelectedButtons();
             }
         });
-        
-         makeAnAppointmentBtn.setOnMouseClicked((MouseEvent event) -> {
+
+        makeAnAppointmentBtn.setOnMouseClicked((MouseEvent event) -> {
             loadUIonSamePane("../View/Appointment.fxml", userBorderPane);
             clearSelectedButtons();
             makeAnAppointmentBtn.setSelected(true);
         });
-         
+
         recordsBtn.setOnMouseClicked((MouseEvent event) -> {
             loadUIonSamePane("../View/patientsRecords.fxml", userBorderPane);
             clearSelectedButtons();
             recordsBtn.setSelected(true);
-        }); 
-        
+        });
+
         testsBtn.setOnMouseClicked((MouseEvent event) -> {
-           
+
             try {
                 clearSelectedButtons();
                 testsBtn.setSelected(true);
-                
+
                 FXMLLoader loader = new FXMLLoader(UserMenuController.this.getClass().getResource("../View/testsTableView.fxml"));
-                Parent root = (Parent)loader.load();
+                Parent root = (Parent) loader.load();
                 TestsTableViewController allTests = loader.getController();
                 allTests.setTests();
                 userBorderPane.setCenter(root);
             } catch (IOException ex) {
                 Logger.getLogger(UserMenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         });
-        
-         appointmentsBtn.setOnMouseClicked((MouseEvent event) -> {
+
+        appointmentsBtn.setOnMouseClicked((MouseEvent event) -> {
             loadUIonSamePane("../View/patientsRecords.fxml", userBorderPane);
             clearSelectedButtons();
             appointmentsBtn.setSelected(true);
         });
     }
-    
+
     public void clearSelectedButtons() {
         profileBtn.setSelected(false);
         editProfileBtn.setSelected(false);
@@ -225,5 +223,5 @@ public class UserMenuController extends NewStage implements Initializable {
         makeAnAppointmentBtn.setSelected(false);
         testsBtn.setSelected(false);
     }
-    
+
 }

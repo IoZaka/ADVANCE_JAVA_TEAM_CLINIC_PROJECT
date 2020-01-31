@@ -82,7 +82,6 @@ public class SignUpViewController extends NewStage implements Initializable {
             answer2 = SecondAnswerQuestion.getText();
             /**/
             Stage currentStage = (Stage) signUpPane.getScene().getWindow();
-            ;
             Parent root;
             Scene scene;
             /**/
