@@ -102,7 +102,7 @@
                         <Font size="16.0" />
                     </font>
                 </Button>
-                <Button fx:id="admissionInfoBtn" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Admission Info" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Button fx:id="admissionInfoBtn" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="appBtns" stylesheets="@style.css" text="Admission Info" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <font>
                         <Font size="16.0" />
                     </font>

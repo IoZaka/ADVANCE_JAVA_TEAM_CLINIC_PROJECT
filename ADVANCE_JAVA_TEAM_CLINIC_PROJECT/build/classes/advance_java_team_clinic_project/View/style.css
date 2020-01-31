@@ -235,6 +235,14 @@ and open the template in the editor.
 .appBtns {
     -fx-background-color: #304e8e;
     -fx-text-fill: #fff;
-    -fx-background-radius: 2em;
+    -fx-background-radius: 0.5em;
+    -fx-cursor: hand;
+}
+
+
+.altSubmitBtn {
+    -fx-background-color: #fff;
+    -fx-text-fill: #304e8e;
+    -fx-background-radius: 0.5em;
     -fx-cursor: hand;
 }

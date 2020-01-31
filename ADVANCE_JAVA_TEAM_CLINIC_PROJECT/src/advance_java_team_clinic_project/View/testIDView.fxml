@@ -57,7 +57,7 @@
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="180.0" left="100.0" />
+                  <Insets bottom="180.0" left="130.0" />
                </GridPane.margin>
             </Text>
             <TextField fx:id="resultsInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.rowIndex="1">
@@ -70,7 +70,7 @@
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="120.0" top="120.0" />
+                  <Insets left="150.0" top="120.0" />
                </GridPane.margin>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IS PAID" GridPane.rowIndex="1">
@@ -78,7 +78,7 @@
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="80.0" left="110.0" />
+                  <Insets bottom="80.0" left="140.0" />
                </GridPane.margin>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CASE STATUS" GridPane.rowIndex="1">
@@ -86,7 +86,7 @@
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="90.0" top="20.0" />
+                  <Insets left="100.0" top="20.0" />
                </GridPane.margin>
             </Text>
             <TextField fx:id="isPaidInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.rowIndex="1">
@@ -112,7 +112,7 @@
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="180.0" left="200.0" />
+                  <Insets bottom="180.0" left="230.0" />
                </GridPane.margin>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREATED BY" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -120,7 +120,7 @@
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="180.0" top="20.0" />
+                  <Insets left="210.0" top="20.0" />
                </GridPane.margin>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATED" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -128,7 +128,7 @@
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="200.0" left="200.0" right="200.0" top="120.0" />
+                  <Insets bottom="200.0" left="230.0" right="200.0" top="120.0" />
                </GridPane.margin>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATED BY" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -136,7 +136,7 @@
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="180.0" top="120.0" />
+                  <Insets left="205.0" top="120.0" />
                </GridPane.margin>
             </Text>
             <TextField fx:id="createdByInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
