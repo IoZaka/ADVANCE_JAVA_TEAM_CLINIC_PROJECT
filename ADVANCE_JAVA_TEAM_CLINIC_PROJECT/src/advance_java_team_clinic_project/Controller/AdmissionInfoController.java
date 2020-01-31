@@ -5,8 +5,20 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.Admission;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
@@ -43,6 +55,9 @@ public class AdmissionInfoController implements Initializable {
     @FXML
     private AnchorPane admissionInfoPane;
 
+    private Admission admissionModel = new Admission();
+    private ResultSet rs;
+    
     /**
      * Initializes the controller class.
      */
@@ -51,8 +66,33 @@ public class AdmissionInfoController implements Initializable {
         // TODO
     }
 
-    public void setAdmissionID(Integer id) {
-        System.out.println(id);
+    public void setAdmissionID(Integer diagID) {
+        admissionModel.getObject();
+        rs = admissionModel.fetchAdmissionData(diagID);
+        try {
+            if(rs.next()){
+                roomInput.setText(rs.getString("room"));
+                bedInput.setText(rs.getString("bed"));
+                costPerDayinput.setText(rs.getString("cost_per_day"));
+                createdByInput.setText(rs.getString("created_by"));
+                updatedByInput.setText(rs.getString("updated_by"));
+                //System.out.println(rs.getString("discharge_date"));
+                System.out.println(rs.getString("admission_date"));
+                admissionDateInput.setValue(LOCAL_DATE(rs.getString("admission_date")));
+                //dischargeDateInput.setValue(LOCAL_DATE(rs.getString("discharge_date")));
+                createdDateInput.setValue(LOCAL_DATE(rs.getString("created")));
+                updatedDateInput.setValue(LOCAL_DATE(rs.getString("updated")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdmissionInfoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     public static final LocalDate LOCAL_DATE(String dateString) {
+         
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate dateTime  = LocalDate.parse(dateString, formatter);
+        return dateTime;
     }
 
 }

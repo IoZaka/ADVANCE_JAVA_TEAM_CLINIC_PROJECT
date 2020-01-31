@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +12,7 @@
 
 <AnchorPane fx:id="appointmentPane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AppointmentController">
     <children>
-        <Label graphicTextGap="6.0" layoutX="279.0" layoutY="97.0" prefHeight="18.0" prefWidth="274.0" text="Reason of appoinment" textAlignment="CENTER" AnchorPane.topAnchor="97.0">
+        <Label graphicTextGap="6.0" layoutX="279.0" layoutY="97.0" prefHeight="18.0" prefWidth="274.0" text="Reason of appoinment" textAlignment="CENTER" textFill="#304e8e" AnchorPane.topAnchor="97.0">
             <font>
                 <Font size="26.0" />
             </font>
@@ -28,11 +27,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ComboBox prefHeight="28.0" prefWidth="197.0" GridPane.columnIndex="1">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </ComboBox>
                 <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" styleClass="cancelBtn" stylesheets="@style.css" text="Cancel" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="30.0" />
@@ -49,7 +43,7 @@
                   <Font size="15.0" />
                </font>
                 </Button>
-                <TextArea fx:id="reasonText" maxWidth="400.0" minWidth="400.0" prefHeight="200.0" prefWidth="400.0" promptText="Type the reason here :" style="-fx-background-color: #385ca8;">
+                <TextArea fx:id="reasonText" maxWidth="430.0" minWidth="400.0" prefHeight="239.0" prefWidth="424.0" promptText="Type the reason here :" style="-fx-background-color: #385ca8;">
                     <GridPane.margin>
                         <Insets />
                     </GridPane.margin>
