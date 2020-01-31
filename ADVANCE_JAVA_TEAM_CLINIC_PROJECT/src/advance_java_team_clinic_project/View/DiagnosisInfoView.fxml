@@ -115,7 +115,7 @@
                         <Insets left="7.0" top="130.0" />
                     </GridPane.margin>
                 </TextArea>
-                <Button fx:id="testsBtn" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Tests" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Button fx:id="testsBtn" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="appBtns" stylesheets="@style.css" text="Tests" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -154,7 +154,7 @@
                         <Insets bottom="70.0" left="115.0" />
                     </GridPane.margin>
                 </TextField>
-                <Button id="create_addmission" fx:id="create_addmission" maxWidth="168.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="168.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Create addmission" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Button id="create_addmission" fx:id="create_addmission" maxWidth="168.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="168.0" styleClass="createBtn" stylesheets="@style.css" text="Create addmission" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -170,7 +170,7 @@
                         <Insets left="40.0" />
                     </GridPane.margin>
                 </Button>
-                <Button fx:id="updateDiagnose" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Update diagnose" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Button fx:id="updateDiagnose" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="updateBtn" stylesheets="@style.css" text="Update diagnose" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -196,7 +196,7 @@
                         <Insets bottom="10.0" left="115.0" />
                     </GridPane.margin>
                 </TextField>
-            <Button fx:id="testCreate" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="diagnosisInfoBtn" stylesheets="@style.css" text="Create test" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="testCreate" maxWidth="150.0" minWidth="150.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" styleClass="createBtn" stylesheets="@style.css" text="Create test" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>

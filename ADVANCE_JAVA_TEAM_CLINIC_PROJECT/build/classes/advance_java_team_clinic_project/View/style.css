@@ -152,7 +152,7 @@ and open the template in the editor.
 
 
 
-/* ============FOR ADMIN ONLY==================*/
+/* ============FOR ADMIN,CLINIC,DOCTOR ONLY==================*/
 .profileInfo {
     -fx-border-width: 4 0 0 0;
     -fx-border-color: #385ca8 transparent transparent transparent;
@@ -165,30 +165,19 @@ and open the template in the editor.
 
 /*==============EDIT PROFILE CSS==============*/
 
-.editUsernameBtn,.editPasswordBtn,.editAddressBtn,.editContactBtn, .editInsuranceBtn, .editSubmitBtn, .diagnosisInfoBtn{
+.editProfileBtns, .submitBtn, .saveBtn {
     -fx-background-color: #304e8e;
     -fx-text-fill: #fff;
     -fx-background-radius: 0.5em;
     -fx-cursor: hand;
 }
 
-.editSubmitBtn {
-    -fx-background-radius: 2em;
-}
-
-.editUsernameBtn:hover,.editPasswordBtn:hover,.editAddressBtn:hover,.editContactBtn:hover, .editInsuranceBtn:hover, .editSubmitBtn:hover, .diagnosisInfoBtn:hover {
+.editProfileBtns:hover, .submitBtn:hover, .saveBtn:hover {
     -fx-background-color: #385ca8;
 }
 
-.editCancelBtn, .backBtn, .deleteBtn {
-    -fx-background-color: #c0392b;
-    -fx-text-fill: #fff;
+.submitBtn, .saveBtn {
     -fx-background-radius: 2em;
-    -fx-cursor: hand;
-}
-
-.editCancelBtn:hover, .backBtn:hover, .deleteBtn {
-    -fx-background-color: #e74c3c;
 }
 
 .editCombobox {
@@ -206,4 +195,46 @@ and open the template in the editor.
     -fx-background-insets: 1, 0 0 1 0 ;
     -fx-background-radius: 0;
     -fx-border-color: transparent transparent #304e8e transparent;
+}
+
+
+
+/*=============================================*/
+/*================BUTTONS=====================*/
+.backBtn {
+   -fx-background-color: #808080;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 2em;
+    -fx-cursor: hand;
+}
+
+.backBtn:hover {-fx-background-color: #aaa;}
+
+.createBtn, .updateBtn {
+    -fx-background-color: #0b0;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 2em;
+    -fx-cursor: hand;
+}
+
+.deleteBtn, .cancelBtn {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 2em;
+    -fx-cursor: hand;
+}
+
+.deleteBtn:hover, .cancelBtn:hover{
+    -fx-background-color: #e74c3c;
+}
+
+.updateBtn {
+    
+}
+
+.appBtns {
+    -fx-background-color: #304e8e;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 2em;
+    -fx-cursor: hand;
 }

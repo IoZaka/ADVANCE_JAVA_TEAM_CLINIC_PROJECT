@@ -72,12 +72,12 @@ public class TestIDController implements Initializable {
         
         try {
             if(rs.next()){
-                diagID = rs.getInt("diag_id");
+                //diagID = rs.getInt("diag_id");
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
                 resultsInput.setText(rs.getString("results"));
-                isPaidInput.setText(rs.getString("is_paid"));
-                caseStatusInput.setText(rs.getString("status_id"));
+                isPaidInput.setText(rs.getString("Paid"));
+                caseStatusInput.setText(rs.getString("status"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(TestIDController.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,11 +107,11 @@ public class TestIDController implements Initializable {
         
         try {
             if(rs.next()){
-                diagID = rs.getInt("diag_id");
+                //diagID = rs.getInt("diag_id");
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
                 resultsInput.setText(rs.getString("results"));
-                isPaidInput.setText(rs.getString("paid"));
+                isPaidInput.setText(rs.getString("Paid"));
                 caseStatusInput.setText(rs.getString("status"));
                 createdByInput.setText(rs.getString("createdby"));
                 updatedByInput.setText(rs.getString("updated_by"));
