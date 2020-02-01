@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="editProfilePane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
+<AnchorPane id="AnchorPane" fx:id="editProfilePane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
     <children>
         <GridPane prefHeight="82.0" prefWidth="820.0">
             <columnConstraints>
@@ -28,12 +28,12 @@
                         <Insets left="180.0" />
                     </GridPane.margin>
                 </Text>
-                <Button fx:id="passwordbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editPasswordBtn" stylesheets="@style.css" text="Change password" GridPane.columnIndex="1">
+                <Button fx:id="passwordbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Change password" GridPane.columnIndex="1">
                     <GridPane.margin>
                         <Insets left="70.0" />
                     </GridPane.margin>
                 </Button>
-                <Button fx:id="usernamebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" styleClass="editUsernameBtn" stylesheets="@style.css" text="Change Username">
+                <Button fx:id="usernamebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Change Username">
                     <GridPane.margin>
                         <Insets left="250.0" />
                     </GridPane.margin>
@@ -166,7 +166,7 @@
                         <Insets left="5.0" />
                     </GridPane.margin>
                 </Text>
-                <Button fx:id="addressbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" styleClass="editAddressBtn" stylesheets="@style.css" text="Address details" GridPane.rowIndex="4">
+                <Button fx:id="addressbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Address details" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="100.0" />
                     </GridPane.margin>
@@ -176,7 +176,7 @@
                         <Insets left="30.0" />
                     </GridPane.margin>
                 </Text>
-                <Button fx:id="contactbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" styleClass="editContactBtn" stylesheets="@style.css" text="Contact details" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <Button fx:id="contactbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Contact details" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="120.0" />
                     </GridPane.margin>
@@ -186,7 +186,7 @@
                         <Insets left="20.0" />
                     </GridPane.margin>
                 </Text>
-                <Button fx:id="insurancebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editInsuranceBtn" stylesheets="@style.css" text="Insurance Details" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                <Button fx:id="insurancebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Insurance Details" GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="120.0" />
                     </GridPane.margin>
@@ -201,29 +201,29 @@
                         <Insets left="100.0" />
                     </GridPane.margin>
                 </ComboBox>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Economic Status:" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                    <GridPane.margin>
-                        <Insets left="20.0" />
-                    </GridPane.margin>
-                </Text>
-                <ComboBox fx:id="comboGender" prefHeight="25.0" prefWidth="140.0" styleClass="editCombobox" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                    <GridPane.margin>
-                        <Insets left="120.0" />
-                    </GridPane.margin>
-                </ComboBox>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" GridPane.columnIndex="2" GridPane.rowIndex="5">
                     <GridPane.margin>
                         <Insets left="50.0" />
                     </GridPane.margin>
                 </Text>
-                <ComboBox fx:id="comboEcoStatus" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                <ComboBox fx:id="comboGender" prefHeight="25.0" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" GridPane.columnIndex="2" GridPane.rowIndex="5">
                     <GridPane.margin>
                         <Insets left="100.0" />
                     </GridPane.margin>
                 </ComboBox>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Economic status:" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets left="20.0" />
+                    </GridPane.margin>
+                </Text>
+                <ComboBox fx:id="comboEcoStatus" prefWidth="140.0" styleClass="editCombobox" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets left="120.0" />
+                    </GridPane.margin>
+                </ComboBox>
             </children>
         </GridPane>
-        <Button fx:id="cancelBtn" layoutX="293.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editCancelBtn" stylesheets="@style.css" text="Cancel" />
-        <Button fx:id="submitBtn" layoutX="486.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="editSubmitBtn" stylesheets="@style.css" text="Submit" />
+        <Button fx:id="cancelBtn" layoutX="293.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="cancelBtn" stylesheets="@style.css" text="Cancel" />
+        <Button fx:id="submitBtn" layoutX="486.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="submitBtn" stylesheets="@style.css" text="Submit" />
     </children>
 </AnchorPane>

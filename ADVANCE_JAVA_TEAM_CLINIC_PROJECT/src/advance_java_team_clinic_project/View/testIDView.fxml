@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="testIDPane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.TestIDController">
+<AnchorPane id="AnchorPane" fx:id="testIDPane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.TestIDController">
    <children>
       <GridPane prefHeight="600.0" prefWidth="820.0">
         <columnConstraints>
@@ -26,17 +26,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPTION">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPTION" wrappingWidth="114.3271484375">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="90.0" left="100.0" />
+                  <Insets left="100.0" top="100.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="costInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0">
+            <TextField fx:id="costInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="50.0" top="200.0" />
+                  <Insets left="210.0" top="120.0" />
                </GridPane.margin>
             </TextField>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IS COMPLETED" GridPane.columnIndex="1">
@@ -44,119 +44,122 @@
                   <Font size="18.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="90.0" left="80.0" />
+                  <Insets left="180.0" top="100.0" />
                </GridPane.margin>
             </Text>
-            <ComboBox prefHeight="25.0" prefWidth="165.0" GridPane.columnIndex="1">
+            <ComboBox fx:id="isCompleted" maxWidth="180.0" minWidth="180.0" prefHeight="25.0" prefWidth="180.0" GridPane.columnIndex="2">
                <GridPane.margin>
-                  <Insets bottom="20.0" left="50.0" />
+                  <Insets left="40.0" top="100.0" />
                </GridPane.margin>
             </ComboBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESULTS" GridPane.columnIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESULTS" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="90.0" left="100.0" />
+                  <Insets bottom="180.0" left="130.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="resultsInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2">
+            <TextField fx:id="resultsInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="20.0" left="50.0" />
+                  <Insets bottom="180.0" left="210.0" />
                </GridPane.margin>
             </TextField>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="COST">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="COST" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="120.0" top="130.0" />
+                  <Insets left="150.0" top="120.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IS PAID" GridPane.columnIndex="1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IS PAID" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="110.0" top="130.0" />
+                  <Insets bottom="80.0" left="140.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CASE STATUS" GridPane.columnIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CASE STATUS" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="90.0" top="130.0" />
+                  <Insets left="100.0" top="20.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="isPaidInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="1">
+            <TextField fx:id="isPaidInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="50.0" top="200.0" />
+                  <Insets bottom="80.0" left="210.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="caseStatusInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2">
+            <TextField fx:id="caseStatusInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="50.0" top="200.0" />
+                  <Insets left="210.0" top="20.0" />
                </GridPane.margin>
             </TextField>
             <TextField fx:id="descriptionInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0">
                <GridPane.margin>
-                  <Insets bottom="20.0" left="60.0" />
+                  <Insets left="210.0" top="100.0" />
                </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </TextField>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREATED" GridPane.rowIndex="1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREATED" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="230.0" />
+                  <Insets bottom="180.0" left="230.0" />
                </GridPane.margin>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CREATED BY" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="230.0" />
+                  <Insets left="210.0" top="20.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATED" GridPane.rowIndex="1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATED" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="230.0" top="200.0" />
+                  <Insets bottom="200.0" left="230.0" right="200.0" top="120.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATED BY" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UPDATED BY" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="200.0" left="230.0" />
+                  <Insets left="205.0" top="120.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="createdByInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="createdByInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="190.0" top="70.0" />
+                  <Insets left="40.0" top="20.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="updatedByInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="updatedByInput" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="130.0" left="190.0" />
+                  <Insets left="40.0" top="120.0" />
                </GridPane.margin>
             </TextField>
-            <DatePicker fx:id="createdDate" editable="false" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="1">
+            <DatePicker fx:id="createdDate" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="180.0" top="70.0" />
+                  <Insets bottom="170.0" left="40.0" />
                </GridPane.margin>
             </DatePicker>
-            <DatePicker fx:id="updatedDate" editable="false" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.rowIndex="2">
+            <DatePicker fx:id="updatedDate" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="130.0" left="180.0" />
+                  <Insets bottom="80.0" left="40.0" />
                </GridPane.margin>
             </DatePicker>
-            <Button fx:id="backBtn" maxWidth="203.0" minWidth="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="203.0" styleClass="backBtn" stylesheets="@style.css" text="Go back to Tests" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="backBtn" maxWidth="161.0" minWidth="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="161.0" styleClass="backBtn" stylesheets="@style.css" text="Back" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>
@@ -164,6 +167,14 @@
                   <Insets left="50.0" top="60.0" />
                </GridPane.margin>
             </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TEST INFO" GridPane.columnIndex="1">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="90.0" left="80.0" />
+               </GridPane.margin>
+            </Text>
          </children>
       </GridPane>
    </children>

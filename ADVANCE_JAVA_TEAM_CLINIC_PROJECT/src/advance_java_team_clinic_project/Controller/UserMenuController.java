@@ -70,6 +70,9 @@ public class UserMenuController extends NewStage implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -95,6 +98,12 @@ public class UserMenuController extends NewStage implements Initializable {
             case 3:
                 buttonsVBox.getChildren().addAll(recordsBtn, editProfileBtn, makeAnAppointmentBtn, logoutBtn);
                 loadUIonSamePane("../View/patientsRecords.fxml", userBorderPane);
+                recordsBtn.setSelected(true);
+                buttonsVBox.setSpacing(30);
+                break;
+            case 4:
+                buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, appointmentsBtn , logoutBtn);
+                loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
                 recordsBtn.setSelected(true);
                 buttonsVBox.setSpacing(30);
                 break;

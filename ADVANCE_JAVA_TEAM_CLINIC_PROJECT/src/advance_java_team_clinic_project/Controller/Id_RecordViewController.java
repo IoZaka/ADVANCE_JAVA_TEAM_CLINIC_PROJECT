@@ -85,8 +85,6 @@ public class Id_RecordViewController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            idRecordPane.getChildren().clear();
-            idRecordPane.getChildren().add(root);
         });
     }
 

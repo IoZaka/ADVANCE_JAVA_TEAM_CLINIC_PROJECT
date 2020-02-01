@@ -48,27 +48,27 @@ public class AdminParametricsController extends NewStage implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         pm_roles.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_roles","ROLES");
-   
+            goToNextPage("pm_roles", "ROLES");
+
         });
         pm_insurance_companies.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_insurance_companies","INSURANCES");
+            goToNextPage("pm_insurance_companies", "INSURANCES");
         });
         pm_genders.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_genders","GENDERS");
+            goToNextPage("pm_genders", "GENDERS");
         });
         pm_nationalities.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_nationalities","NATIONALITIES");
+            goToNextPage("pm_nationalities", "NATIONALITIES");
         });
         pm_eco_status.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_eco_status","ECO STATUS");
+            goToNextPage("pm_eco_status", "ECO STATUS");
         });
         pm_members.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_members","MEMBERS");
+            goToNextPage("pm_members", "MEMBERS");
         });
-        
+
         pm_questions.setOnMouseClicked((MouseEvent event) -> {
-            goToNextPage("pm_questions","QUESTIONS");
+            goToNextPage("pm_questions", "QUESTIONS");
         });
 
     }

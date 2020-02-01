@@ -6,7 +6,6 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
-import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
