@@ -42,7 +42,7 @@ public class TestsTableViewController implements Initializable {
 
     @FXML
     private TableView<Tests> testsTable = new TableView<>();
-    
+
     TableColumn idCol = new TableColumn("Edit");
     TableColumn descriptionCol = new TableColumn("Description");
     TableColumn isCompletedCol = new TableColumn("Completed");
@@ -56,8 +56,7 @@ public class TestsTableViewController implements Initializable {
     TableColumn updatedByCol = new TableColumn("Updated By");
     TableColumn patientCol = new TableColumn("Patient");
     TableColumn doctorCol = new TableColumn("Doctor");
-    
-    
+
     @FXML
     private Button backBtn;
     @FXML
@@ -68,11 +67,14 @@ public class TestsTableViewController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         testsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        
+
         //For All
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -88,135 +90,131 @@ public class TestsTableViewController implements Initializable {
         updatedCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
         updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
         patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
-        
-        
-        
-        testsTable.getColumns().addAll(idCol,descriptionCol,isCompletedCol,costCol,isPaidCol,resultsCol,statusCol,doctorCol);
-    }     
-    
-    public void setTestID(String appID, Integer diagID){
-        Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = new Callback<TableColumn<Tests, String>, TableCell<Tests, String>>() {
-            public TableCell call(final TableColumn<Tests, String> param) {
-                final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
-                    final Button btn = new Button();
 
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            Tests test = new Tests();
-                            test = getTableView().getItems().get(getIndex());
-                            btn.setText(test.idProperty().getValue());
-                            btn.setOnAction(event -> {
-                                    FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
-                                    Parent root = null;
-                                    try {
-                                        root = (Parent)loader.load();
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                    TestIDController id = loader.getController();
-                                    String testID = btn.getText();
-                                    id.setTestIDView(appID,Integer.valueOf(testID));
-                                    //Scene
-                                    testsPane.getChildren().clear();
-                                    testsPane.getChildren().add(root);
-                            });
-                            setGraphic(btn);
-                            setText(null);
-                        }
+        testsTable.getColumns().addAll(idCol, descriptionCol, isCompletedCol, costCol, isPaidCol, resultsCol, statusCol, doctorCol);
+    }
+
+    /**
+     *
+     * @param appID
+     * @param diagID
+     */
+    public void setTestID(String appID, Integer diagID) {
+        Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = (final TableColumn<Tests, String> param) -> {
+            final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
+                final Button btn = new Button();
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        Tests test = new Tests();
+                        test = getTableView().getItems().get(getIndex());
+                        btn.setText(test.idProperty().getValue());
+                        btn.setOnAction(event -> {
+                            FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
+                            Parent root = null;
+                            try {
+                                root = (Parent) loader.load();
+                            } catch (IOException ex) {
+                                Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            TestIDController id = loader.getController();
+                            String testID = btn.getText();
+                            id.setTestIDView(appID, Integer.valueOf(testID));
+                            //Scene
+                            testsPane.getChildren().clear();
+                            testsPane.getChildren().add(root);
+                        });
+                        setGraphic(btn);
+                        setText(null);
                     }
-                };
-                return cell;
-            }
+                }
+            };
+            return cell;
         };
         idCol.setCellFactory(cellFactory);
-        
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
-                    Parent root = (Parent) loader.load();
-                    DiagnosisInfoController diagnosisID = loader.getController();
-                    diagnosisID.setDiagnosisID(appID,diagID);
-                    testsPane.getChildren().clear();
-                    testsPane.getChildren().add(root);
-                } catch (IOException ex) {
-                    Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+        backBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
+                Parent root = (Parent) loader.load();
+                DiagnosisInfoController diagnosisID = loader.getController();
+                diagnosisID.setDiagnosisID(appID, diagID);
+                testsPane.getChildren().clear();
+                testsPane.getChildren().add(root);
+            } catch (IOException ex) {
+                Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
         try {
             data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
-            testsTable.setItems(data);  
+            testsTable.setItems(data);
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-                    
-    } 
- 
 
-   
+    }
+
     //FOR CLINIC CENTER
-    public void setTests(){ 
+    /**
+     *
+     */
+    public void setTests() {
         backBtn.setVisible(false);
-        Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = new Callback<TableColumn<Tests, String>, TableCell<Tests, String>>() {
-            public TableCell call(final TableColumn<Tests, String> param) {
-                final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
-                    final Button btn = new Button();
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            Tests test = new Tests();
-                            test = getTableView().getItems().get(getIndex());
-                            btn.setText(test.idProperty().getValue());
-                            btn.setOnAction(event -> {
-                                    FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
-                                    Parent root = null;
-                                    try {
-                                        root = (Parent)loader.load();
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                    TestIDController id = loader.getController();
-                                    String testID = btn.getText().substring(5);
-                                    id.setTestIDView(Integer.valueOf(testID));
-                                    //Scene
-                                    testsPane.getChildren().clear();
-                                    testsPane.getChildren().add(root);
-                            });
-                            setGraphic(btn);
-                            setText(null);
-                        }
+        Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = (final TableColumn<Tests, String> param) -> {
+            final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
+                final Button btn = new Button();
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        Tests test = new Tests();
+                        test = getTableView().getItems().get(getIndex());
+                        btn.setText(test.idProperty().getValue());
+                        btn.setOnAction(event -> {
+                            FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
+                            Parent root = null;
+                            try {
+                                root = (Parent) loader.load();
+                            } catch (IOException ex) {
+                                Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            TestIDController id = loader.getController();
+                            String testID = btn.getText().substring(5);
+                            id.setTestIDView(Integer.valueOf(testID));
+                            //Scene
+                            testsPane.getChildren().clear();
+                            testsPane.getChildren().add(root);
+                        });
+                        setGraphic(btn);
+                        setText(null);
                     }
-                };
-                return cell;
-            }
+                }
+            };
+            return cell;
         };
         idCol.setCellFactory(cellFactory);
-        
+
         try {
             data = FXCollections.observableArrayList(databaseTests(tests.getAllTests()));
-            testsTable.getColumns().addAll(createdCol,createdByCol,updatedCol,updatedByCol,patientCol);
-            testsTable.setItems(data); 
+            testsTable.getColumns().addAll(createdCol, createdByCol, updatedCol, updatedByCol, patientCol);
+            testsTable.setItems(data);
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-                
+
     }
-    
-     private ArrayList databaseTests(ResultSet rs) throws SQLException {
+
+    private ArrayList databaseTests(ResultSet rs) throws SQLException {
         ArrayList<Tests> data = new ArrayList();
 
         while (rs.next()) {
@@ -230,14 +228,14 @@ public class TestsTableViewController implements Initializable {
             test.resultsProperty().set(rs.getString("results"));
             test.status_idProperty().set(rs.getString("status"));
             test.doctorProperty().set(rs.getString("doctor"));
-            if(user.getRoleID() == 5){
+            if (user.getRoleID() == 5) {
                 test.createdProperty().set(rs.getString("created"));
                 test.created_byProperty().set(rs.getString("createdby"));
                 test.updatedProperty().set(rs.getString("updated"));
                 test.updated_byProperty().set(rs.getString("updated_by"));
                 test.patientProperty().set(rs.getString("patient"));
             }
-            
+
             data.add(test);
         }
         return data;

@@ -201,24 +201,24 @@
                         <Insets left="100.0" />
                     </GridPane.margin>
                 </ComboBox>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Economic Status:" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                    <GridPane.margin>
-                        <Insets left="20.0" />
-                    </GridPane.margin>
-                </Text>
-                <ComboBox fx:id="comboGender" prefHeight="25.0" prefWidth="140.0" styleClass="editCombobox" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                    <GridPane.margin>
-                        <Insets left="120.0" />
-                    </GridPane.margin>
-                </ComboBox>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" GridPane.columnIndex="2" GridPane.rowIndex="5">
                     <GridPane.margin>
                         <Insets left="50.0" />
                     </GridPane.margin>
                 </Text>
-                <ComboBox fx:id="comboEcoStatus" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                <ComboBox fx:id="comboGender" prefHeight="25.0" prefWidth="150.0" styleClass="editCombobox" stylesheets="@style.css" GridPane.columnIndex="2" GridPane.rowIndex="5">
                     <GridPane.margin>
                         <Insets left="100.0" />
+                    </GridPane.margin>
+                </ComboBox>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Economic status:" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets left="20.0" />
+                    </GridPane.margin>
+                </Text>
+                <ComboBox fx:id="comboEcoStatus" prefWidth="140.0" styleClass="editCombobox" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets left="120.0" />
                     </GridPane.margin>
                 </ComboBox>
             </children>

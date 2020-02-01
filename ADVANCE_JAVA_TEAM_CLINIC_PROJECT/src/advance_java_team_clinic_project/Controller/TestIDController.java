@@ -53,25 +53,28 @@ public class TestIDController implements Initializable {
     private DatePicker updatedDate;
     @FXML
     private Button backBtn;
-    
+
     private Integer diagID = null;
 
     Tests tests = new Tests();
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
-    }    
-    
-    public void setTestIDView(String id,Integer testID){
-        
+
+    }
+
+    public void setTestIDView(String id, Integer testID) {
+
         ResultSet rs = tests.getTestByID(testID);
-        
+
         try {
-            if(rs.next()){
+            if (rs.next()) {
                 diagID = rs.getInt("diag_id");
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
@@ -82,31 +85,28 @@ public class TestIDController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(TestIDController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(TestIDController.this.getClass().getResource("../View/testsTableView.fxml"));
-                    Parent root = (Parent)loader.load();
-                    TestsTableViewController testID = loader.getController();
-                    testID.setTestID(id,diagID);
-                    testIDPane.getChildren().clear();
-                    testIDPane.getChildren().add(root);
-                } catch (IOException ex) {
-                    Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+        backBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(TestIDController.this.getClass().getResource("../View/testsTableView.fxml"));
+                Parent root = (Parent) loader.load();
+                TestsTableViewController testID1 = loader.getController();
+                testID1.setTestID(id, diagID);
+                testIDPane.getChildren().clear();
+                testIDPane.getChildren().add(root);
+            } catch (IOException ex) {
+                Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });  
+        });
     }
-    
+
     //FOR CLINIC CENTER
-    public void setTestIDView(Integer testID){
-        
+    public void setTestIDView(Integer testID) {
+
         ResultSet rs = tests.getTestByID(testID);
-        
+
         try {
-            if(rs.next()){
+            if (rs.next()) {
                 diagID = rs.getInt("diag_id");
                 descriptionInput.setText(rs.getString("description"));
                 costInput.setText(rs.getString("cost"));
@@ -119,24 +119,19 @@ public class TestIDController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(TestIDController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(TestIDController.this.getClass().getResource("../View/testsTableView.fxml"));
-                    Parent root = (Parent)loader.load();
-                    TestsTableViewController testID = loader.getController();
-                    testID.setTests();
-                    testIDPane.getChildren().clear();
-                    testIDPane.getChildren().add(root);
-                } catch (IOException ex) {
-                    Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
+        backBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(TestIDController.this.getClass().getResource("../View/testsTableView.fxml"));
+                Parent root = (Parent) loader.load();
+                TestsTableViewController testID1 = loader.getController();
+                testID1.setTests();
+                testIDPane.getChildren().clear();
+                testIDPane.getChildren().add(root);
+            } catch (IOException ex) {
+                Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });  
+        });
     }
-    
-    
-    
+
 }

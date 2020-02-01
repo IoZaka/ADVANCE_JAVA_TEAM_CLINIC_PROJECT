@@ -57,14 +57,11 @@ public class CheckContactDetailsController implements Initializable {
         addTextLimiter(email);
         addTextLimiter(relativeTelephoneNumber);
 
-        submitBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                try {
-                    ak.updateContactDetails(user.getContactID(), Integer.parseInt(telephoneNumber.getText()), Integer.parseInt(cellphoneNumber.getText()), email.getText(), Integer.parseInt(relativeTelephoneNumber.getText()));
-                } catch (SQLException ex) {
-                    Logger.getLogger(CheckContactDetailsController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        submitBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                ak.updateContactDetails(user.getContactID(), Integer.parseInt(telephoneNumber.getText()), Integer.parseInt(cellphoneNumber.getText()), email.getText(), Integer.parseInt(relativeTelephoneNumber.getText()));
+            } catch (SQLException ex) {
+                Logger.getLogger(CheckContactDetailsController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -81,14 +78,15 @@ public class CheckContactDetailsController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param tf
+     */
     public static void addTextLimiter(final TextField tf) {
-        tf.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
-                if (tf.getText().length() > 10) {
-                    String s = tf.getText().substring(0, 10);
-                    tf.setText(s);
-                }
+        tf.textProperty().addListener((final ObservableValue<? extends String> ov, final String oldValue, final String newValue) -> {
+            if (tf.getText().length() > 10) {
+                String s = tf.getText().substring(0, 10);
+                tf.setText(s);
             }
         });
     }

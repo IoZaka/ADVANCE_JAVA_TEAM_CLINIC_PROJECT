@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -42,15 +43,30 @@ public class AdmissionInfoController implements Initializable {
     private DatePicker updatedDateInput;
     @FXML
     private AnchorPane admissionInfoPane;
+    @FXML
+    private Text doctorLayer;
+    @FXML
+    private Text PatientLayout;
+    @FXML
+    private TextField doctorsName;
+    @FXML
+    private TextField patientsName;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
 
+    /**
+     *
+     * @param diagID
+     * @param admissionID
+     */
     public void setAdmissionID(Integer diagID, Integer admissionID) {
         System.out.println(diagID + " " + admissionID);
     }

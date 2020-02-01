@@ -6,7 +6,6 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.Parametrics;
-import advance_java_team_clinic_project.Model.Records;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -17,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +28,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -49,15 +46,13 @@ public class AdminViewParametersController extends NewStage implements Initializ
     private Button backBtn;
     @FXML
     private Button createBtn;
-    
+
     @FXML
     private TableView<Parametrics> parametricsTable;
-    
-   
+
     @FXML
     private Text DescriptionLayout;
-    
-    
+
     private ObservableList data;
 
     TableColumn idCol = new TableColumn("CODE");
@@ -66,7 +61,6 @@ public class AdminViewParametersController extends NewStage implements Initializ
     TableColumn updatedDateCol = new TableColumn("UPDATED");
     TableColumn updatedByCol = new TableColumn("UPDATED BY");
     TableColumn createdByCol = new TableColumn("CREATED BY");
-    
 
     /**
      * Initializes the controller class.
@@ -84,9 +78,7 @@ public class AdminViewParametersController extends NewStage implements Initializ
         updatedDateCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
         updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updatedby"));
         createdByCol.setCellValueFactory(new PropertyValueFactory<>("createdby"));
-                
-       
-     
+
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(AdminViewParametersController.this.getClass().getResource("../View/AdminParametrics.fxml"));
@@ -97,13 +89,16 @@ public class AdminViewParametersController extends NewStage implements Initializ
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        parametricsTable.getColumns().addAll(idCol,descrCol,createdDateCol,createdByCol,updatedDateCol,updatedByCol);
-   
-     
-    }
-    
+        parametricsTable.getColumns().addAll(idCol, descrCol, createdDateCol, createdByCol, updatedDateCol, updatedByCol);
 
-    public void setWindow(String tableName, String lName) {  
+    }
+
+    /**
+     *
+     * @param tableName
+     * @param lName
+     */
+    public void setWindow(String tableName, String lName) {
         Parametrics pm = new Parametrics();
         ResultSet rs = null;
         rs = pm.getDesc(tableName);
@@ -114,94 +109,100 @@ public class AdminViewParametersController extends NewStage implements Initializ
         } catch (SQLException ex) {
             Logger.getLogger(AdminViewParametersController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         createBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(AdminViewParametersController.this.getClass().getResource("../View/AdminNewComponent.fxml"));
-                Parent root = (Parent) loader.load();  
+                Parent root = (Parent) loader.load();
                 Stage createB = new Stage();
                 Scene scene = new Scene(root);
                 createB.setTitle("Enter New Description ");
                 createB.setScene(scene);
                 createB.setResizable(false);
-                createB.setOnCloseRequest((WindowEvent event1) -> {setWindow(tableName, lName);});
+                createB.setOnCloseRequest((WindowEvent event1) -> {
+                    setWindow(tableName, lName);
+                });
                 createB.show();
-                
+
                 AdminNewComponentController createComp = loader.getController();
                 createComp.createComponent(tableName);
             } catch (IOException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
-        Callback<TableColumn<Parametrics, Void>, TableCell<Parametrics, Void>>  cellFactory = new Callback<TableColumn<Parametrics,Void>, TableCell<Parametrics,Void>>(){
-           @Override
-           public TableCell<Parametrics, Void> call(TableColumn<Parametrics, Void> param) {
-             TableCell<Parametrics, Void> cell = new TableCell<Parametrics, Void>() {
-                    private Button btn = new Button();
 
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            Parametrics data = new Parametrics();
-                            Integer id;
-                            data = getTableView().getItems().get(getIndex());
-                            id = Integer.valueOf(data.idProperty().getValue());
-                            String desc = data.descriptionProperty().getValue();
-                            btn.setText("EDIT");
-                            btn.setOnMouseClicked((MouseEvent event) -> {
-                            
-                            
-                                try {
+        Callback<TableColumn<Parametrics, Void>, TableCell<Parametrics, Void>> cellFactory = (TableColumn<Parametrics, Void> param) -> {
+            TableCell<Parametrics, Void> cell = new TableCell<Parametrics, Void>() {
+                private Button btn = new Button();
+
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        Parametrics data = new Parametrics();
+                        Integer id;
+                        data = getTableView().getItems().get(getIndex());
+                        id = Integer.valueOf(data.idProperty().getValue());
+                        String desc = data.descriptionProperty().getValue();
+                        btn.setText("EDIT");
+                        btn.setOnMouseClicked((MouseEvent event) -> {
+
+                            try {
 //                                    Parent root = FXMLLoader.load(getClass().getResource("../View/AdminNewComponent.fxml"));
-                                    Stage createB = new Stage();
-                                    
-                                    FXMLLoader loader = new FXMLLoader(AdminViewParametersController.this.getClass().getResource("../View/AdminNewComponent.fxml"));
-                                    Parent root = (Parent) loader.load();  
-                                    Scene scene = new Scene(root);
-                                    createB.setTitle("EDIT");
-                                    createB.setScene(scene);
-                                    createB.setResizable(false);
-                                    createB.setOnCloseRequest((WindowEvent event1) -> {setWindow(tableName, lName);});
-                                    createB.show();
-                                   
-                                    AdminNewComponentController editComp = loader.getController();
-                                    editComp.editComponent(tableName, id, desc);
-                                } catch (IOException ex) {
-                                    Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                            });
-                            setGraphic(btn);
-                        }
+                                Stage createB = new Stage();
+
+                                FXMLLoader loader = new FXMLLoader(AdminViewParametersController.this.getClass().getResource("../View/AdminNewComponent.fxml"));
+                                Parent root = (Parent) loader.load();
+                                Scene scene = new Scene(root);
+                                createB.setTitle("EDIT");
+                                createB.setScene(scene);
+                                createB.setResizable(false);
+                                createB.setOnCloseRequest((WindowEvent event1) -> {
+                                    setWindow(tableName, lName);
+                                });
+                                createB.show();
+
+                                AdminNewComponentController editComp = loader.getController();
+                                editComp.editComponent(tableName, id, desc);
+                            } catch (IOException ex) {
+                                Logger.getLogger(PatientsRecordsController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                        setGraphic(btn);
                     }
-                    
-             };
+                }
+
+            };
             return cell;
-           }
         };
         idCol.setCellFactory(cellFactory);
-        
+
         parametricsTable.setItems(data);
     }
-    
-    public ArrayList fillParametricsTable(ResultSet rs) throws SQLException{
-        
+
+    /**
+     *
+     * @param rs
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList fillParametricsTable(ResultSet rs) throws SQLException {
+
         ArrayList<Parametrics> data = new ArrayList();
-        
+
         while (rs.next()) {
-                Parametrics pm = new Parametrics();
-                pm.idProperty().set(rs.getString("id"));
-                pm.descriptionProperty().set(rs.getString("description"));
-                pm.createdProperty().set(rs.getString("created"));
-                pm.createdbyProperty().set(rs.getString("createdby"));
-                pm.updatedProperty().set(rs.getString("updated"));
-                pm.updatedbyProperty().set(rs.getString("updatedby"));
-                data.add(pm);
-            }
-       return data;
+            Parametrics pm = new Parametrics();
+            pm.idProperty().set(rs.getString("id"));
+            pm.descriptionProperty().set(rs.getString("description"));
+            pm.createdProperty().set(rs.getString("created"));
+            pm.createdbyProperty().set(rs.getString("createdby"));
+            pm.updatedProperty().set(rs.getString("updated"));
+            pm.updatedbyProperty().set(rs.getString("updatedby"));
+            data.add(pm);
+        }
+        return data;
     }
-     
+
 }

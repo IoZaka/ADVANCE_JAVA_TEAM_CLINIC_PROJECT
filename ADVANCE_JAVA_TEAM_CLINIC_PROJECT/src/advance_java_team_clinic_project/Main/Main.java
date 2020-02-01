@@ -5,8 +5,6 @@
  */
 package advance_java_team_clinic_project.Main;
 
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -32,8 +30,8 @@ public class Main extends Application {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setWidth(1000);
-        primaryStage.setHeight(600);
+        primaryStage.setWidth(1200);
+        primaryStage.setHeight(680);
         primaryStage.setResizable(true);
         primaryStage.show();
     }
