@@ -11,18 +11,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="profilePane" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.ProfileController">
+<AnchorPane id="AnchorPane" fx:id="profilePane" maxHeight="680.0" maxWidth="1020.0" minHeight="680.0" minWidth="1020.0" prefHeight="680.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.ProfileController">
     <children>
-        <Pane prefHeight="125.0" prefWidth="820.0" style="-fx-background-color: #e6e6e6;">
+        <Pane prefHeight="125.0" prefWidth="1020.0" style="-fx-background-color: #e6e6e6;">
             <children>
-                <ImageView fitHeight="77.0" fitWidth="74.0" layoutX="637.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="77.0" fitWidth="74.0" layoutX="904.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@images/user.png" />
                     </image>
                 </ImageView>
             </children>
         </Pane>
-        <GridPane layoutY="130.0" prefHeight="475.0" prefWidth="820.0">
+        <GridPane layoutY="130.0" prefHeight="475.0" prefWidth="1020.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -36,7 +36,7 @@
                         <Font name="System Bold" size="28.0" />
                     </font>
                     <GridPane.margin>
-                        <Insets bottom="200.0" left="570.0" />
+                        <Insets bottom="200.0" left="800.0" />
                     </GridPane.margin>
                 </Text>
                 <Pane prefHeight="475.0" prefWidth="780.0" styleClass="profileInfo" stylesheets="@style.css" GridPane.rowIndex="1">
