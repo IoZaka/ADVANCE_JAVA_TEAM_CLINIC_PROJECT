@@ -40,7 +40,7 @@ public class Admission {
     public ResultSet fetchAdmissionData(Integer diagID){
         try {
             stmt = object.connection.createStatement();
-            sql = " select a.id, a.diag_id, to_char(a.admission_date, 'yyyy/MM/dd') admission_date, to_date(a.discharge_date, 'yyyy/MM/dd') discharge_date, "
+            sql = " select a.id, a.diag_id, to_char(a.admission_date, 'yyyy/MM/dd') admission_date, nvl(to_char(a.discharge_date, 'yyyy/MM/dd'),'-1') discharge_date, "
                     + "a.cost_per_day, a.room, a.bed, b.SURNAME || ' ' || b.FIRSTNAME created_by, " 
                     + "to_char(a.CREATED,'yyyy/MM/dd') created , " 
                     + "c.SURNAME || ' ' || c.FIRSTNAME updated_by, " 

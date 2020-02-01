@@ -79,7 +79,9 @@ public class AdmissionInfoController implements Initializable {
                 //System.out.println(rs.getString("discharge_date"));
                 System.out.println(rs.getString("admission_date"));
                 admissionDateInput.setValue(LOCAL_DATE(rs.getString("admission_date")));
-                //dischargeDateInput.setValue(LOCAL_DATE(rs.getString("discharge_date")));
+                if(!rs.getString("discharge_date").equals("-1")){
+                    dischargeDateInput.setValue(LOCAL_DATE(rs.getString("discharge_date")));
+                }
                 createdDateInput.setValue(LOCAL_DATE(rs.getString("created")));
                 updatedDateInput.setValue(LOCAL_DATE(rs.getString("updated")));
             }
