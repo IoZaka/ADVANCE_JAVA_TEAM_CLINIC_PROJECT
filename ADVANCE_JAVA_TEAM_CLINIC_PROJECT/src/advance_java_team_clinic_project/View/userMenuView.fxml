@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane fx:id="userBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.UserMenuController">
+<BorderPane fx:id="userBorderPane" maxHeight="680.0" maxWidth="1200.0" minHeight="680.0" minWidth="1200.0" prefHeight="680.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.UserMenuController">
    <left>
-      <VBox fx:id="mainVBox" prefHeight="600.0" prefWidth="180.0" styleClass="sidebar" stylesheets="@style.css" BorderPane.alignment="CENTER">
+      <VBox fx:id="mainVBox" prefHeight="680.0" prefWidth="180.0" styleClass="sidebar" stylesheets="@style.css" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="200.0" prefWidth="180.0">
                <children>

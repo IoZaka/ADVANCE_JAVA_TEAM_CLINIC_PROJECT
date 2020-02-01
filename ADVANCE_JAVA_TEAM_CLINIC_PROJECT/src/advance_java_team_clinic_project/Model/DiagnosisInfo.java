@@ -48,6 +48,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     @Override
     public ResultSet fetchDiagnoseInfoData(Integer diag_id) {
         try {
+            getObject();
             stmt = object.connection.createStatement();
             sql = " select a.ID, "
                     + " a.APP_INFO_ID, "
@@ -87,6 +88,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     @Override
     public void createDiagnoseDetails(Integer app_info_id, String lComments, String lMeds) {
         try {
+            getObject();
             stmt = object.connection.createStatement();
             sql = "insert into pm_diagnosis (comments,meds,created_by,updated_by,APP_INFO_ID) values ('" + lComments + "','" + lMeds + "'," + user.getId() + "," + user.getId() + "," + app_info_id +")";
             rs = stmt.executeQuery(sql);

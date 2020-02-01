@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="appointmentPane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AppointmentController">
+<AnchorPane fx:id="appointmentPane" maxHeight="680.0" maxWidth="1020.0" minHeight="680.0" minWidth="1020.0" prefHeight="680.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AppointmentController">
     <children>
-        <Label graphicTextGap="6.0" layoutX="279.0" layoutY="97.0" prefHeight="18.0" prefWidth="274.0" text="Reason of appoinment" textAlignment="CENTER" textFill="#304e8e" AnchorPane.topAnchor="97.0">
+        <Label graphicTextGap="6.0" layoutX="348.0" layoutY="49.0" prefHeight="90.0" prefWidth="324.0" text="Reason of appoinment" textAlignment="CENTER" textFill="#304e8e" AnchorPane.topAnchor="49.0">
             <font>
-                <Font size="26.0" />
+                <Font size="31.0" />
             </font>
         </Label>
-        <GridPane layoutX="200.0" layoutY="250.0" prefWidth="400.0">
+        <GridPane layoutX="200.0" layoutY="200.0" prefWidth="600.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
@@ -29,7 +29,7 @@
             <children>
                 <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" styleClass="cancelBtn" stylesheets="@style.css" text="Cancel" GridPane.rowIndex="1">
                     <GridPane.margin>
-                        <Insets left="30.0" />
+                        <Insets left="30.0" top="100.0" />
                     </GridPane.margin>
                <font>
                   <Font size="15.0" />
@@ -37,15 +37,15 @@
                 </Button>
                 <Button fx:id="submitBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="116.0" styleClass="appBtns" stylesheets="@style.css" text="Sumbit" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <GridPane.margin>
-                        <Insets left="100.0" />
+                        <Insets left="200.0" top="100.0" />
                     </GridPane.margin>
                <font>
                   <Font size="15.0" />
                </font>
                 </Button>
-                <TextArea fx:id="reasonText" maxWidth="430.0" minWidth="400.0" prefHeight="239.0" prefWidth="424.0" promptText="Type the reason here :" style="-fx-background-color: #385ca8;">
+                <TextArea fx:id="reasonText" maxWidth="458.0" minWidth="400.0" prefHeight="234.0" prefWidth="458.0" promptText="Type the reason here :" style="-fx-background-color: #385ca8;">
                     <GridPane.margin>
-                        <Insets />
+                        <Insets left="100.0" />
                     </GridPane.margin>
                 </TextArea>
             </children>

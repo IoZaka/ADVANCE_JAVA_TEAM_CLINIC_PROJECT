@@ -77,9 +77,9 @@ public class AdmissionInfoController implements Initializable {
         // TODO
     }
 
-    public void setAdmissionID(Integer diagID) {
+    public void setAdmissionID(Integer diagID, Integer ID) {
         admissionModel.getObject();
-        rs = admissionModel.fetchAdmissionData(diagID);
+        rs = admissionModel.fetchAdmissionData(ID);
         try {
             if(rs.next()){
                 roomInput.setText(rs.getString("room"));

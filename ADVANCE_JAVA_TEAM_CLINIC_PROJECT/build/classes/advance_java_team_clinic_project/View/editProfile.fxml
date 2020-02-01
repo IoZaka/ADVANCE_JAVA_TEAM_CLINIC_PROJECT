@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="editProfilePane" minHeight="600.0" minWidth="820.0" prefHeight="600.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
+<AnchorPane id="AnchorPane" fx:id="editProfilePane" maxWidth="1020.0" minHeight="600.0" minWidth="1020.0" prefHeight="600.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.EditProfileController">
     <children>
-        <GridPane prefHeight="82.0" prefWidth="820.0">
+        <GridPane layoutX="100.0" prefHeight="82.0" prefWidth="820.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -40,7 +40,7 @@
                 </Button>
             </children>
         </GridPane>
-        <GridPane layoutX="2.0" layoutY="80.0" prefHeight="410.0" prefWidth="820.0">
+        <GridPane layoutX="100.0" layoutY="80.0" prefHeight="410.0" prefWidth="820.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -223,7 +223,7 @@
                 </ComboBox>
             </children>
         </GridPane>
-        <Button fx:id="cancelBtn" layoutX="293.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="cancelBtn" stylesheets="@style.css" text="Cancel" />
-        <Button fx:id="submitBtn" layoutX="486.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="submitBtn" stylesheets="@style.css" text="Submit" />
+        <Button fx:id="cancelBtn" layoutX="300.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="cancelBtn" stylesheets="@style.css" text="Cancel" />
+        <Button fx:id="submitBtn" layoutX="700.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="submitBtn" stylesheets="@style.css" text="Submit" />
     </children>
 </AnchorPane>
