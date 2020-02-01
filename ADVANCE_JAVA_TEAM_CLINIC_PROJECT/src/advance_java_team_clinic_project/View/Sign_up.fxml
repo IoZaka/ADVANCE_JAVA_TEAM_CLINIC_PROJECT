@@ -15,7 +15,7 @@
         <TextField fx:id="registerUsername" layoutX="268.0" layoutY="249.0" prefHeight="38.0" prefWidth="215.0" promptText="Username " styleClass="registerUsernameInput" stylesheets="@style.css" />
         <PasswordField fx:id="registerPassword" layoutX="268.0" layoutY="307.0" prefHeight="38.0" prefWidth="215.0" promptText="Password " styleClass="registerPasswordInput" />
         <PasswordField fx:id="confirmPassword" layoutX="268.0" layoutY="369.0" prefHeight="38.0" prefWidth="215.0" promptText="Confirm Password " styleClass="registerPasswordInput" />
-        <Button fx:id="registerBtn" layoutX="436.0" layoutY="469.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="129.0" styleClass="submitBtn" stylesheets="@style.css" text="Sumbit" />
+        <Button fx:id="registerBtn" layoutX="436.0" layoutY="469.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="129.0" styleClass="altSubmitBtn" stylesheets="@style.css" text="Sumbit" />
         <ImageView fitHeight="213.0" fitWidth="241.0" layoutX="415.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@images/hospital.png" />

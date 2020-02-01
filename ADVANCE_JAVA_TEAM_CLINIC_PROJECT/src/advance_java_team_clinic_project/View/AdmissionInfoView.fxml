@@ -28,7 +28,7 @@
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Admission Date" GridPane.rowIndex="1">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                     </font>
                     <GridPane.margin>
                         <Insets bottom="60.0" left="20.0" />

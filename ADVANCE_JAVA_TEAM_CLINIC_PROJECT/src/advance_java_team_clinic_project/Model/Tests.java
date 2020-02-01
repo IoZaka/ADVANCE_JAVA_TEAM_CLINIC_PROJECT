@@ -64,7 +64,7 @@ public class Tests {
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
-            sql = "select 'Test-'||a.id id, " +
+            sql = "select a.id id, " +
                     "a.description, " +
                     "a.cost, " +
                     "a.results, " +
@@ -89,7 +89,7 @@ public class Tests {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
             //sql = "select * from pm_diag_tests where id= " + testID;
-            sql = "select 'Test-'||a.id id, " +
+            sql = "select a.id id, " +
                     "a.description, " +
                     "a.cost, " +
                     "a.results, " +
@@ -122,7 +122,7 @@ public class Tests {
         try {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
-            sql = "select 'Test-'||a.id id, " +
+            sql = "select a.id id, " +
                     "a.description, " +
                     "a.cost, " +
                     "a.results, " +

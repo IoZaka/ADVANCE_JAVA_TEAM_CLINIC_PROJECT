@@ -101,6 +101,12 @@ public class UserMenuController extends NewStage implements Initializable {
                 recordsBtn.setSelected(true);
                 buttonsVBox.setSpacing(30);
                 break;
+            case 4:
+                buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, appointmentsBtn , logoutBtn);
+                loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
+                recordsBtn.setSelected(true);
+                buttonsVBox.setSpacing(30);
+                break;
             case 5:
                 buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, testsBtn, logoutBtn);
                 loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
