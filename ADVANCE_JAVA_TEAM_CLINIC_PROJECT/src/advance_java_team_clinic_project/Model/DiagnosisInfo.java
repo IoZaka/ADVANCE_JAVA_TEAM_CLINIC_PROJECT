@@ -48,6 +48,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     @Override
     public ResultSet fetchDiagnoseInfoData(Integer diag_id) {
         try {
+            getObject();
             stmt = object.connection.createStatement();
             sql = " select a.ID, "
                     + " a.APP_INFO_ID, "
@@ -87,6 +88,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     @Override
     public void createDiagnoseDetails(Integer app_info_id, String lComments, String lMeds) {
         try {
+            getObject();
             stmt = object.connection.createStatement();
             sql = "insert into pm_diagnosis (comments,meds,created_by,updated_by,APP_INFO_ID) values ('" + lComments + "','" + lMeds + "'," + user.getId() + "," + user.getId() + "," + app_info_id +")";
             rs = stmt.executeQuery(sql);
@@ -116,6 +118,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     @Override
     public void updateDiagnoseDetails(Integer diag_id, String lComments, String lMeds) {
         try {
+            getObject();
             stmt = object.connection.createStatement();
             sql = "update pm_diagnosis set comments = '" + lComments + "' , meds = '" + lMeds + "' , updated_by = " + user.getId() + " where id = " + diag_id;
             rs = stmt.executeQuery(sql);
@@ -145,6 +148,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     public Integer getAdmissionId(Integer diag_id) {
         ak = -1;
         try {
+            getObject();
             stmt = object.connection.createStatement();
             sql = "select id from pm_addmissions where diag_id = " + diag_id;
             rs = stmt.executeQuery(sql);
