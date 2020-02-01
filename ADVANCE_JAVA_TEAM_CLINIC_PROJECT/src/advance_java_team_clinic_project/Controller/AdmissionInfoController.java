@@ -77,8 +77,13 @@ public class AdmissionInfoController implements Initializable {
         // TODO
     }
 
+    /**
+     *
+     * @param diagID
+     * @param ID
+     */
     public void setAdmissionID(Integer diagID, Integer ID) {
-        admissionModel.getObject();
+        totalCostInput.setEditable(false);
         rs = admissionModel.fetchAdmissionData(ID);
         try {
             if(rs.next()){
@@ -87,6 +92,8 @@ public class AdmissionInfoController implements Initializable {
                 costPerDayinput.setText(rs.getString("cost_per_day"));
                 createdByInput.setText(rs.getString("created_by"));
                 updatedByInput.setText(rs.getString("updated_by"));
+                doctorsName.setText(rs.getString("doctor"));
+                patientsName.setText(rs.getString("patient"));
                 //System.out.println(rs.getString("discharge_date"));
                 System.out.println(rs.getString("admission_date"));
                 admissionDateInput.setValue(LOCAL_DATE(rs.getString("admission_date")));

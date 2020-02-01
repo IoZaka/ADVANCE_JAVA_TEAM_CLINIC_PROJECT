@@ -118,6 +118,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     @Override
     public void updateDiagnoseDetails(Integer diag_id, String lComments, String lMeds) {
         try {
+            getObject();
             stmt = object.connection.createStatement();
             sql = "update pm_diagnosis set comments = '" + lComments + "' , meds = '" + lMeds + "' , updated_by = " + user.getId() + " where id = " + diag_id;
             rs = stmt.executeQuery(sql);
@@ -147,6 +148,7 @@ public class DiagnosisInfo implements DiagnosisInfoDao {
     public Integer getAdmissionId(Integer diag_id) {
         ak = -1;
         try {
+            getObject();
             stmt = object.connection.createStatement();
             sql = "select id from pm_addmissions where diag_id = " + diag_id;
             rs = stmt.executeQuery(sql);

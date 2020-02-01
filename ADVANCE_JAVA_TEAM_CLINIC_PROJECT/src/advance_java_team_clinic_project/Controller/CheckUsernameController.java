@@ -6,7 +6,6 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.DatabaseProfileDetails;
-import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
