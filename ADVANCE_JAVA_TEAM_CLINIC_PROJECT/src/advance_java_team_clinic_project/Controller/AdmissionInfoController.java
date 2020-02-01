@@ -6,6 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.Admission;
+import advance_java_team_clinic_project.Model.DiagnosisInfo;
 import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
 import java.net.URL;
@@ -72,6 +73,7 @@ public class AdmissionInfoController implements Initializable {
     private TextField patientsName;
 
     private Admission admissionModel = new Admission();
+    private DiagnosisInfo diagnosisInfoModel = new DiagnosisInfo();
     private ResultSet rs;
     @FXML
     private Button backBtn;
@@ -80,6 +82,7 @@ public class AdmissionInfoController implements Initializable {
     @FXML
     private Button updateBtn;
     
+    private String app_id = null;
     /**
      * Initializes the controller class.
      * @param url
@@ -110,6 +113,15 @@ public class AdmissionInfoController implements Initializable {
             } 
         }
         
+        rs = diagnosisInfoModel.fetchDiagnoseInfoData(diagID);
+        try {
+            if(rs.next()){
+                app_id = rs.getString("APP_INFO_ID");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdmissionInfoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         totalCostInput.setEditable(false);
         rs = admissionModel.fetchAdmissionData(ID);
         try {
@@ -133,21 +145,21 @@ public class AdmissionInfoController implements Initializable {
             Logger.getLogger(AdmissionInfoController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-//        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent event) {
-//                try {
-//                    FXMLLoader loader = new FXMLLoader(AdmissionInfoController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
-//                    Parent root = (Parent) loader.load();
-//                    DiagnosisInfoController diagnosisID = loader.getController();
-//                    diagnosisID.setDiagnosisID(appID, diagID);
-//                    admissionInfoPane.getChildren().clear();
-//                    admissionInfoPane.getChildren().add(root);
-//                } catch (IOException ex) {
-//                    Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
+        backBtn.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(AdmissionInfoController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
+                    Parent root = (Parent) loader.load();
+                    DiagnosisInfoController diagnosisID = loader.getController();
+                    diagnosisID.setDiagnosisID(app_id, diagID);
+                    admissionInfoPane.getChildren().clear();
+                    admissionInfoPane.getChildren().add(root);
+                } catch (IOException ex) {
+                    Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         
     }
     
