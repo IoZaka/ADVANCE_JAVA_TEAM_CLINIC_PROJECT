@@ -125,8 +125,11 @@ public class EditProfileController extends NewStage implements Initializable {
             usernamebtn.setDisable(false);
             addressbtn.setDisable(false);
         }
-        
+               
         if(user.getRoleID() == 1 && userID != user.getId()){
+//            insurancebtn.setDisable(false);
+//            contactbtn.setDisable(false);
+//            addressbtn.setDisable(false);
             comboRole.setDisable(false);
         }else{
             comboRole.setDisable(true);

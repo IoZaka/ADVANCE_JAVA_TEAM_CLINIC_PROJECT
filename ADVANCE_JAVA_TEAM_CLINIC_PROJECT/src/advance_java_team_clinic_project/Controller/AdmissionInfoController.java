@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -28,7 +29,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -176,6 +179,26 @@ public class AdmissionInfoController implements Initializable {
         payBtn.setOnMouseClicked((MouseEvent event) -> {
             admissionModel.updateIsPaid(ID);
             fetchAdmissionData(ID);
+            
+            FXMLLoader loader = new FXMLLoader(AdmissionInfoController.this.getClass().getResource("../View/payView.fxml"));
+                Parent root = null;
+            try {
+                root = (Parent) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdmissionInfoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                Stage paymentStage = new Stage();
+                Scene scene = new Scene(root);
+                paymentStage.setTitle("Enter amount ");
+                paymentStage.setScene(scene);
+                paymentStage.setResizable(false);
+                paymentStage.show();
+                paymentStage.setOnCloseRequest((WindowEvent eventl) -> {
+                   fetchAdmissionData(ID);}
+                );
+                PayController pay = loader.getController();
+                pay.setPayment(2, ID);
+            
         });
 
     }
