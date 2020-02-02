@@ -16,7 +16,7 @@ import javafx.scene.control.Alert;
  *
  * @author User
  */
-public class DatabaseProfileEdit {
+public class DatabaseCustomCombo {
 
     private Statement stmt;
     private String sql;

@@ -54,7 +54,7 @@ public class DatabaseLoginRegister implements LoginRegisterDao {
             /* End of Alert Initialiization*/
             stmt = object.connection.createStatement();
             hashPwd = makeHashPwd(passWord);
-            sql = "select id, password, role_id, firstname as firstname, surname, username, address_id, contact_id from pm_users where username = '" + userName + "'";
+            sql = "select id, password, role_id, firstname as firstname, surname, username, address_id, contact_id from pm_users where upper(username) = upper('" + userName + "')";
             rs = stmt.executeQuery(sql);
 
             if (rs.next()) {

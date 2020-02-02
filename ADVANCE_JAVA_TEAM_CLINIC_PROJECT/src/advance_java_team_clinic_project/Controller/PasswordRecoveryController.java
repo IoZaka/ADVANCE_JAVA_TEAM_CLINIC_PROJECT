@@ -7,7 +7,7 @@ package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.CustomCombo;
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
-import advance_java_team_clinic_project.Model.DatabaseProfileEdit;
+import advance_java_team_clinic_project.Model.DatabaseCustomCombo;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -55,7 +55,7 @@ public class PasswordRecoveryController extends NewStage implements Initializabl
     private int idCombo;
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
-    private static final DatabaseProfileEdit ed = new DatabaseProfileEdit();
+    private static final DatabaseCustomCombo ed = new DatabaseCustomCombo();
     private static Stage stage;
     private static final DatabaseLoginRegister ak = new DatabaseLoginRegister();
     private static final PasswordRecoveryPopUpController op = new PasswordRecoveryPopUpController();

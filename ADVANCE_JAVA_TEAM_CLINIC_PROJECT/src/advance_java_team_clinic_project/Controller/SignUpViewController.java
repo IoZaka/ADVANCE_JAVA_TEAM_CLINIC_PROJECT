@@ -7,7 +7,7 @@ package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.CustomCombo;
 import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
-import advance_java_team_clinic_project.Model.DatabaseProfileEdit;
+import advance_java_team_clinic_project.Model.DatabaseCustomCombo;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -59,7 +59,7 @@ public class SignUpViewController extends NewStage implements Initializable {
     private TextField SecondAnswerQuestion;
 
     ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
-    private static final DatabaseProfileEdit ed = new DatabaseProfileEdit();
+    private static final DatabaseCustomCombo ed = new DatabaseCustomCombo();
 
     private String passWord, confirmPassWord, userName, answer1, answer2;
     private int question1 = -1, question2 = -1;
