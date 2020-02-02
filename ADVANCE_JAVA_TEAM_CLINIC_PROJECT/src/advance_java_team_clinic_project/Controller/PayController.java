@@ -5,17 +5,12 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import java.io.IOException;
+import advance_java_team_clinic_project.Model.Admission;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
@@ -42,6 +37,8 @@ public class PayController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,6 +59,8 @@ public class PayController implements Initializable {
             if(type == 1){
                 
             }else if(type == 2){
+                Admission admission = new Admission();
+                admission.updateIsPaid(ID,Integer.valueOf(amountInput.getText()));
                  Stage stage = (Stage) paymentPane.getScene().getWindow();
                 paymentPane.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
             }     

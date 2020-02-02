@@ -16,7 +16,7 @@ import javafx.scene.control.Alert;
  *
  * @author Chris
  */
-public class Admission {
+public class Admission implements AdmissionDao{
 
     private Statement stmt;
     private String sql;
@@ -29,6 +29,7 @@ public class Admission {
     /**
      * Get the database connection
      */
+    @Override
     public void getObject() {
         try {
             object = DatabaseConnection.getInstance();
@@ -42,6 +43,7 @@ public class Admission {
      * @param ID
      * @return
      */
+    @Override
     public ResultSet fetchAdmissionData(Integer ID) {
         try {
             getObject();
@@ -51,7 +53,8 @@ public class Admission {
                     + " to_char(a.CREATED,'dd/mm/yyyy') created ,  "
                     + " c.SURNAME || ' ' || c.FIRSTNAME updated_by,"
                     + " a.total_cost,  "
-                    + " decode(a.is_paid, 1, 'Yes' , 2 , 'No', 'Uknown') is_paid,"
+                    + " decode(a.is_paid, 1, 'Yes' , 0 , 'No', 'Uknown') is_paid, "
+                    + " a.paid_amount ,"
                     + " a.is_paid is_paid_value, "
                     + " to_char(a.UPDATED,'dd/mm/yyyy') updated ,"
                     + " doc.SURNAME || ' ' || doc.FIRSTNAME doctor,"
@@ -74,6 +77,7 @@ public class Admission {
      * @param ad_date
      * @return
      */
+    @Override
     public boolean createAdmissionData(Integer diagID, Integer costPerDay, String room, String bed, String ad_date) {
         try {
             getObject();
@@ -98,6 +102,7 @@ public class Admission {
      * @param dis_date
      * @return
      */
+    @Override
     public boolean updateAdmissionData(Integer ID, Integer costPerDay, String room, String bed, String ad_date, String dis_date) {
         try {
             getObject();
@@ -117,11 +122,12 @@ public class Admission {
         return true;
     }
 
-    public void updateIsPaid(Integer ID) {
+    @Override
+    public void updateIsPaid(Integer ID, Integer amount) {
         try {
             getObject();
             stmt = object.connection.createStatement();
-            sql = "update pm_addmissions set is_paid = 1 where id = " + ID;
+            sql = "update pm_addmissions set paid_amount = "+ amount +" where id = " + ID;
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Admission.class.getName()).log(Level.SEVERE, null, ex);

@@ -5,7 +5,6 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.DatabaseConnection;
 import advance_java_team_clinic_project.Model.DatabaseLoginRecords;
 import advance_java_team_clinic_project.Model.LoggedInUser;
 import java.io.IOException;
@@ -61,7 +60,6 @@ public class Id_RecordViewController implements Initializable {
 
     private Statement stmt;
     private String sql;
-    private DatabaseConnection object;
 
     /**
      * Initializes the controller class.
@@ -91,8 +89,6 @@ public class Id_RecordViewController implements Initializable {
     public void setID(String appID) {
 
         try {
-            object = DatabaseConnection.getInstance();
-            stmt = object.connection.createStatement();
             ak = new DatabaseLoginRecords();
             ak.getObject();
             rs = ak.fetchBasicInfoData(Integer.parseInt(appID));

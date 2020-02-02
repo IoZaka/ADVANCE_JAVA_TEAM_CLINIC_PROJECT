@@ -80,6 +80,10 @@ public class AdmissionInfoController implements Initializable {
     private Text disDateLayout;
     @FXML
     private Button payBtn;
+    @FXML
+    private Text paidAmountLayout;
+    @FXML
+    private TextField paidAmountValue;
 
     private String app_id = null;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -116,7 +120,11 @@ public class AdmissionInfoController implements Initializable {
                 updateBtn.setVisible(false);
                 dischargeDateInput.setVisible(false);
                 disDateLayout.setVisible(false);
-
+                isPaidValue.setVisible(false);
+                isPaidLayout.setVisible(false);
+                paidAmountLayout.setVisible(false);
+                payBtn.setVisible(false);
+                paidAmountValue.setVisible(false);
             } else {
                 updateBtn.setVisible(true);
                 createBtn.setVisible(false);
@@ -129,7 +137,6 @@ public class AdmissionInfoController implements Initializable {
             roomInput.setEditable(false);
             bedInput.setEditable(false);
             costPerDayinput.setEditable(false);
-
         }
 
         //Fetch Appointment ID for page redirection
@@ -177,30 +184,25 @@ public class AdmissionInfoController implements Initializable {
         });
 
         payBtn.setOnMouseClicked((MouseEvent event) -> {
-            admissionModel.updateIsPaid(ID);
-            fetchAdmissionData(ID);
-            
             FXMLLoader loader = new FXMLLoader(AdmissionInfoController.this.getClass().getResource("../View/payView.fxml"));
-                Parent root = null;
+            Parent root = null;
             try {
                 root = (Parent) loader.load();
             } catch (IOException ex) {
                 Logger.getLogger(AdmissionInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-                Stage paymentStage = new Stage();
-                Scene scene = new Scene(root);
-                paymentStage.setTitle("Enter amount ");
-                paymentStage.setScene(scene);
-                paymentStage.setResizable(false);
-                paymentStage.show();
-                paymentStage.setOnCloseRequest((WindowEvent eventl) -> {
-                   fetchAdmissionData(ID);}
-                );
-                PayController pay = loader.getController();
-                pay.setPayment(2, ID);
-            
+            Stage paymentStage = new Stage();
+            Scene scene = new Scene(root);
+            paymentStage.setTitle("Enter amount ");
+            paymentStage.setScene(scene);
+            paymentStage.setResizable(false);
+            paymentStage.show();
+            PayController pay = loader.getController();
+            pay.setPayment(2, ID);
+            paymentStage.setOnCloseRequest((WindowEvent eventl) -> {
+                fetchAdmissionData(ID);
+            });
         });
-
     }
 
     /**
@@ -247,19 +249,26 @@ public class AdmissionInfoController implements Initializable {
                 patientsName.setText(rs.getString("patient"));
                 totalCostInput.setText(rs.getString("total_cost"));
                 isPaidValue.setText(rs.getString("is_paid"));
+                paidAmountValue.setText(rs.getString("paid_amount"));
                 isPaid = rs.getInt("is_paid_value");
                 admissionDateInput.setValue(LOCAL_DATE(rs.getString("admission_date")));
                 if (!rs.getString("discharge_date").equals("-1")) {
                     dischargeDateInput.setValue(LOCAL_DATE(rs.getString("discharge_date")));
                     isPaidValue.setVisible(true);
                     isPaidLayout.setVisible(true);
+                    paidAmountLayout.setVisible(true);
+                    paidAmountValue.setVisible(true);
                     if (loggedInUser.getRoleID() == 3 && isPaid != 1) {
                         payBtn.setVisible(true);
+                    } else {
+                        payBtn.setVisible(false);
                     }
                 } else {
                     isPaidValue.setVisible(false);
                     isPaidLayout.setVisible(false);
+                    paidAmountLayout.setVisible(false);
                     payBtn.setVisible(false);
+                    paidAmountValue.setVisible(false);
                 }
                 createdDateInput.setText(rs.getString("created"));
                 updatedDateInput.setText(rs.getString("updated"));

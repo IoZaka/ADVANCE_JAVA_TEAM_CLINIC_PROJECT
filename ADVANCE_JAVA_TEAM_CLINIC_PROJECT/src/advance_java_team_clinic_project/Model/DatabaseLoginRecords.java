@@ -36,7 +36,7 @@ public class DatabaseLoginRecords {
      */
     public ResultSet fetchBasicInfoData(Integer roleID, Integer userID) throws SQLException {
         stmt = object.connection.createStatement();
-        sql = "select a.id, "
+        sql = " select a.id, "
                 + "    to_char(a.app_date,'dd/mm/yyyy') app_date, "
                 + "    a.comments, "
                 + "    a.app_code, "
@@ -46,14 +46,14 @@ public class DatabaseLoginRecords {
                 + "    c.Surname || ' ' || c.firstname doctor, "
                 + "    d.Surname || ' ' || d.firstname updated_by, "
                 + "    e.Surname || ' ' || e.firstname created_by "
-                + "from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e "
-                + "where a.patient_id = b.id "
+                + " from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e "
+                + " where a.patient_id = b.id "
                 + "        and a.doctor_id = c.id(+) "
                 + "        and a.updated_by = d.id "
                 + "        and a.created_by = e.id "
-                + "        and " + roleID + " = 1 "
-                + "union "
-                + "select a.id, "
+                + "        and " + roleID + " = 1 " // Admin
+                + " union "
+                + " select a.id, "
                 + "    to_char(a.app_date,'dd/mm/yyyy') app_date, "
                 + "    a.comments, "
                 + "    a.app_code, "
@@ -63,15 +63,15 @@ public class DatabaseLoginRecords {
                 + "    c.Surname || ' ' || c.firstname doctor, "
                 + "    d.Surname || ' ' || d.firstname updated_by, "
                 + "    e.Surname || ' ' || e.firstname created_by "
-                + "from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e "
-                + "where a.patient_id = b.id "
+                + " from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e "
+                + " where a.patient_id = b.id "
                 + "        and a.doctor_id = c.id "
                 + "        and a.updated_by = d.id "
                 + "        and a.created_by = e.id "
                 + "       and a.doctor_id = " + userID
-                + "       and " + roleID + " = 2 "
-                + "union "
-                + "select a.id, "
+                + "       and " + roleID + " = 2 " // Doctor
+                + " union "
+                + " select a.id, "
                 + "    to_char(a.app_date,'dd/mm/yyyy') app_date, "
                 + "    a.comments, "
                 + "    a.app_code, "
@@ -81,15 +81,15 @@ public class DatabaseLoginRecords {
                 + "    c.Surname || ' ' || c.firstname doctor, "
                 + "    d.Surname || ' ' || d.firstname updated_by, "
                 + "    e.Surname || ' ' || e.firstname created_by "
-                + "from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e "
-                + "where a.patient_id = b.id "
+                + " from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e "
+                + " where a.patient_id = b.id "
                 + "        and a.doctor_id = c.id(+) "
                 + "        and a.updated_by = d.id "
                 + "        and a.created_by = e.id "
                 + "       and a.patient_id = " + userID
-                + "       and " + roleID + " = 3 "
-                + "union "
-                + "select a.id, "
+                + "       and " + roleID + " = 3 " // Patient
+                + " union "
+                + " select a.id, "
                 + "    to_char(a.app_date,'dd/mm/yyyy') app_date, "
                 + "    a.comments, "
                 + "    a.app_code, "
@@ -99,12 +99,12 @@ public class DatabaseLoginRecords {
                 + "    c.Surname || ' ' || c.firstname doctor, "
                 + "    d.Surname || ' ' || d.firstname updated_by, "
                 + "    e.Surname || ' ' || e.firstname created_by "
-                + "from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e "
-                + "where a.patient_id = b.id "
+                + " from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e "
+                + " where a.patient_id = b.id "
                 + "       and a.doctor_id = c.id(+) "
                 + "       and a.updated_by = d.id "
                 + "       and a.created_by = e.id "
-                + "       and " + roleID + " = 4";
+                + "       and " + roleID + " = 4"; // Reception
         rs = stmt.executeQuery(sql);
         return rs;
     }
