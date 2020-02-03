@@ -124,9 +124,9 @@ public class TestsTableController implements Initializable {
                             }
                             TestsInfoController id = loader.getController();
                             if(diagID == -1){
-                                id.setTestIDView(false,Integer.valueOf(testID));
+                                id.setTestIDView(false,Integer.valueOf(testID),-1);
                             }else{
-                                id.setTestIDView(true,Integer.valueOf(testID));
+                                id.setTestIDView(true,Integer.valueOf(testID),-1);
                             }
                             
                             //Scene

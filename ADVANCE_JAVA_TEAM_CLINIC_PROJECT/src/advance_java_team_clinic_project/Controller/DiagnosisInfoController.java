@@ -193,7 +193,7 @@ public class DiagnosisInfoController implements Initializable {
                 Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
             TestsInfoController testID = loader.getController();
-            testID.setTestIDView(true, -1);
+            testID.setTestIDView(true, -1,diagID);
             //Scene
             diagnosisPanel.getChildren().clear();
             diagnosisPanel.getChildren().add(root);

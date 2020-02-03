@@ -6,6 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.TestsModel;
+import advance_java_team_clinic_project.classes.LoggedInUserClass;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -22,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -38,7 +40,6 @@ public class TestsInfoController implements Initializable {
     private TextField resultsInput;
     @FXML
     private TextField isPaidInput;
-    @FXML
     private TextField caseStatusInput;
     @FXML
     private TextField descriptionInput;
@@ -53,11 +54,28 @@ public class TestsInfoController implements Initializable {
     @FXML
     private Button backBtn;
 
-    private Integer diagID = null;
-
     TestsModel tests = new TestsModel();
     @FXML
     private ComboBox isCompleted;
+    @FXML
+    private Button updateBtn;
+    @FXML
+    private Button createBtn;
+    @FXML
+    private Button payBtn;
+    @FXML
+    private Text paidAmountLayout;
+    @FXML
+    private TextField paidAmountInput;
+    @FXML
+    private TextField doctorInput;
+    @FXML
+    private TextField patientInput;
+
+    private LoggedInUserClass loggedInUser = LoggedInUserClass.getInstance();
+
+    private Integer diagID = null;
+    private Integer isPaidValue = 0;
 
     /**
      * Initializes the controller class.
@@ -67,39 +85,79 @@ public class TestsInfoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        isCompleted.getItems().addAll("Yes","No");
+        isCompleted.getItems().addAll("Yes", "No");
     }
 
-    public void setTestIDView(boolean fromDiag, Integer testID) {
+    public void setTestIDView(boolean fromDiag, Integer testID, Integer diagId) {
+        System.out.println(testID);
+        diagID = diagId;
+        if (testID != -1) {
+            ResultSet rs = tests.getTestByID(testID);
 
-        ResultSet rs = tests.getTestByID(testID);
-
-        try {
-            if(rs.next()){
-                diagID = rs.getInt("diag_id");
-                descriptionInput.setText(rs.getString("description"));
-                costInput.setText(rs.getString("cost"));
-                resultsInput.setText(rs.getString("results"));
-                isPaidInput.setText(rs.getString("Paid"));
-                caseStatusInput.setText(rs.getString("status"));
-                isCompleted.setValue(rs.getString("is_completed"));
-                createdByInput.setText(rs.getString("createdby"));
-                updatedByInput.setText(rs.getString("updated_by"));
-                createdDate.setText(rs.getString("created"));
-                updatedDate.setText(rs.getString("updated"));
+            try {
+                if (rs.next()) {
+                    diagID = rs.getInt("diag_id");
+                    descriptionInput.setText(rs.getString("description"));
+                    costInput.setText(rs.getString("cost"));
+                    resultsInput.setText(rs.getString("results"));
+                    isPaidInput.setText(rs.getString("Paid"));
+                    paidAmountInput.setText(rs.getString("paid_amount"));
+                    //isCompleted.setValue(rs.getString("is_completed"));
+                    isCompleted.setValue(0);
+                    createdByInput.setText(rs.getString("createdby"));
+                    updatedByInput.setText(rs.getString("updated_by"));
+                    createdDate.setText(rs.getString("created"));
+                    updatedDate.setText(rs.getString("updated"));
+                    doctorInput.setText(rs.getString("doctor"));
+                    patientInput.setText(rs.getString("patient"));
+                    isPaidValue = rs.getInt("isPaidValue");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(TestsInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(TestsInfoController.class.getName()).log(Level.SEVERE, null, ex);
+
+            if (loggedInUser.getRoleID() == 3) {
+                updateBtn.setVisible(false);
+                createBtn.setVisible(false);
+                if (isPaidValue == 1) {
+                    payBtn.setVisible(false);
+                } else {
+                    payBtn.setVisible(true);
+                }
+            } else if (loggedInUser.getRoleID() != 3) {
+                updateBtn.setVisible(true);
+                createBtn.setVisible(false);
+                payBtn.setVisible(false);
+            }
+        } else if (testID == -1) {
+            updateBtn.setVisible(false);
+            payBtn.setVisible(false);
+            createBtn.setVisible(true);
         }
+
+        createBtn.setOnMouseClicked((MouseEvent event) -> {
+            Integer tmpID = 0;
+            tmpID = tests.createTest(diagId, descriptionInput.getText());
+            if (tmpID == 0) {
+                //alert that insertion failed
+            } else if (tmpID != 0) {
+                setTestIDView(fromDiag,tmpID,diagId);
+            }
+        });
+        
+        updateBtn.setOnMouseClicked((MouseEvent event) -> {
+            tests.updateTest(testID, descriptionInput.getText(), 0, Integer.valueOf(costInput.getText()),resultsInput.getText());
+            setTestIDView(fromDiag,testID,diagId);
+        });
 
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(TestsInfoController.this.getClass().getResource("../View/TestsTableView.fxml"));
                 Parent root = (Parent) loader.load();
                 TestsTableController testID1 = loader.getController();
-                if(fromDiag){
+                if (fromDiag) {
                     testID1.setTestID(diagID);
-                }else{
+                } else {
                     testID1.setTestID(-1);
                 }
                 testIDPane.getChildren().clear();
@@ -108,5 +166,6 @@ public class TestsInfoController implements Initializable {
                 Logger.getLogger(TestsTableController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-    }  
+    }
+
 }
