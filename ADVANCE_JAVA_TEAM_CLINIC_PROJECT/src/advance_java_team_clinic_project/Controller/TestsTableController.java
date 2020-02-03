@@ -9,6 +9,7 @@ import advance_java_team_clinic_project.Model.CustomComboModel;
 import advance_java_team_clinic_project.Model.TestsModel;
 import advance_java_team_clinic_project.classes.CustomComboClass;
 import advance_java_team_clinic_project.classes.LoggedInUserClass;
+import advance_java_team_clinic_project.classes.RecordsClass;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -62,6 +63,7 @@ public class TestsTableController implements Initializable {
     TableColumn updatedByCol = new TableColumn("Updated By");
     TableColumn patientCol = new TableColumn("Patient");
     TableColumn doctorCol = new TableColumn("Doctor");
+    TableColumn deleteCol = new TableColumn("Delete");
 
     @FXML
     private Button backBtn;
@@ -120,6 +122,7 @@ public class TestsTableController implements Initializable {
         updatedCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
         updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
         patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
+        deleteCol.setCellValueFactory(new PropertyValueFactory<>("delete"));
 
         if(user.getRoleID() == 3){
            doctorComboBox.setVisible(false);
@@ -154,6 +157,7 @@ public class TestsTableController implements Initializable {
      * @param diagID
      */
     public void setTestID(Integer diagID) {
+        if(diagID == -1) backBtn.setVisible(false);
         Callback<TableColumn<TestsModel, String>, TableCell<TestsModel, String>> cellFactory = (final TableColumn<TestsModel, String> param) -> {
             final TableCell<TestsModel, String> cell = new TableCell<TestsModel, String>() {
                 final Button btn = new Button();
@@ -196,8 +200,42 @@ public class TestsTableController implements Initializable {
             };
             return cell;
         };
+        
+        Callback<TableColumn<TestsModel, Void>, TableCell<TestsModel, Void>>  deleteFactory = (TableColumn<TestsModel, Void> param) -> {
+           TableCell<TestsModel, Void> cell = new TableCell<TestsModel, Void>() {
+               private Button btn = new Button();
+               @Override
+               public void updateItem(Void item, boolean empty) {
+                   super.updateItem(item, empty);
+                   if (empty) {
+                       setGraphic(null);
+                   } else {
+                       TestsModel test = new TestsModel();
+                       test = getTableView().getItems().get(getIndex());
+                       Integer testID = Integer.valueOf(test.idProperty().getValue());
+                       btn.setText("DELETE");
+                       btn.setOnMouseClicked((MouseEvent event) -> {
+                           if(tests.deleteTest(testID)){
+                               try {
+                                   data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
+                                   testsTable.setItems(data);
+                               } catch (SQLException ex) {
+                                   Logger.getLogger(TestsTableController.class.getName()).log(Level.SEVERE, null, ex);
+                               }
+                           }             
+                       });
+                       setGraphic(btn);
+                   }
+               }
+           };
+           return cell;
+       };
+        
         idCol.setCellFactory(cellFactory);
-
+        if(user.getRoleID() == 1){
+            deleteCol.setCellFactory(deleteFactory);
+            testsTable.getColumns().add(deleteCol);
+        }
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(TestsTableController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));

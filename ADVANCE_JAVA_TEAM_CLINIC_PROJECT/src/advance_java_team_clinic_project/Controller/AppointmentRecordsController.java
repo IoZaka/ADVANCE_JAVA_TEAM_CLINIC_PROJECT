@@ -43,7 +43,7 @@ import javafx.util.Callback;
  */
 public class AppointmentRecordsController extends StageRedirect implements Initializable {
 
-    private AppointmentsModel ak;
+    private AppointmentsModel ak = new AppointmentsModel();;
     private ResultSet rs;
     private ObservableList data;
     @FXML
@@ -59,6 +59,7 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
     TableColumn doctorCol = new TableColumn("DOCTOR");
     TableColumn updatedByCol = new TableColumn("UPDATED BY");
     TableColumn createdByCol = new TableColumn("CREATED BY");
+    TableColumn deleteCol = new TableColumn("DELETE");
     @FXML
     private Text textHead;
     LoggedInUserClass user = LoggedInUserClass.getInstance();
@@ -136,7 +137,12 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
        doctorCol.setCellValueFactory(new PropertyValueFactory<>("doctor"));
        updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
        createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
+       deleteCol.setCellValueFactory(new PropertyValueFactory<>("delete"));
        
+       
+        recordsTable.getColumns().add(idCol);
+        recordsTable.getColumns().addAll(appDateCol, hourCol, commentsCol,createdDateCol, updatedDateCol, patientCol, doctorCol, updatedByCol, createdByCol);
+            
        
        Callback<TableColumn<RecordsClass, Void>, TableCell<RecordsClass, Void>>  cellFactory = (TableColumn<RecordsClass, Void> param) -> {
            TableCell<RecordsClass, Void> cell = new TableCell<RecordsClass, Void>() {
@@ -171,8 +177,46 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
            };
            return cell;
        };
+       idCol.setCellFactory(cellFactory);
+       
+       Callback<TableColumn<RecordsClass, Void>, TableCell<RecordsClass, Void>>  deleteFactory = (TableColumn<RecordsClass, Void> param) -> {
+           TableCell<RecordsClass, Void> cell = new TableCell<RecordsClass, Void>() {
+               private Button btn = new Button();
+               @Override
+               public void updateItem(Void item, boolean empty) {
+                   super.updateItem(item, empty);
+                   if (empty) {
+                       setGraphic(null);
+                   } else {
+                       RecordsClass rdata = new RecordsClass();
+                       rdata = getTableView().getItems().get(getIndex());
+                       Integer appID = Integer.valueOf(rdata.idProperty().getValue().substring(4)); //APP-NUM -> (4) NUM
+                       btn.setText("DELETE");
+                       btn.setOnMouseClicked((MouseEvent event) -> {
+                           try {
+                               System.out.println("Deleting.. " + appID);
+                               if(ak.deleteAppointment(appID)){
+                                       System.out.println(appID + " deleted.");
+                                       rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId());
+                                       data = FXCollections.observableArrayList(databaseRecords(rs));
+                                       recordsTable.setItems(data);
+                               }
+                           } catch (SQLException ex) {
+                               Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
+                           }
+                           
+                       });
+                       setGraphic(btn);
+                   }
+               }
+           };
+           return cell;
+       };
 
         switch (user.getRoleID()) {
+            case 1:
+                textHead.setText("APPOINTMENTS");
+                break;
             case 2:
                 textHead.setText("YOUR APPOINTMENTS");
                 break;
@@ -182,17 +226,21 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
             case 4:
                 textHead.setText("APPOINTMENTS");
                 break;
+            case 5:
+                textHead.setText("APPOINTMENTS");
+                break;
         }
 
         try {
-            ak = new AppointmentsModel();
+            
             rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId());
             data = FXCollections.observableArrayList(databaseRecords(rs));
 
-            idCol.setCellFactory(cellFactory);
-            recordsTable.getColumns().add(idCol);
-            recordsTable.getColumns().addAll(appDateCol, hourCol, commentsCol,
-                    createdDateCol, updatedDateCol, patientCol, doctorCol, updatedByCol, createdByCol);
+            
+            if(user.getRoleID() == 1){
+                deleteCol.setCellFactory(deleteFactory);
+                recordsTable.getColumns().add(deleteCol);
+            }
             
             ed.getObject();
             customCombo = ed.FetchUserFilterData(3);

@@ -403,6 +403,18 @@ public class TestsModel {
         }
     }
 
+    public boolean deleteTest(Integer ID){
+        try {
+            object = DatabaseConnectionModel.getInstance();
+            stmt = object.connection.createStatement();
+            sql = "delete from pm_diag_tests where id = " +ID;
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(TestsModel.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
     
     
 }

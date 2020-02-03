@@ -30,7 +30,6 @@ public class Main extends Application {
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Login Page");
         primaryStage.setWidth(1200);
         primaryStage.setHeight(680);
         primaryStage.setResizable(true);

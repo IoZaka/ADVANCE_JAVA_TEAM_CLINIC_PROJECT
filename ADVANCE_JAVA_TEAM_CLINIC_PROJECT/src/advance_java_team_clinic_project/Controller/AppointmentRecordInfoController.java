@@ -89,7 +89,7 @@ public class AppointmentRecordInfoController implements Initializable {
 
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(AppointmentRecordInfoController.this.getClass().getResource("../View/AppointmentRecords.fxml"));
+                FXMLLoader loader = new FXMLLoader(AppointmentRecordInfoController.this.getClass().getResource("../View/AppointmentRecordsView.fxml"));
                 Parent root = (Parent) loader.load();
                 idRecordPane.getChildren().clear();
                 idRecordPane.getChildren().add(root);

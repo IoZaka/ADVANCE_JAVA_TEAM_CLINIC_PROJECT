@@ -146,6 +146,24 @@ public class AppointmentsModel {
     }
 
     /**
+     * 
+     * @param appID
+     * @throws SQLException 
+     */
+    public boolean deleteAppointment(Integer appID) throws SQLException{
+        try {
+            getObject();
+            stmt = object.connection.createStatement();
+            sql = "delete from pm_appointment_info where id =" + appID;
+            rs = stmt.executeQuery(sql);
+        }catch (SQLException ex) {
+            Logger.getLogger(AppointmentsModel.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      *
      * @param comments
      */
