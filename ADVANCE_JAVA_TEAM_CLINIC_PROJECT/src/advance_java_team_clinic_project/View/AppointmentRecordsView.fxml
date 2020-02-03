@@ -27,5 +27,6 @@
       <Button fx:id="searchBtn" layoutX="566.0" layoutY="207.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="81.0" styleClass="appBtns" stylesheets="@style.css" text="Search" />
       <ComboBox fx:id="appointmentsComboBox" layoutX="532.0" layoutY="142.0" prefHeight="25.0" prefWidth="174.0" />
       <Text fx:id="appointmentsHeader" layoutX="581.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments" />
+      <Button fx:id="clearBtn" layoutX="692.0" layoutY="207.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="72.0" styleClass="cancelBtn" stylesheets="@style.css" text="Clear" />
     </children>
 </AnchorPane>

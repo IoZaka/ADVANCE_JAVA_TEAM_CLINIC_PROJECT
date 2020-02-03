@@ -6,6 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.TestsModel;
+import advance_java_team_clinic_project.classes.CustomComboClass;
 import advance_java_team_clinic_project.classes.LoggedInUserClass;
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -75,6 +78,7 @@ public class TestsInfoController implements Initializable {
     private LoggedInUserClass loggedInUser = LoggedInUserClass.getInstance();
 
     private Integer diagID = null;
+    ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
     private Integer isPaidValue = 0;
 
     /**
@@ -85,11 +89,13 @@ public class TestsInfoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        isCompleted.getItems().addAll("Yes", "No");
+      
     }
 
     public void setTestIDView(boolean fromDiag, Integer testID, Integer diagId) {
         System.out.println(testID);
+        customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(2,"No"));
+        isCompleted.setItems(FXCollections.observableArrayList(customCombo));
         diagID = diagId;
         if (testID != -1) {
             ResultSet rs = tests.getTestByID(testID);
@@ -103,7 +109,7 @@ public class TestsInfoController implements Initializable {
                     isPaidInput.setText(rs.getString("Paid"));
                     paidAmountInput.setText(rs.getString("paid_amount"));
                     //isCompleted.setValue(rs.getString("is_completed"));
-                    isCompleted.setValue(0);
+                    //isCompleted.setValue(0);
                     createdByInput.setText(rs.getString("createdby"));
                     updatedByInput.setText(rs.getString("updated_by"));
                     createdDate.setText(rs.getString("created"));

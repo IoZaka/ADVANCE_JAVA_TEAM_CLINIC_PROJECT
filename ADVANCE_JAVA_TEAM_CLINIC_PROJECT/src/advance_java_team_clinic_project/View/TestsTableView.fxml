@@ -34,5 +34,6 @@
       <ComboBox fx:id="completedComboBox" layoutX="435.0" layoutY="156.0" prefWidth="150.0" />
       <Text layoutX="483.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Completed" />
       <Button fx:id="searchBtn" layoutX="653.0" layoutY="147.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="81.0" styleClass="appBtns" stylesheets="@style.css" text="Search" />
+      <Button fx:id="clearBtn" layoutX="657.0" layoutY="85.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="73.0" styleClass="cancelBtn" stylesheets="@style.css" text="Clear" />
     </children>
 </AnchorPane>

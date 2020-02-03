@@ -93,6 +93,8 @@ public class TestsTableController implements Initializable {
     
     private Integer patientID;
     private Integer doctorID;
+    @FXML
+    private Button clearBtn;
     
     /**
      * Initializes the controller class.
@@ -131,9 +133,20 @@ public class TestsTableController implements Initializable {
            patientHeader.setVisible(true);
         }
         
-        paidComboBox.getItems().addAll("Yes","No");
-        completedComboBox.getItems().addAll("Yes","No");
-        testsTable.getColumns().addAll(idCol, descriptionCol, isCompletedCol, costCol, isPaidCol, resultsCol, statusCol, doctorCol, createdCol, createdByCol, updatedCol, updatedByCol, patientCol);
+        clearBtn.setOnMouseClicked((MouseEvent event) -> {
+           doctorComboBox.setValue(null);
+           patientComboBox.setValue(null);
+           completedComboBox.setValue(null);
+           paidComboBox.setValue(null);
+           createdToDate.setValue(null);
+           createdFromDate.setValue(null);
+        });
+        
+       customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(0,"No"));
+       completedComboBox.setItems(FXCollections.observableArrayList(customCombo));
+       paidComboBox.setItems(FXCollections.observableArrayList(customCombo));
+      
+       testsTable.getColumns().addAll(idCol, descriptionCol, isCompletedCol, costCol, isPaidCol, resultsCol, statusCol, doctorCol, createdCol, createdByCol, updatedCol, updatedByCol, patientCol);
     }
 
     /**
@@ -242,6 +255,22 @@ public class TestsTableController implements Initializable {
                 CustomComboClass coDoctor = (CustomComboClass) doctorComboBox.getSelectionModel().getSelectedItem();
                 doctorID = coDoctor.getId();
                 System.out.println(coDoctor.getId());
+                
+            }
+        });
+        
+        paidComboBox.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomComboClass coPaid = (CustomComboClass) paidComboBox.getSelectionModel().getSelectedItem();
+                System.out.println(coPaid.getId());
+                
+            }
+        });
+        
+        completedComboBox.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomComboClass coPaid = (CustomComboClass) completedComboBox.getSelectionModel().getSelectedItem();
+                System.out.println(coPaid.getId());
                 
             }
         });

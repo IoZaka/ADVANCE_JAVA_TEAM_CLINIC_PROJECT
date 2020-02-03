@@ -87,10 +87,11 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
     private ComboBox appointmentsComboBox;
     @FXML
     private Text appointmentsHeader;
+    @FXML
+    private Button clearBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       //RECEPTION -> New Combo
         
        if(user.getRoleID() == 3){
            doctorComboBox.setVisible(false);
@@ -111,6 +112,14 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
            appointmentsHeader.setVisible(false);
            appointmentsComboBox.setVisible(false);
        }
+       
+       clearBtn.setOnMouseClicked((MouseEvent event) -> {
+           doctorComboBox.setValue(null);
+           patientComboBox.setValue(null);
+           appointmentsComboBox.setValue(null);
+           createdToDate.setValue(null);
+           createdFromDate.setValue(null);
+        });
        
        customCombo.addAll(new CustomComboClass(0,"New Appointments"), new CustomComboClass(1,"All Appointments"));
        appointmentsComboBox.setItems(FXCollections.observableArrayList(customCombo));
