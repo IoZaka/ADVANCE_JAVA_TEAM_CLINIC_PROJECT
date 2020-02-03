@@ -40,6 +40,7 @@ public class TestsModel {
     private StringProperty updated_by = new SimpleStringProperty();
     private StringProperty patient = new SimpleStringProperty();
     private StringProperty doctor = new SimpleStringProperty();
+    private LoggedInUserClass loggedInUser = LoggedInUserClass.getInstance();
 
     /**
      *
@@ -334,14 +335,15 @@ public class TestsModel {
                     + "a.cost, "
                     + "a.results, "
                     + "decode(a.is_paid,1,'Yes','No') Paid, "
-                    + "decode(a.status_id,1,'Completed','In progresss') status, "
                     + "decode(a.is_completed,1,'Yes','No') is_completed, "
                     + "to_char(a.created,'MM/DD/YYYY') created, "
                     + "c.SURNAME || ' ' || c.FIRSTNAME createdby, "
                     + " to_char(a.UPDATED,'MM/DD/YYYY') updated, "
                     + "d.SURNAME || ' ' || d.FIRSTNAME updated_by, "
                     + "e.SURNAME || ' ' || e.FIRSTNAME patient, "
-                    + "f.SURNAME || ' ' || f.FIRSTNAME doctor "
+                    + "f.SURNAME || ' ' || f.FIRSTNAME doctor, "
+                    + "a.paid_amount, "
+                    + "a.is_paid isPaidValue "
                     + "from pm_diag_tests a, pm_users c, pm_users d, pm_diagnosis diag , pm_appointment_info ap, pm_users e, pm_users f "
                     + "where a.created_by = c.id "
                     + "  and a.updated_by = d.id "
@@ -354,43 +356,51 @@ public class TestsModel {
         } catch (SQLException ex) {
             Logger.getLogger(TestsModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return rs;
     }
-
+    
     /**
      *
+     * @param diagID
+     * @param desc
      * @return
      */
-    public ResultSet getAllTests() {
+    public Integer createTest(Integer diagID,String desc){
+        Integer tmpID=0;
         try {
             object = DatabaseConnectionModel.getInstance();
             stmt = object.connection.createStatement();
-            sql = "select a.id id, "
-                    + "a.description, "
-                    + "a.cost, "
-                    + "a.results, "
-                    + "decode(a.is_paid,1,'Yes','No') Paid, "
-                    + "decode(a.status_id,1,'Completed','In progresss') status, "
-                    + "decode(a.is_completed,1,'Yes','No') is_completed, "
-                    + "a.created, "
-                    + "c.SURNAME || ' ' || c.FIRSTNAME createdby, "
-                    + "a.updated, "
-                    + "d.SURNAME || ' ' || d.FIRSTNAME updated_by, "
-                    + "e.SURNAME || ' ' || e.FIRSTNAME patient, "
-                    + "f.SURNAME || ' ' || f.FIRSTNAME doctor "
-                    + "from pm_diag_tests a, pm_users c, pm_users d, pm_diagnosis diag , pm_appointment_info ap, pm_users e, pm_users f "
-                    + "where a.created_by = c.id "
-                    + "  and a.updated_by = d.id "
-                    + "  and a.diag_id = diag.id "
-                    + "  and diag.APP_INFO_ID = ap.id "
-                    + "  and ap.patient_id = e.id "
-                    + "  and ap.doctor_id = f.id(+)";
+            sql= "select seq_pm_diag_tests.nextval id from dual";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                tmpID = rs.getInt("id");
+            }
+            sql = "insert into pm_diag_tests (id,diag_id,description,created_by,updated_by) values ("+tmpID+","+diagID+",'"+desc+"',"+loggedInUser.getId()+","+loggedInUser.getId()+")";
+            rs = stmt.executeQuery(sql);
+            return tmpID;
+        } catch (SQLException ex) {
+            Logger.getLogger(TestsModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return tmpID;
+    }
+    
+    /**
+     *
+     * @param ID
+     * @param desc
+     * @param isCompleted
+     * @param cost
+     * @param results
+     */
+    public void updateTest(Integer ID, String desc, Integer isCompleted, Integer cost,String results){
+        try {
+            object = DatabaseConnectionModel.getInstance();
+            stmt = object.connection.createStatement();
+            sql = "update pm_diag_tests set description='"+desc+"',is_completed="+isCompleted+",results='"+results+"',updated_by="+loggedInUser.getId()+" where id="+ID;
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(TestsModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rs;
     }
 
     
