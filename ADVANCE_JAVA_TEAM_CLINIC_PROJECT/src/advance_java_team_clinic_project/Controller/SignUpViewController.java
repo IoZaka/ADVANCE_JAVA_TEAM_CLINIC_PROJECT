@@ -30,6 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -67,13 +68,29 @@ public class SignUpViewController extends NewStage implements Initializable {
     private static DatabaseLoginRegister ak;
     @FXML
     private ImageView backBtn;
+    @FXML
+    private Text registerHeader;
+    @FXML
+    private ImageView registerIcon;
 
     @Override
     @SuppressWarnings("empty-statement")
     public void initialize(URL location, ResourceBundle resources) {
+        
+    }
+    
+    public void setRegisterPage(boolean loggedIn){
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
 
+        if(loggedIn){
+            registerHeader.setText("Create New User");
+            backBtn.setVisible(false);
+            registerIcon.setVisible(false);
+        }else{
+            registerHeader.setText("Sign Up");
+        }
+        
         registerBtn.setOnAction((ActionEvent e) -> {
             passWord = registerPassword.getText();
             confirmPassWord = confirmPassword.getText();
@@ -93,11 +110,21 @@ public class SignUpViewController extends NewStage implements Initializable {
                             if (question1 != question2) {
                                 try {
                                     ak.getObject();
-                                    if (ak.registerQuery(userName, passWord, question1, question2, answer1, answer2) == true) {
-                                        root = FXMLLoader.load(SignUpViewController.this.getClass().getResource("../View/loginStyleFX.fxml"));
-                                        scene = new Scene(root);
-                                        currentStage.setScene(scene);
-                                    };
+                                        if (ak.registerQuery(userName, passWord, question1, question2, answer1, answer2) == true) {
+                                            if(loggedIn){
+                                                FXMLLoader loader = new FXMLLoader(SignUpViewController.this.getClass().getResource("../View/searchUserView.fxml"));
+                                                root = (Parent) loader.load();
+                                                System.out.println("gfijfg");
+                                                SearchUserController searchController = loader.getController();
+                                                searchController.setResults(""); 
+                                            }else{
+                                                root = FXMLLoader.load(SignUpViewController.this.getClass().getResource("../View/loginStyleFX.fxml"));
+                                                scene = new Scene(root);
+                                                currentStage.setScene(scene);
+                                            }
+                                            
+                                        };
+                                    
                                 } catch (IOException ex) {
                                     Logger.getLogger(SignUpViewController.class.getName()).log(Level.SEVERE, null, ex);
                                 }

@@ -61,28 +61,12 @@ public class CheckInsuranceDetailsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            setData();
-        } catch (SQLException ex) {
-            Logger.getLogger(CheckAddressDetailsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        submitBtn.setOnMouseClicked((MouseEvent event) -> {
-            euro = european.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to euro ginete 0
-            if (euro != 0) {
-                euro = 1;
-            }
-            eka = ekas.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to eka ginete 0
-            if (eka != 0) {
-                eka = 1;
-            }
-            ak.updateInsuranceDetails(user.getId(), insuranceExpiredDate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), euro, eka, insureanceComments.getText(), insuId);
-        });
+        
     }
 
-    private void setData() throws SQLException {
+    public void setData(Integer userID) throws SQLException {
         ak.getObject();
-        rs = ak.fetchInsuranceInfoData(user.getId());
+        rs = ak.fetchInsuranceInfoData(userID);
         System.out.println("irthe");
         if (rs.next()) {
             insuId = rs.getInt("ins_comp_id");
@@ -104,6 +88,19 @@ public class CheckInsuranceDetailsController implements Initializable {
             insureanceComments.setText(rs.getString("ins_comments"));
 
         }
+        
+        submitBtn.setOnMouseClicked((MouseEvent event) -> {
+            euro = european.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to euro ginete 0
+            if (euro != 0) {
+                euro = 1;
+            }
+            eka = ekas.getSelectionModel().getSelectedItem().toString().compareTo("no"); //An einai oxi to eka ginete 0
+            if (eka != 0) {
+                eka = 1;
+            }
+            ak.updateInsuranceDetails(userID, insuranceExpiredDate.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), euro, eka, insureanceComments.getText(), insuId);
+        });
+        
         ed.getObject();
         customCombo = ed.FetchData("PM_INSURANCE_COMPANIES");
         Insurancec.setItems(FXCollections.observableArrayList(customCombo));

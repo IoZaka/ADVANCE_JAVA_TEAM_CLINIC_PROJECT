@@ -58,7 +58,7 @@ public class DatabaseInsuranceDetails implements InsuranceDetailsDao {
         }
         return rs;
     }
-
+    
     public void updateInsuranceDetails(Integer userId, String ins_expire_date, Integer european, Integer ekas, String ins_comments, Integer ins_comp_id) {
         try {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

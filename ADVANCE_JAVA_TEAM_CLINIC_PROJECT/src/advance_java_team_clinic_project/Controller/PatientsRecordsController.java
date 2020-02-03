@@ -64,6 +64,7 @@ public class PatientsRecordsController extends NewStage implements Initializable
        
        
        recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+       recordsTable.setId("tables");
        idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
        appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
        commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
@@ -136,6 +137,7 @@ public class PatientsRecordsController extends NewStage implements Initializable
             recordsTable.getColumns().add(idCol);
             recordsTable.getColumns().addAll(appDateCol, commentsCol,
                     createdDateCol, updatedDateCol, patientCol, doctorCol, updatedByCol, createdByCol);
+            
             recordsTable.setItems(data);
 
         } catch (SQLException ex) {

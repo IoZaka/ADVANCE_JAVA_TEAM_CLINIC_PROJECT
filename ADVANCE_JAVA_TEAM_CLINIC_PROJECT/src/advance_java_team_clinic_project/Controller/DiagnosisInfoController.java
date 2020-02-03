@@ -66,7 +66,7 @@ public class DiagnosisInfoController implements Initializable {
     private AnchorPane diagnosisPanel;
 
     private DiagnosisInfo diagInfoModel = new DiagnosisInfo();
-    ;
+
     private ResultSet rs;
     @FXML
     private Button testCreate;
@@ -171,7 +171,6 @@ public class DiagnosisInfoController implements Initializable {
             }
         });
         updateDiagnose.setOnMouseClicked((MouseEvent event) -> {
-            diagInfoModel.getObject();
             diagInfoModel.updateDiagnoseDetails(diagID, commentsText.getText(), medicineText.getText());
         });
         create_addmission.setOnMouseClicked((MouseEvent event) -> {
@@ -181,7 +180,6 @@ public class DiagnosisInfoController implements Initializable {
             admissionRedirect(diagID);
         });
         createDiagnose.setOnMouseClicked((MouseEvent event) -> {
-            diagInfoModel.getObject();
             diagInfoModel.createDiagnoseDetails(appInfoId, commentsText.getText(), medicineText.getText());
         });
 
@@ -195,7 +193,7 @@ public class DiagnosisInfoController implements Initializable {
                 Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
             TestIDController testID = loader.getController();
-            testID.setTestIDView(app_id, -1);
+            testID.setTestIDView(true, -1);
             //Scene
             diagnosisPanel.getChildren().clear();
             diagnosisPanel.getChildren().add(root);
@@ -205,7 +203,7 @@ public class DiagnosisInfoController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testsTableView.fxml"));
                 Parent root = (Parent) loader.load();
                 TestsTableViewController testID = loader.getController();
-                testID.setTestID(app_id, diagID);
+                testID.setTestID(diagID);
                 diagnosisPanel.getChildren().clear();
                 diagnosisPanel.getChildren().add(root);
             } catch (IOException ex) {

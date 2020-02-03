@@ -43,6 +43,7 @@ public class TestsTableViewController implements Initializable {
     @FXML
     private TableView<Tests> testsTable = new TableView<>();
 
+    
     TableColumn idCol = new TableColumn("Edit");
     TableColumn descriptionCol = new TableColumn("Description");
     TableColumn isCompletedCol = new TableColumn("Completed");
@@ -74,7 +75,7 @@ public class TestsTableViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         testsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
+        testsTable.setId("tables");
         //For All
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -84,14 +85,13 @@ public class TestsTableViewController implements Initializable {
         resultsCol.setCellValueFactory(new PropertyValueFactory<>("results"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status_id"));
         doctorCol.setCellValueFactory(new PropertyValueFactory<>("doctor"));
-        //For Clinic
         createdCol.setCellValueFactory(new PropertyValueFactory<>("created"));
         createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
         updatedCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
         updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
         patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
 
-        testsTable.getColumns().addAll(idCol, descriptionCol, isCompletedCol, costCol, isPaidCol, resultsCol, statusCol, doctorCol);
+        testsTable.getColumns().addAll(idCol, descriptionCol, isCompletedCol, costCol, isPaidCol, resultsCol, statusCol, doctorCol, createdCol, createdByCol, updatedCol, updatedByCol, patientCol);
     }
 
     /**
@@ -99,7 +99,7 @@ public class TestsTableViewController implements Initializable {
      * @param appID
      * @param diagID
      */
-    public void setTestID(String appID, Integer diagID) {
+    public void setTestID(Integer diagID) {
         Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = (final TableColumn<Tests, String> param) -> {
             final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
                 final Button btn = new Button();
@@ -113,7 +113,9 @@ public class TestsTableViewController implements Initializable {
                     } else {
                         Tests test = new Tests();
                         test = getTableView().getItems().get(getIndex());
-                        btn.setText(test.idProperty().getValue());
+                        String testID = test.idProperty().getValue();
+                        btn.setText("EDIT");
+                        btn.setStyle("-fx-pref-width: 200px;");
                         btn.setOnAction(event -> {
                             FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
                             Parent root = null;
@@ -123,8 +125,12 @@ public class TestsTableViewController implements Initializable {
                                 Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             TestIDController id = loader.getController();
-                            String testID = btn.getText();
-                            id.setTestIDView(appID, Integer.valueOf(testID));
+                            if(diagID == -1){
+                                id.setTestIDView(false,Integer.valueOf(testID));
+                            }else{
+                                id.setTestIDView(true,Integer.valueOf(testID));
+                            }
+                            
                             //Scene
                             testsPane.getChildren().clear();
                             testsPane.getChildren().add(root);
@@ -143,7 +149,7 @@ public class TestsTableViewController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
                 Parent root = (Parent) loader.load();
                 DiagnosisInfoController diagnosisID = loader.getController();
-                diagnosisID.setDiagnosisID(appID, diagID);
+                //diagnosisID.setDiagnosisID(appID, diagID);
                 testsPane.getChildren().clear();
                 testsPane.getChildren().add(root);
             } catch (IOException ex) {
@@ -159,61 +165,7 @@ public class TestsTableViewController implements Initializable {
         }
 
     }
-
-    //FOR CLINIC CENTER
-    /**
-     *
-     */
-    public void setTests() {
-        backBtn.setVisible(false);
-        Callback<TableColumn<Tests, String>, TableCell<Tests, String>> cellFactory = (final TableColumn<Tests, String> param) -> {
-            final TableCell<Tests, String> cell = new TableCell<Tests, String>() {
-                final Button btn = new Button();
-
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                        setText(null);
-                    } else {
-                        Tests test = new Tests();
-                        test = getTableView().getItems().get(getIndex());
-                        btn.setText(test.idProperty().getValue());
-                        btn.setOnAction(event -> {
-                            FXMLLoader loader = new FXMLLoader(TestsTableViewController.this.getClass().getResource("../View/testIDView.fxml"));
-                            Parent root = null;
-                            try {
-                                root = (Parent) loader.load();
-                            } catch (IOException ex) {
-                                Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            TestIDController id = loader.getController();
-                            String testID = btn.getText().substring(5);
-                            id.setTestIDView(Integer.valueOf(testID));
-                            //Scene
-                            testsPane.getChildren().clear();
-                            testsPane.getChildren().add(root);
-                        });
-                        setGraphic(btn);
-                        setText(null);
-                    }
-                }
-            };
-            return cell;
-        };
-        idCol.setCellFactory(cellFactory);
-
-        try {
-            data = FXCollections.observableArrayList(databaseTests(tests.getAllTests()));
-            testsTable.getColumns().addAll(createdCol, createdByCol, updatedCol, updatedByCol, patientCol);
-            testsTable.setItems(data);
-        } catch (SQLException ex) {
-            Logger.getLogger(TestsTableViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
+    
     private ArrayList databaseTests(ResultSet rs) throws SQLException {
         ArrayList<Tests> data = new ArrayList();
 
@@ -228,13 +180,12 @@ public class TestsTableViewController implements Initializable {
             test.resultsProperty().set(rs.getString("results"));
             test.status_idProperty().set(rs.getString("status"));
             test.doctorProperty().set(rs.getString("doctor"));
-            if (user.getRoleID() == 5) {
                 test.createdProperty().set(rs.getString("created"));
-                test.created_byProperty().set(rs.getString("createdby"));
+                test.created_byProperty().set(rs.getString("created_by"));
                 test.updatedProperty().set(rs.getString("updated"));
                 test.updated_byProperty().set(rs.getString("updated_by"));
                 test.patientProperty().set(rs.getString("patient"));
-            }
+            
 
             data.add(test);
         }

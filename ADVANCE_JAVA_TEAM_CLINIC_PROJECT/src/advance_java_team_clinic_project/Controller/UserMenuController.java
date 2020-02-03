@@ -102,7 +102,7 @@ public class UserMenuController extends NewStage implements Initializable {
                 buttonsVBox.setSpacing(30);
                 break;
             case 4:
-                buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, appointmentsBtn , logoutBtn);
+                buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, appointmentsBtn, testsBtn, logoutBtn);
                 loadUIonSamePane("../View/profilePane.fxml", userBorderPane);
                 recordsBtn.setSelected(true);
                 buttonsVBox.setSpacing(30);
@@ -205,7 +205,24 @@ public class UserMenuController extends NewStage implements Initializable {
                 FXMLLoader loader = new FXMLLoader(UserMenuController.this.getClass().getResource("../View/testsTableView.fxml"));
                 Parent root = (Parent) loader.load();
                 TestsTableViewController allTests = loader.getController();
-                allTests.setTests();
+                allTests.setTestID(-1);
+                userBorderPane.setCenter(root);
+            } catch (IOException ex) {
+                Logger.getLogger(UserMenuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+        
+        enterNewUserBtn.setOnMouseClicked((MouseEvent event) -> {
+
+            try {
+                clearSelectedButtons();
+                testsBtn.setSelected(true);
+
+                FXMLLoader loader = new FXMLLoader(UserMenuController.this.getClass().getResource("../View/Sign_up.fxml"));
+                Parent root = (Parent) loader.load();
+                SignUpViewController signUpController = loader.getController();
+                signUpController.setRegisterPage(true);
                 userBorderPane.setCenter(root);
             } catch (IOException ex) {
                 Logger.getLogger(UserMenuController.class.getName()).log(Level.SEVERE, null, ex);

@@ -93,6 +93,10 @@ public class EditProfileController extends NewStage implements Initializable {
     private Button cancelBtn;
     @FXML
     private Button submitBtn;
+    
+    private Integer address_ID = null;
+    private Integer contact_ID = null;
+    private Integer insurance_ID = null;
 
     /**
      * Initializes the controller class.
@@ -127,9 +131,9 @@ public class EditProfileController extends NewStage implements Initializable {
         }
                
         if(user.getRoleID() == 1 && userID != user.getId()){
-//            insurancebtn.setDisable(false);
-//            contactbtn.setDisable(false);
-//            addressbtn.setDisable(false);
+            contactbtn.setDisable(false);
+            addressbtn.setDisable(false);
+            insurancebtn.setDisable(false);
             comboRole.setDisable(false);
         }else{
             comboRole.setDisable(true);
@@ -197,48 +201,6 @@ public class EditProfileController extends NewStage implements Initializable {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
-        contactbtn.setOnMouseClicked((MouseEvent event) -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/checkContactDetails.fxml"));
-                Stage checkContact = new Stage();
-                Scene scene = new Scene(root);
-                checkContact.setTitle("Contact Details");
-                checkContact.setScene(scene);
-                checkContact.setResizable(false);
-                checkContact.show();
-            } catch (IOException ex) {
-                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-
-        insurancebtn.setOnMouseClicked((MouseEvent event) -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/checkInsuranceDetails.fxml"));
-                Stage checkInsurance = new Stage();
-                Scene scene = new Scene(root);
-                checkInsurance.setTitle("Insurance Details");
-                checkInsurance.setScene(scene);
-                checkInsurance.setResizable(false);
-                checkInsurance.show();
-            } catch (IOException ex) {
-                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-
-        addressbtn.setOnMouseClicked((MouseEvent event) -> {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("../View/checkAddressDetails.fxml"));
-                Stage checkAddress = new Stage();
-                Scene scene = new Scene(root);
-                checkAddress.setTitle("Address Details");
-                checkAddress.setScene(scene);
-                checkAddress.setResizable(false);
-                checkAddress.show();
-            } catch (IOException ex) {
-                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
     }
 
     /**
@@ -250,10 +212,11 @@ public class EditProfileController extends NewStage implements Initializable {
         ak.getObject();
         rs = ak.fetchBasicInfoData(userID);
         if (rs.next()) {
+            address_ID = rs.getInt("address_id");
+            contact_ID = rs.getInt("contact_id");
             usernamebtn.setText(rs.getString("username"));
             name.setText(rs.getString("firstname"));
             surname.setText(rs.getString("surname"));
-            /*insurancebtn.setText(String.valueOf(rs.getInt("insurance_id")));*/
             code.setText(rs.getString("global_code"));
             amka.setText(rs.getString("amka"));
             ama.setText(rs.getString("ama"));
@@ -270,6 +233,70 @@ public class EditProfileController extends NewStage implements Initializable {
             setComboValues();
             setComboEventListeners();
         }
+        
+        addressbtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/checkAddressDetails.fxml"));
+                Parent root = (Parent)loader.load();
+                Stage checkAddress = new Stage();
+                Scene scene = new Scene(root);
+                checkAddress.setTitle("Address Details");
+                checkAddress.setScene(scene);
+                checkAddress.setResizable(false);
+                CheckAddressDetailsController addressController = loader.getController();
+                try {
+                    addressController.setData(address_ID);
+                } catch (SQLException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                checkAddress.show();
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        contactbtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/checkContactDetails.fxml"));
+                Parent root = (Parent)loader.load();
+                Stage checkContact = new Stage();
+                Scene scene = new Scene(root);
+                checkContact.setTitle("Contact Details");
+                checkContact.setScene(scene);
+                checkContact.setResizable(false);
+                CheckContactDetailsController contactController = loader.getController();
+                try {
+                    contactController.setData(contact_ID);
+                } catch (SQLException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                checkContact.show();
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        insurancebtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/checkInsuranceDetails.fxml"));
+                Parent root = (Parent)loader.load();
+                Stage checkInsurance = new Stage();
+                Scene scene = new Scene(root);
+                checkInsurance.setTitle("Insurance Details");
+                checkInsurance.setScene(scene);
+                checkInsurance.setResizable(false);
+                CheckInsuranceDetailsController insuranceController = loader.getController();
+                try {
+                    insuranceController.setData(userID);
+                } catch (SQLException ex) {
+                    Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                checkInsurance.show();
+            } catch (IOException ex) {
+                Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
     }
 
     /**
