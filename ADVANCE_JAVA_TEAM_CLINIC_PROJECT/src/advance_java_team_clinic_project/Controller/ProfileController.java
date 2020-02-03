@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.LoggedInUser;
+import advance_java_team_clinic_project.classes.LoggedInUserClass;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ import javafx.scene.text.Text;
  */
 public class ProfileController implements Initializable {
 
-    LoggedInUser user = LoggedInUser.getInstance();
+    LoggedInUserClass user = LoggedInUserClass.getInstance();
     @FXML
     private Text firstNameText;
     @FXML
@@ -34,6 +34,8 @@ public class ProfileController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

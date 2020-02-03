@@ -5,9 +5,9 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.Admission;
-import advance_java_team_clinic_project.Model.DiagnosisInfo;
-import advance_java_team_clinic_project.Model.LoggedInUser;
+import advance_java_team_clinic_project.Model.AdmissionModel;
+import advance_java_team_clinic_project.Model.DiagnosisInfoModel;
+import advance_java_team_clinic_project.classes.LoggedInUserClass;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -87,11 +87,11 @@ public class AdmissionInfoController implements Initializable {
 
     private String app_id = null;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    private Admission admissionModel = new Admission();
-    private DiagnosisInfo diagnosisInfoModel = new DiagnosisInfo();
+    private AdmissionModel admissionModel = new AdmissionModel();
+    private DiagnosisInfoModel diagnosisInfoModel = new DiagnosisInfoModel();
     private ResultSet rs;
     private Integer isPaid;
-    private LoggedInUser loggedInUser = LoggedInUser.getInstance();
+    private LoggedInUserClass loggedInUser = LoggedInUserClass.getInstance();
 
     /**
      * Initializes the controller class.
@@ -153,7 +153,7 @@ public class AdmissionInfoController implements Initializable {
                 admissionInfoPane.getChildren().clear();
                 admissionInfoPane.getChildren().add(root);
             } catch (IOException ex) {
-                Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -184,7 +184,7 @@ public class AdmissionInfoController implements Initializable {
         });
 
         payBtn.setOnMouseClicked((MouseEvent event) -> {
-            FXMLLoader loader = new FXMLLoader(AdmissionInfoController.this.getClass().getResource("../View/payView.fxml"));
+            FXMLLoader loader = new FXMLLoader(AdmissionInfoController.this.getClass().getResource("../View/PaymentWindowView.fxml"));
             Parent root = null;
             try {
                 root = (Parent) loader.load();
@@ -197,7 +197,7 @@ public class AdmissionInfoController implements Initializable {
             paymentStage.setScene(scene);
             paymentStage.setResizable(false);
             paymentStage.show();
-            PayController pay = loader.getController();
+            PaymentWindowController pay = loader.getController();
             pay.setPayment(2, ID);
             paymentStage.setOnCloseRequest((WindowEvent eventl) -> {
                 fetchAdmissionData(ID);

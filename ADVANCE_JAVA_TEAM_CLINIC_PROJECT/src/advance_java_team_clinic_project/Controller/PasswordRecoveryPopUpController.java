@@ -5,7 +5,7 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.DatabaseLoginRegister;
+import advance_java_team_clinic_project.Model.RegisterAndLoginModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,10 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -30,7 +27,7 @@ import javafx.stage.StageStyle;
  *
  * @author Tasos
  */
-public class PasswordRecoveryPopUpController extends NewStage implements Initializable {
+public class PasswordRecoveryPopUpController extends StageRedirect implements Initializable {
 
     
     
@@ -45,7 +42,7 @@ public class PasswordRecoveryPopUpController extends NewStage implements Initial
     private String pass1, pass2;
     private int Id;
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    private static final DatabaseLoginRegister ak = new DatabaseLoginRegister();
+    private static final RegisterAndLoginModel ak = new RegisterAndLoginModel();
     private static final PasswordRecoveryController po = new PasswordRecoveryController();
 
     /**
@@ -66,7 +63,7 @@ public class PasswordRecoveryPopUpController extends NewStage implements Initial
                         ak.changePassword(pass1, Id); //Kalame to query stin basi pou allazei to password tou sigekrimenou xristi me afto to id
                         po.GetStage().close();
                         Stage currentStage = (Stage) RecoveryPop.getScene().getWindow();
-                        setNewStage("../View/loginStyleFX.fxml", currentStage);
+                        setNewStage("../View/LoginWindowView.fxml", currentStage);
                         currentStage.show();
                         } catch (IOException ex) {
                             Logger.getLogger(PasswordRecoveryPopUpController.class.getName()).log(Level.SEVERE, null, ex);

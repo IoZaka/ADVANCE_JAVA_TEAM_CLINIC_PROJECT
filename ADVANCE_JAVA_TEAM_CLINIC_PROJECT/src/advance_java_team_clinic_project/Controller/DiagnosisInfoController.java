@@ -5,8 +5,8 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.DiagnosisInfo;
-import advance_java_team_clinic_project.Model.LoggedInUser;
+import advance_java_team_clinic_project.Model.DiagnosisInfoModel;
+import advance_java_team_clinic_project.classes.LoggedInUserClass;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -61,11 +61,11 @@ public class DiagnosisInfoController implements Initializable {
     private TextField patientTypeInput;
 
     private Integer appInfoId, admissionID;
-    LoggedInUser user = LoggedInUser.getInstance();
+    LoggedInUserClass user = LoggedInUserClass.getInstance();
     @FXML
     private AnchorPane diagnosisPanel;
 
-    private DiagnosisInfo diagInfoModel = new DiagnosisInfo();
+    private DiagnosisInfoModel diagInfoModel = new DiagnosisInfoModel();
 
     private ResultSet rs;
     @FXML
@@ -160,14 +160,14 @@ public class DiagnosisInfoController implements Initializable {
         System.out.println("six step");
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/id_RecordView.fxml"));
+                FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AppointmentRecordInfoView.fxml"));
                 Parent root = (Parent) loader.load();
-                Id_RecordViewController idRecord = loader.getController();
+                AppointmentRecordInfoController idRecord = loader.getController();
                 idRecord.setID(app_id);
                 diagnosisPanel.getChildren().clear();
                 diagnosisPanel.getChildren().add(root);
             } catch (IOException ex) {
-                Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         updateDiagnose.setOnMouseClicked((MouseEvent event) -> {
@@ -185,14 +185,14 @@ public class DiagnosisInfoController implements Initializable {
 
         /* TESTS CONTEXT */
         testCreate.setOnMouseClicked((MouseEvent event) -> {
-            FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testIDView.fxml"));
+            FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/TestsInfoView.fxml"));
             Parent root = null;
             try {
                 root = (Parent) loader.load();
             } catch (IOException ex) {
                 Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            TestIDController testID = loader.getController();
+            TestsInfoController testID = loader.getController();
             testID.setTestIDView(true, -1);
             //Scene
             diagnosisPanel.getChildren().clear();
@@ -200,14 +200,14 @@ public class DiagnosisInfoController implements Initializable {
         });
         testsBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/testsTableView.fxml"));
+                FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/TestsTableView.fxml"));
                 Parent root = (Parent) loader.load();
-                TestsTableViewController testID = loader.getController();
+                TestsTableController testID = loader.getController();
                 testID.setTestID(diagID);
                 diagnosisPanel.getChildren().clear();
                 diagnosisPanel.getChildren().add(root);
             } catch (IOException ex) {
-                Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         /* END -- TESTS CONTEXT */
@@ -222,7 +222,7 @@ public class DiagnosisInfoController implements Initializable {
             diagnosisPanel.getChildren().clear();
             diagnosisPanel.getChildren().add(root);
         } catch (IOException ex) {
-            Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

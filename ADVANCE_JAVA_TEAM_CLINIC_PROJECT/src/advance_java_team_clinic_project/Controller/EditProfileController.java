@@ -5,10 +5,10 @@
  */
 package advance_java_team_clinic_project.Controller;
 
-import advance_java_team_clinic_project.Model.CustomCombo;
-import advance_java_team_clinic_project.Model.DatabaseProfileDetails;
-import advance_java_team_clinic_project.Model.DatabaseCustomCombo;
-import advance_java_team_clinic_project.Model.LoggedInUser;
+import advance_java_team_clinic_project.classes.CustomComboClass;
+import advance_java_team_clinic_project.Model.EditProfileModel;
+import advance_java_team_clinic_project.Model.CustomComboModel;
+import advance_java_team_clinic_project.classes.LoggedInUserClass;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -40,14 +40,14 @@ import javafx.stage.WindowEvent;
  *
  * @author Chris
  */
-public class EditProfileController extends NewStage implements Initializable {
+public class EditProfileController extends StageRedirect implements Initializable {
 
     @FXML
     private AnchorPane editProfilePane;
-    private static DatabaseProfileDetails ak = new DatabaseProfileDetails();
-    private static final DatabaseCustomCombo ed = new DatabaseCustomCombo();
+    private static EditProfileModel ak = new EditProfileModel();
+    private static final CustomComboModel ed = new CustomComboModel();
     private ResultSet rs;
-    LoggedInUser user = LoggedInUser.getInstance();
+    LoggedInUserClass user = LoggedInUserClass.getInstance();
 
     @FXML
     private Button usernamebtn;
@@ -81,7 +81,7 @@ public class EditProfileController extends NewStage implements Initializable {
     private Button contactbtn;
     @FXML
     private ComboBox comboRole;
-    ObservableList<CustomCombo> customCombo = FXCollections.observableArrayList();
+    ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
     private Integer genderId, ecoStatusId, nationalityId, roleId;
     @FXML
     private ComboBox comboGender;
@@ -141,7 +141,7 @@ public class EditProfileController extends NewStage implements Initializable {
         
         usernamebtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(EditProfileController.this.getClass().getResource("../View/checkUsernameWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(EditProfileController.this.getClass().getResource("../View/UsernameWindowView.fxml"));
                 Parent root = null;
                 root = (Parent)loader.load();
                 Stage checkUsername = new Stage();
@@ -149,7 +149,7 @@ public class EditProfileController extends NewStage implements Initializable {
                 checkUsername.setTitle("Enter New Username");
                 checkUsername.setScene(scene);
                 checkUsername.setResizable(false);
-                CheckUsernameController usernameController = loader.getController();
+                UsernameWindowController usernameController = loader.getController();
                 usernameController.myInit(userID);
                 checkUsername.setOnCloseRequest((WindowEvent event1) -> {myInit(userID);});
                 checkUsername.show();
@@ -160,7 +160,7 @@ public class EditProfileController extends NewStage implements Initializable {
 
         passwordbtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(EditProfileController.this.getClass().getResource("../View/checkPasswordWindow.fxml"));
+                FXMLLoader loader = new FXMLLoader(EditProfileController.this.getClass().getResource("../View/PasswordWindowView.fxml"));
                 Parent root = null;
                 root = (Parent)loader.load();
                 Stage checkPassword = new Stage();
@@ -168,7 +168,7 @@ public class EditProfileController extends NewStage implements Initializable {
                 checkPassword.setTitle("Enter New Password");
                 checkPassword.setScene(scene);
                 checkPassword.setResizable(false);
-                CheckPasswordWindowController passwordController = loader.getController();
+                PasswordWindowController passwordController = loader.getController();
                 passwordController.myInit(userID);
                 checkPassword.show();
             } catch (IOException ex) {
@@ -180,7 +180,7 @@ public class EditProfileController extends NewStage implements Initializable {
             
             Stage currentStage = (Stage) editProfilePane.getScene().getWindow();
             try {
-                setNewStage("../View/userMenuView.fxml", currentStage);
+                setNewStage("../View/UserMenuView.fxml", currentStage);
             } catch (IOException ex) {
                 Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -189,10 +189,10 @@ public class EditProfileController extends NewStage implements Initializable {
 
         submitBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                ak = new DatabaseProfileDetails();
+                ak = new EditProfileModel();
                 ak.getObject();
                 ak.updateBasicInfoData(userID, roleId, surname.getText(), name.getText(), amka.getText(), ama.getText(), dateOfBirth.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), fathersName.getText(), mothersName.getText(), genderId, ecoStatusId, nationalityId, profession.getText(), placeOfBirth.getText()/*, memberId*/);
-                LoggedInUser user1 = LoggedInUser.getInstance();
+                LoggedInUserClass user1 = LoggedInUserClass.getInstance();
                 rs = ak.fetchBasicInfoData(user1.getId());
                 if (rs.next()) {
                     code.setText(rs.getString("global_code"));
@@ -236,14 +236,14 @@ public class EditProfileController extends NewStage implements Initializable {
         
         addressbtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/checkAddressDetails.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/AddressDetailsView.fxml"));
                 Parent root = (Parent)loader.load();
                 Stage checkAddress = new Stage();
                 Scene scene = new Scene(root);
                 checkAddress.setTitle("Address Details");
                 checkAddress.setScene(scene);
                 checkAddress.setResizable(false);
-                CheckAddressDetailsController addressController = loader.getController();
+                AddressDetailsController addressController = loader.getController();
                 try {
                     addressController.setData(address_ID);
                 } catch (SQLException ex) {
@@ -257,14 +257,14 @@ public class EditProfileController extends NewStage implements Initializable {
         
         contactbtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/checkContactDetails.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/ContactDetailsView.fxml"));
                 Parent root = (Parent)loader.load();
                 Stage checkContact = new Stage();
                 Scene scene = new Scene(root);
                 checkContact.setTitle("Contact Details");
                 checkContact.setScene(scene);
                 checkContact.setResizable(false);
-                CheckContactDetailsController contactController = loader.getController();
+                ContactDetailsController contactController = loader.getController();
                 try {
                     contactController.setData(contact_ID);
                 } catch (SQLException ex) {
@@ -278,14 +278,14 @@ public class EditProfileController extends NewStage implements Initializable {
         
         insurancebtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/checkInsuranceDetails.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/InsuranceDetailsView.fxml"));
                 Parent root = (Parent)loader.load();
                 Stage checkInsurance = new Stage();
                 Scene scene = new Scene(root);
                 checkInsurance.setTitle("Insurance Details");
                 checkInsurance.setScene(scene);
                 checkInsurance.setResizable(false);
-                CheckInsuranceDetailsController insuranceController = loader.getController();
+                InsuranceDetailsController insuranceController = loader.getController();
                 try {
                     insuranceController.setData(userID);
                 } catch (SQLException ex) {
@@ -340,25 +340,25 @@ public class EditProfileController extends NewStage implements Initializable {
     private void setComboEventListeners() {
         comboRole.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
-                CustomCombo coRole = (CustomCombo) comboRole.getSelectionModel().getSelectedItem();
+                CustomComboClass coRole = (CustomComboClass) comboRole.getSelectionModel().getSelectedItem();
                 roleId = coRole.getId();
             }
         });
         comboNationality.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
-                CustomCombo coNationality = (CustomCombo) comboNationality.getSelectionModel().getSelectedItem();
+                CustomComboClass coNationality = (CustomComboClass) comboNationality.getSelectionModel().getSelectedItem();
                 nationalityId = coNationality.getId();
             }
         });
         comboEcoStatus.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
-                CustomCombo coEcoStatus = (CustomCombo) comboEcoStatus.getSelectionModel().getSelectedItem();
+                CustomComboClass coEcoStatus = (CustomComboClass) comboEcoStatus.getSelectionModel().getSelectedItem();
                 ecoStatusId = coEcoStatus.getId();
             }
         });
         comboGender.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
-                CustomCombo coGender = (CustomCombo) comboGender.getSelectionModel().getSelectedItem();
+                CustomComboClass coGender = (CustomComboClass) comboGender.getSelectionModel().getSelectedItem();
                 genderId = coGender.getId();
             }
         });
