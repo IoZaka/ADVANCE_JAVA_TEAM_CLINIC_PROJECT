@@ -48,5 +48,17 @@ public class CustomComboModel {
         }
         return customCombo;
     }
+    
+    public ObservableList<CustomComboClass> FetchUserFilterData(Integer roleID) throws SQLException {
+        ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
+        getObject();
+        stmt = object.connection.createStatement();
+        sql = "select nvl(a.SURNAME,a.username) || ' ' || a.FIRSTNAME description, a.id from pm_users a where a.role_id = "+ roleID;
+        rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            customCombo.add(new CustomComboClass(rs.getInt("id"), rs.getString("description")));
+        }
+        return customCombo;
+    }
 
 }

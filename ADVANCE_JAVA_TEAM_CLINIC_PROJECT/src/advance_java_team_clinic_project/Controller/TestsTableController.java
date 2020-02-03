@@ -5,7 +5,9 @@
  */
 package advance_java_team_clinic_project.Controller;
 
+import advance_java_team_clinic_project.Model.CustomComboModel;
 import advance_java_team_clinic_project.Model.TestsModel;
+import advance_java_team_clinic_project.classes.CustomComboClass;
 import advance_java_team_clinic_project.classes.LoggedInUserClass;
 import java.io.IOException;
 import java.net.URL;
@@ -22,12 +24,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 /**
@@ -38,6 +43,7 @@ import javafx.util.Callback;
 public class TestsTableController implements Initializable {
 
     private ObservableList data;
+    private CustomComboModel ed = new CustomComboModel();
 
     @FXML
     private TableView<TestsModel> testsTable = new TableView<>();
@@ -64,7 +70,30 @@ public class TestsTableController implements Initializable {
 
     LoggedInUserClass user = LoggedInUserClass.getInstance();
     TestsModel tests = new TestsModel();
+    @FXML
+    private ComboBox patientComboBox;
 
+    ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
+    @FXML
+    private ComboBox doctorComboBox;
+    @FXML
+    private DatePicker createdFromDate;
+    @FXML
+    private DatePicker createdToDate;
+    @FXML
+    private ComboBox paidComboBox;
+    @FXML
+    private ComboBox completedComboBox;
+    @FXML
+    private Button searchBtn;
+    @FXML
+    private Text doctorHeader;
+    @FXML
+    private Text patientHeader;
+    
+    private Integer patientID;
+    private Integer doctorID;
+    
     /**
      * Initializes the controller class.
      *
@@ -90,6 +119,20 @@ public class TestsTableController implements Initializable {
         updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
         patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
 
+        if(user.getRoleID() == 3){
+           doctorComboBox.setVisible(false);
+           patientComboBox.setVisible(false);
+           doctorHeader.setVisible(false);
+           patientHeader.setVisible(false);
+        }else{
+           doctorComboBox.setVisible(true);
+           patientComboBox.setVisible(true);
+           doctorHeader.setVisible(true);
+           patientHeader.setVisible(true);
+        }
+        
+        paidComboBox.getItems().addAll("Yes","No");
+        completedComboBox.getItems().addAll("Yes","No");
         testsTable.getColumns().addAll(idCol, descriptionCol, isCompletedCol, costCol, isPaidCol, resultsCol, statusCol, doctorCol, createdCol, createdByCol, updatedCol, updatedByCol, patientCol);
     }
 
@@ -157,12 +200,53 @@ public class TestsTableController implements Initializable {
 
         try {
             data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
+            ed.getObject();
+            
+            customCombo = ed.FetchUserFilterData(3);
+            patientComboBox.setItems(FXCollections.observableArrayList(customCombo));
+            
+            customCombo = ed.FetchUserFilterData(2);
+            doctorComboBox.setItems(FXCollections.observableArrayList(customCombo));
+            
+            setComboEventListeners();
+            
             testsTable.setItems(data);
         } catch (SQLException ex) {
             Logger.getLogger(TestsTableController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        
+           searchBtn.setOnMouseClicked((MouseEvent event) -> {
+             System.out.println("Created From:" + createdFromDate.getValue());
+             System.out.println("Created To:" + createdToDate.getValue());
+             System.out.println("Patient: " + patientComboBox.getSelectionModel().getSelectedItem());
+             System.out.println("Doctor: " + doctorComboBox.getSelectionModel().getSelectedItem());
+             System.out.println("Completed: " + completedComboBox.getSelectionModel().getSelectedItem());
+             System.out.println("Paid: " + paidComboBox.getSelectionModel().getSelectedItem());
+             
+        });
+        
     }
+    
+    private void setComboEventListeners(){
+        patientComboBox.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomComboClass coPatient = (CustomComboClass) patientComboBox.getSelectionModel().getSelectedItem();
+                patientID = coPatient.getId();
+                System.out.println(coPatient.getId());
+            }
+        });
+        
+        doctorComboBox.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomComboClass coDoctor = (CustomComboClass) doctorComboBox.getSelectionModel().getSelectedItem();
+                doctorID = coDoctor.getId();
+                System.out.println(coDoctor.getId());
+                
+            }
+        });
+    }
+    
     
     private ArrayList databaseTests(ResultSet rs) throws SQLException {
         ArrayList<TestsModel> data = new ArrayList();
@@ -189,5 +273,7 @@ public class TestsTableController implements Initializable {
         }
         return data;
     }
+    
+    
 
 }

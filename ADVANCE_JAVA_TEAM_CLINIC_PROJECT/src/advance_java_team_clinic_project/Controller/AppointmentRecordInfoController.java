@@ -6,6 +6,8 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.AppointmentsModel;
+import advance_java_team_clinic_project.Model.CustomComboModel;
+import advance_java_team_clinic_project.classes.CustomComboClass;
 import advance_java_team_clinic_project.classes.LoggedInUserClass;
 import java.io.IOException;
 import java.net.URL;
@@ -15,11 +17,14 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -52,7 +57,6 @@ public class AppointmentRecordInfoController implements Initializable {
     private AnchorPane idRecordPane;
 
     LoggedInUserClass user = LoggedInUserClass.getInstance();
-    @FXML
     private TextField doctorInput;
     @FXML
     private TextField patientInput;
@@ -60,6 +64,11 @@ public class AppointmentRecordInfoController implements Initializable {
 
     private Statement stmt;
     private String sql;
+    @FXML
+    private ComboBox doctorComboBox;
+    
+    private CustomComboModel ed = new CustomComboModel();
+    ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -69,11 +78,13 @@ public class AppointmentRecordInfoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        if(user.getRoleID() == 3){doctorComboBox.setDisable(true);}
+
         appDateInput.setEditable(false);
         appCodeInput.setEditable(false);
         createdInput.setEditable(false);
         commentsTextArea.setEditable(false);
-        doctorInput.setEditable(false);
         patientInput.setEditable(false);
 
         backBtn.setOnMouseClicked((MouseEvent event) -> {
@@ -99,8 +110,11 @@ public class AppointmentRecordInfoController implements Initializable {
         try {
             ak = new AppointmentsModel();
             rs = ak.fetchBasicInfoData(Integer.parseInt(appID));
+            ed.getObject();
+            customCombo = ed.FetchUserFilterData(2);
+            doctorComboBox.setItems(FXCollections.observableArrayList(customCombo));
             if (rs.next()) {
-                doctorInput.setText(rs.getString("doctor"));
+                doctorComboBox.setValue(rs.getString("doctor"));
                 patientInput.setText(rs.getString("patient"));
                 appDateInput.setText(rs.getString("app_date"));
                 appCodeInput.setText(rs.getString("app_code"));

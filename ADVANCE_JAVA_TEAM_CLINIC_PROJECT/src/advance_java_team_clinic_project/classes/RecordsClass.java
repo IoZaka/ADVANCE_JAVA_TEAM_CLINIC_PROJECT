@@ -16,6 +16,7 @@ public class RecordsClass {
 
     private StringProperty id = new SimpleStringProperty();
     private StringProperty app_date = new SimpleStringProperty();
+    private StringProperty hour = new SimpleStringProperty();
     private StringProperty comments = new SimpleStringProperty();
     private StringProperty app_code = new SimpleStringProperty();
     private StringProperty created = new SimpleStringProperty();
@@ -39,6 +40,14 @@ public class RecordsClass {
      */
     public StringProperty app_dateProperty() {
         return app_date;
+    }
+    
+     /**
+     *
+     * @return
+     */
+    public StringProperty hourProperty() {
+        return hour;
     }
 
     /**
