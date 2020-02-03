@@ -69,6 +69,10 @@ public class AppointmentRecordInfoController implements Initializable {
     
     private CustomComboModel ed = new CustomComboModel();
     ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
+    @FXML
+    private TextField hourInput;
+    @FXML
+    private Button updateBtn;
 
     /**
      * Initializes the controller class.
@@ -80,7 +84,12 @@ public class AppointmentRecordInfoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         if(user.getRoleID() == 3){doctorComboBox.setDisable(true);}
-
+        if(user.getRoleID() == 1 || user.getRoleID() == 4){
+            updateBtn.setVisible(true);
+        }else{
+            updateBtn.setVisible(false);
+        }
+        
         appDateInput.setEditable(false);
         appCodeInput.setEditable(false);
         createdInput.setEditable(false);
@@ -97,6 +106,10 @@ public class AppointmentRecordInfoController implements Initializable {
                 Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+        });
+        
+        updateBtn.setOnMouseClicked((MouseEvent event) -> {
+            
         });
 
     }

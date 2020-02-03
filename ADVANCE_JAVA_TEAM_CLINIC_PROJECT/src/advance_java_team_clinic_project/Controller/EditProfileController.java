@@ -32,6 +32,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -97,6 +100,11 @@ public class EditProfileController extends StageRedirect implements Initializabl
     private Integer address_ID = null;
     private Integer contact_ID = null;
     private Integer insurance_ID = null;
+    @FXML
+    private HBox patientsBtns;
+    @FXML
+    private GridPane gridPane;
+
 
     /**
      * Initializes the controller class.
@@ -107,7 +115,6 @@ public class EditProfileController extends StageRedirect implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-
     }
     
     public void myInit(Integer userID){
@@ -128,6 +135,11 @@ public class EditProfileController extends StageRedirect implements Initializabl
             passwordbtn.setDisable(false);
             usernamebtn.setDisable(false);
             addressbtn.setDisable(false);
+        }
+        
+        if(user.getRoleID() != 3 && user.getId() == userID){
+            gridPane.getRowConstraints().get(4).setMaxHeight(0); //renove one grid Row
+            patientsBtns.setVisible(false); // Hide the Address-Insurance-Contact
         }
                
         if(user.getRoleID() == 1 && userID != user.getId()){

@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
@@ -40,7 +41,7 @@
                 </Button>
             </children>
         </GridPane>
-        <GridPane layoutX="100.0" layoutY="80.0" prefHeight="410.0" prefWidth="820.0">
+        <GridPane fx:id="gridPane" layoutX="100.0" layoutY="80.0" prefHeight="410.0" prefWidth="820.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -161,36 +162,6 @@
                         <Insets />
                     </GridPane.margin>
                 </TextField>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address Details:" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets left="5.0" />
-                    </GridPane.margin>
-                </Text>
-                <Button fx:id="addressbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Address details" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets left="100.0" />
-                    </GridPane.margin>
-                </Button>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Details: " GridPane.columnIndex="1" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets left="30.0" />
-                    </GridPane.margin>
-                </Text>
-                <Button fx:id="contactbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Contact details" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets left="120.0" />
-                    </GridPane.margin>
-                </Button>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Insurance Details:" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets left="20.0" />
-                    </GridPane.margin>
-                </Text>
-                <Button fx:id="insurancebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Insurance Details" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets left="120.0" />
-                    </GridPane.margin>
-                </Button>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ROLE:" GridPane.rowIndex="5">
                     <GridPane.margin>
                         <Insets left="60.0" />
@@ -221,6 +192,39 @@
                         <Insets left="120.0" />
                     </GridPane.margin>
                 </ComboBox>
+            <HBox fx:id="patientsBtns" maxWidth="820.0" minWidth="820.0" prefHeight="68.0" prefWidth="820.0" GridPane.rowIndex="4">
+               <children>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Address Details:" />
+                      <Button fx:id="addressbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Address details">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                      </Button>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Details: ">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                      </Text>
+                      <Button fx:id="contactbtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Contact details">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                      </Button>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Insurance Details:">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                      </Text>
+                      <Button fx:id="insurancebtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" styleClass="editProfileBtns" stylesheets="@style.css" text="Insurance Details">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                      </Button>
+               </children>
+               <GridPane.margin>
+                  <Insets top="20.0" />
+               </GridPane.margin>
+            </HBox>
             </children>
         </GridPane>
         <Button fx:id="cancelBtn" layoutX="300.0" layoutY="516.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" styleClass="cancelBtn" stylesheets="@style.css" text="Cancel" />

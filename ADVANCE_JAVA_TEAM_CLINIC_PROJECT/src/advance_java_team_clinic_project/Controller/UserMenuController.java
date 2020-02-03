@@ -217,7 +217,7 @@ public class UserMenuController extends StageRedirect implements Initializable {
 
             try {
                 clearSelectedButtons();
-                testsBtn.setSelected(true);
+                enterNewUserBtn.setSelected(true);
 
                 FXMLLoader loader = new FXMLLoader(UserMenuController.this.getClass().getResource("../View/SignUpWindowView.fxml"));
                 Parent root = (Parent) loader.load();
