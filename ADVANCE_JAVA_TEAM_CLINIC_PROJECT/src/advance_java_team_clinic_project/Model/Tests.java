@@ -65,17 +65,150 @@ public class Tests {
             object = DatabaseConnection.getInstance();
             stmt = object.connection.createStatement();
             sql = "select a.id id, " +
-                    "a.description, " +
-                    "a.cost, " +
-                    "a.results, " +
-                    "decode(a.is_paid,1,'Yes','No') Paid, " +
-                    "decode(a.status_id,1,'Completed','In progresss') status, " +
-                    "decode(a.is_completed,1,'Yes','No') is_completed, " +               
-                    "f.SURNAME || ' ' || f.FIRSTNAME doctor " +
-                    "from pm_diag_tests a, pm_diagnosis diag , pm_appointment_info ap,pm_users f " +
-                    "  where a.diag_id = " + diagID +
-                    "  and diag.APP_INFO_ID = ap.id " +
-                    "  and ap.doctor_id = f.id(+)";
+" diag.id diag, " +
+" a.description, " +
+" a.cost, " +
+" a.results, " +
+" decode(a.is_paid,1,'Yes','No') Paid, " +
+" decode(a.status_id,1,'Completed','In progresss') status," +
+" decode(a.is_completed,1,'Yes','No') is_completed, " +
+"f.SURNAME || ' ' || f.FIRSTNAME doctor, " +
+ "a.created, " +
+ " cr.SURNAME || ' ' || cr.FIRSTNAME created_by, " +
+ " a.updated, " +
+ " up.SURNAME || ' ' || up.FIRSTNAME updated_by ," +
+" pat.SURNAME || ' ' || pat.FIRSTNAME patient" +
+ " from pm_diag_tests a, pm_diagnosis diag , pm_appointment_info ap,pm_users f , pm_users up, pm_users cr, pm_users pat " +
+" where ap.patient_id = pat.id " +
+" and a.updated_by = up.id " +
+                    "and a.created_by = cr.id " +
+ " and a.diag_id =    " +   diagID  +
+" and a.diag_id = diag.id  " +
+" and diag.APP_INFO_ID = ap.id   " +
+" and ap.doctor_id = f.id  " +
+" and   " +   diagID  + "  != -1  " +
+"union  " +
+"select a.id id,  " +
+" diag.id diag,  " +
+" a.description,   " +
+" a.cost,   " +
+" a.results,   " +
+" decode(a.is_paid,1,'Yes','No') Paid,   " +
+" decode(a.status_id,1,'Completed','In progresss') status,   " +
+" decode(a.is_completed,1,'Yes','No') is_completed,                  " +
+" f.SURNAME || ' ' || f.FIRSTNAME doctor, " +
+" a.created, " +
+" cr.SURNAME || ' ' || cr.FIRSTNAME created_by, " +
+" a.updated, " +
+" up.SURNAME || ' ' || up.FIRSTNAME updated_by ," +
+" pat.SURNAME || ' ' || pat.FIRSTNAME patient " +
+" from pm_diag_tests a, pm_diagnosis diag , pm_appointment_info ap,pm_users f, pm_users up, pm_users cr, pm_users pat\n" +
+" where ap.patient_id = pat.id " +
+" and a.updated_by = up.id " +
+" and a.created_by = cr.id " +
+" and  diag.APP_INFO_ID = ap.id " +
+" and a.diag_id = diag.id " +
+" and ap.doctor_id = f.id(+) " +
+" and   " + user.getRoleID() + " = 1 " +
+" and   " +   diagID  + "    = -1 " +
+"union " +
+"select a.id id,  " +
+" diag.id diag, " +
+" a.description,  " +
+" a.cost,  " +
+" a.results,  " +
+" decode(a.is_paid,1,'Yes','No') Paid, " +
+" decode(a.status_id,1,'Completed','In progresss') status, " +
+" decode(a.is_completed,1,'Yes','No') is_completed, " +
+" f.SURNAME || ' ' || f.FIRSTNAME doctor , " +
+" a.created, " +
+" cr.SURNAME || ' ' || cr.FIRSTNAME created_by, " +
+" a.updated, " +
+" up.SURNAME || ' ' || up.FIRSTNAME updated_by ," +
+" pat.SURNAME || ' ' || pat.FIRSTNAME patient" +
+" from pm_diag_tests a, pm_diagnosis diag , pm_appointment_info ap,pm_users f, pm_users up, pm_users cr, pm_users pat " +
+" where ap.patient_id = pat.id " +
+" and a.updated_by = up.id" +
+" and a.created_by = cr.id " +
+" and diag.APP_INFO_ID = ap.id " +
+" and a.diag_id = diag.id " +
+" and ap.doctor_id = f.id " +
+" and ap.doctor_id =    " +user.getId() +
+" and   " + user.getRoleID() + " = 2 " +
+" and   " +   diagID  + "    = -1  " +
+"union  " +
+"select a.id id, " +
+" diag.id diag, " +
+" a.description, " +
+" a.cost, " +
+" a.results, " +
+" decode(a.is_paid,1,'Yes','No') Paid, " +
+" decode(a.status_id,1,'Completed','In progresss') status, " +
+" decode(a.is_completed,1,'Yes','No') is_completed, " +
+" f.SURNAME || ' ' || f.FIRSTNAME doctor, " +
+" a.created, " +
+" cr.SURNAME || ' ' || cr.FIRSTNAME created_by, " +
+" a.updated, " +
+" up.SURNAME || ' ' || up.FIRSTNAME updated_by , " +
+" pat.SURNAME || ' ' || pat.FIRSTNAME patient" +
+" from pm_diag_tests a, pm_diagnosis diag , pm_appointment_info ap,pm_users f, pm_users up, pm_users cr, pm_users pat " +
+" where ap.patient_id = pat.id " +
+" and a.updated_by = up.id " +
+" and a.created_by = cr.id " +
+" and diag.APP_INFO_ID = ap.id " +
+" and a.diag_id = diag.id " +
+" and ap.doctor_id = f.id(+) " +
+" and ap.patient_id =   " +user.getId() +
+" and  " + user.getRoleID() +"  = 3 " +
+" and   " +   diagID  + "    = -1 " +
+"union " +
+"select a.id id, " +
+" diag.id diag, " +
+" a.description,  " +
+" a.cost, " +
+" a.results, " +
+" decode(a.is_paid,1,'Yes','No') Paid, " +
+" decode(a.status_id,1,'Completed','In progresss') status, " +
+" decode(a.is_completed,1,'Yes','No') is_completed, " +
+" f.SURNAME || ' ' || f.FIRSTNAME doctor, " +
+" a.created, " +
+" cr.SURNAME || ' ' || cr.FIRSTNAME created_by, " +
+" a.updated, " +
+" up.SURNAME || ' ' || up.FIRSTNAME updated_by ," +
+" pat.SURNAME || ' ' || pat.FIRSTNAME patient " +
+" from pm_diag_tests a, pm_diagnosis diag , pm_appointment_info ap,pm_users f, pm_users up, pm_users cr, pm_users pat " +
+" where ap.patient_id = pat.id " +
+" and a.updated_by = up.id " +
+" and a.created_by = cr.id " +
+" and diag.APP_INFO_ID = ap.id  " +
+" and a.diag_id = diag.id  " +
+" and ap.doctor_id = f.id(+) " +
+" and  " + user.getRoleID() + " = 4 " +
+" and   " +   diagID  + "    = -1 " +
+" union " +
+" select a.id id, " +
+"diag.id diag, " +
+"a.description, " +
+"a.cost, " +
+"a.results, " +
+"decode(a.is_paid,1,'Yes','No') Paid, " +
+"decode(a.status_id,1,'Completed','In progresss') status, " +
+"decode(a.is_completed,1,'Yes','No') is_completed, " +
+"f.SURNAME || ' ' || f.FIRSTNAME doctor, " +
+" a.created, " +
+" cr.SURNAME || ' ' || cr.FIRSTNAME created_by, " +
+" a.updated, " +
+" up.SURNAME || ' ' || up.FIRSTNAME updated_by ," +
+" pat.SURNAME || ' ' || pat.FIRSTNAME patient" +
+" from pm_diag_tests a, pm_diagnosis diag , pm_appointment_info ap,pm_users f, pm_users up, pm_users cr, pm_users pat " +
+" where ap.patient_id = pat.id " +
+" and a.updated_by = up.id " +
+" and a.created_by = cr.id " +
+" and  diag.APP_INFO_ID = ap.id  " +
+"and a.diag_id = diag.id " +
+"and ap.doctor_id = f.id(+) " +
+"and    " + user.getRoleID() + "  = 5 " +
+"and   " +   diagID  + "    = -1";
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,15 +223,16 @@ public class Tests {
             stmt = object.connection.createStatement();
             //sql = "select * from pm_diag_tests where id= " + testID;
             sql = "select a.id id, " +
+                    "a.diag_id, " + 
                     "a.description, " +
                     "a.cost, " +
                     "a.results, " +
                     "decode(a.is_paid,1,'Yes','No') Paid, " +
                     "decode(a.status_id,1,'Completed','In progresss') status, " +
                     "decode(a.is_completed,1,'Yes','No') is_completed, " +
-                    "a.created, " +
+                    "to_char(a.created,'MM/DD/YYYY') created, " +
                     "c.SURNAME || ' ' || c.FIRSTNAME createdby, " +
-                    "a.updated, " +
+                    " to_char(a.UPDATED,'MM/DD/YYYY') updated, " +
                     "d.SURNAME || ' ' || d.FIRSTNAME updated_by, " +
                     "e.SURNAME || ' ' || e.FIRSTNAME patient, " +
                     "f.SURNAME || ' ' || f.FIRSTNAME doctor " +

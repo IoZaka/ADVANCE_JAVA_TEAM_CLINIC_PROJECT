@@ -49,30 +49,27 @@ public class CheckAddressDetailsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            setData();
-        } catch (SQLException ex) {
-            Logger.getLogger(CheckAddressDetailsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         addTextLimiter(postalCode);
-        submitBtn.setOnMouseClicked((MouseEvent event) -> {
-            try {
-                ak.updateAddressDetails(user.getAddressID(), address.getText(), city.getText(), county.getText(), Integer.parseInt(postalCode.getText()));
-            } catch (SQLException ex) {
-                Logger.getLogger(CheckContactDetailsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
     }
 
-    private void setData() throws SQLException {
+    public void setData(Integer userAddressID) throws SQLException {
         ak.getObject();
-        rs = ak.fetchAddressInfoData(user.getAddressID());
+        rs = ak.fetchAddressInfoData(userAddressID);
         if (rs.next()) {
             address.setText(rs.getString("address"));
             city.setText(rs.getString("city"));
             county.setText(rs.getString("county"));
             postalCode.setText(String.valueOf(rs.getInt("postal_code")));
         }
+        
+        submitBtn.setOnMouseClicked((MouseEvent event) -> {
+            try {
+                ak.updateAddressDetails(userAddressID, address.getText(), city.getText(), county.getText(), Integer.parseInt(postalCode.getText()));
+            } catch (SQLException ex) {
+                Logger.getLogger(CheckContactDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
     }
 
     /**

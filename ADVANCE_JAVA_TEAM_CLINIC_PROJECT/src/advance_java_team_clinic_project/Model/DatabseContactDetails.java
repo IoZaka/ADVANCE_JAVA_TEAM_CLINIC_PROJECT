@@ -21,6 +21,8 @@ public class DatabseContactDetails {
     private String sql, sql_contact;
     private ResultSet rs;
     private DatabaseConnection object;
+    
+    LoggedInUser loggedInUser = LoggedInUser.getInstance();
 
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
@@ -51,7 +53,7 @@ public class DatabseContactDetails {
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
-        sql_contact = "update pm_contact_details set tel_number=" + tel_number + ",cel_number=" + cel_number + ",email=\'" + email + "\',relative_tel_number=" + relative_tel_number + " where id =" + contact_id;
+        sql_contact = "update pm_contact_details set tel_number=" + tel_number + ",cel_number=" + cel_number + ",email=\'" + email + "\',relative_tel_number=" + relative_tel_number +  ",updated_by=" + loggedInUser.getId() + " where id =" + contact_id;
         rs = stmt.executeQuery(sql_contact);
         alert.setTitle("Update");
         alert.setContentText("Update submitted");

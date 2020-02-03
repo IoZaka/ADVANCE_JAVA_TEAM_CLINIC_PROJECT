@@ -21,6 +21,8 @@ public class DatabaseCheckAddressDetails {
     private String sql, sql_users;
     private ResultSet rs;
     private DatabaseConnection object;
+    
+    LoggedInUser loggedInUser = LoggedInUser.getInstance();
 
     public void getObject() throws SQLException {
         object = DatabaseConnection.getInstance();
@@ -51,7 +53,7 @@ public class DatabaseCheckAddressDetails {
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UTILITY);
         stmt = object.connection.createStatement();
-        sql_users = "update pm_address_details set address=\'" + address + "\',city=\'" + city + "\',county=\'" + county + "\',postal_code=" + postal_code + "where id =" + address_id;
+        sql_users = "update pm_address_details set address=\'" + address + "\',city=\'" + city + "\',county=\'" + county + "\',postal_code=" + postal_code +  ",updated_by=" + loggedInUser.getId() + "where id =" + address_id;
         rs = stmt.executeQuery(sql_users);
         alert.setTitle("Update");
         alert.setContentText("Update submitted");

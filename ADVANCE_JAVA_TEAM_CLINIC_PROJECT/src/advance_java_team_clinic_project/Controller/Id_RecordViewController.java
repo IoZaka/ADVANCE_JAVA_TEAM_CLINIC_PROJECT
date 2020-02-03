@@ -74,16 +74,19 @@ public class Id_RecordViewController implements Initializable {
         commentsTextArea.setEditable(false);
         doctorInput.setEditable(false);
         patientInput.setEditable(false);
-
+        
         backBtn.setOnMouseClicked((MouseEvent event) -> {
-            FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/patientsRecords.fxml"));
-            Parent root = null;
             try {
-                root = (Parent) loader.load();
+                FXMLLoader loader = new FXMLLoader(Id_RecordViewController.this.getClass().getResource("../View/patientsRecords.fxml"));
+                Parent root = (Parent) loader.load();
+                idRecordPane.getChildren().clear();
+                idRecordPane.getChildren().add(root);
             } catch (IOException ex) {
                 Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         });
+        
     }
 
     public void setID(String appID) {
@@ -131,6 +134,8 @@ public class Id_RecordViewController implements Initializable {
                 Logger.getLogger(Id_RecordViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        
 
 
     }

@@ -13,7 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -111,10 +114,13 @@ public class LoginViewController extends NewStage implements Initializable {
      */
     @SuppressWarnings("empty-statement")
     private void handleRegisterAction(ActionEvent event) throws IOException {
-        Stage currentStage = (Stage) loginPane.getScene().getWindow();;
-        setNewStage("../View/Sign_up.fxml", currentStage);
-        currentStage.show();
-
+        Stage currentStage = (Stage) loginPane.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(LoginViewController.this.getClass().getResource("../View/Sign_Up.fxml"));
+        Parent root = (Parent)loader.load();
+        Scene scene = new Scene(root);
+        currentStage.setScene(scene);
+        SignUpViewController registerController = loader.getController();
+        registerController.setRegisterPage(false);
     }
         /**
      * Function that triggers when the user presses the Forgot Password button. Returns

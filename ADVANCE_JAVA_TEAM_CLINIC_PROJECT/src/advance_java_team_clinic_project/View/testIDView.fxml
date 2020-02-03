@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -149,16 +148,6 @@
                   <Insets left="40.0" top="120.0" />
                </GridPane.margin>
             </TextField>
-            <DatePicker fx:id="createdDate" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="170.0" left="40.0" />
-               </GridPane.margin>
-            </DatePicker>
-            <DatePicker fx:id="updatedDate" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="80.0" left="40.0" />
-               </GridPane.margin>
-            </DatePicker>
             <Button fx:id="backBtn" maxWidth="161.0" minWidth="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="161.0" styleClass="backBtn" stylesheets="@style.css" text="Back" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
@@ -175,6 +164,16 @@
                   <Insets bottom="90.0" left="80.0" />
                </GridPane.margin>
             </Text>
+            <TextField fx:id="createdDate" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="180.0" left="40.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="updatedDate" editable="false" maxWidth="180.0" minWidth="180.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="80.0" left="40.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
       </GridPane>
    </children>
