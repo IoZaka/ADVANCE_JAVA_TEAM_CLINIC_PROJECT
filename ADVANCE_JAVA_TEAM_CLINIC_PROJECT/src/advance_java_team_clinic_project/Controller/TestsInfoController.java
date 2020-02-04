@@ -89,13 +89,13 @@ public class TestsInfoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
+       customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(2,"No"));
+        isCompleted.setItems(FXCollections.observableArrayList(customCombo));
     }
 
     public void setTestIDView(boolean fromDiag, Integer testID, Integer diagId) {
         System.out.println(testID);
-        customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(2,"No"));
-        isCompleted.setItems(FXCollections.observableArrayList(customCombo));
+       
         diagID = diagId;
         if (testID != -1) {
             ResultSet rs = tests.getTestByID(testID);

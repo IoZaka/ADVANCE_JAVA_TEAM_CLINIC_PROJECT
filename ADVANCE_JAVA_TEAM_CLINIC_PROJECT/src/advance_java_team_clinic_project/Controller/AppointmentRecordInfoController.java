@@ -140,6 +140,12 @@ public class AppointmentRecordInfoController implements Initializable {
                 }else{
                     appDateInput.setValue(null);
                 }
+                String app_hour = rs.getString("app_hour");
+                if(app_hour == null){
+                    
+                }else{
+                     hourInput.setText(app_hour);
+                }
                 appCodeInput.setText(rs.getString("app_code"));
                 createdInput.setText(rs.getString("created"));
                 commentsTextArea.setText(rs.getString("comments"));

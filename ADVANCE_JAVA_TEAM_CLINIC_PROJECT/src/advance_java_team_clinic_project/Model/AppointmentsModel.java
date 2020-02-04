@@ -126,6 +126,7 @@ public class AppointmentsModel {
         sql = "select a.id, "
                 + " to_char(a.app_date,'dd/mm/yyyy') app_date, "
                 + " a.comments, "
+                + " a.app_hour, " 
                 + " a.app_code, "
                 + " to_char(a.created,'dd/mm/yyyy') created, "
                 + " to_char(a.updated,'dd/mm/yyyy') updated, "
