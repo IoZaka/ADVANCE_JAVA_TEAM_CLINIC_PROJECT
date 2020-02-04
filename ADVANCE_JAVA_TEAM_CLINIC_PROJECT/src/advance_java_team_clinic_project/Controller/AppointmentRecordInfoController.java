@@ -14,6 +14,9 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +26,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -38,7 +43,7 @@ import javafx.scene.layout.AnchorPane;
 public class AppointmentRecordInfoController implements Initializable {
 
     @FXML
-    private TextField appDateInput;
+    private DatePicker appDateInput;
     @FXML
     private TextField appCodeInput;
     @FXML
@@ -74,6 +79,9 @@ public class AppointmentRecordInfoController implements Initializable {
     @FXML
     private Button updateBtn;
 
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private Integer doctorID;
+    
     /**
      * Initializes the controller class.
      *
@@ -85,6 +93,7 @@ public class AppointmentRecordInfoController implements Initializable {
         
         if(user.getRoleID() == 3){doctorComboBox.setDisable(true);}
         if(user.getRoleID() == 1 || user.getRoleID() == 4){
+            appDateInput.setEditable(true);
             updateBtn.setVisible(true);
         }else{
             updateBtn.setVisible(false);
@@ -108,10 +117,7 @@ public class AppointmentRecordInfoController implements Initializable {
 
         });
         
-        updateBtn.setOnMouseClicked((MouseEvent event) -> {
-            
-        });
-
+        
     }
 
     /**
@@ -129,7 +135,11 @@ public class AppointmentRecordInfoController implements Initializable {
             if (rs.next()) {
                 doctorComboBox.setValue(rs.getString("doctor"));
                 patientInput.setText(rs.getString("patient"));
-                appDateInput.setText(rs.getString("app_date"));
+                if(rs.getString("app_date") != null){
+                   appDateInput.setValue(LOCAL_DATE(rs.getString("app_date"))); 
+                }else{
+                    appDateInput.setValue(null);
+                }
                 appCodeInput.setText(rs.getString("app_code"));
                 createdInput.setText(rs.getString("created"));
                 commentsTextArea.setText(rs.getString("comments"));
@@ -152,6 +162,30 @@ public class AppointmentRecordInfoController implements Initializable {
             diagnoseInfoBtn.setVisible(true);
             diagnoseInfoBtn.setText("Diagnose Info");
         }
+        
+        doctorComboBox.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomComboClass coDoctor = (CustomComboClass) doctorComboBox.getSelectionModel().getSelectedItem();
+                doctorID = coDoctor.getId();            
+            }
+        });
+        
+        updateBtn.setOnMouseClicked((MouseEvent event) -> {
+            if (ak.updateAppointmentData(appID, appDateInput.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), doctorID, hourInput.getText(), commentsTextArea.getText())) {
+                alert.setTitle("Update");
+                alert.setContentText("Update submitted");
+                alert.showAndWait();
+                try {
+                    ak.fetchBasicInfoData(Integer.valueOf(appID));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                alert.setTitle("Update");
+                alert.setContentText("Update failed");
+                alert.showAndWait();
+            }
+        });
 
         diagnoseInfoBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
@@ -166,6 +200,12 @@ public class AppointmentRecordInfoController implements Initializable {
             }
         });
 
+    }
+    
+    public static final LocalDate LOCAL_DATE(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
     }
 
     /**

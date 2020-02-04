@@ -105,6 +105,16 @@ public class DiagnosisInfoController implements Initializable {
         appInfoId = Integer.valueOf(app_id);
         admissionID = -1;
 //        diagInfoModel.getObject();
+        if(app_id.equals("-1")){
+            rs = diagInfoModel.fetchDiagnoseInfoData(diagID);
+            try {
+                while(rs.next()){
+                    appInfoId = Integer.valueOf(rs.getString("APP_INFO_ID"));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
         if (diagID == -1) {
             testsBtn.setVisible(false);

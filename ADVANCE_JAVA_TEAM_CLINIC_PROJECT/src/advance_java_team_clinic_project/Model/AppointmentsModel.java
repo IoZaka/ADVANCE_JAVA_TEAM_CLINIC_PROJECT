@@ -144,6 +144,24 @@ public class AppointmentsModel {
         rs = stmt.executeQuery(sql);
         return rs;
     }
+    
+    public boolean updateAppointmentData(String ID, String appDate, Integer doctorID, String hour, String comments) {
+        try {
+            getObject();
+            stmt = object.connection.createStatement();
+            sql = "update pm_appointment_info set "
+                    + " doctor_id = " + doctorID + " , "
+                    + " app_hour = '" + hour+ "' , "
+                    + " comments = '" + comments + "' ,"
+                    + " app_date = to_date('" + appDate + "','dd/mm/yyyy') "
+                    + " where id = " + ID;
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdmissionModel.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 

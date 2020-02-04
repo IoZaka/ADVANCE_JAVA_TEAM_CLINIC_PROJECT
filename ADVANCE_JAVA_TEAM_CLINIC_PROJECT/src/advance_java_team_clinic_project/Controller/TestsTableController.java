@@ -241,7 +241,7 @@ public class TestsTableController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(TestsTableController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
                 Parent root = (Parent) loader.load();
                 DiagnosisInfoController diagnosisID = loader.getController();
-                //diagnosisID.setDiagnosisID(appID, diagID);
+                diagnosisID.setDiagnosisID("-1", diagID);
                 testsPane.getChildren().clear();
                 testsPane.getChildren().add(root);
             } catch (IOException ex) {
@@ -268,13 +268,16 @@ public class TestsTableController implements Initializable {
 
         
            searchBtn.setOnMouseClicked((MouseEvent event) -> {
-             System.out.println("Created From:" + createdFromDate.getValue());
-             System.out.println("Created To:" + createdToDate.getValue());
-             System.out.println("Patient: " + patientComboBox.getSelectionModel().getSelectedItem());
-             System.out.println("Doctor: " + doctorComboBox.getSelectionModel().getSelectedItem());
-             System.out.println("Completed: " + completedComboBox.getSelectionModel().getSelectedItem());
-             System.out.println("Paid: " + paidComboBox.getSelectionModel().getSelectedItem());
-             
+             if(createdToDate.getValue() == null){
+                 
+             }
+//             System.out.println("Created From:" + createdFromDate.getValue());
+//             System.out.println("Created To:" + createdToDate.getValue());
+//             System.out.println("Patient: " + patientComboBox.getSelectionModel().getSelectedItem());
+//             System.out.println("Doctor: " + doctorComboBox.getSelectionModel().getSelectedItem());
+//             System.out.println("Completed: " + completedComboBox.getSelectionModel().getSelectedItem());
+//             System.out.println("Paid: " + paidComboBox.getSelectionModel().getSelectedItem());
+//             
         });
         
     }
