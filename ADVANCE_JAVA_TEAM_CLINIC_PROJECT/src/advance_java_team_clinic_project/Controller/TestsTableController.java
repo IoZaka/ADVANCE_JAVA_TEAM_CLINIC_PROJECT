@@ -144,16 +144,7 @@ public class TestsTableController implements Initializable {
            doctorHeader.setVisible(true);
            patientHeader.setVisible(true);
         }
-        
-        clearBtn.setOnMouseClicked((MouseEvent event) -> {
-           doctorComboBox.setValue(null);
-           patientComboBox.setValue(null);
-           completedComboBox.setValue(null);
-           paidComboBox.setValue(null);
-           createdToDate.setValue(null);
-           createdFromDate.setValue(null);
-        });
-        
+                
        customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(0,"No"), new CustomComboClass(-1,"All"));
        completedComboBox.setItems(FXCollections.observableArrayList(customCombo));
        paidComboBox.setItems(FXCollections.observableArrayList(customCombo));
@@ -301,8 +292,8 @@ public class TestsTableController implements Initializable {
            paidComboBox.setValue(null);
            paidComboBox.setValue(paidComboBox.getItems().get(2));
            completedComboBox.setValue(paidComboBox.getItems().get(2));
-           paidAllID = -1;
-           completedAllID = -1;
+           paidAllID = null;
+           completedAllID = null;
            createdToDate.setValue(null);
            createdFromDate.setValue(null);
            handleSearchAction(diagID);
