@@ -46,7 +46,8 @@ import javafx.util.StringConverter;
  */
 public class AppointmentRecordsController extends StageRedirect implements Initializable {
 
-    private AppointmentsModel ak = new AppointmentsModel();;
+    private AppointmentsModel ak = new AppointmentsModel();
+    ;
     private ResultSet rs;
     private ObservableList data;
     @FXML
@@ -77,11 +78,11 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
     private Text doctorHeader;
     @FXML
     private Text patientHeader;
-    
+
     private CustomComboModel ed = new CustomComboModel();
     ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
-    private Integer patientID = 0;
-    private Integer doctorID = 0;
+    private Integer patientID = null;
+    private Integer doctorID = null;
     @FXML
     private DatePicker createdFromDate;
     @FXML
@@ -98,144 +99,138 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
     private DatePicker appDate;
 
     private Integer appComboID = 1;
-        
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-      
-                  
-       if(user.getRoleID() == 3){
-           doctorComboBox.setVisible(false);
-           patientComboBox.setVisible(false);
-           doctorHeader.setVisible(false);
-           patientHeader.setVisible(false);
-        }else{
-           doctorComboBox.setVisible(true);
-           patientComboBox.setVisible(true);
-           doctorHeader.setVisible(true);
-           patientHeader.setVisible(true);
-        }
-        
-       if(user.getRoleID() == 2 || user.getRoleID() == 4){
-           doctorHeader.setVisible(true);
-           doctorComboBox.setVisible(true);
-       }
-       
-       if(user.getRoleID() == 4){
-           appointmentsComboBox.setVisible(true);
-           appointmentsHeader.setVisible(true);
-       }else{
-           appointmentsHeader.setVisible(false);
-           appointmentsComboBox.setVisible(false);
-       }
-       
-      
-       
-       customCombo.addAll(new CustomComboClass(2,"New Appointments"), new CustomComboClass(1,"All Appointments"));
-       appointmentsComboBox.setItems(FXCollections.observableArrayList(customCombo));
-       appointmentsComboBox.setValue(appointmentsComboBox.getItems().get(1));
-        clearBtn.setOnMouseClicked((MouseEvent event) -> {
-           doctorComboBox.setValue(null);
-           doctorID = 0;
-           patientComboBox.setValue(null);
-           patientID = 0;
-           appointmentsComboBox.setValue(appointmentsComboBox.getItems().get(1));
-           appComboID = 1;
-           createdToDate.setValue(null);
-           createdFromDate.setValue(null); 
-           appDate.setValue(null);
-           handleSearchAction();
-        });
-       
-       recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-       recordsTable.setId("tables");
-       
-       
-       editCol.setCellValueFactory(new PropertyValueFactory<>("edit"));
-       idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
-       appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
-       hourCol.setCellValueFactory(new PropertyValueFactory<>("hour"));
-       commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
-       createdDateCol.setCellValueFactory(new PropertyValueFactory<>("created"));
-       updatedDateCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
-       patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
-       doctorCol.setCellValueFactory(new PropertyValueFactory<>("doctor"));
-       updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
-       createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
-       deleteCol.setCellValueFactory(new PropertyValueFactory<>("delete"));
 
-       recordsTable.getColumns().addAll(editCol,idCol,appDateCol, hourCol, commentsCol,createdDateCol, updatedDateCol, patientCol, doctorCol, updatedByCol, createdByCol);
-      
-            
-       
-       Callback<TableColumn<RecordsClass, String>, TableCell<RecordsClass, String>>  cellFactory = (TableColumn<RecordsClass, String> param) -> {
-           TableCell<RecordsClass, String> cell = new TableCell<RecordsClass, String>() {
-               private Button btn = new Button();
-               
-               @Override
-               public void updateItem(String item, boolean empty) {
-                   super.updateItem(item, empty);
-                   if (empty) {
-                       setGraphic(null);
-                   } else {
-                       RecordsClass data = new RecordsClass();
-                       data = getTableView().getItems().get(getIndex());
-                       String appID = data.app_codeProperty().getValue().substring(4);
-                       btn.setText("EDIT");
-                       btn.setOnMouseClicked((MouseEvent event) -> {
-                           try {
-                               FXMLLoader loader = new FXMLLoader(AppointmentRecordsController.this.getClass().getResource("../View/AppointmentRecordInfoView.fxml"));
-                               Parent root = (Parent) loader.load();
-                               AppointmentRecordInfoController id = loader.getController();
-                               id.setID(appID);
-                               //Scene
-                               recordsPane.getChildren().clear();
-                               recordsPane.getChildren().add(root);
-                           } catch (IOException ex) {
-                               Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
-                           }
-                       });
-                       setGraphic(btn);
-                   }
-               }
-           };
-           return cell;
-       };
-       editCol.setCellFactory(cellFactory);
-       
-       Callback<TableColumn<RecordsClass, Void>, TableCell<RecordsClass, Void>>  deleteFactory = (TableColumn<RecordsClass, Void> param) -> {
-           TableCell<RecordsClass, Void> cell = new TableCell<RecordsClass, Void>() {
-               private Button btn = new Button();
-               @Override
-               public void updateItem(Void item, boolean empty) {
-                   super.updateItem(item, empty);
-                   if (empty) {
-                       setGraphic(null);
-                   } else {
-                       RecordsClass rdata = new RecordsClass();
-                       rdata = getTableView().getItems().get(getIndex());
-                       Integer appID = Integer.valueOf(rdata.app_codeProperty().getValue().substring(4)); //APP-NUM -> (4) NUM
-                       btn.setText("DELETE");
-                       btn.setOnMouseClicked((MouseEvent event) -> {
-                           try {
-                               System.out.println("Deleting.. " + appID);
-                               if(ak.deleteAppointment(appID)){
-                                       System.out.println(appID + " deleted.");
-                                       rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(),null,null,null,null,null,1);
-                                       data = FXCollections.observableArrayList(databaseRecords(rs));
-                                       recordsTable.setItems(data);
-                               }
-                           } catch (SQLException ex) {
-                               Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
-                           }
-                           
-                       });
-                       setGraphic(btn);
-                   }
-               }
-           };
-           return cell;
-       };
+        if (user.getRoleID() == 3) {
+            doctorComboBox.setVisible(false);
+            patientComboBox.setVisible(false);
+            doctorHeader.setVisible(false);
+            patientHeader.setVisible(false);
+        } else {
+            doctorComboBox.setVisible(true);
+            patientComboBox.setVisible(true);
+            doctorHeader.setVisible(true);
+            patientHeader.setVisible(true);
+        }
+
+        if (user.getRoleID() == 2 || user.getRoleID() == 4) {
+            doctorHeader.setVisible(true);
+            doctorComboBox.setVisible(true);
+        }
+
+        if (user.getRoleID() == 4) {
+            appointmentsComboBox.setVisible(true);
+            appointmentsHeader.setVisible(true);
+        } else {
+            appointmentsHeader.setVisible(false);
+            appointmentsComboBox.setVisible(false);
+        }
+
+        customCombo.addAll(new CustomComboClass(2, "New Appointments"), new CustomComboClass(1, "All Appointments"));
+        appointmentsComboBox.setItems(FXCollections.observableArrayList(customCombo));
+        appointmentsComboBox.setValue(appointmentsComboBox.getItems().get(1));
+        clearBtn.setOnMouseClicked((MouseEvent event) -> {
+            doctorComboBox.setValue(null);
+            doctorID = null;
+            patientComboBox.setValue(null);
+            patientID = null;
+            appointmentsComboBox.setValue(appointmentsComboBox.getItems().get(1));
+            appComboID = 1;
+            createdToDate.setValue(null);
+            createdFromDate.setValue(null);
+            appDate.setValue(null);
+            handleSearchAction();
+        });
+
+        recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        recordsTable.setId("tables");
+
+        editCol.setCellValueFactory(new PropertyValueFactory<>("edit"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
+        appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
+        hourCol.setCellValueFactory(new PropertyValueFactory<>("hour"));
+        commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
+        createdDateCol.setCellValueFactory(new PropertyValueFactory<>("created"));
+        updatedDateCol.setCellValueFactory(new PropertyValueFactory<>("updated"));
+        patientCol.setCellValueFactory(new PropertyValueFactory<>("patient"));
+        doctorCol.setCellValueFactory(new PropertyValueFactory<>("doctor"));
+        updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
+        createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
+        deleteCol.setCellValueFactory(new PropertyValueFactory<>("delete"));
+
+        recordsTable.getColumns().addAll(editCol, idCol, appDateCol, hourCol, commentsCol, createdDateCol, updatedDateCol, patientCol, doctorCol, updatedByCol, createdByCol);
+
+        Callback<TableColumn<RecordsClass, String>, TableCell<RecordsClass, String>> cellFactory = (TableColumn<RecordsClass, String> param) -> {
+            TableCell<RecordsClass, String> cell = new TableCell<RecordsClass, String>() {
+                private Button btn = new Button();
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        RecordsClass data = new RecordsClass();
+                        data = getTableView().getItems().get(getIndex());
+                        String appID = data.app_codeProperty().getValue().substring(4);
+                        btn.setText("EDIT");
+                        btn.setOnMouseClicked((MouseEvent event) -> {
+                            try {
+                                FXMLLoader loader = new FXMLLoader(AppointmentRecordsController.this.getClass().getResource("../View/AppointmentRecordInfoView.fxml"));
+                                Parent root = (Parent) loader.load();
+                                AppointmentRecordInfoController id = loader.getController();
+                                id.setID(appID);
+                                //Scene
+                                recordsPane.getChildren().clear();
+                                recordsPane.getChildren().add(root);
+                            } catch (IOException ex) {
+                                Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                        setGraphic(btn);
+                    }
+                }
+            };
+            return cell;
+        };
+        editCol.setCellFactory(cellFactory);
+
+        Callback<TableColumn<RecordsClass, Void>, TableCell<RecordsClass, Void>> deleteFactory = (TableColumn<RecordsClass, Void> param) -> {
+            TableCell<RecordsClass, Void> cell = new TableCell<RecordsClass, Void>() {
+                private Button btn = new Button();
+
+                @Override
+                public void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        RecordsClass rdata = new RecordsClass();
+                        rdata = getTableView().getItems().get(getIndex());
+                        Integer appID = Integer.valueOf(rdata.app_codeProperty().getValue().substring(4)); //APP-NUM -> (4) NUM
+                        btn.setText("DELETE");
+                        btn.setOnMouseClicked((MouseEvent event) -> {
+                            try {
+                                System.out.println("Deleting.. " + appID);
+                                if (ak.deleteAppointment(appID)) {
+                                    System.out.println(appID + " deleted.");
+                                    rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(), null, null, "01/01/1900", "01/01/2100", "01/01/1900", 1);
+                                    data = FXCollections.observableArrayList(databaseRecords(rs));
+                                    recordsTable.setItems(data);
+                                }
+                            } catch (SQLException ex) {
+                                Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                        });
+                        setGraphic(btn);
+                    }
+                }
+            };
+            return cell;
+        };
 
         switch (user.getRoleID()) {
             case 1:
@@ -256,47 +251,43 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
         }
 
         try {
-            
-            rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(),null,null,null,null,null,1);
+
+            rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(), null, null, "01/01/1900", "01/01/2100", "01/01/1900", 1);
             data = FXCollections.observableArrayList(databaseRecords(rs));
-            
-             
-            
-            
-            if(user.getRoleID() == 1){
+
+            if (user.getRoleID() == 1) {
                 deleteCol.setCellFactory(deleteFactory);
                 recordsTable.getColumns().add(deleteCol);
             }
-            
+
             ed.getObject();
             customCombo = ed.FetchUserFilterData(3);
             patientComboBox.setItems(FXCollections.observableArrayList(customCombo));
-            
+
             customCombo = ed.FetchUserFilterData(2);
             doctorComboBox.setItems(FXCollections.observableArrayList(customCombo));
-            
+
             setComboEventListeners();
-            
+
             recordsTable.setItems(data);
 
         } catch (SQLException ex) {
             Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         searchBtn.setOnMouseClicked((MouseEvent event) -> {
-           handleSearchAction();
+            handleSearchAction();
 //               System.out.println("App Date:" + appDate.getValue());
 //               System.out.println("Created From:" + createdFromDate.getValue());
 //               System.out.println("Created To:" + createdToDate.getValue());
 //               System.out.println("Patient: " + patientID);   
 //               System.out.println("Doctor: " +doctorID);
 //               System.out.println("Doctor: " +appComboID);
-           } );
-                
-        
+        });
+
     }
-    
-    private void setComboEventListeners(){
+
+    private void setComboEventListeners() {
         patientComboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomComboClass coPatient = (CustomComboClass) patientComboBox.getSelectionModel().getSelectedItem();
@@ -304,22 +295,22 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
                 System.out.println(coPatient.getId());
             }
         });
-        
+
         doctorComboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomComboClass coDoctor = (CustomComboClass) doctorComboBox.getSelectionModel().getSelectedItem();
                 doctorID = coDoctor.getId();
                 System.out.println(coDoctor.getId());
-                
+
             }
         });
-        
+
         appointmentsComboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomComboClass coAppointment = (CustomComboClass) appointmentsComboBox.getSelectionModel().getSelectedItem();
                 appComboID = coAppointment.getId();
                 System.out.println(coAppointment.getId());
-                
+
             }
         });
     }
@@ -352,34 +343,42 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
         return data;
     }
 
-    private void handleSearchAction(){
+    private void handleSearchAction() {
         try {
             String createdFrom, createdTo, app;
-            if(createdFromDate.getValue() != null){
+            if (createdFromDate.getValue() != null) {
                 createdFrom = createdFromDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            }else{createdFrom = null;}
-            if(createdToDate.getValue() != null){
+            } else {
+                createdFrom = "01/01/1900";
+            }
+            if (createdToDate.getValue() != null) {
                 createdTo = createdToDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            }else{createdTo = null;}
-            if(appDate.getValue() != null){
+            } else {
+                createdTo = "01/01/2100";
+            }
+            if (appDate.getValue() != null) {
                 app = appDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            }else{app = null;}
-            
-            System.out.println(Integer.valueOf(doctorID));
+            } else {
+                app = "01/01/1900";
+            }
+
+            /* System.out.println(Integer.valueOf(doctorID));
             System.out.println(Integer.valueOf(patientID));
-            System.out.println(Integer.valueOf(appComboID));
-            
-            rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(),Integer.valueOf(doctorID),Integer.valueOf(patientID),
+            System.out.println(Integer.valueOf(appComboID));*/
+            //System.out.println("App dat1e" + app);
+            /*  System.out.println("Created to" + createdTo);
+            System.out.println("created from" + createdFrom);*/
+            rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(), doctorID, patientID,
                     createdFrom,
                     createdTo,
-                    app,Integer.valueOf(appComboID));
+                    app, appComboID);
             data = FXCollections.observableArrayList(databaseRecords(rs));
             recordsTable.setItems(data);
+
         } catch (SQLException ex) {
             Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
+
     }
-    
-    
+
 }
