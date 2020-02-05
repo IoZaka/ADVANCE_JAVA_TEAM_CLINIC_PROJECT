@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="appointmentPane" maxHeight="680.0" maxWidth="1020.0" minHeight="680.0" minWidth="1020.0" prefHeight="680.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.NewAppointmentController">
+<AnchorPane fx:id="appointmentPane" maxHeight="680.0" maxWidth="1020.0" minHeight="680.0" minWidth="1020.0" prefHeight="680.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.NewAppointmentController">
     <children>
         <Label graphicTextGap="6.0" layoutX="348.0" layoutY="49.0" prefHeight="90.0" prefWidth="324.0" text="Reason of appoinment" textAlignment="CENTER" textFill="#304e8e" AnchorPane.topAnchor="49.0">
             <font>

@@ -39,16 +39,27 @@ public class ProfileController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        firstNameText.setText(firstNameText.getText() + " " + user.getFirstName());
-        lastNameText.setText(lastNameText.getText() + " " + user.getSurname());
+        
+        if(user.getFirstName() == null){firstNameText.setText(firstNameText.getText() + "");}
+        else{firstNameText.setText(firstNameText.getText() + " " + user.getFirstName());}
+        
+        if(user.getSurname() == null){lastNameText.setText(lastNameText.getText() + "");}
+        else{lastNameText.setText(lastNameText.getText() + " " + user.getSurname());}
+               
+        
         usernameText.setText(usernameText.getText() + " " + user.getUsername());
 
+        
+        
         switch (user.getRoleID()) {
             case 1:
                 roleText.setText(roleText.getText() + "ADMIN");
                 break;
             case 2:
                 roleText.setText(roleText.getText() + "DOCTOR");
+                break;
+            case 3:
+                roleText.setText(roleText.getText() + "PATIENT");
                 break;
             case 4:
                 roleText.setText(roleText.getText() + "RECEPTION");

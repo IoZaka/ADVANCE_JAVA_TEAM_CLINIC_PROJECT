@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="paymentPane" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.PaymentWindowController">
+<AnchorPane id="AnchorPane" fx:id="paymentPane" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.PaymentWindowController">
    <children>
       <Text layoutX="54.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount to be paid:">
          <font>

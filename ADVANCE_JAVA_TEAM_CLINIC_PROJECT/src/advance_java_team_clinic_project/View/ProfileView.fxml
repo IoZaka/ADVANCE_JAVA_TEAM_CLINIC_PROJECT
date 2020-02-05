@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="profilePane" maxHeight="680.0" maxWidth="1020.0" minHeight="680.0" minWidth="1020.0" prefHeight="680.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.ProfileController">
+<AnchorPane id="AnchorPane" fx:id="profilePane" maxHeight="680.0" maxWidth="1020.0" minHeight="680.0" minWidth="1020.0" prefHeight="680.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.ProfileController">
     <children>
         <Pane prefHeight="125.0" prefWidth="1020.0" style="-fx-background-color: #e6e6e6;">
             <children>

@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
@@ -36,6 +39,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -212,18 +216,26 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
                         Integer appID = Integer.valueOf(rdata.app_codeProperty().getValue().substring(4)); //APP-NUM -> (4) NUM
                         btn.setText("DELETE");
                         btn.setOnMouseClicked((MouseEvent event) -> {
-                            try {
-                                System.out.println("Deleting.. " + appID);
-                                if (ak.deleteAppointment(appID)) {
-                                    System.out.println(appID + " deleted.");
-                                    rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(), null, null, "01/01/1900", "01/01/2100", "01/01/1900", 1);
-                                    data = FXCollections.observableArrayList(databaseRecords(rs));
-                                    recordsTable.setItems(data);
-                                }
-                            } catch (SQLException ex) {
-                                Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("");
+                            alert.setHeaderText("Do you want to delete test?");
+                            alert.initStyle(StageStyle.UTILITY);
 
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get() == ButtonType.OK) {
+                                try {
+                                    System.out.println("Deleting.. " + appID);
+                                    if (ak.deleteAppointment(appID)) {
+                                        System.out.println(appID + " deleted.");
+                                        rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(), null, null, "01/01/1900", "01/01/2100", "01/01/1900", 1);
+                                        data = FXCollections.observableArrayList(databaseRecords(rs));
+                                        recordsTable.setItems(data);
+                                    }
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }else{}
+                            
                         });
                         setGraphic(btn);
                     }
@@ -362,12 +374,6 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
                 app = "01/01/1900";
             }
 
-            /* System.out.println(Integer.valueOf(doctorID));
-            System.out.println(Integer.valueOf(patientID));
-            System.out.println(Integer.valueOf(appComboID));*/
-            //System.out.println("App dat1e" + app);
-            /*  System.out.println("Created to" + createdTo);
-            System.out.println("created from" + createdFrom);*/
             rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(), doctorID, patientID,
                     createdFrom,
                     createdTo,

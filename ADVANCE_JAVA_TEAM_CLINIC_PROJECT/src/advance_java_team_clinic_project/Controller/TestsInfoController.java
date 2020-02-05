@@ -80,6 +80,8 @@ public class TestsInfoController implements Initializable {
     private Integer diagID = null;
     ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
     private Integer isPaidValue = 0;
+    
+    private Integer isCompletedID = null;
 
     /**
      * Initializes the controller class.
@@ -89,13 +91,27 @@ public class TestsInfoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(2,"No"));
-        isCompleted.setItems(FXCollections.observableArrayList(customCombo));
+     
+       isCompleted.setEditable(false);
+       
     }
 
     public void setTestIDView(boolean fromDiag, Integer testID, Integer diagId) {
         System.out.println(testID);
        
+        customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(2,"No"));
+       isCompleted.setItems(FXCollections.observableArrayList(customCombo));
+        
+        isCompleted.valueProperty().addListener((obs, oldval, newval) -> {
+            if (newval != null) {
+                CustomComboClass isCompletedCombo = (CustomComboClass) isCompleted.getSelectionModel().getSelectedItem();
+                isCompletedID = isCompletedCombo.getId();
+                System.out.println(isCompletedCombo.getId());
+            }else{
+                
+            }
+        });
+        
         diagID = diagId;
         if (testID != -1) {
             ResultSet rs = tests.getTestByID(testID);
@@ -108,7 +124,13 @@ public class TestsInfoController implements Initializable {
                     resultsInput.setText(rs.getString("results"));
                     isPaidInput.setText(rs.getString("Paid"));
                     paidAmountInput.setText(rs.getString("paid_amount"));
-                    //isCompleted.setValue(rs.getString("is_completed"));
+                    String isCompletedInput = rs.getString("is_completed");
+                    if(isCompletedInput.equals("Yes")){
+                        System.out.println("YES");
+                        isCompleted.setValue(isCompleted.getItems().get(0));
+                    }else{
+                       // isCompleted.setValue(isCompleted.getItems().get(1));
+                    }
                     //isCompleted.setValue(0);
                     createdByInput.setText(rs.getString("createdby"));
                     updatedByInput.setText(rs.getString("updated_by"));
@@ -123,6 +145,10 @@ public class TestsInfoController implements Initializable {
             }
 
             if (loggedInUser.getRoleID() == 3) {
+                descriptionInput.setEditable(false);
+                resultsInput.setEditable(false);
+                costInput.setEditable(false);
+                isCompleted.setEditable(false);
                 updateBtn.setVisible(false);
                 createBtn.setVisible(false);
                 if (isPaidValue == 1) {
@@ -151,8 +177,10 @@ public class TestsInfoController implements Initializable {
             }
         });
         
+       
+        
         updateBtn.setOnMouseClicked((MouseEvent event) -> {
-            tests.updateTest(testID, descriptionInput.getText(), 0, Integer.valueOf(costInput.getText()),resultsInput.getText());
+            tests.updateTest(testID, descriptionInput.getText(), isCompletedID, Integer.valueOf(costInput.getText()),resultsInput.getText());
             setTestIDView(fromDiag,testID,diagId);
         });
 

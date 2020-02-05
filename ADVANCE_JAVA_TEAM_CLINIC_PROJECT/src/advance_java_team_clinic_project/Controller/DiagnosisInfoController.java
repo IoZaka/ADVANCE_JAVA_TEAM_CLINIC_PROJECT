@@ -173,7 +173,7 @@ public class DiagnosisInfoController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AppointmentRecordInfoView.fxml"));
                 Parent root = (Parent) loader.load();
                 AppointmentRecordInfoController idRecord = loader.getController();
-                idRecord.setID(app_id);
+                idRecord.setID(appInfoId.toString());
                 diagnosisPanel.getChildren().clear();
                 diagnosisPanel.getChildren().add(root);
             } catch (IOException ex) {

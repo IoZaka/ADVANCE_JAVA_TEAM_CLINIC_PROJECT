@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +26,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
@@ -34,6 +38,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 /**
@@ -93,8 +99,11 @@ public class TestsTableController implements Initializable {
     @FXML
     private Text patientHeader;
     
-    private Integer patientID;
-    private Integer doctorID;
+    private Integer patientID = null;
+    private Integer doctorID = null;
+    private Integer completedAllID = null;
+    private Integer paidAllID = null;
+    
     @FXML
     private Button clearBtn;
     
@@ -145,11 +154,11 @@ public class TestsTableController implements Initializable {
            createdFromDate.setValue(null);
         });
         
-       customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(0,"No"));
+       customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(0,"No"), new CustomComboClass(-1,"All"));
        completedComboBox.setItems(FXCollections.observableArrayList(customCombo));
        paidComboBox.setItems(FXCollections.observableArrayList(customCombo));
       
-       testsTable.getColumns().addAll(idCol, descriptionCol, isCompletedCol, costCol, isPaidCol, resultsCol, statusCol, doctorCol, createdCol, createdByCol, updatedCol, updatedByCol, patientCol);
+       testsTable.getColumns().addAll(idCol, descriptionCol, isCompletedCol, costCol, isPaidCol, resultsCol, doctorCol, createdCol, createdByCol, updatedCol, updatedByCol, patientCol);
     }
 
     /**
@@ -215,14 +224,26 @@ public class TestsTableController implements Initializable {
                        Integer testID = Integer.valueOf(test.idProperty().getValue());
                        btn.setText("DELETE");
                        btn.setOnMouseClicked((MouseEvent event) -> {
-                           if(tests.deleteTest(testID)){
-                               try {
-                                   data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
-                                   testsTable.setItems(data);
-                               } catch (SQLException ex) {
-                                   Logger.getLogger(TestsTableController.class.getName()).log(Level.SEVERE, null, ex);
-                               }
-                           }             
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("");
+                            alert.setHeaderText("Do you want to delete test?");
+                            alert.initStyle(StageStyle.UTILITY);
+
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get() == ButtonType.OK) {
+                               if(tests.deleteTest(testID)){
+                                    try {
+                                        data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID,doctorID,patientID,"01/01/1900","01/01/2100",completedAllID,paidAllID)));
+                                        testsTable.setItems(data);
+                                    } catch (SQLException ex) {
+                                            Logger.getLogger(TestsTableController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                           }
+                            } else {
+                                
+                            }
+
+                          
                        });
                        setGraphic(btn);
                    }
@@ -250,7 +271,7 @@ public class TestsTableController implements Initializable {
         });
 
         try {
-            data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID)));
+            data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID,doctorID,patientID,"01/01/1900","01/01/2100",completedAllID,paidAllID)));
             ed.getObject();
             
             customCombo = ed.FetchUserFilterData(3);
@@ -268,17 +289,24 @@ public class TestsTableController implements Initializable {
 
         
            searchBtn.setOnMouseClicked((MouseEvent event) -> {
-             if(createdToDate.getValue() == null){
-                 
-             }
-//             System.out.println("Created From:" + createdFromDate.getValue());
-//             System.out.println("Created To:" + createdToDate.getValue());
-//             System.out.println("Patient: " + patientComboBox.getSelectionModel().getSelectedItem());
-//             System.out.println("Doctor: " + doctorComboBox.getSelectionModel().getSelectedItem());
-//             System.out.println("Completed: " + completedComboBox.getSelectionModel().getSelectedItem());
-//             System.out.println("Paid: " + paidComboBox.getSelectionModel().getSelectedItem());
-//             
+             handleSearchAction(diagID);            
         });
+           
+        clearBtn.setOnMouseClicked((MouseEvent event) -> {
+           doctorComboBox.setValue(null);
+           doctorID = null;
+           patientComboBox.setValue(null);
+           patientID = null;
+           completedComboBox.setValue(null);
+           paidComboBox.setValue(null);
+           paidComboBox.setValue(paidComboBox.getItems().get(2));
+           completedComboBox.setValue(paidComboBox.getItems().get(2));
+           paidAllID = -1;
+           completedAllID = -1;
+           createdToDate.setValue(null);
+           createdFromDate.setValue(null);
+           handleSearchAction(diagID);
+        });   
         
     }
     
@@ -303,20 +331,49 @@ public class TestsTableController implements Initializable {
         paidComboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomComboClass coPaid = (CustomComboClass) paidComboBox.getSelectionModel().getSelectedItem();
-                System.out.println(coPaid.getId());
+               if(coPaid.getId() == -1){
+                   paidAllID = null;
+               }else{
+                   paidAllID = coPaid.getId();
+               }
                 
             }
         });
         
         completedComboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
-                CustomComboClass coPaid = (CustomComboClass) completedComboBox.getSelectionModel().getSelectedItem();
-                System.out.println(coPaid.getId());
+                CustomComboClass coCompleted = (CustomComboClass) completedComboBox.getSelectionModel().getSelectedItem();
+                System.out.println(coCompleted.getId());
+                if(coCompleted.getId() == -1){
+                   completedAllID = null;
+               }else{
+                   completedAllID = coCompleted.getId();
+               }
                 
             }
         });
     }
     
+    private void handleSearchAction(Integer diagID){
+            String createdFrom, createdTo, app;
+            if (createdFromDate.getValue() != null) {
+                createdFrom = createdFromDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } else {
+                createdFrom = "01/01/1900";
+            }
+            if (createdToDate.getValue() != null) {
+                createdTo = createdToDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } else {
+                createdTo = "01/01/2100";
+            }
+        try {
+            data = FXCollections.observableArrayList(databaseTests(tests.getTestByDiagID(diagID,doctorID,patientID,createdFrom,createdTo,completedAllID,paidAllID)));
+        } catch (SQLException ex) {
+            Logger.getLogger(TestsTableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            testsTable.setItems(data);
+
+    }
     
     private ArrayList databaseTests(ResultSet rs) throws SQLException {
         ArrayList<TestsModel> data = new ArrayList();
@@ -330,7 +387,6 @@ public class TestsTableController implements Initializable {
             test.costProperty().set(rs.getString("cost"));
             test.is_paidProperty().set(rs.getString("paid"));
             test.resultsProperty().set(rs.getString("results"));
-            test.status_idProperty().set(rs.getString("status"));
             test.doctorProperty().set(rs.getString("doctor"));
                 test.createdProperty().set(rs.getString("created"));
                 test.created_byProperty().set(rs.getString("created_by"));

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="idRecordPane" maxWidth="1020.0" minWidth="1020.0" prefHeight="680.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="advance_java_team_clinic_project.Controller.AppointmentRecordInfoController">
+<AnchorPane id="AnchorPane" fx:id="idRecordPane" maxWidth="1020.0" minWidth="1020.0" prefHeight="680.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="advance_java_team_clinic_project.Controller.AppointmentRecordInfoController">
     <children>
         <GridPane layoutX="150.0" layoutY="100.0" prefHeight="500.0" prefWidth="700.0">
             <columnConstraints>
