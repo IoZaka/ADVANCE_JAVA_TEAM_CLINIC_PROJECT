@@ -167,7 +167,6 @@ public class DiagnosisInfoController implements Initializable {
             }
             createDiagnose.setVisible(false);
         }
-        System.out.println("six step");
         backBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
                 FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AppointmentRecordInfoView.fxml"));
@@ -191,6 +190,15 @@ public class DiagnosisInfoController implements Initializable {
         });
         createDiagnose.setOnMouseClicked((MouseEvent event) -> {
             diagInfoModel.createDiagnoseDetails(appInfoId, commentsText.getText(), medicineText.getText());
+            Integer diag_ID = null;
+            try {
+                diag_ID = fetchDiagID(app_id);
+            } catch (SQLException ex) {
+                Logger.getLogger(DiagnosisInfoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            setDiagnosisID(appInfoId.toString(),diag_ID);
+            
+            
         });
 
         /* TESTS CONTEXT */
@@ -222,7 +230,16 @@ public class DiagnosisInfoController implements Initializable {
         });
         /* END -- TESTS CONTEXT */
     }
-
+    
+    private Integer fetchDiagID(String app_id) throws SQLException{
+        ResultSet rs = diagInfoModel.getDiagId(app_id);
+        Integer dID = null;
+        while(rs.next()){
+                dID =  rs.getInt("id");
+        }
+        return dID;
+    }
+    
     private void admissionRedirect(Integer diagID) {
         try {
             FXMLLoader loader = new FXMLLoader(DiagnosisInfoController.this.getClass().getResource("../View/AdmissionInfoView.fxml"));

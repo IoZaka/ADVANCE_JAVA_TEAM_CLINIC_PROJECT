@@ -78,6 +78,8 @@ public class DiagnosisInfoModel implements DiagnosisInfoDao {
         }
         return rs;
     }
+    
+    
 
     /**
      *
@@ -166,6 +168,19 @@ public class DiagnosisInfoModel implements DiagnosisInfoDao {
         }
 
         return ak;
+    }
+
+    @Override
+    public ResultSet getDiagId(String app_id) {
+       try {
+            getObject();
+            stmt = object.connection.createStatement();
+            sql = "select id from pm_diagnosis where app_info_id = " + app_id;
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(DiagnosisInfoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return rs;
     }
 
 }

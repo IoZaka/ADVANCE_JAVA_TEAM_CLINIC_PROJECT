@@ -157,8 +157,14 @@ public class AdmissionInfoController implements Initializable {
             }
         });
 
-        createBtn.setOnMouseClicked((MouseEvent event) -> {
-            if (admissionModel.createAdmissionData(diagID, Integer.valueOf(costPerDayinput.getText()), roomInput.getText(), bedInput.getText(), admissionDateInput.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))) {
+        createBtn.setOnMouseClicked((MouseEvent event) -> { 
+            Integer cost = null;
+            if(costPerDayinput.getText().equals("")){
+                cost = null;
+            }else{
+                Integer.valueOf(costPerDayinput.getText());
+            }
+            if (admissionModel.createAdmissionData(diagID, cost, roomInput.getText(), bedInput.getText(), admissionDateInput.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))) {
                 alert.setTitle("Create");
                 alert.setContentText("Creation submitted");
                 alert.showAndWait();

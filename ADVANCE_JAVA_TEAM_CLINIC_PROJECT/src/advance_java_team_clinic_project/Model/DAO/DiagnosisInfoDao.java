@@ -20,5 +20,7 @@ public interface DiagnosisInfoDao {
     public void updateDiagnoseDetails(Integer diag_id, String lComments, String lMeds);
 
     public Integer getAdmissionId(Integer diag_id);
+    
+    public ResultSet getDiagId(String app_id);
 
 }

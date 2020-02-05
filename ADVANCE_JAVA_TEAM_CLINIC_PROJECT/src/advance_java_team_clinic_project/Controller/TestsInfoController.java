@@ -21,12 +21,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -178,6 +181,26 @@ public class TestsInfoController implements Initializable {
         });
         
        
+        payBtn.setOnMouseClicked((MouseEvent event) -> {
+            FXMLLoader loader = new FXMLLoader(TestsInfoController.this.getClass().getResource("../View/PaymentWindowView.fxml"));
+            Parent root = null;
+            try {
+                root = (Parent) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdmissionInfoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Stage paymentStage = new Stage();
+            Scene scene = new Scene(root);
+            paymentStage.setTitle("Enter amount ");
+            paymentStage.setScene(scene);
+            paymentStage.setResizable(false);
+            paymentStage.show();
+            PaymentWindowController pay = loader.getController();
+            pay.setPayment(1, testID);
+            paymentStage.setOnCloseRequest((WindowEvent eventl) -> {
+                setTestIDView(fromDiag,testID,diagID);
+            });
+        });
         
         updateBtn.setOnMouseClicked((MouseEvent event) -> {
             tests.updateTest(testID, descriptionInput.getText(), isCompletedID, Integer.valueOf(costInput.getText()),resultsInput.getText());

@@ -96,15 +96,15 @@ public class UserMenuController extends StageRedirect implements Initializable {
                 buttonsVBox.setSpacing(30);
                 break;
             case 3:
-                buttonsVBox.getChildren().addAll(profileBtn,recordsBtn, editProfileBtn, makeAnAppointmentBtn, logoutBtn);
+                buttonsVBox.getChildren().addAll(profileBtn,editProfileBtn,recordsBtn, testsBtn, makeAnAppointmentBtn, logoutBtn);
                 loadUIonSamePane("../View/ProfileView.fxml", userBorderPane);
-                recordsBtn.setSelected(true);
-                buttonsVBox.setSpacing(30);
+                profileBtn.setSelected(true);
+                buttonsVBox.setSpacing(10);
                 break;
             case 4:
                 buttonsVBox.getChildren().addAll(profileBtn, editProfileBtn, searchUserBtn, appointmentsBtn, testsBtn, logoutBtn);
                 loadUIonSamePane("../View/ProfileView.fxml", userBorderPane);
-                recordsBtn.setSelected(true);
+                profileBtn.setSelected(true);
                 buttonsVBox.setSpacing(10);
                 break;
             case 5:

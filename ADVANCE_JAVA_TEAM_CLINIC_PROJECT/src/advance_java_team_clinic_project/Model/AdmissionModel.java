@@ -27,6 +27,7 @@ public class AdmissionModel implements AdmissionDao{
     private LoggedInUserClass user = LoggedInUserClass.getInstance();
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     private DatabaseConnectionModel object;
+    LoggedInUserClass loggedInUser = LoggedInUserClass.getInstance();
 
     /**
      * Get the database connection
@@ -84,7 +85,7 @@ public class AdmissionModel implements AdmissionDao{
         try {
             getObject();
             stmt = object.connection.createStatement();
-            sql = "insert into pm_addmissions (diag_id, cost_per_day, room, bed, admission_date, is_paid,created_by, updated_by) "
+            sql = "insert into pm_addmissions (diag_id, cost_per_day, room, bed,is_paid, admission_date,created_by, updated_by) "
                     + "values (" + diagID + "," + costPerDay + ",'" + room + "','" + bed + "',0,to_date('" + ad_date + "','dd/mm/yyyy'), " + user.getId() + ", " + user.getId() + ")";
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
@@ -134,7 +135,7 @@ public class AdmissionModel implements AdmissionDao{
         try {
             getObject();
             stmt = object.connection.createStatement();
-            sql = "update pm_addmissions set paid_amount = "+ amount +" where id = " + ID;
+            sql = "update pm_addmissions set paid_amount = "+ amount +",updated_by="+loggedInUser.getId()+" where id = " + ID;
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             Logger.getLogger(AdmissionModel.class.getName()).log(Level.SEVERE, null, ex);

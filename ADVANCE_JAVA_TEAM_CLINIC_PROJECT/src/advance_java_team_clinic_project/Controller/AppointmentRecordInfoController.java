@@ -100,6 +100,9 @@ public class AppointmentRecordInfoController implements Initializable {
             updateBtn.setVisible(false);
         }
         
+       
+        
+        
         appDateInput.setEditable(false);
         appCodeInput.setEditable(false);
         createdInput.setEditable(false);
@@ -157,17 +160,22 @@ public class AppointmentRecordInfoController implements Initializable {
         }
 
         if (diagID == -1) {
-            if (user.getRoleID() == 3) {
+            if (user.getRoleID() == 3 || user.getRoleID() == 4) {
                 diagnoseInfoBtn.setVisible(false);
             } else {
-                if (user.getRoleID() != 3) {
+                if (user.getRoleID() != 3 && user.getRoleID() != 4) {
                     diagnoseInfoBtn.setVisible(true);
                     diagnoseInfoBtn.setText("Create diagnose");
                 }
             }
         } else {
-            diagnoseInfoBtn.setVisible(true);
-            diagnoseInfoBtn.setText("Diagnose Info");
+            if(user.getRoleID() == 1 || user.getRoleID() == 2){
+               diagnoseInfoBtn.setVisible(true);
+                 diagnoseInfoBtn.setText("Diagnose Info"); 
+            }else{
+                diagnoseInfoBtn.setVisible(false);
+            }
+            
         }
         
         doctorComboBox.valueProperty().addListener((obs, oldval, newval) -> {
@@ -195,23 +203,20 @@ public class AppointmentRecordInfoController implements Initializable {
         });
 
         diagnoseInfoBtn.setOnMouseClicked((MouseEvent event) -> {
-            try {
-                
-                if(user.getRoleID() == 4 && (appDateInput.getValue() == null || doctorComboBox.getSelectionModel().getSelectedItem() == null || hourInput.getText() == null)){
-                     failAlert.setTitle("Problem");
-                     failAlert.setContentText("Fill all inputs");
-                     failAlert.showAndWait();
-                }else{
+           
+               
                     FXMLLoader loader = new FXMLLoader(AppointmentRecordInfoController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
-                    Parent root = (Parent) loader.load();
+                    Parent root = null;
+            try {
+                root = (Parent) loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     DiagnosisInfoController diagnosisID = loader.getController();
                     diagnosisID.setDiagnosisID(appID, diagID);
                     idRecordPane.getChildren().clear();
                     idRecordPane.getChildren().add(root);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+       
         });
 
     }

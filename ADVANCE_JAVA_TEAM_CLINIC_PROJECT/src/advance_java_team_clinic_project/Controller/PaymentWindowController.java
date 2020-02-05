@@ -6,6 +6,7 @@
 package advance_java_team_clinic_project.Controller;
 
 import advance_java_team_clinic_project.Model.AdmissionModel;
+import advance_java_team_clinic_project.Model.TestsModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
@@ -62,7 +63,10 @@ public class PaymentWindowController implements Initializable {
         
        submitBtn.setOnMouseClicked((MouseEvent event) -> {
             if(type == 1){
-                
+                TestsModel test = new TestsModel();
+                test.updateIsPaid(ID, Integer.valueOf(amountInput.getText()));
+                 Stage stage = (Stage) paymentPane.getScene().getWindow();
+                paymentPane.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
             }else if(type == 2){
                 AdmissionModel admission = new AdmissionModel();
                 admission.updateIsPaid(ID,Integer.valueOf(amountInput.getText()));

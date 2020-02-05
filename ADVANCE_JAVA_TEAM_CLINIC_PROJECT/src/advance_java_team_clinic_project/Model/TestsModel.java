@@ -42,6 +42,8 @@ public class TestsModel {
     private StringProperty doctor = new SimpleStringProperty();
     private LoggedInUserClass loggedInUser = LoggedInUserClass.getInstance();
 
+    
+    
     /**
      *
      * @return
@@ -155,6 +157,14 @@ public class TestsModel {
     }
 
     public TestsModel() {
+    }
+    
+     public void getObject() {
+        try {
+            object = DatabaseConnectionModel.getInstance();
+        } catch (SQLException ex) {
+            Logger.getLogger(InsuranceDetailsModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -435,7 +445,7 @@ public class TestsModel {
 
     public boolean deleteTest(Integer ID){
         try {
-            object = DatabaseConnectionModel.getInstance();
+            
             stmt = object.connection.createStatement();
             sql = "delete from pm_diag_tests where id = " +ID;
             rs = stmt.executeQuery(sql);
@@ -444,6 +454,17 @@ public class TestsModel {
             return false;
         }
         return true;
+    }
+    
+    public void updateIsPaid(Integer ID, Integer amount) {
+        try {
+            getObject();
+            stmt = object.connection.createStatement();
+            sql = "update pm_diag_tests set paid_amount = "+ amount +",updated_by="+loggedInUser.getId()+" where id = " + ID;
+            rs = stmt.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdmissionModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
