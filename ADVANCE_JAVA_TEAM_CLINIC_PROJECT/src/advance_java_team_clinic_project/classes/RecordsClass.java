@@ -14,11 +14,11 @@ import javafx.beans.property.StringProperty;
  */
 public class RecordsClass {
 
-    private StringProperty id = new SimpleStringProperty();
+    private StringProperty edit = new SimpleStringProperty();
+    private StringProperty app_code = new SimpleStringProperty();
     private StringProperty app_date = new SimpleStringProperty();
     private StringProperty hour = new SimpleStringProperty();
     private StringProperty comments = new SimpleStringProperty();
-    private StringProperty app_code = new SimpleStringProperty();
     private StringProperty created = new SimpleStringProperty();
     private StringProperty updated = new SimpleStringProperty();
     private StringProperty patient = new SimpleStringProperty();
@@ -30,8 +30,16 @@ public class RecordsClass {
      *
      * @return
      */
-    public StringProperty idProperty() {
-        return id;
+    public StringProperty editProperty() {
+        return app_code;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public StringProperty app_codeProperty() {
+        return app_code;
     }
 
     /**
@@ -56,14 +64,6 @@ public class RecordsClass {
      */
     public StringProperty commentsProperty() {
         return comments;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public StringProperty app_codeProperty() {
-        return app_code;
     }
 
     /**

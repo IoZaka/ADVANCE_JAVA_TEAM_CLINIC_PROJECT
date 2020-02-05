@@ -80,6 +80,7 @@ public class AppointmentRecordInfoController implements Initializable {
     private Button updateBtn;
 
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private Alert failAlert = new Alert(Alert.AlertType.ERROR);
     private Integer doctorID;
     
     /**
@@ -195,12 +196,19 @@ public class AppointmentRecordInfoController implements Initializable {
 
         diagnoseInfoBtn.setOnMouseClicked((MouseEvent event) -> {
             try {
-                FXMLLoader loader = new FXMLLoader(AppointmentRecordInfoController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
-                Parent root = (Parent) loader.load();
-                DiagnosisInfoController diagnosisID = loader.getController();
-                diagnosisID.setDiagnosisID(appID, diagID);
-                idRecordPane.getChildren().clear();
-                idRecordPane.getChildren().add(root);
+                
+                if(user.getRoleID() == 4 && (appDateInput.getValue() == null || doctorComboBox.getSelectionModel().getSelectedItem() == null || hourInput.getText() == null)){
+                     failAlert.setTitle("Problem");
+                     failAlert.setContentText("Fill all inputs");
+                     failAlert.showAndWait();
+                }else{
+                    FXMLLoader loader = new FXMLLoader(AppointmentRecordInfoController.this.getClass().getResource("../View/DiagnosisInfoView.fxml"));
+                    Parent root = (Parent) loader.load();
+                    DiagnosisInfoController diagnosisID = loader.getController();
+                    diagnosisID.setDiagnosisID(appID, diagID);
+                    idRecordPane.getChildren().clear();
+                    idRecordPane.getChildren().add(root);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(AppointmentRecordInfoController.class.getName()).log(Level.SEVERE, null, ex);
             }

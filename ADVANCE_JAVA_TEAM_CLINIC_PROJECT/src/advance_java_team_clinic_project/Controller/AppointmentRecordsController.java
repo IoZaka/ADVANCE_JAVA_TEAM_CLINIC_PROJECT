@@ -49,6 +49,7 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
     @FXML
     private TableView<RecordsClass> recordsTable = new TableView<>();
 
+    TableColumn editCol = new TableColumn("EDIT");
     TableColumn idCol = new TableColumn("CODE");
     TableColumn appDateCol = new TableColumn("APP DATE");
     TableColumn hourCol = new TableColumn("HOUR");
@@ -90,7 +91,11 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
     private Text appointmentsHeader;
     @FXML
     private Button clearBtn;
+    @FXML
+    private DatePicker appDate;
 
+    private Integer appComboID;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -105,7 +110,12 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
            doctorHeader.setVisible(true);
            patientHeader.setVisible(true);
         }
-           
+        
+       if(user.getRoleID() == 2 || user.getRoleID() == 4){
+           doctorHeader.setVisible(true);
+           doctorComboBox.setVisible(true);
+       }
+       
        if(user.getRoleID() == 4){
            appointmentsComboBox.setVisible(true);
            appointmentsHeader.setVisible(true);
@@ -114,19 +124,25 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
            appointmentsComboBox.setVisible(false);
        }
        
-       clearBtn.setOnMouseClicked((MouseEvent event) -> {
+      
+       
+       customCombo.addAll(new CustomComboClass(2,"New Appointments"), new CustomComboClass(1,"All Appointments"));
+       appointmentsComboBox.setItems(FXCollections.observableArrayList(customCombo));
+       
+        clearBtn.setOnMouseClicked((MouseEvent event) -> {
            doctorComboBox.setValue(null);
            patientComboBox.setValue(null);
-           appointmentsComboBox.setValue(null);
+           appointmentsComboBox.setValue(appointmentsComboBox.getItems().get(1));
            createdToDate.setValue(null);
            createdFromDate.setValue(null);
+           appDate.setValue(null);
         });
-       
-       customCombo.addAll(new CustomComboClass(0,"New Appointments"), new CustomComboClass(1,"All Appointments"));
-       appointmentsComboBox.setItems(FXCollections.observableArrayList(customCombo));
        
        recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
        recordsTable.setId("tables");
+       
+       
+       editCol.setCellValueFactory(new PropertyValueFactory<>("edit"));
        idCol.setCellValueFactory(new PropertyValueFactory<>("app_code"));
        appDateCol.setCellValueFactory(new PropertyValueFactory<>("app_date"));
        hourCol.setCellValueFactory(new PropertyValueFactory<>("hour"));
@@ -138,26 +154,25 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
        updatedByCol.setCellValueFactory(new PropertyValueFactory<>("updated_by"));
        createdByCol.setCellValueFactory(new PropertyValueFactory<>("created_by"));
        deleteCol.setCellValueFactory(new PropertyValueFactory<>("delete"));
-       
-       
-        recordsTable.getColumns().add(idCol);
-        recordsTable.getColumns().addAll(appDateCol, hourCol, commentsCol,createdDateCol, updatedDateCol, patientCol, doctorCol, updatedByCol, createdByCol);
+
+       recordsTable.getColumns().addAll(editCol,idCol,appDateCol, hourCol, commentsCol,createdDateCol, updatedDateCol, patientCol, doctorCol, updatedByCol, createdByCol);
+      
             
        
-       Callback<TableColumn<RecordsClass, Void>, TableCell<RecordsClass, Void>>  cellFactory = (TableColumn<RecordsClass, Void> param) -> {
-           TableCell<RecordsClass, Void> cell = new TableCell<RecordsClass, Void>() {
+       Callback<TableColumn<RecordsClass, String>, TableCell<RecordsClass, String>>  cellFactory = (TableColumn<RecordsClass, String> param) -> {
+           TableCell<RecordsClass, String> cell = new TableCell<RecordsClass, String>() {
                private Button btn = new Button();
                
                @Override
-               public void updateItem(Void item, boolean empty) {
+               public void updateItem(String item, boolean empty) {
                    super.updateItem(item, empty);
                    if (empty) {
                        setGraphic(null);
                    } else {
                        RecordsClass data = new RecordsClass();
                        data = getTableView().getItems().get(getIndex());
-                       String appID = data.idProperty().getValue().substring(4);
-                       btn.setText("OPEN");
+                       String appID = data.app_codeProperty().getValue().substring(4);
+                       btn.setText("EDIT");
                        btn.setOnMouseClicked((MouseEvent event) -> {
                            try {
                                FXMLLoader loader = new FXMLLoader(AppointmentRecordsController.this.getClass().getResource("../View/AppointmentRecordInfoView.fxml"));
@@ -177,7 +192,7 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
            };
            return cell;
        };
-       idCol.setCellFactory(cellFactory);
+       editCol.setCellFactory(cellFactory);
        
        Callback<TableColumn<RecordsClass, Void>, TableCell<RecordsClass, Void>>  deleteFactory = (TableColumn<RecordsClass, Void> param) -> {
            TableCell<RecordsClass, Void> cell = new TableCell<RecordsClass, Void>() {
@@ -190,7 +205,7 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
                    } else {
                        RecordsClass rdata = new RecordsClass();
                        rdata = getTableView().getItems().get(getIndex());
-                       Integer appID = Integer.valueOf(rdata.idProperty().getValue().substring(4)); //APP-NUM -> (4) NUM
+                       Integer appID = Integer.valueOf(rdata.app_codeProperty().getValue().substring(4)); //APP-NUM -> (4) NUM
                        btn.setText("DELETE");
                        btn.setOnMouseClicked((MouseEvent event) -> {
                            try {
@@ -235,7 +250,9 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
             
             rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId());
             data = FXCollections.observableArrayList(databaseRecords(rs));
-
+            
+             
+            
             
             if(user.getRoleID() == 1){
                 deleteCol.setCellFactory(deleteFactory);
@@ -287,6 +304,7 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
         appointmentsComboBox.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomComboClass coAppointment = (CustomComboClass) appointmentsComboBox.getSelectionModel().getSelectedItem();
+                appComboID = coAppointment.getId();
                 System.out.println(coAppointment.getId());
                 
             }
@@ -305,7 +323,8 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
 
         while (rs.next()) {
             RecordsClass record = new RecordsClass();
-            record.idProperty().set(rs.getString("app_code"));
+            record.editProperty().set(rs.getString("app_code"));
+            record.app_codeProperty().set(rs.getString("app_code"));
             record.app_dateProperty().set(rs.getString("app_date"));
             record.hourProperty().set(rs.getString("app_hour"));
             record.commentsProperty().set(rs.getString("comments"));
