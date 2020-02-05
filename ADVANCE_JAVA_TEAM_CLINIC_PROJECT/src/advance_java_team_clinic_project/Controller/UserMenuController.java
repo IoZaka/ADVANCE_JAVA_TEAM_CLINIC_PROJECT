@@ -144,7 +144,6 @@ public class UserMenuController extends StageRedirect implements Initializable {
             SearchUserWindowController searchController = loader.getController();
             searchController.setResults("");
             userBorderPane.setCenter(root);
-            userBorderPane.setCenter(root);
         });
 
         editProfileBtn.setOnMouseClicked((MouseEvent event) -> {
@@ -160,8 +159,6 @@ public class UserMenuController extends StageRedirect implements Initializable {
             EditProfileController editController = loader.getController();
             editController.myInit(loggedInUser.getId());
             userBorderPane.setCenter(root);
-            userBorderPane.setCenter(root);
-
         });
 
         logoutBtn.setOnMouseClicked((MouseEvent event) -> {

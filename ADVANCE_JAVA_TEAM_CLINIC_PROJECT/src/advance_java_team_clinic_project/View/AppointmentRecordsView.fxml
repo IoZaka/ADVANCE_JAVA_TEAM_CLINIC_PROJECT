@@ -24,11 +24,11 @@
       <DatePicker fx:id="createdFromDate" layoutX="308.0" layoutY="186.0" />
       <Text layoutX="359.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created To" />
       <DatePicker fx:id="createdToDate" layoutX="308.0" layoutY="259.0" />
-      <Button fx:id="searchBtn" layoutX="570.0" layoutY="251.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="81.0" styleClass="appBtns" stylesheets="@style.css" text="Search" />
-      <ComboBox fx:id="appointmentsComboBox" layoutX="536.0" layoutY="186.0" prefHeight="25.0" prefWidth="174.0" />
-      <Text fx:id="appointmentsHeader" layoutX="585.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments" />
-      <Button fx:id="clearBtn" layoutX="696.0" layoutY="251.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="72.0" styleClass="cancelBtn" stylesheets="@style.css" text="Clear" />
-      <Text layoutX="360.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="APP_DATE" />
-      <DatePicker fx:id="appDate" layoutX="308.0" layoutY="115.0" prefHeight="25.0" prefWidth="174.0" />
+      <Button fx:id="searchBtn" layoutX="717.0" layoutY="251.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="81.0" styleClass="appBtns" stylesheets="@style.css" text="Search" />
+      <ComboBox fx:id="appointmentsComboBox" layoutX="524.0" layoutY="186.0" prefHeight="25.0" prefWidth="174.0" />
+      <Text fx:id="appointmentsHeader" layoutX="573.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments" />
+      <Button fx:id="clearBtn" layoutX="721.0" layoutY="107.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="72.0" styleClass="cancelBtn" stylesheets="@style.css" text="Clear" />
+      <Text layoutX="583.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="APP_DATE" wrappingWidth="54.673828125" />
+      <DatePicker fx:id="appDate" layoutX="524.0" layoutY="259.0" prefHeight="25.0" prefWidth="174.0" />
     </children>
 </AnchorPane>

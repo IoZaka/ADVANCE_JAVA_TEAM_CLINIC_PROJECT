@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,6 +37,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
@@ -77,8 +80,8 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
     
     private CustomComboModel ed = new CustomComboModel();
     ObservableList<CustomComboClass> customCombo = FXCollections.observableArrayList();
-    private Integer patientID;
-    private Integer doctorID;
+    private Integer patientID = 0;
+    private Integer doctorID = 0;
     @FXML
     private DatePicker createdFromDate;
     @FXML
@@ -94,11 +97,13 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
     @FXML
     private DatePicker appDate;
 
-    private Integer appComboID;
-    
+    private Integer appComboID = 1;
+        
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
+      
+                  
        if(user.getRoleID() == 3){
            doctorComboBox.setVisible(false);
            patientComboBox.setVisible(false);
@@ -128,14 +133,18 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
        
        customCombo.addAll(new CustomComboClass(2,"New Appointments"), new CustomComboClass(1,"All Appointments"));
        appointmentsComboBox.setItems(FXCollections.observableArrayList(customCombo));
-       
+       appointmentsComboBox.setValue(appointmentsComboBox.getItems().get(1));
         clearBtn.setOnMouseClicked((MouseEvent event) -> {
            doctorComboBox.setValue(null);
+           doctorID = 0;
            patientComboBox.setValue(null);
+           patientID = 0;
            appointmentsComboBox.setValue(appointmentsComboBox.getItems().get(1));
+           appComboID = 1;
            createdToDate.setValue(null);
-           createdFromDate.setValue(null);
+           createdFromDate.setValue(null); 
            appDate.setValue(null);
+           handleSearchAction();
         });
        
        recordsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -212,7 +221,7 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
                                System.out.println("Deleting.. " + appID);
                                if(ak.deleteAppointment(appID)){
                                        System.out.println(appID + " deleted.");
-                                       rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId());
+                                       rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(),null,null,null,null,null,1);
                                        data = FXCollections.observableArrayList(databaseRecords(rs));
                                        recordsTable.setItems(data);
                                }
@@ -248,7 +257,7 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
 
         try {
             
-            rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId());
+            rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(),null,null,null,null,null,1);
             data = FXCollections.observableArrayList(databaseRecords(rs));
             
              
@@ -275,11 +284,15 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
         }
         
         searchBtn.setOnMouseClicked((MouseEvent event) -> {
-             System.out.println("Created From:" + createdFromDate.getValue());
-             System.out.println("Created To:" + createdToDate.getValue());
-             System.out.println("Patient: " + patientComboBox.getSelectionModel().getSelectedItem());
-             System.out.println("Doctor: " + doctorComboBox.getSelectionModel().getSelectedItem());   
-        });
+           handleSearchAction();
+//               System.out.println("App Date:" + appDate.getValue());
+//               System.out.println("Created From:" + createdFromDate.getValue());
+//               System.out.println("Created To:" + createdToDate.getValue());
+//               System.out.println("Patient: " + patientID);   
+//               System.out.println("Doctor: " +doctorID);
+//               System.out.println("Doctor: " +appComboID);
+           } );
+                
         
     }
     
@@ -339,4 +352,34 @@ public class AppointmentRecordsController extends StageRedirect implements Initi
         return data;
     }
 
+    private void handleSearchAction(){
+        try {
+            String createdFrom, createdTo, app;
+            if(createdFromDate.getValue() != null){
+                createdFrom = createdFromDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            }else{createdFrom = null;}
+            if(createdToDate.getValue() != null){
+                createdTo = createdToDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            }else{createdTo = null;}
+            if(appDate.getValue() != null){
+                app = appDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            }else{app = null;}
+            
+            System.out.println(Integer.valueOf(doctorID));
+            System.out.println(Integer.valueOf(patientID));
+            System.out.println(Integer.valueOf(appComboID));
+            
+            rs = ak.fetchBasicInfoData(user.getRoleID(), user.getId(),Integer.valueOf(doctorID),Integer.valueOf(patientID),
+                    createdFrom,
+                    createdTo,
+                    app,Integer.valueOf(appComboID));
+            data = FXCollections.observableArrayList(databaseRecords(rs));
+            recordsTable.setItems(data);
+        } catch (SQLException ex) {
+            Logger.getLogger(AppointmentRecordsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+               
+    }
+    
+    
 }

@@ -39,7 +39,7 @@ public class AppointmentsModel {
      * @return
      * @throws SQLException
      */
-    public ResultSet fetchBasicInfoData(Integer roleID, Integer userID) throws SQLException {
+    public ResultSet fetchBasicInfoData(Integer roleID, Integer userID, Integer doctorID, Integer patientID, String createdFrom, String createdTo, String appDate, Integer appComboID) throws SQLException {
         getObject();
         stmt = object.connection.createStatement();
         sql = " select a.id, "
@@ -58,6 +58,11 @@ public class AppointmentsModel {
                 + "        and a.doctor_id = c.id(+) "
                 + "        and a.updated_by = d.id "
                 + "        and a.created_by = e.id "
+                + " and nvl(a.doctor_id,-1) = nvl("+doctorID+",nvl(a.doctor_id,-1)) "
+ + " and a.patient_id = nvl("+patientID+",a.patient_id) "
+ + " and a.created between nvl(to_date('"+createdFrom+"','DD/MM/YYYY'),to_Date('01/01/1900','MM/DD/YYYY')) and nvl(to_date('"+createdTo+"','DD/MM/YYYY'),to_Date('01/01/2100','MM/DD/YYYY')) "
+ + " and nvl(a.app_date,to_date('01/01/1990','DD/MM/YYYY')) = nvl(to_date('"+appDate+"','DD/MM/YYYY'),nvl(a.app_date,to_date('01/01/1990','DD/MM/YYYY'))) "
+ + " and (("+appComboID+" = 1) or ("+appComboID+" = 2 and app_date is null)) "
                 + "        and " + roleID + " = 1 " // Admin
                 + " union "
                 + " select a.id, "
@@ -76,6 +81,11 @@ public class AppointmentsModel {
                 + "        and a.doctor_id = c.id "
                 + "        and a.updated_by = d.id "
                 + "        and a.created_by = e.id "
+                                + " and nvl(a.doctor_id,-1) = nvl("+doctorID+",nvl(a.doctor_id,-1)) "
+ + " and a.patient_id = nvl("+patientID+",a.patient_id) "
+ + " and a.created between nvl(to_date('"+createdFrom+"','DD/MM/YYYY'),to_Date('01/01/1900','MM/DD/YYYY')) and nvl(to_date('"+createdTo+"','DD/MM/YYYY'),to_Date('01/01/2100','MM/DD/YYYY')) "
+ + " and nvl(a.app_date,to_date('01/01/1990','DD/MM/YYYY')) = nvl(to_date('"+appDate+"','DD/MM/YYYY'),nvl(a.app_date,to_date('01/01/1990','DD/MM/YYYY'))) "
+ + " and (("+appComboID+" = 1) or ("+appComboID+" = 2 and app_date is null)) "
                 + "       and a.doctor_id = " + userID
                 + "       and " + roleID + " = 2 " // Doctor
                 + " union "
@@ -96,7 +106,12 @@ public class AppointmentsModel {
                 + "        and a.updated_by = d.id "
                 + "        and a.created_by = e.id "
                 + "       and a.patient_id = " + userID
-                + "       and " + roleID + " = 3 " // Patient
+                                                + " and nvl(a.doctor_id,-1) = nvl("+doctorID+",nvl(a.doctor_id,-1)) "
+ + " and a.patient_id = nvl("+patientID+",a.patient_id) "
+ + " and a.created between nvl(to_date('"+createdFrom+"','DD/MM/YYYY'),to_Date('01/01/1900','MM/DD/YYYY')) and nvl(to_date('"+createdTo+"','DD/MM/YYYY'),to_Date('01/01/2100','MM/DD/YYYY')) "
+ + " and nvl(a.app_date,to_date('01/01/1990','DD/MM/YYYY')) = nvl(to_date('"+appDate+"','DD/MM/YYYY'),nvl(a.app_date,to_date('01/01/1990','DD/MM/YYYY'))) "
+ + " and (("+appComboID+" = 1) or ("+appComboID+" = 2 and app_date is null)) "
+               + "       and " + roleID + " = 3 " // Patient
                 + " union "
                 + " select a.id, "
                 + "    to_char(a.app_date,'dd/mm/yyyy') app_date, "
@@ -114,6 +129,11 @@ public class AppointmentsModel {
                 + "       and a.doctor_id = c.id(+) "
                 + "       and a.updated_by = d.id "
                 + "       and a.created_by = e.id "
+                                                + " and nvl(a.doctor_id,-1) = nvl("+doctorID+",nvl(a.doctor_id,-1)) "
+ + " and a.patient_id = nvl("+patientID+",a.patient_id) "
+ + " and a.created between nvl(to_date('"+createdFrom+"','DD/MM/YYYY'),to_Date('01/01/1900','MM/DD/YYYY')) and nvl(to_date('"+createdTo+"','DD/MM/YYYY'),to_Date('01/01/2100','MM/DD/YYYY')) "
+ + " and nvl(a.app_date,to_date('01/01/1990','DD/MM/YYYY')) = nvl(to_date('"+appDate+"','DD/MM/YYYY'),nvl(a.app_date,to_date('01/01/1990','DD/MM/YYYY'))) "
+ + " and (("+appComboID+" = 1) or ("+appComboID+" = 2 and app_date is null)) "
                 + "       and " + roleID + " = 4"; // Reception
         rs = stmt.executeQuery(sql);
         return rs;
