@@ -96,16 +96,9 @@ public class TestsInfoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
      
        isCompleted.setEditable(false);
-       
-    }
-
-    public void setTestIDView(boolean fromDiag, Integer testID, Integer diagId) {
-        System.out.println(testID);
-       
-        customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(2,"No"));
+       customCombo.addAll(new CustomComboClass(1,"Yes"), new CustomComboClass(2,"No"));
        isCompleted.setItems(FXCollections.observableArrayList(customCombo));
-        
-        isCompleted.valueProperty().addListener((obs, oldval, newval) -> {
+       isCompleted.valueProperty().addListener((obs, oldval, newval) -> {
             if (newval != null) {
                 CustomComboClass isCompletedCombo = (CustomComboClass) isCompleted.getSelectionModel().getSelectedItem();
                 isCompletedID = isCompletedCombo.getId();
@@ -114,6 +107,14 @@ public class TestsInfoController implements Initializable {
                 
             }
         });
+    }
+
+    public void setTestIDView(boolean fromDiag, Integer testID, Integer diagId) {
+        System.out.println(testID);
+        
+       
+        
+        
         
         diagID = diagId;
         if (testID != -1) {
@@ -132,9 +133,8 @@ public class TestsInfoController implements Initializable {
                         System.out.println("YES");
                         isCompleted.setValue(isCompleted.getItems().get(0));
                     }else{
-                       // isCompleted.setValue(isCompleted.getItems().get(1));
+                        isCompleted.setValue(isCompleted.getItems().get(1));
                     }
-                    //isCompleted.setValue(0);
                     createdByInput.setText(rs.getString("createdby"));
                     updatedByInput.setText(rs.getString("updated_by"));
                     createdDate.setText(rs.getString("created"));

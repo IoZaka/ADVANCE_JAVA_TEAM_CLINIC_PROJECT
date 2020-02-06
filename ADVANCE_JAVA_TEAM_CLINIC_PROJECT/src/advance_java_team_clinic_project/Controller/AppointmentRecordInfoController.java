@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -138,6 +137,7 @@ public class AppointmentRecordInfoController implements Initializable {
             doctorComboBox.setItems(FXCollections.observableArrayList(customCombo));
             if (rs.next()) {
                 doctorComboBox.setValue(rs.getString("doctor"));
+                doctorID = rs.getInt("doctor_id");
                 patientInput.setText(rs.getString("patient"));
                 if(rs.getString("app_date") != null){
                    appDateInput.setValue(LOCAL_DATE(rs.getString("app_date"))); 
@@ -163,19 +163,14 @@ public class AppointmentRecordInfoController implements Initializable {
             if (user.getRoleID() == 3 || user.getRoleID() == 4) {
                 diagnoseInfoBtn.setVisible(false);
             } else {
-                if (user.getRoleID() != 3 && user.getRoleID() != 4) {
+                if (user.getRoleID() != 3 && user.getRoleID() != 4 && user.getRoleID() != 5) {
                     diagnoseInfoBtn.setVisible(true);
                     diagnoseInfoBtn.setText("Create diagnose");
                 }
             }
         } else {
-            if(user.getRoleID() == 1 || user.getRoleID() == 2){
                diagnoseInfoBtn.setVisible(true);
-                 diagnoseInfoBtn.setText("Diagnose Info"); 
-            }else{
-                diagnoseInfoBtn.setVisible(false);
-            }
-            
+                 diagnoseInfoBtn.setText("Diagnose Info");           
         }
         
         doctorComboBox.valueProperty().addListener((obs, oldval, newval) -> {

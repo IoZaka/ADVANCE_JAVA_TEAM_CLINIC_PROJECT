@@ -158,7 +158,8 @@ public class AppointmentsModel {
                 + " c.Surname || ' ' || c.firstname doctor, "
                 + " d.Surname || ' ' || d.firstname updated_by, "
                 + " e.Surname || ' ' || e.firstname created_by, "
-                + " nvl(f.id,-1) diagnosis "
+                + " nvl(f.id,-1) diagnosis, "
+                + " a.doctor_id doctor_id "
                 + " from pm_appointment_info a, pm_users b, pm_users c, pm_users d, pm_users e , pm_diagnosis f "
                 + " where a.patient_id = b.id "
                 + " and a.doctor_id = c.id(+) "
@@ -178,7 +179,8 @@ public class AppointmentsModel {
                     + " doctor_id = " + doctorID + " , "
                     + " app_hour = '" + hour+ "' , "
                     + " comments = '" + comments + "' ,"
-                    + " app_date = to_date('" + appDate + "','dd/mm/yyyy') "
+                    + " app_date = to_date('" + appDate + "','dd/mm/yyyy'), "
+                    + " updated_by = " + user.getId() 
                     + " where id = " + ID;
             rs = stmt.executeQuery(sql);
         } catch (SQLException ex) {

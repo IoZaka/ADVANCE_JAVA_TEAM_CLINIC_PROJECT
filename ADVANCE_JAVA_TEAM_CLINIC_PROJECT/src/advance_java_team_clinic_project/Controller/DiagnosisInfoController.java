@@ -164,6 +164,7 @@ public class DiagnosisInfoController implements Initializable {
                     create_addmission.setVisible(false);
                     admissionInfoBtn.setText("Admission info");
                 }
+                testCreate.setVisible(false);
             }
             createDiagnose.setVisible(false);
         }
